@@ -1,4 +1,4 @@
-package com.nishchay.java8.basic.collection;
+package com.nishchay.java8.collection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
