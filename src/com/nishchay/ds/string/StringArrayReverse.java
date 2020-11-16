@@ -1,7 +1,5 @@
 package com.nishchay.ds.string;
 
-import java.util.Arrays;
-
 /*
 * Reverse a String word wise - reverse the string without reversing its individual words
 *       str = i like this program very much
