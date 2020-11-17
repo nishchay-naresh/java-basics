@@ -34,9 +34,9 @@ public class PrintAllPermutation {
         }
     }
 
-    private static String swap(String a, int i, int j) {
+    private static String swap(String str, int i, int j) {
         char temp;
-        char[] charArray = a.toCharArray();
+        char[] charArray = str.toCharArray();
         temp = charArray[i];
         charArray[i] = charArray[j];
         charArray[j] = temp;
