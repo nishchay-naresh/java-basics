@@ -9,7 +9,7 @@ package com.nishchay.ds.string;
 public class PrintAllPermutation {
 
     public static void main(String[] args) {
-        String str = "ABCD";
+        String str = "ABC";
         int len = str.length();
         strPermute(str, 0, len - 1);
     }
@@ -27,17 +27,17 @@ public class PrintAllPermutation {
             System.out.println(str);
         else {
             for (int i = start; i <= end; i++) {
-                str = swap(str, start, i);
+                str = swap(str, start, i); // first swap -> to find combination.
                 strPermute(str, start + 1, end);
-                str = swap(str, start, i);
+                str = swap(str, start, i); //swap back for backtracking
+                // since we are modifying the actual string. So we need to put it back after printing the desired combination
             }
         }
     }
 
     private static String swap(String str, int i, int j) {
-        char temp;
         char[] charArray = str.toCharArray();
-        temp = charArray[i];
+        char temp = charArray[i];
         charArray[i] = charArray[j];
         charArray[j] = temp;
         return String.valueOf(charArray);
