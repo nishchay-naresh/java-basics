@@ -19,12 +19,12 @@ class FindOnlyRepetitiveElementIn1_N {
 
     // Driver code
     public static void main(String[] args) {
-        int arr[] = {9, 8, 2, 6, 1, 8, 5, 3, 4, 7};
+        int[] arr = {9, 8, 2, 6, 1, 8, 5, 3, 4, 7};
         int n = arr.length;
         System.out.println(findRepeatingElement(arr, n));
     }
 
-    static int findRepeatingElement(int arr[], int n) {
+    static int findRepeatingElement(int[] arr, int n) {
 
         // res is going to store value of 
         // 1 ^ 2 ^ 3 .. ^ (n-1) ^
