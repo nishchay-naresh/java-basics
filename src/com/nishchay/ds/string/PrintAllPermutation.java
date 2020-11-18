@@ -10,8 +10,8 @@ public class PrintAllPermutation {
 
     public static void main(String[] args) {
         String str = "ABCD";
-        int n = str.length();
-        strPermute(str, 0, n - 1);
+        int len = str.length();
+        strPermute(str, 0, len - 1);
     }
 
 
