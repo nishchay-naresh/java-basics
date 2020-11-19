@@ -30,7 +30,8 @@ public class EmployeeSQL {
         // self practice
 //        youngestOldestEmployee();
 //         getEmpNameEmpMap();
-        first3EmpNames();
+//        first3EmpNames();
+        printEmpNamesStartingWtih_N();
 
     }
 
@@ -286,6 +287,14 @@ public class EmployeeSQL {
 
     }
 
+    private static void printEmpNamesStartingWtih_N(){
+
+        System.out.println("printing employee name starting with latter - 'N' ");
+        populateEmployeeList().stream()
+                .map(Employee::getName)
+                .filter(e -> e.startsWith("N"))
+                .forEach(System.out::println);
+    }
 
     public static List<Employee> populateEmployeeList() {
 
