@@ -12,7 +12,7 @@ public class TerminalOperationDemo {
 //        mthd4AnyMatchAllMatchNoMatch();
 //        mthd4Collect();
 //        mthd4Count();
-//        mthd4FindAnyFindFist();
+        mthd4FindAnyFindFist();
 //        mthd4StreamForEach();
 //        mthd4MinMax();
 //        mthd4Reduce();
@@ -73,8 +73,8 @@ public class TerminalOperationDemo {
 
         // Find any -  but its always giving the first element only
         Optional<String> anyElement =
-                            Stream.of("one", "two", "three", "four", "five")
-                            .findAny();
+                Stream.of("one", "two", "three", "four", "five")
+                        .findAny();
         System.out.println("Find any - " + anyElement.get());
 
         // Find first
@@ -111,7 +111,6 @@ public class TerminalOperationDemo {
     private static void mthd4Reduce() {
 
         // Applying reduce over IntStream
-
         OptionalInt optionalIntSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
         System.out.println("optionalIntSum = " + optionalIntSum);
         // if you pass the initial value, it will give you the result instead of optional - here int
@@ -129,6 +128,13 @@ public class TerminalOperationDemo {
         Optional<String> reduced = Stream.of("one", "two", "three", "four", "five").
                 reduce((value, combinedValue) -> value + " + " + combinedValue);
         System.out.println("reduced value - " + reduced.get());
+
+        // Applying reduce over Stream of String -  to get char counts
+        int charCount = Stream.of("one", "two", "three", "four", "five")
+                .map(String::length)
+                .reduce(0, (e, sum) -> e + sum);
+        System.out.println("charCount - " + charCount);
+
     }
 
     private static void streamToObjectArray() {
