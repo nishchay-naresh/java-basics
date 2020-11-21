@@ -10,7 +10,8 @@ public class StringArrayReverse {
 
     public static void main(String[] args) {
 
-        String str = "i like this program very much";
+        String str = "java";
+//        String str = "i like this program very much";
 //      Output: much very program this like i
 
         String revStr = strArrayReverse(str);
@@ -21,7 +22,14 @@ public class StringArrayReverse {
 
     private static String strArrayReverse(String str) {
 
+        if (str == null) {
+            return null;
+        }
         String strArr[] = str.split(" ");
+
+        if (strArr.length < 2) {
+            return str;
+        }
 
         String t;
         int i, j;
