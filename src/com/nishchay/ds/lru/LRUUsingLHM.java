@@ -8,12 +8,12 @@ public class LRUUsingLHM {
 
 	public static void main(String[] args) {
 
-		cacheFunctionalityDemo();
-		cacheFunctionalityDemo1();
+		cacheDemo();
+		genericCacheDemo();
 
 	}
 
-	private static void cacheFunctionalityDemo() {
+	private static void cacheDemo() {
 
 //		using a cache of - <String, String>
 		final int SIZE = 3;
@@ -43,10 +43,10 @@ public class LRUUsingLHM {
 	}
 
 
-	private static void cacheFunctionalityDemo1() {
+	private static void genericCacheDemo() {
 
-		//		using a cache of - <String, String>
-		LRUCacheImpl lruCache = new LRUCacheImpl(3, 0.75f);
+		//		using a cache of - <Integer, String>
+		LRUCacheImpl<Integer, String> lruCache = new LRUCacheImpl<>(3, 0.75f);
 
 		lruCache.put(1, "Object1");
 		lruCache.put(2, "Object2");
@@ -63,14 +63,14 @@ public class LRUUsingLHM {
 		System.out.println("lruCache = " + lruCache);
 		lruCache.get(4);
 		lruCache.put(7, "Object7");
-		lruCache.put(8, "Object8");
+		lruCache.put(1, "Object10");
 		System.out.println("lruCache = " + lruCache);
 
 	}
 }
 
 
-class LRUCacheImpl extends LinkedHashMap<Integer, String> {
+class LRUCacheImpl<K,V> extends LinkedHashMap<K, V> {
 	private static final long serialVersionUID = 1L;
 	private int capacity;
 
@@ -84,7 +84,7 @@ class LRUCacheImpl extends LinkedHashMap<Integer, String> {
 	 * to implement the eviction policy which LRU here
 	 */
 	@Override
-	protected boolean removeEldestEntry(Entry<Integer, String> eldest){
+	protected boolean removeEldestEntry(Entry<K, V> eldest){
 		return size() > this.capacity;
 	}
 }
@@ -105,7 +105,7 @@ class LRUCacheImpl extends LinkedHashMap<Integer, String> {
  *	lruCache = {3=Object3, 1=Object1, 4=Object4}
  *	lruCache = {1=Object1, 4=Object4, 5=Object5}
  *	lruCache = {4=Object4, 5=Object5, 6=Object6}
- *	lruCache = {4=Object4, 7=Object7, 8=Object8}
+ *	lruCache = {4=Object4, 7=Object7, 1=Object10}
  *
 * */
 
