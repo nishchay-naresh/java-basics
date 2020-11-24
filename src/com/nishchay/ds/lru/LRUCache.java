@@ -86,7 +86,7 @@ class LRUCache<K,V> {
             addToHead(old);
         } else {
             // insert as a new value
-            Node<K,V> newNode = new Node(key, value);
+            Node<K,V> newNode = new Node<>(key, value);
             if (map.size() < cacheSize) {
                 addToHead(newNode);
             } else {
