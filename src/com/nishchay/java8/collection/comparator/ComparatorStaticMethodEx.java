@@ -2,7 +2,6 @@ package com.nishchay.java8.collection.comparator;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ComparatorStaticMethodEx {
     }
 
 
-//    Using Comparator.naturalOrder() & Comparator.reverseOrder()
+    //    Using Comparator.naturalOrder() & Comparator.reverseOrder()
     private static void naturalOrder_reverseOrder_ex() {
 
         List<String> animals = new ArrayList<>();
@@ -55,8 +54,8 @@ public class ComparatorStaticMethodEx {
 
         // Using Comparator.comparing(-)
         System.out.println(" --------------- Sorting based on Names -----------------");
-        Comparator nameComparator = Comparator.comparing(Employee::getName);
-        Collections.sort(employeeList, nameComparator);
+        Comparator<Employee> nameComparator = Comparator.comparing(Employee::getName);
+        employeeList.sort(nameComparator);
         employeeList.forEach(System.out::println);
 
 
@@ -67,16 +66,16 @@ public class ComparatorStaticMethodEx {
 
 //        Using Comparator.reverseOrder()
 //        Comparator nameComparator1 = Comparator.comparing(Employee::getName, (o1, o2) -> o2.compareTo(o1));
-        Comparator nameComparator1 = Comparator.comparing(Employee::getName, Comparator.reverseOrder());
-        Collections.sort(employeeList, nameComparator1);
+        Comparator<Employee> nameComparator1 = Comparator.comparing(Employee::getName, Comparator.reverseOrder());
+        employeeList.sort(nameComparator1);
         employeeList.forEach(System.out::println);
 
         // Using Comparator.comparing(-,-)
 //        Collections.sort(employeeList, Comparator.comparing(Employee::getSalary,Double::compareTo));
         System.out.println(" --------------- Sorting based on Names length -----------------");
-//        Comparator nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparing(String::length));
-        Comparator nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparingInt(String::length));
-        Collections.sort(employeeList, nameLengthComparator);
+//        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparing(String::length));
+        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparingInt(String::length));
+        employeeList.sort(nameLengthComparator);
         employeeList.forEach(System.out::println);
     }
 
@@ -84,14 +83,14 @@ public class ComparatorStaticMethodEx {
     private static void comparingXxx_ex(List<Employee> employeeList) {
         // Using Comparator.comparingInt
         System.out.println(" --------------- Sorting based on Age -----------------");
-        Comparator ageComparator = Comparator.comparingInt(Employee::getAge);
-        Collections.sort(employeeList, ageComparator);
+        Comparator<Employee> ageComparator = Comparator.comparingInt(Employee::getAge);
+        employeeList.sort(ageComparator);
         employeeList.forEach(System.out::println);
 
         //Using Comparator.comparingDouble
         System.out.println(" --------------- Sorting based on Salary -----------------");
-        Comparator salaryComparator = Comparator.comparingDouble(Employee::getSalary);
-        Collections.sort(employeeList, salaryComparator);
+        Comparator<Employee> salaryComparator = Comparator.comparingDouble(Employee::getSalary);
+        employeeList.sort(salaryComparator);
         employeeList.forEach(System.out::println);
     }
 
@@ -100,11 +99,11 @@ public class ComparatorStaticMethodEx {
     //        Adding multiple sorting criteria, if age is same , go for cityName
     private static void thenComparing_ex(List<Employee> employeeList) {
 
-        Comparator<Employee> comparator_Age_cityName = Comparator.comparing(Employee::getAge)
+        Comparator<Employee> ageThenCityNameComparator = Comparator.comparing(Employee::getAge)
                 .thenComparing(Employee::getCity);
 
         System.out.println(" --------------- Sorting based on Age then Name -----------------");
-        Collections.sort(employeeList, comparator_Age_cityName);
+        employeeList.sort(ageThenCityNameComparator);
         employeeList.forEach(System.out::println);
     }
 
@@ -114,27 +113,22 @@ public class ComparatorStaticMethodEx {
         employeeList.add(null);
         employeeList.add(null);
 
-        Comparator<Employee> nameComparator
-                = Comparator.comparing(Employee::getName);
-        Comparator<Employee> employeeNameComparator_nullLast
-                = Comparator.nullsLast(nameComparator);
+        Comparator<Employee> nameComparator = Comparator.comparing(Employee::getName);
+        Comparator<Employee> employeeNameComparator_nullLast = Comparator.nullsLast(nameComparator);
 
         employeeList.sort(employeeNameComparator_nullLast);
         System.out.println(" --------------- List with name waise sorting with nullLast -----------------");
         employeeList.forEach(System.out::println);
 
 
-        Comparator<Employee> cityComparator
-                = Comparator.comparing(Employee::getCity);
-        Comparator<Employee> cityComparator_nullFirst
-                = Comparator.nullsFirst(cityComparator);
+        Comparator<Employee> cityComparator = Comparator.comparing(Employee::getCity);
+        Comparator<Employee> cityComparator_nullFirst = Comparator.nullsFirst(cityComparator);
 
         employeeList.sort(cityComparator_nullFirst);
         System.out.println(" --------------- List with name waise sorting with nullLast -----------------");
         employeeList.forEach(System.out::println);
 
     }
-
 
 
     public static List<Employee> populateEmployeeList() {
