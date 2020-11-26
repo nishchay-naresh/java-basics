@@ -14,7 +14,7 @@ public class HashMapSortOnValue {
 
     public static void main(String[] args) {
 
-        HashMap<String, Integer> marks = new HashMap<String, Integer>();
+        HashMap<String, Integer> marks = new HashMap<>();
 
         // populating hashMap
         marks.put("Operating System", 85);
@@ -39,7 +39,8 @@ public class HashMapSortOnValue {
         List<Map.Entry<String, Integer> > entryList =  new ArrayList<>(hashMap.entrySet());
 
         // Sort the list - based on hashMap value
-        entryList.sort(Comparator.comparing(HashMap.Entry::getValue));
+//        entryList.sort(Comparator.comparing(HashMap.Entry::getValue));
+        entryList.sort(Map.Entry.comparingByValue());
 
 
         // put data from sorted list to hashmap
