@@ -29,3 +29,7 @@ hs_err_pid*
 
 /.idea/workspace.xml
 .idea/workspace.xml
+
+/out/
+
+out\production\java-basics\META-INF
