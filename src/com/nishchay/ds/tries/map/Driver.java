@@ -9,8 +9,9 @@ public class Driver {
         trie.insert("apple");
         trie.search("apple");   // returns true
         trie.search("app");     // returns false
-        trie.startsWith("app"); // returns true
+        System.out.println(" trie.search(\"app\") - " +  trie.search("app"));
 
+        trie.startsWith("app"); // returns true
         System.out.println("trie.startsWith(\"app\") - " + trie.startsWith("app"));
         System.out.println("trie.startsWith(\"agg\") - " + trie.startsWith("agg"));
 
