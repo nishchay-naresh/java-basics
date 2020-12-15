@@ -3,7 +3,7 @@ package com.nishchay.ds.array.appearonce;
 import com.nishchay.ds.array.sort.MergeSort;
 
 /*
- * Java program to find the element that appears only once in array
+ * Given an array where every element occurs three times, except one element which occurs only once.
  * Input: arr[] = {12, 1, 12, 3, 12, 1, 1, 2, 3, 3}
  * Output: 2
  * In the given array all element appear three times except ‘2' which appears once

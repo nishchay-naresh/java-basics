@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /*
-* Java program to find the element that appears only once in array
+* Find the element that appears once in an array where every other element appears twice
 * Input:  arr[] = {7, 3, 5, 4, 5, 3, 4}
 * Output: 7
 *
