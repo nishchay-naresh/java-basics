@@ -16,7 +16,7 @@ public class ReferenceDemo {
         Object mainObj = new Object(); // Strong Ref
 
         // Make a Soft Reference on mainObj
-        SoftReference<Object> softRef = new SoftReference<Object>(mainObj);
+        SoftReference<Object> softRef = new SoftReference<>(mainObj);
         Object strongRef1 = softRef.get();
         mainObj = null;
         System.out.println("strongRef1 = " + strongRef1);
@@ -27,7 +27,7 @@ public class ReferenceDemo {
 
         mainObj = new Object();
         // Make a weak Reference on mainObj
-        WeakReference<Object> weakRef = new WeakReference<Object>(mainObj);
+        WeakReference<Object> weakRef = new WeakReference<>(mainObj);
         Object strongRef2 = weakRef.get();
         mainObj = null;
         System.out.println("strongRef2 = " + strongRef2);
