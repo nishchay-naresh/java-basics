@@ -30,20 +30,22 @@ package com.nishchay.ds.array.water;
  *
  * */
 
-import java.util.Arrays;
-
 public class TrappingRainWater {
 
 
     public static void main(String[] args) {
+        // -------------
+        int[] nums = {0, 1, 2, 4, 5, 7, 9, 8, 6, 3, 2, 1}; // o
+        System.out.println(getTotalWaterVolume1(nums));
+
 //        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-//        int[] arr = {0, 1, 2, 4, 5, 7, 9, 8, 6, 3, 2, 1}; // o
 //        int[] arr = {1, 3, 2, 4, 6, 1}; // 1
 //        int[] arr = {1, 3, 2, 1, 4, 6, 7, 3, 1}; // 3
 //        int[] arr = { 7, 0, 4, 2, 5, 0, 6, 4, 0, 5 }; // 25
         int[] arr = {5, 6, 7, 12, 2, 10, 17, 5, 3}; // 12
-
         System.out.print(getTotalWaterVolume(arr));
+
+
     }
 
     private static int getTotalWaterVolume(int[] arr) {
@@ -82,10 +84,10 @@ public class TrappingRainWater {
 
          int n = arr.length;
          // left[i] contains height of tallest bar to the left of i'th bar including itself
-         int left[] = new int[n];
+         int[] left = new int[n];
 
          // right[i] contains height of tallest bar to the right of ith bar including itself
-         int right[] = new int[n];
+         int[] right = new int[n];
 
          // Initialize result
          int water = 0;
@@ -100,15 +102,12 @@ public class TrappingRainWater {
          for (int i = n - 2; i >= 0; i--)
              right[i] = Math.max(right[i + 1], arr[i]);
 
-         System.out.println("original - " + Arrays.toString(arr));
-         System.out.println("left - " + Arrays.toString(left));
-         System.out.println("right - " + Arrays.toString(right));
          // Calculate the accumulated water element by element
          // consider the amount of water on i'th bar, the
          // amount of water accumulated on this particular
          // bar will be equal to min(left[i], right[i]) - arr[i] .
-//        for (int i = 0; i < n; i++)
-//            water += Math.min(left[i], right[i]) - arr[i];
+        for (int i = 0; i < n; i++)
+            water += Math.min(left[i], right[i]) - arr[i];
 
          return water;
      }
