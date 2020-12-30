@@ -1,4 +1,4 @@
-package com.nishchay.ds.array;
+package com.nishchay.ds.array.basic;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,10 +7,9 @@ public class IntArrayReverse {
 
     public static void main(String[] args) {
 
+//        int[] arr = readArrayFromConsole();
 
-//        int arr[] = readArrayFromConsole();
-
-//        arrayReversePrint();
+        arrayReversePrint();
 
         intArrayReverse();
 
@@ -34,11 +33,11 @@ public class IntArrayReverse {
 
     private static void arrayReversePrint() {
 
-        int intArr[] = {10, 20, 30, 40, 50};
+        int[] intArr = {10, 20, 30, 40, 50};
 
         System.out.println("----------Actual Array-----------");
-        for (int i = 0; i < intArr.length; i++) {
-            System.out.println(intArr[i]);
+        for (int value : intArr) {
+            System.out.println(value);
         }
 
         System.out.println("----------Printing Array in reverse order-----------");
@@ -49,7 +48,7 @@ public class IntArrayReverse {
 
     private static void intArrayReverse() {
 
-        int intArr[] = {10, 20, 30, 40, 50, 60};
+        int[] intArr = {10, 20, 30, 40, 50, 60};
         System.out.println("Actual Array : " + Arrays.toString(intArr));
 
         int i, j, t;
