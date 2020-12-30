@@ -3,6 +3,7 @@ package com.nishchay.core.collection;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ArrayToList {
 
@@ -11,12 +12,13 @@ public class ArrayToList {
         asListEx();
         arrayToList_listToArray_objectType();
         arrayToList_listToArray_primitiveInt();
+        arrayToList_listToArray_primitiveChar();
 
     }
 
     // asList() -  Returns a fixed-size list backed by the specified array
     private static void asListEx() {
-        String arr[] = {"Rohit", "Shikhar", "Kohli", "Iyyar", "Dhoni"};
+        String[] arr = {"Rohit", "Shikhar", "Kohli", "Iyyar", "Dhoni"};
 
         List<String> list = Arrays.asList(arr);
         System.out.println("list = " + list);
@@ -33,8 +35,8 @@ public class ArrayToList {
         System.out.println("list = " + list);
         System.out.println("arr = " + Arrays.toString(arr));
 
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + ",\t");
+        for (String s : list) {
+            System.out.print(s + ",\t");
         }
 
 //        Can't perform structure change operation like - add, remove, Throw - java.lang.UnsupportedOperationException
@@ -60,11 +62,36 @@ public class ArrayToList {
         int[] ints = {1, 2, 3, 4};
 
         List<Integer> intList = Arrays.stream(ints).boxed().collect(Collectors.toList());
-        System.out.println("intList -" + intList);
+        System.out.println("IntegerList - " + intList);
 
         int[] intArr = intList.stream().mapToInt(i -> i).toArray();
-        System.out.println("strArray -" + Arrays.toString(intArr));
+        System.out.println("intArray - " + Arrays.toString(intArr));
     }
 
+    private static void arrayToList_listToArray_primitiveChar() {
+
+        char[] chars = new char[]{'a', 'b', 'c', 'd', 'e', 'f'};
+
+        List<Character> listOfCharacters = charArrayToListCharacters(chars);
+        System.out.println("CharacterList - " + listOfCharacters);
+
+        char[] charArray = listCharactersToCharArray(listOfCharacters);
+        System.out.println("charArray - " + Arrays.toString(charArray));
+    }
+
+    private static List<Character> charArrayToListCharacters(char[] charArray) {
+        List<Character> listOfCharacters =
+                IntStream.range(0, charArray.length)
+                        .mapToObj(i -> charArray[i])
+                        .collect(Collectors.toList());
+        return listOfCharacters;
+    }
+
+    public static char[] listCharactersToCharArray(final List<Character> list) {
+        final char[] array = new char[list.size()];
+        for (int i = 0; i < array.length; i++)
+            array[i] = list.get(i);
+        return array;
+    }
 
 }
