@@ -1,6 +1,5 @@
 package com.nishchay.ds.string;
 
-
 /*
  * Input: “This|| pandemic ;/? will ?? be // over;; soon//?/”
  * Output: “sihT|| cimednap ;/? lliw ?? eb // revo;; noos//?/“
@@ -59,7 +58,7 @@ public class ReverseWordsExcludeDelimiter {
     private static String reverse(char[] arr, int start, int end) {
         StringBuilder revWords = new StringBuilder();
         for (int i = end; i >= start; i--) {
-            revWords = revWords.append(arr[i]);
+            revWords.append(arr[i]);
         }
         return revWords.toString();
     }
