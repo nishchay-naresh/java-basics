@@ -6,7 +6,7 @@ public class LongestSubstringWithoutRepeatingChar {
 
     static final int NO_OF_CHARS = 256;
 
-    static int longestUniqueSubsttr(String str) {
+    static int longestUniqueSubStr(String str) {
         int n = str.length();
 
         int res = 0; // result 
@@ -41,7 +41,7 @@ public class LongestSubstringWithoutRepeatingChar {
     public static void main(String[] args) {
         String str = "geeksforgeeks";
         System.out.println("The input string is " + str);
-        int len = longestUniqueSubsttr(str);
+        int len = longestUniqueSubStr(str);
         System.out.println("The length of "
                 + "the longest non repeating character is " + len);
     }
