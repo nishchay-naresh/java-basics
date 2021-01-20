@@ -12,10 +12,10 @@ public class TerminalOperationDemo {
 //        mthd4AnyMatchAllMatchNoMatch();
 //        mthd4Collect();
 //        mthd4Count();
-        mthd4FindAnyFindFist();
+//        mthd4FindAnyFindFist();
 //        mthd4StreamForEach();
 //        mthd4MinMax();
-//        mthd4Reduce();
+        mthd4Reduce();
 //        streamToObjectArray();
 //        mthd4ConcatenateStreams();
 
@@ -117,6 +117,9 @@ public class TerminalOperationDemo {
         int intSum = Arrays.stream(new int[]{7, 5, 9, 2, 8, 1}).reduce(0, (a, b) -> a + b);
         System.out.println("intSum = " + intSum);
 
+        intSum = IntStream.range(1, 11).sum();
+        System.out.println("sum(1 to 10) = " + intSum);
+
         // Applying reduce over Stream of Integer
         Optional<Integer> optionalSum = Stream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
         System.out.println("optionalSum = " + optionalSum);
@@ -133,6 +136,11 @@ public class TerminalOperationDemo {
         int charCount = Stream.of("one", "two", "three", "four", "five")
                 .map(String::length)
                 .reduce(0, (e, sum) -> e + sum);
+        System.out.println("charCount - " + charCount);
+
+        charCount = Stream.of("one", "two", "three", "four", "five")
+                .mapToInt(String::length)
+                .sum();
         System.out.println("charCount - " + charCount);
 
     }
