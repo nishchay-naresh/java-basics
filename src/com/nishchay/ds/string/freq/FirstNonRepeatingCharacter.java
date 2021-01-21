@@ -21,7 +21,6 @@ public class FirstNonRepeatingCharacter {
      * Returns true if all tests pass. Otherwise returns false.
      */
     public static void doTestsPass() {
-        // todo: implement more tests, please
         // feel free to make testing more elegant
         String[] inputs = {"apple", "racecars", "ababdc"};
         char[] outputs = {'a', 'e', 'd'};
@@ -59,7 +58,7 @@ public class FirstNonRepeatingCharacter {
             }
         }
 
-//        System.out.println("input: " + input + "\tfirstChar : " + firstChar);
+//        System.out.println("input: " + input + "\t firstChar : " + firstChar);
         return firstChar;
     }
 
