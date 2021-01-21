@@ -1,4 +1,4 @@
-package com.nishchay.ds.string;
+package com.nishchay.ds.string.freq;
 
 /*
 * https://www.baeldung.com/java-string-contains-all-letters
