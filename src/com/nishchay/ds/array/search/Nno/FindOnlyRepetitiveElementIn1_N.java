@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.Nno;
+package com.nishchay.ds.array.search.Nno;
 
 
 /*
@@ -10,6 +10,7 @@ package com.nishchay.ds.array.Nno;
  *	XOR PROPERTY : 2 XOR 2 =0 i.e XOR of same no. is 0.
  *	now what is happening in algo 2?
  *	XOR of 1st N-1 natural no. X1=1^2^3^4
+ *  N-1, bcus N no are there in array, +1 is the no which is repeated
  *	XOR of array elements X2=1^2^3^2^4
  *	X1 XOR X2 = 1^2^3^4^1^2^3^2^4= 1^1^2^2^2^3^3^4^4=2
  *

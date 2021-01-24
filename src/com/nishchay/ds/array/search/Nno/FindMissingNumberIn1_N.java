@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.Nno;
+package com.nishchay.ds.array.search.Nno;
 
 /*
  *   You are given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in the list.
@@ -52,6 +52,7 @@ class FindMissingNumberIn1_N {
         int n = nums.length;
         int x1 = 1;
         // For xor of all the elements from 1 to n+1
+        /// n+1 , bcus n nos are there in array and 1 is missing so n+1
         for (int i = 2; i <= n + 1; i++)
             x1 = x1 ^ i;
 
