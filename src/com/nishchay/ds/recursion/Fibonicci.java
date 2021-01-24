@@ -20,6 +20,15 @@ public class Fibonicci {
 
     }
 
+    private int fibo1(int n) {
+        if (n == 0)
+            return 0;
+        if (n == 1)
+            return 1;
+
+        return fibo1(n - 1) + fibo1(n - 2);
+    }
+
     private static void printFibo(int n) {
         int t1, t2, t3;
         t1 = 0;
