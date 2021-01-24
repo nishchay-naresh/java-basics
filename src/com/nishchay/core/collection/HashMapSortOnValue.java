@@ -17,18 +17,18 @@ public class HashMapSortOnValue {
         HashMap<String, Integer> marks = new HashMap<>();
 
         // populating hashMap
-        marks.put("Operating System", 85);
-        marks.put("Data Structure", 75);
-        marks.put("Database", 65);
-        marks.put("Java", 70);
-        marks.put("C Programming", 90);
-        marks.put("Networking", 60);
+        marks.put("java", 85);
+        marks.put("perl", 75);
+        marks.put("go", 65);
+        marks.put("unix", 70);
+        marks.put("c++", 90);
+        marks.put("ruby", 60);
 
-        System.out.println("marks = " + marks);
+        System.out.println("originalMap = " + marks);
 
         Map<String, Integer> sortedMarks = sortByValue(marks);
 
-        System.out.println("sortedMarks = " + sortedMarks);
+        System.out.println("sortedMap = " + sortedMarks);
 
     }
 
@@ -42,8 +42,12 @@ public class HashMapSortOnValue {
 //        entryList.sort(Comparator.comparing(HashMap.Entry::getValue));
         entryList.sort(Map.Entry.comparingByValue());
 
+        // Sort the list - based on hashMap key
+//        entryList.sort(Comparator.comparing(HashMap.Entry::getKey));
+//        entryList.sort(Map.Entry.comparingByKey());
 
-        // put data from sorted list to hashmap
+
+        // put data from sorted list to hashMap
         HashMap<String, Integer> temp = new LinkedHashMap<>();
         for (Map.Entry<String, Integer> currEntry : entryList) {
             temp.put(currEntry.getKey(), currEntry.getValue());
