@@ -12,9 +12,7 @@ public class PrenthesisMatch {
 
 		System.out.println("Expr String  : " + expr);
 
-		for (int i = 0; i < values.length; i++) {
-			String token = values[i];
-
+		for (String token : values) {
 			// values[i] = validate(token) ? "YES" : "NO";
 			System.out.println(validate(token));
 		}
@@ -25,7 +23,7 @@ public class PrenthesisMatch {
 
 		char[] charArr = token.trim().toCharArray();
 
-		Stack<Character> stack = new Stack<Character>();
+		Stack<Character> stack = new Stack<>();
 
 		for (char t : charArr) {
 
@@ -62,7 +60,7 @@ public class PrenthesisMatch {
 				return false;
 			}
 		}
-		if (stack.empty() == true) {
+		if (stack.empty()) {
 			return true;
 		}
 		return false;
