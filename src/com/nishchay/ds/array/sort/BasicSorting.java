@@ -10,7 +10,7 @@ public class BasicSorting {
 
         System.out.println("original array = " + Arrays.toString(arr));
         bubbleSort(arr);
-//        selectionSort(arr);
+        selectionSort(arr);
         System.out.println("sorted array = " + Arrays.toString(arr));
 
     }
@@ -19,7 +19,7 @@ public class BasicSorting {
      * Finding the largest element with each iteration
      * Like - the way bubble is coming out of water
      * */
-    public static void bubbleSort(int[] arr) {
+    private static void bubbleSort(int[] arr) {
 
         int size = arr.length;
         for (int i = 1; i < size; i++) {
@@ -57,6 +57,5 @@ public class BasicSorting {
             }
 
         }
-
     }
 }
