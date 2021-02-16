@@ -39,7 +39,7 @@ public class BasicSorting {
      * - swape with the first element for the array
      * */
 
-    public static void selectionSort(int[] arr) {
+    private static void selectionSort(int[] arr) {
 
         int size = arr.length;
         for (int i = 0; i < size - 1; i++) {
