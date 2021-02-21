@@ -9,7 +9,7 @@ public class Author {
     private List<Book> books;
     private Country country;
 
-    public Author() {
+    Author() {
     }
 
     public String getName() {
