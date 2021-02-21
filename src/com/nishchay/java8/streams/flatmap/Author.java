@@ -1,12 +1,13 @@
 package com.nishchay.java8.streams.flatmap;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Author {
 
     private String name;
     private List<Book> books;
-    private String country;
+    private Country country;
 
     public Author() {
     }
@@ -27,11 +28,15 @@ public class Author {
         this.books = books;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public Optional<Country> getCountryOptionally() {
+        return Optional.of(country);
+    }
+
+    public void setCountry(Country country) {
         this.country = country;
     }
 
