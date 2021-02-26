@@ -14,7 +14,7 @@ public class OptionalDemo {
         NPEExample();
         NPESuppressUsingOptional();
 
-//        optionalDemo();
+        optionalDemo();
 
     }
 
@@ -40,7 +40,7 @@ public class OptionalDemo {
     // The client is now forced by the type system to write the Optional check in his code.
     private static void NPESuppressUsingOptional() {
         User user = findUserById(999);
-        Optional<User> userOptional = Optional.ofNullable(user);
+        Optional<User> userOptional = Optional.of(user);
 
         // checking container for value preset - using loop
         if (userOptional.isPresent()) {
@@ -79,28 +79,35 @@ public class OptionalDemo {
         // Create an empty Optional, which describes the absence of a value.
         Optional<User> emptyOptional = Optional.empty();
         System.out.println("emptyOptional = " + emptyOptional);
+        System.out.println(emptyOptional.equals(Optional.ofNullable(null)));
+
 
         // create an Optional with a non-null value -
-        User user1 = new User(555, "Iron Man");
-        Optional<User> userOptional = Optional.ofNullable(user1);
-        //If the argument supplied to Optional.ofNullable() is null, then it will throw a NullPointerException immediately and the Optional object won’t be created.
-        // Optional<User> userOptional = Optional.ofNullable(null); // Exception in thread "main" java.lang.NullPointerException
-        System.out.println("userOptional = " + userOptional);
+        User user1 = findUserById(999);
+        Optional<User> userOptional1 = Optional.of(user1);
+        //If the argument supplied to Optional.of() is null, then it will throw a NullPointerException immediately and the Optional object won’t be created.
+        // Optional<User> userOptional = Optional.of(null); // Exception in thread "main" java.lang.NullPointerException
+        System.out.println("userOptional1 = " + userOptional1);
 
         // Create an Optional with a value which may or may not be null -
 
-        User user2 = findUserById(999);
-//        User user2 = findUserById(111);
+//        User user2 = findUserById(999);
+        User user2 = findUserById(111);
         Optional<User> userOptional2 = Optional.ofNullable(user2);
         // If the argument passed to Optional.ofNullable() is non-null, then it returns an Optional containing the specified value,
         // otherwise it returns an empty Optional.
         System.out.println("userOptional2 = " + userOptional2);
 
+        Optional<User> userOptional3 = Optional.ofNullable(null);// empty Optional
+        System.out.println("userOptional3 = " + userOptional3);
+
         // Retrieving the value using get() method
         // Optional’s get() method returns a value if it is present, otherwise it throws NoSuchElementException.
-//        System.out.println("Optional.get() - " + userOptional2.get());
+        // Below code will throws NoSuchElementException
+        // System.out.println("Optional.get() - " + userOptional2.get());
+        // String name1 = (String) Optional.empty().get();
+        // String name2 = (String) Optional.ofNullable(null).get();
 
-        Optional<User> userOptional3 = Optional.ofNullable(null);
 
         // Returning default value using orElse()
         // return "Unknown User" if user is null
@@ -118,7 +125,7 @@ public class OptionalDemo {
         System.out.println("Optional.orElseGet() - " + returnUser);
 
         // orElseThrow() - Throw an exception on absence of a value
-        // int userId = 111;
+//         int userId = 111;
         int userId = 555;
         Optional<User> returnUserOptional = findUserByIdOptionally(userId);
         User returnUser1 = returnUserOptional.orElseThrow(
@@ -129,7 +136,6 @@ public class OptionalDemo {
         // Filtering values using filter() method
         boolean isIronMan = returnUserOptional.filter(user -> user.getName().equalsIgnoreCase("iron man")).isPresent();
         System.out.println("isIronMan = " + isIronMan);
-
 
     }
 
