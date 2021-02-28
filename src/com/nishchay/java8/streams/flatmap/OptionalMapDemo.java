@@ -49,5 +49,57 @@ public class OptionalMapDemo {
 
     }
 
+    private static void mapExample2() {
+
+        Author author = new Author();
+        author.setName("Dan Brown");
+        Optional<Author> authorOptional = Optional.ofNullable(author);
+
+        // map() applies the Function argument to the value, then returns the result wrapped in an Optional.
+        Optional<String> name = authorOptional.map(a -> a.getName());
+        if (author.getName().equals(name.orElse("Default Name"))) {
+            System.out.println("name - " + name.get());
+        }
+
+    }
+
+    // Extracting and transforming values using map()
+    // map() applies the Function argument to the value, then returns the result wrapped in an Optional.
+    private static void flatMapExample1() {
+
+        /*
+         * Solving below situation the map method
+         *	if(user != null) {
+         *		Address address = user.getAddress();
+         *		if(address != null && address.getCountry().equalsIgnoreCase("India")) {
+         *			System.out.println("User belongs to India");
+         *		}
+         *	}
+         * */
+
+        Author author = new Author();
+        author.setName("Chetan Bhagat");
+        author.setCountry(new Country("India"));
+
+        Optional<Author> authorOptional = Optional.ofNullable(author);
+
+        // Option<Author>  ->  map ->  Option<Country>
+        authorOptional.map(auth -> auth.getCountry())
+                .filter(country -> country.getName().equalsIgnoreCase("India"))
+                .ifPresent(e -> System.out.println("Indian Author"));
+
+
+        // Option<Author> -> flatMap -> Option<Country> -> flatMap -> Option<String> -> map -> Option<String>
+        String name = Optional.ofNullable(author)
+                .flatMap(u -> u.getCountryOptionally())
+                .flatMap(a -> a.getNameOptionally())
+                .map(e -> e.toUpperCase())
+                .orElse("default");
+
+        if ("INDIA".equals(name)) {
+            System.out.println("name = " + name);
+        }
+
+    }
 
 }
