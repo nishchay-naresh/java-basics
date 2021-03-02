@@ -99,7 +99,30 @@ public class OptionalMapDemo {
         if ("INDIA".equals(name)) {
             System.out.println("name = " + name);
         }
+    }
 
+
+    private static void flatMapExample2() {
+
+        Optional<String> optional1 = Optional.of("Hello Java 8");
+        Optional<Optional<String>> optional2 = Optional.ofNullable(optional1);
+        Optional<Optional<Optional<String>>> optional3 = Optional.ofNullable(optional2);
+
+        System.out.println("optional3 value : " + optional3);
+
+        String actualString = optional3.flatMap(v3 -> v3)
+                .flatMap(v2 -> v2)
+                .get();
+        System.out.println("actualString = " + actualString);
+
+        Optional<String> output = optional3.flatMap(value -> value.flatMap(v -> {
+            if (v.get().contains("Java 8")) {
+                return Optional.of("Yes, Java 8 is found.");
+            }
+            return Optional.empty();
+        }));
+
+        System.out.println("output value : " + output);
     }
 
 }
