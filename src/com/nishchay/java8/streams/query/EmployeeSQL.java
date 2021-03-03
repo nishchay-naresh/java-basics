@@ -31,9 +31,11 @@ public class EmployeeSQL {
 //        youngestOldestEmployee();
 //         getEmpNameEmpMap();
 //        first3EmpNames();
-        printEmpNamesStartingWtih_N();
-
+//        printEmpNamesStartingWtih_N();
+        avgAndTotalSalaryOfFemaleEmployee();
+//        femaleEmployeeWithHighestSalary();
     }
+
 
     private static void employeePrint() {
         System.out.println("================= Employee List =================");
@@ -209,9 +211,9 @@ public class EmployeeSQL {
 
     // Query 3.11 : What is the average salary of male and female employees?
     private static void averageSalaryMaleAndFemaleEmployees() {
-        Map<String, Double> avgSalaryOfMaleAndFemaleEmployees=
+        Map<String, Double> avgSalaryOfMaleAndFemaleEmployees =
                 populateEmployeeList().stream()
-                    .collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingDouble(Employee::getSalary)));
+                        .collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingDouble(Employee::getSalary)));
 
         System.out.println(avgSalaryOfMaleAndFemaleEmployees);
     }
@@ -234,14 +236,14 @@ public class EmployeeSQL {
     // Query 3.13 : What is the average, total, min, max salary of the whole organization?
     private static void getSalaryStatistics() {
 
-        DoubleSummaryStatistics employeeSalaryStatistics=
+        DoubleSummaryStatistics employeeSalaryStatistics =
                 populateEmployeeList().stream().collect(Collectors.summarizingDouble(Employee::getSalary));
 
-        System.out.println("Salary count = "+employeeSalaryStatistics.getCount());
-        System.out.println("Total Salary = "+employeeSalaryStatistics.getSum());
-        System.out.println("Min Salary = "+employeeSalaryStatistics.getMin());
-        System.out.println("Max Salary = "+employeeSalaryStatistics.getMax());
-        System.out.println("Average Salary = "+employeeSalaryStatistics.getAverage());
+        System.out.println("Salary count = " + employeeSalaryStatistics.getCount());
+        System.out.println("Total Salary = " + employeeSalaryStatistics.getSum());
+        System.out.println("Min Salary = " + employeeSalaryStatistics.getMin());
+        System.out.println("Max Salary = " + employeeSalaryStatistics.getMax());
+        System.out.println("Average Salary = " + employeeSalaryStatistics.getAverage());
 
     }
 
@@ -264,21 +266,21 @@ public class EmployeeSQL {
 
     }
 
-    private static void getEmpNameEmpMap(){
+    private static void getEmpNameEmpMap() {
 
 
         Map<String, Employee> empMap = populateEmployeeList().stream()
-                .collect(Collectors.toMap(e->e.getName(), Function.identity()));
+                .collect(Collectors.toMap(e -> e.getName(), Function.identity()));
 
         System.out.println("----------------- Employee Map on name basis --------------------");
         empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
     }
 
 
-    private static void first3EmpNames(){
+    private static void first3EmpNames() {
 
 //        Collecting first 3 employee name in a string
-        String first3EmployeeName  =  populateEmployeeList().stream()
+        String first3EmployeeName = populateEmployeeList().stream()
                 .limit(3)
                 .map(Employee::getName)
                 .collect(Collectors.joining(", "));
@@ -287,7 +289,7 @@ public class EmployeeSQL {
 
     }
 
-    private static void printEmpNamesStartingWtih_N(){
+    private static void printEmpNamesStartingWtih_N() {
 
         System.out.println("printing employee name starting with latter - 'N' ");
         populateEmployeeList().stream()
@@ -295,6 +297,29 @@ public class EmployeeSQL {
                 .filter(e -> e.startsWith("N"))
                 .forEach(System.out::println);
     }
+
+    private static void avgAndTotalSalaryOfFemaleEmployee() {
+
+        double femaleSalaryTotal = populateEmployeeList().stream()
+                .filter(e -> e.getGender().equals("Female"))
+                .map(Employee::getSalary)
+                .mapToDouble(i -> i)
+                .sum();
+
+        System.out.println("femaleSalaryTotal = " + femaleSalaryTotal);
+
+        double femaleSalaryAverage = populateEmployeeList().stream()
+                .filter(e -> e.getGender().equals("Female"))
+                .map(Employee::getSalary)
+                .mapToDouble(i -> i)
+                .average().getAsDouble();
+
+        System.out.println("femaleSalaryAverage = " + femaleSalaryAverage);
+
+    }
+
+
+
 
     public static List<Employee> populateEmployeeList() {
 
