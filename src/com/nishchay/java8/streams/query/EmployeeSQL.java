@@ -32,8 +32,8 @@ public class EmployeeSQL {
 //         getEmpNameEmpMap();
 //        first3EmpNames();
 //        printEmpNamesStartingWtih_N();
-        avgAndTotalSalaryOfFemaleEmployee();
-//        femaleEmployeeWithHighestSalary();
+//        avgAndTotalSalaryOfFemaleEmployee();
+        femaleEmployeeWithHighestSalary();
     }
 
 
@@ -318,7 +318,29 @@ public class EmployeeSQL {
 
     }
 
+    private static void femaleEmployeeWithHighestSalary() {
 
+        Optional<Employee> optionalEmployee = populateEmployeeList().stream()
+                .filter(e -> e.getGender().equals("Female"))
+                .reduce((e1, e2) -> e1.getSalary() > e2.getSalary() ? e1 : e2);
+
+        System.out.println("Female Employee With Highest Salary = " + optionalEmployee.get());
+
+        optionalEmployee = populateEmployeeList().stream()
+                .filter(e -> e.getGender().equals("Female"))
+                .sorted(Comparator.comparing(Employee::getSalary, Comparator.reverseOrder()))
+                .findFirst();
+
+        System.out.println("optionalEmployee = " + optionalEmployee.get());
+
+        optionalEmployee = populateEmployeeList().stream()
+                .filter(e -> e.getGender().equals("Female"))
+                .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+                .findFirst();
+
+        System.out.println("optionalEmployee = " + optionalEmployee.get());
+
+    }
 
 
     public static List<Employee> populateEmployeeList() {
