@@ -17,7 +17,7 @@ public class StringFrequency {
 	}
 
 
-	private static Map<String, Integer> getFrequencyMap(String[] strArray) {
+	public static Map<String, Integer> getFrequencyMap(String[] strArray) {
 
 		Map<String, Integer> feqMap = new HashMap<>();
 		Integer freq;
