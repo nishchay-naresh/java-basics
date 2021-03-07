@@ -15,6 +15,9 @@ public class MostFrequentWord {
 
     }
 
+
+//    Time Complexity: O(n)
+//    Space Complexity: O(n)
     private static String mostFrequentString(String[] strArray) {
 
         Map<String, Integer> feqMap = StringFrequency.getFrequencyMap(strArray);
