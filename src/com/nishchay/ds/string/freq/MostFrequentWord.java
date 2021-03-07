@@ -11,8 +11,13 @@ public class MostFrequentWord {
                 "computer", "science", "zoom", "yup",
                 "fire", "in", "be", "data", "geeks"};
 
+        System.out.println("Most frequent word is - " + mostFrequentString(strArray));
+
+    }
+
+    private static String mostFrequentString(String[] strArray) {
+
         Map<String, Integer> feqMap = StringFrequency.getFrequencyMap(strArray);
-        System.out.println(feqMap);
 
         String result = "";
         int value = 0;
@@ -23,10 +28,7 @@ public class MostFrequentWord {
                 result = currEntry.getKey();
             }
         }
-
-        System.out.println("Most frequent word is - " + result);
+        return result;
     }
-
-
 
 }
