@@ -2,6 +2,10 @@ package com.nishchay.java8.basic;
 
 import java.util.Optional;
 
+/*
+* two diff implementation for optional
+*
+* */
 public class OptionalDemo1 {
 
     public static void main(String[] args) {
