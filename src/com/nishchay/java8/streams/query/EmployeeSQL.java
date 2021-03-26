@@ -175,7 +175,7 @@ public class EmployeeSQL {
 
         Optional<Employee> youngestMaleEmployeeInADept =
                 populateEmployeeList().stream()
-                        .filter(e -> e.getGender() == "Male" && e.getDepartment() == "Product Development")
+                        .filter(e -> e.getGender().equals("Male") && e.getDepartment().equals("Product Development"))
                         .min(Comparator.comparingInt(Employee::getAge));
 
         System.out.println("youngestMaleEmployeeInADept = " + youngestMaleEmployeeInADept.get());
@@ -202,7 +202,7 @@ public class EmployeeSQL {
 
         Map<String, Long> countMaleFemaleEmployeesInSalesMarketing =
                 populateEmployeeList().stream()
-                        .filter(e -> e.getDepartment() == "Sales And Marketing")
+                        .filter(e -> e.getDepartment().equals("Sales And Marketing"))
                         .collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
 
         System.out.println(countMaleFemaleEmployeesInSalesMarketing);
@@ -262,7 +262,8 @@ public class EmployeeSQL {
         Optional<Employee> oldest = populateEmployeeList().stream()
                 .max(Comparator.comparingInt(Employee::getAge));
 
-        System.out.println("oldest = " + oldest.get());
+//        System.out.println("oldest = " + oldest.get());
+        System.out.println("oldest = " + oldest.orElse(null));
 
     }
 
