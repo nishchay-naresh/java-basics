@@ -9,29 +9,71 @@ public class HashMapSortOnValue {
 
 //        sortMapByValueEx();
         sortIntArray();
+//        sortIntArray1();
 
     }
 
     /*
-     *  Sort an integer array based on its frequency descending order, if frequency is ame got for no again in descending order
-     *	integer[] arr = {1,3,5,7,2,1,5,3,3};
-     *	o/p -  3,3,3,5,5,1,1,7,2
-     *  N + N LogN + N= N LogN
+     * Sort an integer array based on its frequency, if frequency is same go for insertion order
+     * Sort based on occurrence and if count same maintain insertion sequence
+     * integer[] arr = {1,3,5,7,2,1,5,3,3};
+     * o/p - 3,3,3,1,1,5,5,7,2
      * */
     private static void sortIntArray() {
 
         int[] arr = {1, 3, 5, 7, 2, 1, 5, 3, 3};
 
-        // get freq of each no in a hashMap
-        Map<Integer, Integer> freqMap = new HashMap<>();
-        for (int i : arr) {
-            Integer val = freqMap.get(i);
-            if (val == null) {
-                freqMap.put(i, 1);
-            } else {
-                freqMap.put(i, val + 1);
+        // get freq of each no in a LinkedHashMap
+        Map<Integer, Integer> freqMap = new LinkedHashMap<>();
+        for (int currNo : arr) {
+            Integer freq = freqMap.get(currNo);
+            freq = freq == null ? 1 : ++freq;
+            freqMap.put(currNo, freq);
+        }
+
+        // sort the map based on freq, which is value here
+        List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(freqMap.entrySet());
+
+        Comparator<Map.Entry<Integer, Integer>> valueComparatorReverse = Comparator.comparing(HashMap.Entry::getValue, Comparator.reverseOrder());
+        entryList.sort(valueComparatorReverse);
+
+        HashMap<Integer, Integer> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Integer, Integer> currEntry : entryList) {
+            sortedMap.put(currEntry.getKey(), currEntry.getValue());
+        }
+
+        System.out.println("sortedMap = " + sortedMap);
+
+        System.out.print(" input - ");
+        for (int x : arr) {
+            System.out.print(x + ", ");
+        }
+
+        System.out.print("\n output - ");
+        for (Map.Entry<Integer, Integer> e : sortedMap.entrySet()) {
+            int freq = e.getValue();
+            int num = e.getKey();
+            for (int i = 1; i <= freq; i++) {
+                System.out.print(num + ", ");
             }
         }
+    }
+    /*
+     *	input - 1, 3, 5, 7, 2, 1, 5, 3, 3,
+     *	output - 3, 3, 3, 1, 1, 5, 5, 7, 2,
+     * */
+
+    /*
+     *  Sort an integer array based on its frequency descending order, if frequency is same go for no again in descending order
+     *	integer[] arr = {1,3,5,7,2,1,5,3,3};
+     *	o/p -  3,3,3,5,5,1,1,7,2
+     *  N + N LogN + N= N LogN
+     * */
+    private static void sortIntArray1() {
+
+        int[] arr = {1, 3, 5, 7, 2, 1, 5, 3, 3};
+
+        Map<Integer, Integer> freqMap = getFrequencyMap(arr);
 
         // sort the map based on freq, which is value here
         List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(freqMap.entrySet());
@@ -62,13 +104,23 @@ public class HashMapSortOnValue {
         }
 
     }
-
-
     /*
-    *  input - 1, 3, 5, 7, 2, 1, 5, 3, 3,
-    * output - 3, 3, 3, 5, 5, 1, 1, 7, 2,
-    *
-    * */
+     *  input - 1, 3, 5, 7, 2, 1, 5, 3, 3,
+     * output - 3, 3, 3, 5, 5, 1, 1, 7, 2,
+     * */
+
+
+    private static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
+
+        // get freq of each no in a hashMap
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int currNo : intArray) {
+            Integer freq = freqMap.get(currNo);
+            freq = freq == null ? 1 : ++freq;
+            freqMap.put(currNo, freq);
+        }
+        return freqMap;
+    }
 
     /*
      * 1. populate hashMap with values
