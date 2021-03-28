@@ -13,7 +13,11 @@ import java.util.*;
 public class FirstNonRepeatingCharacter {
 
     public static void main(String[] args) {
-        doTestsPass();
+//        doTestsPass();
+
+        findFirstStream("simplest");
+
+        System.out.println("simplest".chars().distinct());
     }
 
     /**
@@ -22,8 +26,8 @@ public class FirstNonRepeatingCharacter {
      */
     public static void doTestsPass() {
         // feel free to make testing more elegant
-        String[] inputs = {"apple", "racecars", "ababdc"};
-        char[] outputs = {'a', 'e', 'd'};
+        String[] inputs = {"apple", "racecars", "ababdc", "simplest"};
+        char[] outputs = {'a', 'e', 'd', 'i'};
 
         boolean result = true;
         for (int i = 0; i < inputs.length; i++) {
@@ -62,5 +66,19 @@ public class FirstNonRepeatingCharacter {
         return firstChar;
     }
 
+    // https://www.java-success.com/java-8-string-streams-finding-first-non-repeated-character-functional-programming/
+    public static char findFirstStream(String input) {
+
+
+        Optional<Character> first = input.chars()
+                .distinct()
+                .mapToObj(i -> (char) i)
+                .findFirst();
+
+
+        System.out.println("first = " + first.get());
+        return 'a';
+//        return  input.chars().mapToObj(i -> (char)i).distinct().findFirst();
+    }
 
 }
