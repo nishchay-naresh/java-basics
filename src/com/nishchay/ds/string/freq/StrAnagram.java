@@ -3,6 +3,8 @@ package com.nishchay.ds.string.freq;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class StrAnagram {
 
@@ -60,5 +62,12 @@ public class StrAnagram {
             freqMap.put(currChar, freq);
         }
         return freqMap;
+    }
+
+    private static Map<Character, Long> getFrequencyMapStream(String word) {
+        Map<Character, Long> counter = word.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        return counter;
     }
 }
