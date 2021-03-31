@@ -1,10 +1,7 @@
 package com.nishchay.ds.string.freq;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class StrAnagram {
 
@@ -19,8 +16,8 @@ public class StrAnagram {
         System.out.println("  isAnagramStream(\"Mother In Law\", \"Hitler Woman\") - " +  isAnagramStream("Mother In Law", "Hitler Woman"));
 
         System.out.println("  isAnagramMap(\"cat\", \"act\") - " + isAnagramMap("cat", "act"));
-        System.out.println("  isAnagramMap(\"Keep\", \"Peek\") - " + isAnagramMap("keep", "peek"));
-        System.out.println("  isAnagramMap(\"mother in law\", \"hitler woman\") - " +  isAnagramMap("mother in law", "hitler woman"));
+        System.out.println("  isAnagramMap(\"keep\", \"peek\") - " + isAnagramMap("keep", "peek"));
+        System.out.println("  isAnagramMap(\"motherinlaw\", \"hitlerwoman\") - " +  isAnagramMap("motherinlaw", "hitlerwoman"));
     }
 
     private static boolean isAnagramSort(String string1, String string2) {
@@ -45,29 +42,16 @@ public class StrAnagram {
             return false;
         }
 
-        Map<Character, Integer> freqMap1 = getFrequencyMap(string1);
-        Map<Character, Integer> freqMap2 = getFrequencyMap(string2);
-
+        Map<Character, Integer> freqMap1 = StringFrequencyUtility.getFrequencyMap(string1);
+        Map<Character, Integer> freqMap2 = StringFrequencyUtility.getFrequencyMap(string2);
         return freqMap1.equals(freqMap2);
+
+//        return StringFrequencyUtility.getFrequencyMapStream(string1).equals(StringFrequencyUtility.getFrequencyMapStream(string2));
     }
 
-    private static Map<Character, Integer> getFrequencyMap(String word) {
 
-        char[] charArray = word.toCharArray();
-        Map<Character, Integer> freqMap = new HashMap<>();
-        Integer freq;
-        for (char currChar : charArray) {
-            freq = freqMap.get(currChar);
-            freq = freq == null ? 1 : ++freq;
-            freqMap.put(currChar, freq);
-        }
-        return freqMap;
-    }
 
-    private static Map<Character, Long> getFrequencyMapStream(String word) {
-        Map<Character, Long> counter = word.chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        return counter;
-    }
+
+
+
 }
