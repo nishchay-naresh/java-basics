@@ -21,7 +21,7 @@ public class EnglishAlphabetLetters {
     }
 
     // Imperative Algorithm
-    public static boolean checkStringForAllTheLetters(String input) {
+    private static boolean checkStringForAllTheLetters(String input) {
         int index = 0;
         boolean[] visited = new boolean[26];
 
@@ -45,7 +45,7 @@ public class EnglishAlphabetLetters {
 
 
     // Java 8 Stream
-    public static boolean checkStringForAllLetterUsingStream(String input) {
+    private static boolean checkStringForAllLetterUsingStream(String input) {
         long c = input.toLowerCase().chars()
                 .filter(ch -> ch >= 'a' && ch <= 'z')
                 .distinct()
