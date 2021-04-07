@@ -23,6 +23,16 @@ public class Fibonacci {
 
         int n = 8; // 21
 
+        // printing fibonacci series till n
+//        printFibonacciIterative(n);
+        printFibonacciRecursive(0, 1, n);
+
+/*
+        for(int i = 0; i < n; i++){
+            System.out.print("  " + fibonacciRecursion(i));
+        }
+*/
+
 
 //        int n = 8 ; // 21
 //        int n = 9 ; // 34
@@ -30,10 +40,9 @@ public class Fibonacci {
 //        int n = 20 ; // 4181
 //        int n = 22 ; // 10946
 
+//        System.out.println(fibonacciRecursion(n));
+//        System.out.println(fibonacciRecursion1(n));
 
-//        fibonacciIterative(n);
-        System.out.println(fibonacciRecursion(n));
-        System.out.println(fibonacciRecursion1(n));
 
     }
 
@@ -55,7 +64,10 @@ public class Fibonacci {
         return fibonacciRecursion1(n - 1) + fibonacciRecursion1(n - 2);
     }
 
-    private static void fibonacciIterative(int n) {
+    /*
+     * print fibonacci series using iteration
+     * */
+    private static void printFibonacciIterative(int n) {
         int t1, t2, t3;
         t1 = 0;
         t2 = 1;
@@ -65,6 +77,27 @@ public class Fibonacci {
             System.out.print(" " + t3);
             t1 = t2;
             t2 = t3;
+        }
+    }
+
+
+    /*
+     * Fibonacci series using recursion
+     * */
+    private static void printFibonacciRecursive(int t1, int t2, int n) {
+
+        int t3;
+        if (n >= 0 && n <= 2) {
+            System.out.println(t1);
+            System.out.println(t2);
+            n = n - 2;
+        } else if (n >= 2) {
+            t3 = t1 + t2;
+            System.out.println(t3);
+            t1 = t2;
+            t2 = t3;
+            n = n - 1;
+            printFibonacciRecursive(t2, t3, n);
         }
     }
 
