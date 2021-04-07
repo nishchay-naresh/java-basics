@@ -8,7 +8,10 @@ public class HashMapSortOnValue {
     public static void main(String[] args) {
 
 //        sortMapByValueEx();
-        sortIntArray();
+
+        sortMapByKeyEx();
+
+//        sortIntArray();
 //        sortIntArray1();
 
     }
@@ -173,5 +176,44 @@ public class HashMapSortOnValue {
 
     }
 
+
+    private static void sortMapByKeyEx() {
+
+        HashMap<Integer, String> progLanguages = new HashMap<>();
+
+        // populating hashMap
+        progLanguages.put(85, "java");
+        progLanguages.put(75, "perl");
+        progLanguages.put(65, "go");
+        progLanguages.put(70, "unix");
+        progLanguages.put(90, "c++");
+        progLanguages.put(60, "ruby");
+
+        System.out.println("originalMap = " + progLanguages);
+
+        Map<Integer, String> sortedMarks = sortMapByKey(progLanguages);
+
+        System.out.println("sortedMap = " + sortedMarks);
+
+    }
+
+    // function to sort hashMap by key
+    private static HashMap<Integer, String> sortMapByKey(HashMap<Integer, String> hashMap) {
+        // Create a list from elements of HashMap
+        List<Map.Entry<Integer, String>> entryList = new ArrayList<>(hashMap.entrySet());
+
+        // Sort the list - based on hashMap key
+        Comparator<Map.Entry<Integer, String>> keyComparator = Comparator.comparing(e -> e.getKey());
+//        Comparator<Map.Entry<Integer, String>> keyComparator = Map.Entry.comparingByKey();
+        entryList.sort(keyComparator);
+
+        // put data from sorted list to linkedHashMap
+        HashMap<Integer, String> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<Integer, String> currEntry : entryList) {
+            sortedMap.put(currEntry.getKey(), currEntry.getValue());
+        }
+        return sortedMap;
+
+    }
 
 }
