@@ -1,6 +1,7 @@
 package com.nishchay.ds.string.freq;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * char findFirst(String input)
@@ -9,22 +10,23 @@ import java.util.*;
  * Given "apple", the answer is "a"
  * Given "racecars", the answer is "e"
  * Given "ababdc", the answer is "d"
+ * Given "simplest", the answer is "i"
  **/
 public class FirstNonRepeatingCharacter {
 
     public static void main(String[] args) {
-//        doTestsPass();
 
-        findFirstStream("simplest");
+        doTestsPass();
 
-        System.out.println("simplest".chars().distinct());
+        System.out.println(" findFirstStream(\"java perl rep \") - " +  findFirstStream("java perl rep"));
+
     }
 
     /**
      * boolean doTestsPass()
      * Returns true if all tests pass. Otherwise returns false.
      */
-    public static void doTestsPass() {
+    private static void doTestsPass() {
         // feel free to make testing more elegant
         String[] inputs = {"apple", "racecars", "ababdc", "simplest"};
         char[] outputs = {'a', 'e', 'd', 'i'};
@@ -40,7 +42,7 @@ public class FirstNonRepeatingCharacter {
     }
 
 
-    public static char findFirst(String input) {
+    private static char findFirst(String input) {
 
         char firstChar = '0';
         char[] charArray = input.toCharArray();
@@ -66,19 +68,22 @@ public class FirstNonRepeatingCharacter {
         return firstChar;
     }
 
-    // https://www.java-success.com/java-8-string-streams-finding-first-non-repeated-character-functional-programming/
-    public static char findFirstStream(String input) {
+
+    // Finding first non repeating char in a string
+    private static char findFirstStream(String input) {
+
+        System.out.println("input = " + input);
+        Map<Character, Long> freqMap = StringFrequencyUtility.getOrderedFrequencyMapStream(input);
+        System.out.println("freqMap = " + freqMap);
 
 
-        Optional<Character> first = input.chars()
-                .distinct()
-                .mapToObj(i -> (char) i)
-                .findFirst();
+        Character result = freqMap
+                .entrySet().stream()
+                .filter(entry -> entry.getValue() == 1L)
+                .map(entry -> entry.getKey())
+                .findFirst().get();
 
-
-        System.out.println("first = " + first.get());
-        return 'a';
-//        return  input.chars().mapToObj(i -> (char)i).distinct().findFirst();
+        return result;
     }
 
 }
