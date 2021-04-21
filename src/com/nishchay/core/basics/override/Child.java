@@ -32,14 +32,15 @@ public class Child extends Parent {
         System.out.println("Child.fo2() throws ArrayIndexOutOfBoundsException");
     }
 
-    // not a valid override, can't override for checked exception
+
 /*
-    public void po() throws FileNotFoundException {
+ // not a valid override, can't override for checked exception
+    public void po() throws Exception {
         System.out.println("Child.po() throws FileNotFoundException");
     }
 */
-
-    public void po() throws ArrayIndexOutOfBoundsException {
+    // a valid override, can override for un-checked exception
+    public void po() throws RuntimeException {
         System.out.println("Child.po() throws ArrayIndexOutOfBoundsException");
     }
 
