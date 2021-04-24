@@ -1,5 +1,6 @@
 package com.nishchay.core.collection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,10 +10,10 @@ public class ArrayToList {
 
     public static void main(String[] args) {
 
-        asListEx();
+//        asListEx();
         arrayToList_listToArray_objectType();
-        arrayToList_listToArray_primitiveInt();
-        arrayToList_listToArray_primitiveChar();
+//        arrayToList_listToArray_primitiveInt();
+//        arrayToList_listToArray_primitiveChar();
 
     }
 
@@ -52,9 +53,20 @@ public class ArrayToList {
         List<String> stringList = Arrays.asList("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
         //          List<String> -> String []
         String[] strArray = stringList.toArray(new String[stringList.size()]);
-
         System.out.println("stringList -" + stringList);
         System.out.println("strArray -" + Arrays.toString(strArray));
+
+        List<Integer> integerList = Arrays.asList(0, 1, 2, 3, 4, 5);
+        Integer[] intArray = integerList.toArray(new Integer[0]);
+        System.out.println("integerList = " + integerList);
+        System.out.println("intArray = " + Arrays.toString(intArray));
+
+        // Note that this is a fixed-sized list that will still be backed by the array.
+        // If you want a standard ArrayList you can simply instantiate one as so:
+        Integer[] sourceArray = { 0, 1, 2, 3, 4, 5 };
+        List<Integer> targetList = new ArrayList<Integer>(Arrays.asList(sourceArray));
+        targetList.add(10);
+        System.out.println("targetList = " + targetList);
     }
 
 
