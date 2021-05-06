@@ -7,8 +7,8 @@ public class ContainerWithMostWater {
 
     public static void main(String[] args) {
 
-//        int[] barArray = {1,8,6,2,5,4,8,3,7};
-        int[] barArray = {1,1};
+        int[] barArray = {1,8,6,2,5,4,8,3,7};
+//        int[] barArray = {1,1};
 //        int[] barArray = {4, 3, 2, 1, 4};
 //        int[] barArray = {1,2,1};
 

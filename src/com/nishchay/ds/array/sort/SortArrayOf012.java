@@ -12,7 +12,7 @@ public class SortArrayOf012 {
     public static void main(String[] args) {
 
 //        int[] arr = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
-        int arr[] = { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
+        int[] arr = { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
         int len = arr.length;
         System.out.println("len = " + len);
         System.out.println("Original array = " + Arrays.toString(arr));

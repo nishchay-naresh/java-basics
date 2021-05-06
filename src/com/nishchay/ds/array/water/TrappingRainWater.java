@@ -35,14 +35,14 @@ public class TrappingRainWater {
 
     public static void main(String[] args) {
         // -------------
-        int[] nums = {0, 1, 2, 4, 5, 7, 9, 8, 6, 3, 2, 1}; // o
+        int[] nums = {0, 1, 2, 4, 5, 7, 9, 8, 6, 3, 2, 1};  // 0
         System.out.println(getTotalWaterVolume1(nums));
 
-//        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-//        int[] arr = {1, 3, 2, 4, 6, 1}; // 1
-//        int[] arr = {1, 3, 2, 1, 4, 6, 7, 3, 1}; // 3
-//        int[] arr = { 7, 0, 4, 2, 5, 0, 6, 4, 0, 5 }; // 25
-        int[] arr = {5, 6, 7, 12, 2, 10, 17, 5, 3}; // 12
+//        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};   // 6
+//        int[] arr = {1, 3, 2, 4, 6, 1};                   // 1
+//        int[] arr = {1, 3, 2, 1, 4, 6, 7, 3, 1};          // 3
+//        int[] arr = { 7, 0, 4, 2, 5, 0, 6, 4, 0, 5 };     // 25
+        int[] arr = {5, 6, 7, 12, 2, 10, 17, 5, 3};       // 12
         System.out.print(getTotalWaterVolume(arr));
 
 
