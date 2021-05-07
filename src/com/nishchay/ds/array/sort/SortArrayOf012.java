@@ -17,9 +17,9 @@ public class SortArrayOf012 {
         System.out.println("len = " + len);
         System.out.println("Original array = " + Arrays.toString(arr));
 
-        sort012_count(arr);
+//        sort012_count(arr);
 //        sort012_count_1(arr);
-//        sort012_partition(arr);
+        sort012_partition(arr);
         System.out.println("  Sorted array = " + Arrays.toString(arr));
     }
 
@@ -90,28 +90,29 @@ public class SortArrayOf012 {
         return i;
     }
     /*
-     *  Here keeping 3 pointers (hi, low & mid), initializing them as  lo = mid = 0,   hi = n - 1
+     *  Here keeping 3 pointers (hi, low & mid), initializing them as
+     *  lo = mid = 0,   high = n - 1
      *  mid is the traversing pointer
      *  if mid == 0,  swap(lo, mid); lo++; mid++;
      *  if mid == 1,  do nothing simply mid++;;
-     *  if mid == 2,   swap(mid, hi); hi--;
-     *
+     *  if mid == 2,   swap(mid, high); high--;
+     *  Only one traversals of the array is needed.
      * */
     private static void sort012_partition(int[] nums) {
 
-        int lo, hi, mid;
+        int lo, high, mid;
         lo = mid = 0;
-        hi = nums.length - 1;
+        high = nums.length - 1;
 
-        while (mid <= hi) {
+        while (mid <= high) {
             if (nums[mid] == 0) {
                 swap(nums, lo, mid);
                 lo++; mid++;
             }else if (nums[mid] == 1) {
                 mid++;
             }else if (nums[mid] == 2) {
-                swap(nums, mid, hi);
-                hi--;
+                swap(nums, mid, high);
+                high--;
             }
         }
     }
