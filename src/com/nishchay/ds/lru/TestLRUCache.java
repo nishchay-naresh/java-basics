@@ -4,7 +4,7 @@ public class TestLRUCache {
 
     public static void main(String[] args) {
 
-    	cacheDemo();
+//    	cacheDemo();
     	cacheDemo1();
 
     }
@@ -43,19 +43,36 @@ public class TestLRUCache {
 		lruCache.put(2, "Object2");
 		lruCache.put(3, "Object3");
 		System.out.println("lruCache = " + lruCache);
-		lruCache.get(1);
+		System.out.println("lruCache.get(1) - " + lruCache.get(1));
+		System.out.println("lruCache.get(2) - " + lruCache.get(2));
+		System.out.println("lruCache.get(3) - " + lruCache.get(3));
+
+		System.out.println("-----------------------");
 		System.out.println("lruCache = " + lruCache);
 		lruCache.put(4, "Object4");
 		System.out.println("lruCache = " + lruCache);
+		System.out.println("lruCache.get(2) - " + lruCache.get(2));
+
+		System.out.println("lruCache = " + lruCache);
 		lruCache.put(5, "Object5");
 		System.out.println("lruCache = " + lruCache);
-		lruCache.get(3);
+		System.out.println("lruCache.get(3) - " + lruCache.get(3));
+		System.out.println("lruCache.get(1) - " + lruCache.get(1));
+
 		lruCache.put(6, "Object6");
 		System.out.println("lruCache = " + lruCache);
-		lruCache.get(4);
-		lruCache.put(7, "Object7");
-		lruCache.put(1, "Object10");
-		System.out.println("lruCache = " + lruCache);
+
+		System.out.println("-----------------------");
+		System.out.println("lruCache.get(4) - " + lruCache.get(4));
+		System.out.println("lruCache.get(5) - " + lruCache.get(5));
+		System.out.println("lruCache.get(6) - " + lruCache.get(6));
+
+		System.out.println("-----------------------");
+		System.out.println(lruCache);
+		lruCache.put(7, "Object7");System.out.println(lruCache);
+		lruCache.put(1, "Object10");System.out.println(lruCache);
+		System.out.println("lruCache.get(1) - " + lruCache.get(1));
+
 	}
 
 }
@@ -71,10 +88,29 @@ public class TestLRUCache {
  * 94
  * null
  * null
- * lruCache = LRUCache{map={1=1->Object1, 2=2->Object2, 3=3->Object3}}
- * lruCache = LRUCache{map={1=1->Object1, 2=2->Object2, 3=3->Object3}}
- * lruCache = LRUCache{map={4=4->Object4, 1=1->Object1, 3=3->Object3}}
- * lruCache = LRUCache{map={4=4->Object4, 1=1->Object1, 5=5->Object5}}
- * lruCache = LRUCache{map={4=4->Object4, 5=5->Object5, 6=6->Object6}}
- * lruCache = LRUCache{map={4=4->Object4, 1=1->Object10, 7=7->Object7}}
+ *
+ *
+ *
+ *	lruCache = LRUCache{ head => 3->Object3, 2->Object2, 1->Object1 }
+ *	lruCache.get(1) - Object1
+ *	lruCache.get(2) - Object2
+ *	lruCache.get(3) - Object3
+ *	-----------------------
+ *	lruCache = LRUCache{ head => 3->Object3, 2->Object2, 1->Object1 }
+ *	lruCache = LRUCache{ head => 4->Object4, 3->Object3, 2->Object2 }
+ *	lruCache.get(2) - Object2
+ *	lruCache = LRUCache{ head => 2->Object2, 4->Object4, 3->Object3 }
+ *	lruCache = LRUCache{ head => 5->Object5, 2->Object2, 4->Object4 }
+ *	lruCache.get(3) - null
+ *	lruCache.get(1) - null
+ *	lruCache = LRUCache{ head => 6->Object6, 5->Object5, 2->Object2 }
+ *	-----------------------
+ *	lruCache.get(4) - null
+ *	lruCache.get(5) - Object5
+ *	lruCache.get(6) - Object6
+ *	-----------------------
+ *	LRUCache{ head => 6->Object6, 5->Object5, 2->Object2 }
+ *	LRUCache{ head => 7->Object7, 6->Object6, 5->Object5 }
+ *	LRUCache{ head => 1->Object10, 7->Object7, 6->Object6 }
+ *	lruCache.get(1) - Object10
 * */
