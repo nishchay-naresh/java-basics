@@ -12,11 +12,21 @@ public class MapDemo {
 
     private static void hashMapNullPut() {
 
-        Map<Integer, String> map = new HashMap<>();
-        map.put(11, "audi");
-        map.put(null, "bmw");
-        map.put(12, null);
-        map.put(null, null);
+
+        Map<String, Integer> map = new HashMap<>();
+
+        // null as key
+        map.put(null, 1);
+        map.put(null, 2);
+        map.put(null, 3);
+
+        map.put("a", 10);
+        map.put("b", 20);
+
+        // null as value
+        map.put("c", null);
+        map.put("d", null);
+        map.put("e", null);
 
 //        System.out.println("map = " + map);
 
