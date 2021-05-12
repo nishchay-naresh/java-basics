@@ -1,4 +1,4 @@
-package com.nishchay.core.basics;
+package com.nishchay.core.basics.exc;
 
 public class ExceptionTest {
 
