@@ -1,5 +1,20 @@
 package com.nishchay.ds.number;
 
+/*
+ *	input a number (10 <= number <= 1000), Apply below logic repeatedly , until number is not covert to 1
+ *		If number is Even - divide by two
+ *		If number is Odd - multiply by 3 and add 1
+ *	Need to tell how many operation step would require to covert the number to 1
+ *
+ * ------------------------------------------
+ *
+ *	Print below series :
+ *	1
+ *	2 3
+ *	4 5 6
+ *	7 8 9 10
+ *
+ * */
 public class ConvertNumToOne {
 
     public static void main(String[] args) {
@@ -9,33 +24,28 @@ public class ConvertNumToOne {
         convertNo(850);
         convertNo(79);
 
-//        printPyramid(5);
+        System.out.println(" -------------------------------------- ");
+
+        printPyramid(5);
+        printPyramid(8);
+
     }
 
 
-    public static void  convertNo(int n) {
+    private static void convertNo(int n) {
 
-        int stepCount = 0;
-        while (n > 10 && n < 10000) {
+        int opCount = 0;
+        while (n > 10 && n < 1000) {
             if (n % 2 == 0)
-                evenNoLogic(n);
+                n = n / 2 ;
             else
-                oddNoLogic(n);
-            stepCount++;
+                n = n * 3 + 1;
+            opCount++;
         }
-        System.out.print("stepCount - " + stepCount);
+        System.out.println("operationStepCount - " + opCount);
     }
 
-    public static int evenNoLogic(int n) {
-        return n / 2;
-    }
-
-    public static int oddNoLogic(int n) {
-        return n * 3 + 1;
-    }
-
-
-    public static void printPyramid(int LineNo) {
+    private static void printPyramid(int LineNo) {
         int n = 1;
         for (int i = 1; i <= LineNo; i++) {
             for (int j = 1; j <= i; j++) {
