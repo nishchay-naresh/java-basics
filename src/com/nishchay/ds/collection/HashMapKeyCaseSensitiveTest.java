@@ -1,4 +1,4 @@
-package com.nishchay.core.collection;
+package com.nishchay.ds.collection;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,5 +30,6 @@ public class HashMapKeyCaseSensitiveTest {
         System.out.println("HTTP Requester from treeMap - " + treeMap.get(key));
         System.out.println("HTTP Requester from treeMap - " + treeMap.get("SERVER1"));
         System.out.println("HTTP Requester from treeMap - " + treeMap.get("serveR1"));
+
     }
 }
