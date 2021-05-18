@@ -56,13 +56,13 @@ public class MaxMarksWithAverageHM {
         int maxMarks = 0;
         String maxMarksName = "";
         for (Map.Entry<String, Integer> e : marksHM.entrySet()) {
-            if(maxMarks < e.getValue()){
+            if (maxMarks < e.getValue()) {
                 maxMarks = e.getValue();
-                maxMarksName  = e.getKey();
+                maxMarksName = e.getKey();
             }
         }
 
-        System.out.println("Topper : " + maxMarksName + " : " +  maxMarks);
+        System.out.println("Topper : " + maxMarksName + " : " + maxMarks);
     }
 
 
@@ -80,7 +80,7 @@ public class MaxMarksWithAverageHM {
             String currName = names[i];
             int currMarks = marks[i];
             List<Integer> currMarksList = marksHM.get(currName);
-            if(currMarksList == null){
+            if (currMarksList == null) {
                 currMarksList = new ArrayList<>();
                 marksHM.put(currName, currMarksList);
             }
@@ -94,19 +94,22 @@ public class MaxMarksWithAverageHM {
         String maxMarksName = "";
         for (Map.Entry<String, List<Integer>> e : marksHM.entrySet()) {
             Integer avgMarks = calculateAverage(e.getValue());
-            if(maxMarks < avgMarks){
+            if (maxMarks < avgMarks) {
                 maxMarks = avgMarks;
-                maxMarksName  = e.getKey();
+                maxMarksName = e.getKey();
             }
         }
 
-        System.out.println("Topper : " + maxMarksName + " : " +  maxMarks);
+        System.out.println("Topper : " + maxMarksName + " : " + maxMarks);
 
     }
 
-    private static Integer calculateAverage(List <Integer> marks) {
+    private static Integer calculateAverage(List<Integer> marks) {
+        if (marks.size() == 1) {
+            return marks.get(0);
+        }
         Integer avg = 0;
-        if(!marks.isEmpty()) {
+        if (!marks.isEmpty()) {
             for (Integer mark : marks) {
                 avg += mark;
             }
