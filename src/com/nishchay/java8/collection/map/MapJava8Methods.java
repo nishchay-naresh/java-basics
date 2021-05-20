@@ -20,8 +20,8 @@ public class MapJava8Methods {
     }
 
     /*
-    * Return - returns null (if there was no mapping) else mapped value
-    * */
+     * Return - returns null (if there was no mapping) else mapped value
+     * */
     private static void putIfAbsentDemo() {
         System.out.println("---------------------putIfAbsentDemo----------------------");
         Map<String, Integer> hashMap = new HashMap<>();
@@ -32,7 +32,7 @@ public class MapJava8Methods {
         System.out.println(hashMap.putIfAbsent("key5", 500)); // null
 
         System.out.println(hashMap.putIfAbsent("key4", 100 * 2 + 150 + 50)); // null
-        if(400 == hashMap.putIfAbsent("key4", 0)){
+        if (400 == hashMap.putIfAbsent("key4", 0)) {
             System.out.println(hashMap.putIfAbsent("key3", hashMap.get("key4") - 100)); // null
         }
 
@@ -57,22 +57,22 @@ public class MapJava8Methods {
     }
 
     private static Integer get500(String strKey) {
-        if(strKey.equals("key5")){
+        if (strKey.equals("key5")) {
             return 500;
         }
         return 0;
     }
 
     private static Integer get1000(String strKey) {
-        if(strKey.equals("key10")){
+        if (strKey.equals("key10")) {
             return 1000;
         }
         return null;
     }
 
     /*
-    * some how closer to Optional.orElse() vs Optional.orElseGet()
-    * */
+     * some how closer to Optional.orElse() vs Optional.orElseGet()
+     * */
     private static void putIfAbsentVsComputeIfAbsent() {
 
         System.out.println("---------------------putIfAbsentVsComputeIfAbsent----------------------");
@@ -86,7 +86,7 @@ public class MapJava8Methods {
          *	putIfAbsent - takes the value directly
          *	computeIfAbsent - takes a mapping function, that is called to obtain the value
          * */
-        hashMap.put("key3", 300);
+        hashMap.putIfAbsent("key3", 300);
         hashMap.computeIfAbsent("key5", MapJava8Methods::get500);
 
         /*
@@ -111,3 +111,24 @@ public class MapJava8Methods {
     }
 
 }
+
+/*
+ * O/P =>
+ * ---------------------putIfAbsentDemo----------------------
+ * 200
+ * null
+ * null
+ * null
+ * hashMap = {key1=100, key2=200, key5=500, key3=300, key4=400}
+ * ---------------------computeIfAbsentDemo----------------------
+ * 200
+ * 500
+ * 1000
+ * hashMap = {key1=100, key2=200, key5=500, key10=1000}
+ * ---------------------putIfAbsentVsComputeIfAbsent----------------------
+ * 500
+ * 1000
+ * null
+ * null
+ * hashMap = {key1=100, key2=200, key5=500, key3=300, key4=null, key10=1000}
+ * */
