@@ -8,10 +8,11 @@ public class MapDemo {
     public static void main(String[] args) {
 
         hashMapNullPut();
+
     }
 
-    private static void hashMapNullPut() {
 
+    private static void hashMapNullPut() {
 
         Map<String, Integer> map = new HashMap<>();
 
@@ -28,6 +29,8 @@ public class MapDemo {
         map.put("d", null);
         map.put("e", null);
 
+        // hashMap printing logic
+
 //        System.out.println("map = " + map);
 
 /*
@@ -39,4 +42,5 @@ public class MapDemo {
         map.forEach((key, value) -> System.out.println(key + "-> " + value));
 
     }
+
 }
