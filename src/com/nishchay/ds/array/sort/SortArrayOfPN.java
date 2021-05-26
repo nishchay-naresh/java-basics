@@ -23,7 +23,6 @@ public class SortArrayOfPN {
     /*
      *	Complexity Analysis:
      *	Time Complexity: O(n).
-     *	Only two traversals of the array is needed.
      *	Space Complexity: O(1).
      *	As no extra space is required.
      * */
@@ -32,15 +31,13 @@ public class SortArrayOfPN {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] < 0) {   // if negative number found
                 if (i != left) {
-                    int temp = arr[i];
-                    arr[i] = arr[left]; // swapping with leftmost positive
-                    arr[left] = temp;
+                    // swapping with leftmost positive
+                    swap(arr, left, i);
                 }
                 left++;
             }
         }
     }
-
 
 
     private static void swap(int[] nums, int i, int j) {
