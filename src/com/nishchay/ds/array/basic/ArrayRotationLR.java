@@ -17,6 +17,8 @@ public class ArrayRotationLR {
         System.out.println("           Original array  = " + Arrays.toString(arr));
         rotateArrayL(arr);
         System.out.println("Array after right rotation = " + Arrays.toString(arr));
+        rotateArrayR(arr);
+        System.out.println("Array after right rotation = " + Arrays.toString(arr));
 
     }
 
@@ -33,5 +35,18 @@ public class ArrayRotationLR {
         arr[arr.length - 1] = firstElement;
     }
 
+    /*
+     *    arr     = {10, 20, 30, 40, 50}
+     *   Right   = {50, 10, 20, 30, 40}
+     * */
+    private static void rotateArrayR(int[] arr) {
+
+        int lastElement = arr[arr.length - 1];
+
+        for (int i = 1; i < arr.length; i++) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = lastElement;
+    }
 
 }
