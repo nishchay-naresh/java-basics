@@ -13,6 +13,15 @@ public class Prime {
 
     }
 
+    public static void countPrimes(int n) {
+        int count = 0;
+        for(int i = 2; i <= n ; i++){
+            if (isPrime(i))
+                count ++;
+        }
+        System.out.println("count = " + count);
+    }
+
     // Imperative way to find the Prime.
     public static boolean isPrime(int n) {
         if (n <= 1) {
