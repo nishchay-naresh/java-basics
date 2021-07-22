@@ -13,50 +13,69 @@ public class FindDuplicate {
 
 
 //        removeDupFromStream();
+        findDuplicateAndUnique();
         findDuplicateFromStream();
-//        findDuplicateFromCollection();
-//        findDuplicateBySotringBoth();
+        findDuplicateBySortingBoth();
 
     }
 
     private static void removeDupFromStream() {
 
         List<Integer> numbers = Arrays.asList(7, 1, 4, 3, 4, 3, 2, 1, 7, 2, 1, 3);
+        System.out.println("original list = " + numbers);
         // Printing only distinct numbers from list of number
+        System.out.print("list without dups = ");
         numbers.stream()
                 .distinct()
-                .forEach(System.out::println);
+                .forEach(e -> System.out.print(e + ", "));
 
     }
 
-    // Using hash map and with count
-    private static void findDuplicateFromStream() {
+    // Using no frequency to find the unique & duplicates in alist
+    private static void findDuplicateAndUnique() {
 
-        List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);;
-        List duplicates =
-                numbers.stream().collect(Collectors.groupingBy(Function.identity()))
-                        .entrySet()
-                        .stream()
-                        .filter(e -> e.getValue().size() > 1)
-                        .map(Map.Entry::getKey)
-                        .collect(Collectors.toList());
+        List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
+        System.out.println("original list = " + numbers);
+
+        Map<Integer, Long> freqMap = numbers.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+        System.out.println("freqMap = " + freqMap);
+
+        List<Integer> uniqueElementList = numbers.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() == 1)
+                .map(e -> e.getKey())
+                .collect(Collectors.toList());
+
+        System.out.println("uniqueElementList = " + uniqueElementList); // 1, 2, 5, 7
+
+        List<Integer> duplicates = numbers.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() > 1)
+                .map(e -> e.getKey())
+                .collect(Collectors.toList());
 
         System.out.println("duplicates = " + duplicates);  // 3, 4, 9
+
     }
 
     // data collection is available here
-    private static void findDuplicateFromCollection() {
+    private static void findDuplicateFromStream() {
 
-        List<Integer> numbers = Arrays.asList(1, 2, 8, 1, 3, 4, 7, 4);
-        System.out.println("numbers -" + numbers);
+        List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
+        System.out.println("original list = " + numbers);
 
+        System.out.print("duplicates = ");
         numbers.stream().filter(i -> Collections.frequency(numbers, i) > 1)
-                .collect(Collectors.toSet()).forEach(System.out::println);
+                .collect(Collectors.toSet()).forEach(e -> System.out.print(e + ", "));
 
     }
 
     // here soring both uniques & duplicates
-    private static void findDuplicateBySotringBoth() {
+    private static void findDuplicateBySortingBoth() {
 
         // 3, 4, 9
         List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
@@ -66,8 +85,10 @@ public class FindDuplicate {
                 .filter(n -> !uniques.add(n)) // Set.add() returns false if the element was already in the set.
                 .collect(Collectors.toSet());
 
-        System.out.println("uniques = " + uniques);
-        System.out.println("duplicates = " + duplicates);
+        System.out.println("\n---------------------------------------");
+        System.out.println("original list = " + numbers);
+        System.out.println("      uniques = " + uniques);
+        System.out.println("   duplicates = " + duplicates);
     }
 
 
