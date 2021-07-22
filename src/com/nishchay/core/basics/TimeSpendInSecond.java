@@ -1,8 +1,8 @@
-package com.nishchay.core.gc;
+package com.nishchay.core.basics;
 
 import com.nishchay.ds.number.Prime;
 
-public class TimeSpanInSecond {
+public class TimeSpendInSecond {
 
     public static void main(String[] args) {
 
