@@ -21,11 +21,11 @@ public class Fibonacci {
 
     public static void main(String[] args) {
 
-        int n = 8; // 21
+//        int n = 8; // 21
 
         // printing fibonacci series till n
 //        printFibonacciIterative(n);
-        printFibonacciRecursive(0, 1, n);
+//        printFibonacciRecursive(0, 1, n);
 
 /*
         for(int i = 0; i < n; i++){
@@ -39,8 +39,9 @@ public class Fibonacci {
 //        int n = 12 ; // 144
 //        int n = 20 ; // 4181
 //        int n = 22 ; // 10946
+        int n = 40 ; // 102334155
 
-//        System.out.println(fibonacciRecursion(n));
+        System.out.println(fibonacciRecursion(n));
 //        System.out.println(fibonacciRecursion1(n));
 
 
