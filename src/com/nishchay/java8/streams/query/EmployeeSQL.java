@@ -33,8 +33,10 @@ public class EmployeeSQL {
 //        first3EmpNames();
 //        printEmpNamesStartingWtih_N();
 //        avgAndTotalSalaryOfFemaleEmployee();
-        femaleEmployeeWithHighestSalary();
+//        femaleEmployeeWithHighestSalary();
+        getEmployeeYoungerThan25();
     }
+
 
 
     private static void employeePrint() {
@@ -341,6 +343,24 @@ public class EmployeeSQL {
 
         System.out.println("optionalEmployee = " + optionalEmployee.get());
 
+    }
+
+    private static void getEmployeeYoungerThan25() {
+
+
+//        Get me the list of employee, who all are younger than 25yrs (testing concept of filter & predicate)
+        List<Employee> youngerEmpList = populateEmployeeList().stream()
+                .filter(e -> e.getAge() < 25)
+                .collect(Collectors.toList());
+        System.out.println("youngerEmpList = " + youngerEmpList);
+
+//        Get me the list of names of employee, who all are younger than 25yrs (testing concept of map)
+        List<String> youngerEmpNameList = populateEmployeeList().stream()
+                .filter(e -> e.getAge() < 25)
+                .map(e -> e.getName())
+                .collect(Collectors.toList());
+
+        System.out.println("youngerEmpNameList = " + youngerEmpNameList);
     }
 
 
