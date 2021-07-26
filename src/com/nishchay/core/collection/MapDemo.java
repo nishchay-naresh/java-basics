@@ -1,6 +1,7 @@
 package com.nishchay.core.collection;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class MapDemo {
@@ -33,13 +34,19 @@ public class MapDemo {
 
 //        System.out.println("map = " + map);
 
+        Iterator<Map.Entry<String, Integer>> itr = map.entrySet().iterator();
+        while(itr.hasNext()){
+            Map.Entry<String, Integer> entry = itr.next();
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+
 /*
         for (Map.Entry e : map.entrySet()) {
             System.out.println(e.getKey() + " -> " + e.getValue());
         }
 */
 
-        map.forEach((key, value) -> System.out.println(key + "-> " + value));
+//        map.forEach((key, value) -> System.out.println(key + "-> " + value));
 
     }
 
