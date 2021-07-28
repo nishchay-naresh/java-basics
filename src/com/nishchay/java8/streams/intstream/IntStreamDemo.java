@@ -28,7 +28,12 @@ public class IntStreamDemo {
     }
 
     private static void streamFromRange() {
-        IntStream.range(1, 11).forEach(System.out::println);
+        System.out.print("\n IntStream.range(1, 10) = ");
+        IntStream.range(1, 10).forEach(e -> System.out.print(e + ", "));
+        System.out.print("\n IntStream.range(1, 10) = ");
+        IntStream.rangeClosed(1, 10).forEach(e -> System.out.print(e + ", "));
+
+        System.out.println("\n ------------------------------------------");
         int[] intArray =  IntStream.range(1, 11).toArray();
         System.out.println("intArray = " + Arrays.toString(intArray));
         List<Integer> listOfInt =  IntStream.range(1, 11).boxed().collect(Collectors.toList());
@@ -36,7 +41,7 @@ public class IntStreamDemo {
     }
 
     private static void intStreamTerminalUtility() {
-        int numbers[] = {1, 9, 3, 10, 4, 20, 2};
+        int[] numbers = {1, 9, 3, 10, 4, 20, 2};
 
         System.out.println("min : " + IntStream.of(numbers).min().getAsInt());
         System.out.println("max : " + IntStream.of(numbers).max().getAsInt());
@@ -48,7 +53,7 @@ public class IntStreamDemo {
 
 
     private static void intStreamStatistics() {
-        int numbers[] = {1, 9, 3, 10, 4, 20, 2};
+        int[] numbers = {1, 9, 3, 10, 4, 20, 2};
 
         System.out.println("---------------------IntSummaryStatistics----------------------");
         IntSummaryStatistics stats = IntStream.of(numbers).summaryStatistics();
