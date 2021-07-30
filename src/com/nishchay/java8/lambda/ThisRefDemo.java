@@ -2,6 +2,7 @@ package com.nishchay.java8.lambda;
 /*
 * Main difference between lambda & anonymous inner class
 * lambda - does not overrides the this reference value
+*        - the value of 'this' reference will be the same as the value of this reference outside of lambda
 * anonymous inner class - overrides the this reference value
 *
 * */
