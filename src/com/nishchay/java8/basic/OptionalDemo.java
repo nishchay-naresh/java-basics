@@ -11,11 +11,19 @@ public class OptionalDemo {
 
     public static void main(String[] args) {
 
+        whatIsNull();
         NPEExample();
         NPESuppressUsingOptional();
 
         optionalDemo();
 
+    }
+
+    private static void whatIsNull() {
+        // null -  unknown value
+        // The null keyword is a literal that represents a null reference,
+        // one that does not refer to any object. null is the default value of reference-type variables.
+        System.out.println(null == null); // Always true
     }
 
 
