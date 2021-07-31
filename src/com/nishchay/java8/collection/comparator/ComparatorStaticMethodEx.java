@@ -9,7 +9,7 @@ public class ComparatorStaticMethodEx {
 
     public static void main(String[] args) {
 
-        naturalOrder_reverseOrder_ex();
+//        naturalOrder_reverseOrder_ex();
 
         List<Employee> employeeList = populateEmployeeList();
         System.out.println(" --------------- Original List -----------------");
@@ -17,11 +17,13 @@ public class ComparatorStaticMethodEx {
 
         comparing_ex(employeeList);
 
+/*
         comparingXxx_ex(employeeList);
 
         thenComparing_ex(employeeList);
 
         nullsLast_nullsFirst_ex();
+*/
 
     }
 
@@ -73,10 +75,12 @@ public class ComparatorStaticMethodEx {
         // Using Comparator.comparing(-,-)
 //        Collections.sort(employeeList, Comparator.comparing(Employee::getSalary,Double::compareTo));
         System.out.println(" --------------- Sorting based on Names length -----------------");
+//        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, (o1, o2) -> o1.length()-o2.length());
 //        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparing(String::length));
         Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparingInt(String::length));
         employeeList.sort(nameLengthComparator);
         employeeList.forEach(System.out::println);
+
     }
 
 
