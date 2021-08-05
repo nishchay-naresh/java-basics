@@ -195,13 +195,21 @@ public class KnapsackProblem {
         int len = val.length;
         int[][] dp = new int[len + 1][W + 1];
 
-        // Build table dp[][] in bottom up manner
+        // initialisation
+        // If W is 0, then answer is true - first column
         for (int i = 0; i <= len; i++) {
-            for (int j = 0; j <= W; j++) {
-                 // initialisation
-                if (i == 0 || j == 0)
-                    dp[i][j] = 0;
-                else if (wt[i - 1] > j)
+            dp[i][0] = 0;
+        }
+
+        // if 0 items in the list - first row
+        for (int j = 1; j <= W; j++) {
+            dp[0][j] = 0;
+        }
+
+        // Build table dp[][] in bottom up manner
+        for (int i = 1; i <= len; i++) {
+            for (int j = 1; j <= W; j++) {
+                if (wt[i - 1] > j)
                     dp[i][j] = dp[i - 1][j];
                 else {
                     int excludeLastItem = dp[i - 1][j];
@@ -214,4 +222,5 @@ public class KnapsackProblem {
         // return last element of the table - result
         return dp[len][W];
     }
+
 }
