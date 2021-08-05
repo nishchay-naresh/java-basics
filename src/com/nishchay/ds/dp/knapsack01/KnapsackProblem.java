@@ -19,10 +19,8 @@ public class KnapsackProblem {
 
     public static void main(String[] args) {
 
-/*
         System.out.println("------------Recursion-------------");
         knapsackRecursionEx();
-*/
         System.out.println("------------TopDown-------------");
         knapsackDPTopDown();
         System.out.println("------------BottomUp-------------");
@@ -43,11 +41,13 @@ public class KnapsackProblem {
         maxProfit = ks.knapsackRecursive(W, profits, weights, n); // 17
         System.out.println("Total knapsack profit ---> " + maxProfit);
 
-        int[] profits1 = { 60, 100, 120 };
-        int[] weights1 = { 10, 20, 30 };
+        profits = new int[]{60, 100, 120};
+        weights = new int[]{10, 20, 30};
+
+
         W = 50;
-        n = weights1.length;
-        maxProfit = ks.knapsackRecursive(W, profits1, weights1, n); //220
+        n = weights.length;
+        maxProfit = ks.knapsackRecursive(W, profits, weights, n); //220
         System.out.println("Total knapsack profit ---> " + maxProfit);
     }
 
@@ -59,21 +59,22 @@ public class KnapsackProblem {
         int W = 7;
         int n = weights.length;
 
-        int[][] memoize = getMemoize2D(n + 1, W + 1 );
+        int[][] memoize = getMemoize2D(n + 1, W + 1);
         int maxProfit = ks.knapsackMemoization(W, profits, weights, n, memoize); //22
         System.out.println("Total knapsack profit ---> " + maxProfit);
 
         W = 6;
-        memoize = getMemoize2D(n + 1, W + 1 );
+        memoize = getMemoize2D(n + 1, W + 1);
         maxProfit = ks.knapsackMemoization(W, profits, weights, n, memoize); // 17
         System.out.println("Total knapsack profit ---> " + maxProfit);
 
-        int[] profits1 = { 60, 100, 120 };
-        int[] weights1 = { 10, 20, 30 };
+        profits = new int[]{60, 100, 120};
+        weights = new int[]{10, 20, 30};
+
         W = 50;
-        n = weights1.length;
-        memoize = getMemoize2D(n + 1, W + 1 );
-        maxProfit = ks.knapsackMemoization(W, profits1, weights1, n, memoize); //220
+        n = weights.length;
+        memoize = getMemoize2D(n + 1, W + 1);
+        maxProfit = ks.knapsackMemoization(W, profits, weights, n, memoize); //220
         System.out.println("Total knapsack profit ---> " + maxProfit);
 
     }
@@ -82,11 +83,11 @@ public class KnapsackProblem {
 
         int[][] memoize = new int[m][n];
         // Loop to initially filled the table with -1
-        for(int i = 0; i < m; i++)
-            for(int j = 0; j < n; j++)
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
                 memoize[i][j] = -1;
 
-         return memoize;
+        return memoize;
     }
 
     private static void knapsackDPBottomUp() {
@@ -95,7 +96,6 @@ public class KnapsackProblem {
         int[] profits = {1, 6, 10, 16};
         int[] weights = {1, 2, 3, 5};
         int W = 7;
-        int n = weights.length;
 
         int maxProfit = ks.knapsackTabulation(W, profits, weights); //22
         System.out.println("Total knapsack profit ---> " + maxProfit);
@@ -104,32 +104,31 @@ public class KnapsackProblem {
         maxProfit = ks.knapsackTabulation(W, profits, weights); // 17
         System.out.println("Total knapsack profit ---> " + maxProfit);
 
-        int[] profits1 = { 60, 100, 120 };
-        int[] weights1 = { 10, 20, 30 };
+        profits = new int[]{60, 100, 120};
+        weights = new int[]{10, 20, 30};
         W = 50;
-        n = weights1.length;
-        maxProfit = ks.knapsackTabulation(W, profits1, weights1); //220
+        maxProfit = ks.knapsackTabulation(W, profits, weights); //220
         System.out.println("Total knapsack profit ---> " + maxProfit);
 
     }
 
     /*
-    * Method 1: Recursion by Brute-Force algorithm
-    *
-    * base case , W=0 when knapsack capacity is - 0
-    *           n=0 when we don't have any items to pick
-    *           =>  net profit will always be 0
-    *
-    * pick n-1th(last) element of array and proceeds like below
-    *   if (weights[n - 1] > W)
-    *       leave current element, exclude it from array
-    *       recursively call the same method for shrink array
-    *   else
-    *       Return the maximum of below two profits:
-    *           (1) computed profit when n-1th(last) element included
-    *           2) computed profit when n-1th(last) element is not included
-    *
-    * */
+     * Method 1: Recursion by Brute-Force algorithm
+     *
+     * base case , W=0 when knapsack capacity is - 0
+     *           n=0 when we don't have any items to pick
+     *           =>  net profit will always be 0
+     *
+     * pick n-1th(last) element of array and proceeds like below
+     *   if (weights[n - 1] > W)
+     *       leave current element, exclude it from array
+     *       recursively call the same method for shrink array
+     *   else
+     *       Return the maximum of below two profits:
+     *           (1) computed profit when n-1th(last) element included
+     *           2) computed profit when n-1th(last) element is not included
+     *
+     * */
     private int knapsackRecursive(int W, int[] profits, int[] weights, int n) {
         // Base Case
         if (n == 0 || W == 0)
@@ -146,16 +145,16 @@ public class KnapsackProblem {
     /*
      *	Time Complexity: O(2n). As there are redundant subproblems.
      *	Auxiliary Space :O(1). As no extra data structure has been used for storing values.
-    * */
+     * */
 
 
     /*
-    * Method 2: This method uses Memoization Technique (an extension of recursive approach).
-    * This method is basically an extension to the recursive approach so that we can overcome the problem of calculating redundant cases
-    *  and thus increased complexity. We can solve this problem by simply creating a 2-D array that can store a particular state (n, w)
-    *  if we get it the first time. Now if we come across the same state (n, w) again instead of calculating it in exponential complexity we can directly return its result stored in the table in constant time.
-    * */
-    private int knapsackMemoization(int W, int[] profits, int[] weights, int n, int [][]memoize) {
+     * Method 2: This method uses Memoization Technique (an extension of recursive approach).
+     * This method is basically an extension to the recursive approach so that we can overcome the problem of calculating redundant cases
+     *  and thus increased complexity. We can solve this problem by simply creating a 2-D array that can store a particular state (n, w)
+     *  if we get it the first time. Now if we come across the same state (n, w) again instead of calculating it in exponential complexity we can directly return its result stored in the table in constant time.
+     * */
+    private int knapsackMemoization(int W, int[] profits, int[] weights, int n, int[][] memoize) {
         // Base Case
         if (n == 0 || W == 0)
             return 0;
@@ -176,20 +175,20 @@ public class KnapsackProblem {
     /*
      *	Time Complexity: O(N*W). As redundant calculations of states are avoided.
      *	Auxiliary Space: O(N*W). The use of 2D array data structure for storing intermediate states.
-    * */
+     * */
 
 
     /*
-    * Method 3: Like other typical Dynamic Programming(DP) problems, re-computation of same subproblems can be avoided
-    *  by constructing a temporary array dp[][] in bottom-up manner. Following is Dynamic Programming based implementation.
-    *
-    * In a dp[][] table let’s consider all the possible weights from ‘0’ to ‘W’ as the columns and weights that can be kept as the rows.
-    * dp[n+1][W+1] , n in Y axis, W in x axis
-    *
-    * First fill the 0th row & 0th column based on base case
-    * then fill rest of the table(matrix) using the same recursive methods
-    *
-    * */
+     * Method 3: Like other typical Dynamic Programming(DP) problems, re-computation of same subproblems can be avoided
+     *  by constructing a temporary array dp[][] in bottom-up manner. Following is Dynamic Programming based implementation.
+     *
+     * In a dp[][] table let’s consider all the possible weights from ‘0’ to ‘W’ as the columns and weights that can be kept as the rows.
+     * dp[n+1][W+1] , n in Y axis, W in x axis
+     *
+     * First fill the 0th row & 0th column based on base case
+     * then fill rest of the table(matrix) using the same recursive methods
+     *
+     * */
     private int knapsackTabulation(int W, int[] val, int[] wt) {
 
         int len = val.length;
@@ -224,3 +223,18 @@ public class KnapsackProblem {
     }
 
 }
+/*
+ * O/P =>
+ *	------------Recursion-------------
+ *	Total knapsack profit ---> 22
+ *	Total knapsack profit ---> 17
+ *	Total knapsack profit ---> 220
+ *	------------TopDown-------------
+ *	Total knapsack profit ---> 22
+ *	Total knapsack profit ---> 17
+ *	Total knapsack profit ---> 220
+ *	------------BottomUp-------------
+ *	Total knapsack profit ---> 22
+ *	Total knapsack profit ---> 17
+ *	Total knapsack profit ---> 220
+ * */
