@@ -212,7 +212,7 @@ public class KnapsackProblem {
                     dp[i][j] = dp[i - 1][j];
                 else {
                     int excludeLastItem = dp[i - 1][j];
-                    int includeLastItem = val[i - 1] + dp[i - 1][j - wt[i - 1]];
+                    int includeLastItem = dp[i - 1][j - wt[i - 1]] + val[i - 1];
                     dp[i][j] = Math.max(excludeLastItem, includeLastItem);
                 }
             }
