@@ -25,10 +25,8 @@ public class SubsetSumPossible {
 
     public static void main(String[] args) {
 
-/*
         System.out.println("------------Recursion-------------");
         isSubsetSumRecursionEx();
-*/
         System.out.println("------------TopDown-------------");
         isSubsetSumDPTopDown();
         System.out.println("------------BottomUp-------------");
