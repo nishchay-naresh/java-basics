@@ -36,6 +36,8 @@ public class NthMostOccurrenceInIntegerArray {
         int[] res = nthMostOccurrence(arr, k);
         System.out.println(k + "thMostOccurrence = " + Arrays.toString(res)); //[5, 11, 7, 10]
 
+        System.out.println("-----------------------------------------------------");
+
         arr = new int[]{3, 1, 4, 4, 5, 2, 6, 1};
         k = 2;
         res = nthMostOccurrence(arr, 2);
@@ -61,7 +63,7 @@ public class NthMostOccurrenceInIntegerArray {
         entryList.sort(valueThenKeyComp);
 
         System.out.println("Sorted List = " + entryList);
-        System.out.println("----------------------------------------------");
+
 
         int[] result = new int[k];
         for (int i = 0; i < k; i++) {
@@ -71,3 +73,13 @@ public class NthMostOccurrenceInIntegerArray {
 
     }
 }
+/*
+ * O/P =>
+ *	Original List = [2=1, 5=3, 7=2, 8=1, 9=1, 10=1, 11=2]
+ *	Sorted List = [5=3, 11=2, 7=2, 10=1, 9=1, 8=1, 2=1]
+ *	4thMostOccurrence = [5, 11, 7, 10]
+ *	-----------------------------------------------------
+ *	Original List = [1=2, 2=1, 3=1, 4=2, 5=1, 6=1]
+ *	Sorted List = [4=2, 1=2, 6=1, 5=1, 3=1, 2=1]
+ *	2thMostOccurrence = [4, 1]
+ * */
