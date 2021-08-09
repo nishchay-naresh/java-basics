@@ -1,4 +1,4 @@
-package com.nishchay.core.collection;
+package com.nishchay.ds.collection;
 
 import java.util.*;
 
@@ -113,7 +113,7 @@ public class HashMapSortOnValue {
      * */
 
 
-    private static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
+    static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
 
         // get freq of each no in a hashMap
         Map<Integer, Integer> freqMap = new HashMap<>();
