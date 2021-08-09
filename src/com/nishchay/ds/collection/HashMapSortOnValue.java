@@ -7,12 +7,12 @@ public class HashMapSortOnValue {
 
     public static void main(String[] args) {
 
-//        sortMapByValueEx();
+        sortMapByValueEx();
 
         sortMapByKeyEx();
 
-//        sortIntArray();
-//        sortIntArray1();
+        sortIntArray();
+        sortIntArray1();
 
     }
 
