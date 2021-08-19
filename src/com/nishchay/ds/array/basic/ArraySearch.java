@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class ArraySearch {
 
-
     public static void main(String[] args) {
 
         System.out.println("------------ linearSearch-------------");
@@ -26,7 +25,6 @@ public class ArraySearch {
 
     }
 
-
     private static void binarySearchEx() {
         int[] arr = {3, 4, 1, 7, 5, 12, 8};
 
@@ -42,10 +40,5 @@ public class ArraySearch {
         System.out.println("binarySearchRecursive(arr, 0, size, 17) - " + ArrayUtils.binarySearchRecursive(arr, 0, size, 17));
         System.out.println("binarySearchRecursive(arr, 0, size, 1) - " + ArrayUtils.binarySearchRecursive(arr, 0, size, 1));
     }
-
-
-
-
-
 
 }
