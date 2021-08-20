@@ -1,13 +1,10 @@
 package com.nishchay.ds.array.basic;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class IntArrayReverse {
 
     public static void main(String[] args) {
-
-//        int[] arr = readArrayFromConsole();
 
         arrayReversePrint();
 
@@ -16,20 +13,6 @@ public class IntArrayReverse {
     }
 
 
-    private static int[] readArrayFromConsole() {
-
-        Scanner s = new Scanner(System.in);
-
-        // read the array size
-        int length = s.nextInt();
-        int[] intArr = new int[length];
-
-        // read array element
-        for (int i = 0; i < length; i++) {
-            intArr[i] = s.nextInt();
-        }
-        return intArr;
-    }
 
     private static void arrayReversePrint() {
 
@@ -49,20 +32,9 @@ public class IntArrayReverse {
     private static void intArrayReverse() {
 
         int[] intArr = {10, 20, 30, 40, 50, 60};
+
         System.out.println("Actual Array : " + Arrays.toString(intArr));
-
-        int i, j, t;
-        i = 0;
-        j = intArr.length - 1;
-        while (i < j) {
-            // swap ith & jth element
-            t = intArr[i];
-            intArr[i] = intArr[j];
-            intArr[j] = t;
-            i++;
-            j--;
-        }
-
+        ArrayUtils.reverseArray(intArr);
         System.out.println("Reversed Array : " + Arrays.toString(intArr));
     }
 
