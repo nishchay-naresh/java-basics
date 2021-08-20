@@ -1,5 +1,7 @@
 package com.nishchay.ds.array.basic;
 
+import java.util.Scanner;
+
 public class ArrayUtils {
 
 
@@ -64,6 +66,34 @@ public class ArrayUtils {
             max = Math.max(max, value);
         }
         return max;
+    }
+
+
+    // reversing the content of an int array.
+    public static void reverseArray(int[] arr) {
+
+        for (int i = 0,  j = arr.length - 1; i < j ; i++, j--) {
+            // swap ith & jth element
+            int t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+        }
+    }
+
+
+    private static int[] readArrayFromConsole() {
+
+        Scanner s = new Scanner(System.in);
+
+        // read the array size
+        int length = s.nextInt();
+        int[] intArr = new int[length];
+
+        // read array element
+        for (int i = 0; i < length; i++) {
+            intArr[i] = s.nextInt();
+        }
+        return intArr;
     }
 
 }
