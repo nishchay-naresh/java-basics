@@ -1,9 +1,12 @@
 package com.nishchay.java8.collection.comparator;
 
 
+import com.nishchay.ds.string.freq.StringFrequencyUtility;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class ComparatorStaticMethodEx {
 
@@ -11,19 +14,18 @@ public class ComparatorStaticMethodEx {
 
 //        naturalOrder_reverseOrder_ex();
 
+/*
         List<Employee> employeeList = populateEmployeeList();
         System.out.println(" --------------- Original List -----------------");
         employeeList.forEach(System.out::println);
 
         comparing_ex(employeeList);
-
-/*
         comparingXxx_ex(employeeList);
-
         thenComparing_ex(employeeList);
-
         nullsLast_nullsFirst_ex();
 */
+
+        thenComparing_ex_map();
 
     }
 
@@ -111,7 +113,22 @@ public class ComparatorStaticMethodEx {
         employeeList.forEach(System.out::println);
     }
 
+    private static void thenComparing_ex_map() {
 
+        int[]arr = {7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
+        Map<Integer,Integer> freqMap = StringFrequencyUtility.getFrequencyMap(arr);
+
+        List<Map.Entry<Integer,Integer>> entryList = new ArrayList<>(freqMap.entrySet());
+        System.out.println("Original list = " + entryList);
+
+        Comparator<Map.Entry<Integer,Integer>> valueComparator = Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder());
+        Comparator<Map.Entry<Integer,Integer>> keyComparator = Comparator.comparing(Map.Entry::getKey, Comparator.reverseOrder());
+        Comparator<Map.Entry<Integer,Integer>> valueThenKeyComparator = valueComparator.thenComparing(keyComparator);
+
+        entryList.sort(valueThenKeyComparator);
+
+        System.out.println("Sorted list = " + entryList);
+    }
     private static void nullsLast_nullsFirst_ex() {
         List<Employee> employeeList = populateEmployeeList();
         employeeList.add(null);
