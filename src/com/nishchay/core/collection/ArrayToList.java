@@ -17,7 +17,10 @@ public class ArrayToList {
 
     }
 
-    // asList() -  Returns a fixed-size list backed by the specified array
+    /*
+    * Arrays.asList() vs new ArrayList()
+    * asList() -  Returns a fixed-size list backed by the specified array
+    * */
     private static void asListEx() {
         String[] arr = {"Rohit", "Shikhar", "Kohli", "Iyyar", "Dhoni"};
 
