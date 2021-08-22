@@ -53,6 +53,20 @@ public class StringFrequencyUtility {
         return feqMap;
     }
 
+
+    // Count the frequency of each no in a integer array
+    public static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
+
+        Map<Integer, Integer> feqMap = new HashMap<>();
+        Integer freq;
+        for(int currNo : intArray){
+            freq = feqMap.get(currNo);
+            freq = freq == null ? 1 : ++freq;
+            feqMap.put(currNo, freq);
+        }
+        return feqMap;
+    }
+
     // java 8 feature to get the frequency map - HashMap
     static Map<String, Long> getFrequencyMapStream(String[] strArray) {
         Map<String, Long> freqMap = Arrays.stream(strArray)
