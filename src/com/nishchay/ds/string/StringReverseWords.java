@@ -6,7 +6,7 @@ package com.nishchay.ds.string;
  *       Output: much very program this like i
  *
  * */
-public class StringArrayReverse {
+public class StringReverseWords {
 
     public static void main(String[] args) {
 

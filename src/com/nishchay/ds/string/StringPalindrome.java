@@ -11,7 +11,7 @@ public class StringPalindrome {
         System.out.println("  isPalindrome(\"nolemonnomelon\") - " +  isPalindrome("nolemonnomelon"));
     }
 
-    private static boolean isPalindrome(String string) {
+    public static boolean isPalindrome(String string) {
         char[] charArray = string.toCharArray();
 
         for (int i = 0, j = charArray.length - 1; i < j; i++, j--) {
