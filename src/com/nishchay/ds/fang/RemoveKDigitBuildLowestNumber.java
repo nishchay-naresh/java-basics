@@ -59,7 +59,7 @@ public class RemoveKDigitBuildLowestNumber {
         }
 
         StringBuilder result = new StringBuilder();
-        Stack<Character> s = new Stack<Character>();
+        Stack<Character> s = new Stack<>();
 
         for (int i = 0; i < num.length(); i++) {
             char c = num.charAt(i);
