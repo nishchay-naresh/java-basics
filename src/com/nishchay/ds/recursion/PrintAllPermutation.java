@@ -1,4 +1,4 @@
-package com.nishchay.ds.string;
+package com.nishchay.ds.recursion;
 
 /*
  * Java program to print all permutations of a given string.
