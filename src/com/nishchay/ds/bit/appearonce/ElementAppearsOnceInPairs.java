@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.appearonce;
+package com.nishchay.ds.bit.appearonce;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +23,7 @@ class ElementAppearsOnceInPairs {
 		int[] nums = {7, 3, 5, 4, 5, 3, 4};
 		System.out.println("Element occurring once is - " + findSingleInPairs(nums));//7
 
-		int[] arr = {7, 3, 5, 9, 4, 7, 5, 3, 4};
+		int[] arr = {7, 3, 5, 9, 4, 7, 5, 3, 4, 1};
 		System.out.println("Element occurring once is - " + findSingle(arr));//9
 
 	}

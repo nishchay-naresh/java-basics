@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.appearonce;
+package com.nishchay.ds.bit.appearonce;
 
 import com.nishchay.ds.array.sort.MergeSort;
 
@@ -7,6 +7,7 @@ import com.nishchay.ds.array.sort.MergeSort;
  * Input: arr[] = {12, 1, 12, 3, 12, 1, 1, 2, 3, 3}
  * Output: 2
  * In the given array all element appear three times except ‘2' which appears once
+ * https://www.geeksforgeeks.org/find-the-element-that-appears-once/
  * */
 class ElementAppearsOnceInTriplets {
 
@@ -28,7 +29,7 @@ class ElementAppearsOnceInTriplets {
     // CLUSTERING APPROACH (SORTING) - First sort the array then, find the smallest cluster
     // complexity -  O(n log n + n), space - O(0)
     // COUNTING SET BITS APPROACH log n <= 32 & n <= INT_MAX
-    static int findSingleInTriplets(int[] nums) {
+    private static int findSingleInTriplets(int[] nums) {
 
         int n = nums.length;
         if (n < 3) {
@@ -52,7 +53,7 @@ class ElementAppearsOnceInTriplets {
 
     // BIT MANIPULATION APPROACH - Using XOR + AND combination
     // complexity : time -  O(n), space - O(2)
-    static int findSingleInTriplets1(int[] arr) {
+    private static int findSingleInTriplets1(int[] arr) {
         int ones; // hold the element until it has only one occurrence, resetting it to zero once getting 2nd occurrence
         int twos; // // hold the element until it has two occurrence, resetting it to zero once getting 3rd occurrence
         ones = twos = 0;
