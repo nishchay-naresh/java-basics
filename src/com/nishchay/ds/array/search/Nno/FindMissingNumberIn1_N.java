@@ -11,6 +11,8 @@ package com.nishchay.ds.array.search.Nno;
  *	Input: arr[] = {1, 2, 3, 5}
  *	Output: 4
  *	Explanation: The missing number from 1 to 5 is 4
+ *
+ * https://www.geeksforgeeks.org/find-repetitive-element-1-n-1/
  * */
 class FindMissingNumberIn1_N {
 
