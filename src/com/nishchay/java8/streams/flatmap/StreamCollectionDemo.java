@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 public class StreamCollectionDemo {
 
+
     public static void main(String[] args) {
 
-        mthd4mapAndCollectorsToList();
-        mthd4mapToIntAndSum();
-        mthd4flatMap();
+//        mthd4mapAndCollectorsToList();
+        mthdMapDemoLowerToUpperObject();
+//        mthd4mapToIntAndSum();
+//        mthd4flatMap();
 
     }
 
@@ -27,6 +29,17 @@ public class StreamCollectionDemo {
 
         System.out.println("authers = " + authers);
     }
+
+    private static void mthdMapDemoLowerToUpperObject() {
+        List<String> writes = Arrays.asList("Spider Man", "Iron Man", "Super Man", "Wonder Women");
+
+        List<Book> books = writes.stream().map(writer -> new Book(1001, "Book 1", writer, 100))
+                .collect(Collectors.toList());
+
+        books.forEach(System.out::println);
+    }
+
+
 
     private static void mthd4mapToIntAndSum() {
 
