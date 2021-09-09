@@ -7,6 +7,9 @@ import java.util.Arrays;
  * Given an array a[] consisting of +ve, -ve nos P,N
  * Write a method to rearrange all negative integers to the left of the middle element and all positive integers to the right
  *
+ * Original array = [2, 4, -6, 8, -5, -10, 6, -11, 3, 9]
+ *   Sorted array = [-6, -5, -10, -11, 4, 2, 6, 8, 3, 9]
+ *
  * */
 public class SortArrayOfPN {
 
