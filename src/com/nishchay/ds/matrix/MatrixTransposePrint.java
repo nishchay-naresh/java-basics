@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.twod;
+package com.nishchay.ds.matrix;
 
 
 /*
@@ -24,7 +24,7 @@ package com.nishchay.ds.array.twod;
  *
  * */
 
-public class MatrixPrint {
+public class MatrixTransposePrint {
 
     public static void main(String[] args) {
 
@@ -33,7 +33,7 @@ public class MatrixPrint {
         int noOfCols = 3;
 
         // printing
-        System.out.println("----------original matrix-----------");
+        System.out.print("\n----------original matrix-----------");
         for (int i = 0; i < noOfRows; i++) {
             System.out.print("\n");
             for (int j = 0; j < noOfCols; j++) {
@@ -42,14 +42,22 @@ public class MatrixPrint {
             }
         }
 
-        System.out.println("----------printing in desired order-----------");
-
+        System.out.print("\n----------printing in desired order-----------");
         for (int j = noOfCols - 1; j >= 0; j--) {
             System.out.print("\n");
             for (int i = 0; i < noOfRows; i++) {
                 System.out.print(matrix[i][j] + "\t");
 
             }
+        }
+
+        System.out.println("\n....After transposing the elements are...");
+        for (int i = 0; i < noOfRows; i++) {
+            System.out.println("");
+            for (int j = 0; j < noOfCols; j++) {
+                System.out.print(matrix[j][i] + " ");
+            }
+
         }
     }
 
