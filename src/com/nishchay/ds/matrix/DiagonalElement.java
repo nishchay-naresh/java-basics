@@ -67,7 +67,7 @@ public class DiagonalElement {
                 }
             }
         }
-        System.out.println("");
+        System.out.println();
     }
 
     // Function to print the Secondary Diagonal
@@ -83,7 +83,7 @@ public class DiagonalElement {
                 }
             }
         }
-        System.out.println("");
+        System.out.println();
     }
 
 }
