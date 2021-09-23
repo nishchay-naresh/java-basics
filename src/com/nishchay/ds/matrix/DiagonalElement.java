@@ -4,6 +4,7 @@ package com.nishchay.ds.matrix;
  *	=========== print Diagonals of a Matrix===========
  *
  * Given a 2D square matrix, print the Principal and Secondary diagonals.
+ * NOTE - this diagonal concept is only applicable in square matrix
  *
  *	For Example
  *
@@ -46,7 +47,7 @@ public class DiagonalElement {
      *      A20 A21 A22 A23
      *      A30 A31 A32 A33
      *
-     * The primary diagonal is formed by the elements A00, A11, A22, A33.
+     * The Principal diagonal is formed by the elements A00, A11, A22, A33.
      * Condition for Principal Diagonal: row == column
      *
      * The secondary diagonal is formed by the elements A03, A12, A21, A30.
