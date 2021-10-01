@@ -1,4 +1,4 @@
-package com.nishchay.ds.array;
+package com.nishchay.ds.array.sum;
 
 import java.util.Arrays;
 import java.util.Set;
