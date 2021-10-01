@@ -23,9 +23,9 @@ class FindRepeatingMissingElementIn1_N {
         findRepeatingMissing(arr);
     }
 
-    static void findRepeatingMissing(int[] arr) {
+    private static void findRepeatingMissing(int[] arr) {
         int size = arr.length;
-        int[] tempArray = Arrays.copyOf(arr,size);
+        int[] tempArray = Arrays.copyOf(arr, size);
 
         System.out.print("Repeating - ");
 
