@@ -20,7 +20,7 @@ import java.util.Stack;
  * 			Output: "1118"
  *
  * https://www.geeksforgeeks.org/build-lowest-number-by-removing-n-digits-from-a-given-number/
- * https://gist.github.com/SuryaPratapK/a494ad5194ea33ee83b343698c1fa98e
+ * https://www.youtube.com/watch?v=3QJzHqNAEXs
  *
  * */
 public class RemoveKDigitBuildLowestNumber {
@@ -38,7 +38,7 @@ public class RemoveKDigitBuildLowestNumber {
     }
 
     /*
-    * case 1 : 5421 -> simply remove from th stack top
+    * case 1 : 5421 -> simply remove from the stack top
     * case 2 : in mix digit scenario
     *           without 0 - look for pick fall, remove element from the stack , till its greater than
     *           with 0 - skip 0 to push , apply logic to remove from stack based on pick fall
