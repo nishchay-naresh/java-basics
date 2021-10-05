@@ -11,16 +11,16 @@ public class ArrayToList {
     public static void main(String[] args) {
 
 //        asListEx();
-        arrayToList_listToArray_objectType();
-//        arrayToList_listToArray_primitiveInt();
+//        arrayToList_listToArray_objectType();
+        arrayToList_listToArray_primitiveInt();
 //        arrayToList_listToArray_primitiveChar();
 
     }
 
     /*
-    * Arrays.asList() vs new ArrayList()
-    * asList() -  Returns a fixed-size list backed by the specified array
-    * */
+     * Arrays.asList() vs new ArrayList()
+     * asList() -  Returns a fixed-size list backed by the specified array
+     * */
     private static void asListEx() {
         String[] arr = {"Rohit", "Shikhar", "Kohli", "Iyyar", "Dhoni"};
 
@@ -66,7 +66,7 @@ public class ArrayToList {
 
         // Note that this is a fixed-sized list that will still be backed by the array.
         // If you want a standard ArrayList you can simply instantiate one as so:
-        Integer[] sourceArray = { 0, 1, 2, 3, 4, 5 };
+        Integer[] sourceArray = {0, 1, 2, 3, 4, 5};
         List<Integer> targetList = new ArrayList<Integer>(Arrays.asList(sourceArray));
         targetList.add(10);
         System.out.println("targetList = " + targetList);
@@ -74,12 +74,16 @@ public class ArrayToList {
 
 
     private static void arrayToList_listToArray_primitiveInt() {
-        int[] ints = {1, 2, 3, 4};
+        int[] intArray = {1, 2, 3, 4, 5};
 
-        List<Integer> intList = Arrays.stream(ints).boxed().collect(Collectors.toList());
-        System.out.println("IntegerList - " + intList);
+        // int[] -> List<Integer>
+        List<Integer> intList1 = Arrays.stream(intArray).boxed().collect(Collectors.toList());
+        System.out.println("intList1 = " + intList1);
 
-        int[] intArr = intList.stream().mapToInt(i -> i).toArray();
+        List<Integer> intList2 = IntStream.of(intArray).boxed().collect(Collectors.toList());
+        System.out.println("intList2 = " + intList2);
+
+        int[] intArr = intList2.stream().mapToInt(i -> i).toArray();
         System.out.println("intArray - " + Arrays.toString(intArr));
     }
 
