@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.search.Nno;
+package com.nishchay.ds.array.nelement;
 
 import java.util.Arrays;
 
@@ -37,6 +37,7 @@ class FindRepeatingMissingElementIn1_N {
                 System.out.print(absCurrVal);
         }
 
+        System.out.println("arr - " + Arrays.toString(arr));
 
         System.out.print("\t Missing - ");
         for (int i = 0; i < size; i++) {
