@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.search.Nno;
+package com.nishchay.ds.array.nelement;
 
 
 /*
@@ -25,7 +25,7 @@ class FindOnlyRepetitiveElementIn1_N {
         System.out.println(findRepeatingElement(arr, n));
     }
 
-    static int findRepeatingElement(int[] arr, int n) {
+   private  static int findRepeatingElement(int[] arr, int n) {
 
         // res is going to store value of 
         // 1 ^ 2 ^ 3 .. ^ (n-1) ^
