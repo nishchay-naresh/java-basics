@@ -8,6 +8,7 @@ package com.nishchay.ds.number;
  * Magic number is a number which gives sum exactly 1 when its digits are recursively added.
  *  For example,
  * 	1252 is a magic number. 1252 -> 1 + 2 + 5 + 2 = 10 -> 1 + 0 = 1
+ *  163 is a magic number. 163 -> 1+6+3 = 10 -> 1 + 0 = 1
  * 	1748 is not a magic number. 1748 -> 1 + 7 + 4 + 8 = 20 -> 2 + 0 = 2
  * */
 public class MagicNumber {
