@@ -32,7 +32,7 @@ public class StreamCollectionDemo {
 
     private static void mthdMapDemoLowerToUpperObject() {
         List<String> writes = Arrays.asList("Spider Man", "Iron Man", "Super Man", "Wonder Women");
-
+        // MapDemoLowerToUpperObject
         List<Book> books = writes.stream().map(writer -> new Book(1001, "Book 1", writer, 100))
                 .collect(Collectors.toList());
 
