@@ -32,9 +32,10 @@ public class LargestRectangleArea {
 
     public static void main(String[] args) {
 
-        int[] hist = {2, 4, 8, 10, 8, 4, 2}; //12
+//        int[] hist = {2, 4, 8, 10, 8, 4, 2}; //12
+        int[] hist = {2, 1, 5, 2, 1, 3}; //6
         //        int[] hist = {2, 4, 8, 10, 8, 4, 2}; // 24
-        System.out.println("Maximum area is " + largestRectangleArea_bruteForce(hist));
+        System.out.println("Maximum area is " + largestRectangleArea1(hist));
 
 
 //        int[] input = {6, 2, 5, 4, 5, 1, 6};
@@ -56,6 +57,56 @@ public class LargestRectangleArea {
             }
         }
         return maxArea;
+    }
+    /*
+     * Scan from left to right to compute left[], which represents the left most boundary of current height.
+     * Scan from right to left to compute right[], which represents the right most boundary of current height.
+     * Scan from left to right again to compute rectangle area based on the height of that each position.
+     *
+     * Time Complexity: O(n).
+     * Space Complexity: O(n).
+    * */
+    private static int largestRectangleArea1(int[] heights) {
+        // validate input
+        if(heights == null || heights.length == 0) {
+            return 0;
+        }
+
+        // init
+        int n = heights.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int result = 0;
+
+        // build left
+        left[0] = 0;
+        for(int i = 1; i < n; i++) {
+            int currentLeft = i-1;
+            while(currentLeft >= 0 && heights[currentLeft] >= heights[i]) {
+                currentLeft = left[currentLeft]-1;
+            }
+
+            left[i] = currentLeft+1;
+        }
+
+        // build right
+        right[n-1] = n-1;
+        for(int i = n-2; i >= 0; i--) {
+            int currentRight = i+1;
+            while(currentRight < n && heights[i] <= heights[currentRight]) {
+                currentRight = right[currentRight]+1;
+            }
+
+            right[i] = currentRight-1;
+        }
+
+        // compare height
+        for(int i = 0; i < n; i++) {
+            result = Math.max(result, (right[i]-left[i]+1)*heights[i]);
+        }
+
+        // return
+        return result;
     }
 
     /*
