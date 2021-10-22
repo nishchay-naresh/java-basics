@@ -2,11 +2,15 @@ package com.nishchay.ds.array.sort;
 
 import java.util.Arrays;
 
+/*
+ * TODO - https://medium.com/enjoy-algorithm/quicksort-one-the-fastest-sorting-algorithms-2685fb0910c5
+ * https://medium.com/enjoy-algorithm/merge-sort-algorithm-1a32258d81f5
+ * */
 public class MergeSort {
 
     // Driver code
-    public static void main(String args[]) {
-        int arr[] = {12, 11, 13, 5, 6, 7};
+    public static void main(String[] args) {
+        int[] arr = {12, 11, 13, 5, 6, 7};
 
         System.out.println("Original Array - " + Arrays.toString(arr));
 
@@ -16,28 +20,37 @@ public class MergeSort {
         System.out.println("Sorted array - " + Arrays.toString(arr));
     }
 
-    public void sort(int arr[], int l, int r) {
+    /*
+     *	void mergeSort(int A[], int l, int r){
+     *	    if(l >= r)
+     *	        return
+     *
+     *	    int mid = (l + r) /2
+     *      // Sort first and second halves
+     *	    mergeSort(A, l, mid)
+     *	    mergeSort(A, mid + 1, r)
+     *	    // Merge the sorted halves
+     *      merge(A, l, mid, r)
+     *	}
+     *
+     * */
+    public void sort(int[] arr, int l, int r) {
         if (l < r) {
-            // Find the middle point
             int m = (l + r) / 2;
-
-            // Sort first and second halves
             sort(arr, l, m);
             sort(arr, m + 1, r);
-
-            // Merge the sorted halves
             merge(arr, l, m, r);
         }
     }
 
-    void merge(int arr[], int l, int m, int r) {
+    private void merge(int[] arr, int l, int m, int r) {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
 
         /* Create temp arrays */
-        int L[] = new int[n1];
-        int R[] = new int[n2];
+        int[] L = new int[n1];
+        int[] R = new int[n2];
 
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i)
