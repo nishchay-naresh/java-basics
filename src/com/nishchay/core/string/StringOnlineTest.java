@@ -5,6 +5,7 @@ public class StringOnlineTest {
     public static void main(String[] args) {
 
         stringsQuiz1();
+        stringsQuiz2();
 
     }
 
@@ -33,5 +34,25 @@ public class StringOnlineTest {
         System.out.println(s1.intern() == s2.intern());
     }
 
+
+    private static void stringsQuiz2() {
+        System.out.println("JavaScript".substring(4));// Script
+        System.out.println("JavaScript".substring(0, 4));// Java
+        System.out.println("smiles".substring(1, 5));// 1, n-1 => 1,4 =>mile
+
+        String str = "java".replace('a', '0');
+        System.out.println(str);
+
+        System.out.println("Java"+1000+2000+3000); // Java100020003000 L-> R
+        System.out.println(1000+2000+3000+"Java"); // 6000Java L-> R
+        System.out.println(7.7+3.3+"Java"+3.3+7.7); // 11.0Java3.37.7
+        System.out.println("ONE"+2+3+4+"FIVE"); //ONE234FIVE
+
+        System.out.println("null"+null+1); //nullnull1
+        //System.out.println(1+null+"null"); // CE
+
+        String blanks = "    ";
+        System.out.println(blanks.isEmpty()); // false
+    }
 
 }
