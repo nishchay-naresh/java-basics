@@ -1,15 +1,9 @@
 package com.nishchay.ds.string.freq;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+/*
+*
+* TODO - https://javarevisited.blogspot.com/2021/10/how-to-find-first-recurring-character.html?m=1
+*
+* */
 /*
  * Problem - find the first recurring character in given String
  * Examples
@@ -20,6 +14,7 @@ import org.junit.Test;
  */
 
 public class StringWithDupChar {
+/*
     GoogleCode code;
 
     @Before
@@ -90,5 +85,8 @@ class GoogleCode {
             }
             return null;
         }
+
+
+ */
     }
 
