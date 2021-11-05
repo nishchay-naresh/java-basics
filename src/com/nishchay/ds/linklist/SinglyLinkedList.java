@@ -5,12 +5,13 @@ class SinglyLinkedList {
 
 
     public static void main(String[] args) {
-        Node head = createList();
 
-        System.out.println("Link List Content :");
-        printList(head);
 
+//        printMiddleElementDemo();
     }
+
+
+
 
     // creating a singly linked list (10-50)
     private static Node createList() {
@@ -29,6 +30,7 @@ class SinglyLinkedList {
             System.out.print(delim + p.data);
             delim = " -> ";
         }
+        System.out.println();
     }
 
     /* Function to reverse the linked list */
@@ -46,7 +48,18 @@ class SinglyLinkedList {
         return head;
     }
 
+    /* Function to print middle of linked list */
+    private static void printMiddleElement(Node head) {
+        Node slowPointer = head;
+        Node fastPointer = head;
 
+        while (fastPointer != null && fastPointer.next != null) {
+            fastPointer = fastPointer.next.next;
+            slowPointer = slowPointer.next;
+        }
+        System.out.println("The middle element is = " + slowPointer.data);
+
+    }
 
 
 }
