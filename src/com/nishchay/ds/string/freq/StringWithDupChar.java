@@ -7,6 +7,9 @@ package com.nishchay.ds.string.freq;
 /*
  * Problem - find the first recurring character in given String
  * Examples
+ * java
+ * if given String is "ABCDA" return "A"
+ * if given String is "ABCDA" return "A"
  * if given String is "ABCDA" return "A"
  * if given String is "ABCDAB" return "A"
  * if given String is "ABBCDA" return "B"
