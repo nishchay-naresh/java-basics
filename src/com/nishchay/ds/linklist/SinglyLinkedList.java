@@ -7,10 +7,18 @@ class SinglyLinkedList {
     public static void main(String[] args) {
 
 
-//        printMiddleElementDemo();
+        printMiddleElementDemo();
     }
 
 
+    private static void printMiddleElementDemo() {
+        Node head = createList();
+
+        System.out.println("Link List Content :");
+        printList(head);
+
+        printMiddleElement(head);
+    }
 
 
     // creating a singly linked list (10-50)
