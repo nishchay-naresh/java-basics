@@ -21,12 +21,41 @@ public class StrPalindromeRecursion {
 
     public static void main(String[] args) {
 
+        checkPalindromDemo();
+//        isPalindromeDemo();
+
+    }
+
+    private static void checkPalindromDemo() {
+        System.out.println(" checkPalindrome(\"malayalam\") - " + checkPalindrome("malayalam"));
+        System.out.println(" checkPalindrome(\"max\") - " + checkPalindrome("max"));
+        System.out.println(" checkPalindrome(\"mam\") - " + checkPalindrome("mam"));
+        System.out.println(" checkPalindrome(\"nitin\") - " + checkPalindrome("nitin"));
+    }
+
+    private static boolean checkPalindrome(String str) {
+        return isPalindromeRecursion(str, 0, str.length() - 1);
+    }
+
+    private static boolean isPalindromeRecursion(String str, int left, int right) {
+        // left cross/meet right - it's Palindrome
+        if (left >= right)
+            return true;
+        // left & right chat are not same - it's not Palindrome
+        if ((str.charAt(left)) != (str.charAt(right)))
+            return false;
+
+        return isPalindromeRecursion(str, left + 1, right - 1);
+    }
+
+
+    private static void isPalindromeDemo() {
         System.out.println(" isPalindrome(\"malayalam\") - " + isPalindrome("malayalam"));
         System.out.println(" isPalindrome(\"max\") - " + isPalindrome("max"));
         System.out.println(" isPalindrome(\"nitin\") - " + isPalindrome("nitin"));
     }
 
-    static boolean isPalindrome(String str) {
+    private static boolean isPalindrome(String str) {
         int n = str.length();
 
         // An empty string is considered as palindrome
@@ -41,7 +70,7 @@ public class StrPalindromeRecursion {
      *        1) If there is only one character in string return true.
      *        2) Else compare first and last characters and recur for remaining substring.
      * */
-    static boolean isPalRec(String str, int s, int e) {
+    private static boolean isPalRec(String str, int s, int e) {
         // If there is only one character
         if (s == e)
             return true;
