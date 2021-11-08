@@ -3,8 +3,12 @@ package com.nishchay.ds.array.sort;
 import java.util.Arrays;
 
 /*
+ *	=========== The Dutch national flag problem(DNF) ===========
+ *
  * Given an array a[] consisting of 0s, 1s, and 2s.
  * Write a program to sort the array of 0’s, 1’s, and 2’s in ascending order.
+ *
+ * https://www.educative.io/edpresso/the-dutch-national-flag-problem-in-cpp
  *
  * */
 public class SortArrayOf012 {
@@ -89,13 +93,24 @@ public class SortArrayOf012 {
         }
         return i;
     }
+
     /*
+     *
+     *ALGORITHM -
+     *	Take three-pointers, namely - low, mid, high.
+     *	low and mid pointers point the start, and the high pointer will point the end of given array.
+     *CASES :
+     *	If array [mid] =0, then swap array [mid] with array [low] and increment both pointers once.
+     *	If array [mid] = 1, then no swapping is required. Increment mid pointer once.
+     *	If array [mid] = 2, then we swap array [mid] with array [high] and decrement the high pointer once.
+     *
+     * ====================================
      *  Here keeping 3 pointers (hi, low & mid), initializing them as
      *  lo = mid = 0,   high = n - 1
      *  mid is the traversing pointer
-     *  if mid == 0,  swap(lo, mid); lo++; mid++;
-     *  if mid == 1,  do nothing simply mid++;;
-     *  if mid == 2,   swap(mid, high); high--;
+     *  if array[mid] == 0,    swap(lo, mid); lo++; mid++;
+     *  if array[mid] == 1,    do nothing simply mid++;;
+     *  if array[mid] == 2,    swap(mid, high); high--;
      *  Only one traversals of the array is needed.
      * */
     private static void sort012_partition(int[] nums) {
