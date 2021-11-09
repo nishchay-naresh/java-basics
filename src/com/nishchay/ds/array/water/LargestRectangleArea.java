@@ -25,7 +25,7 @@ import java.util.Stack;
  * https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
  * https://www.youtube.com/watch?v=vcv3REtIvEo
  * https://www.danielleskosky.com/largest-rectangle-in-histogram/
- *
+ * TODO - https://medium.com/techtofreedom/algorithms-for-interview-2-monotonic-stack-462251689da8
  *
  * */
 public class LargestRectangleArea {
