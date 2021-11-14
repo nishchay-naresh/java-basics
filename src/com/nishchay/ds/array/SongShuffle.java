@@ -44,6 +44,7 @@ public class SongShuffle {
      *		j = random integer with 0 <= j <= i
      *		exchange a[j] and a[i]
      *
+     * time complexity - O(n)
      * */
     private static void shuffle(int[] arr) {
         // Creating a object for Random class
@@ -53,8 +54,8 @@ public class SongShuffle {
         // need to run for the first element that's why i > 0
         for (int i = arr.length - 1; i > 0; i--) {
 
-            // Pick a random index from 0 to i
-            int j = random.nextInt(i + 1);
+            // Pick a random index from 0 to i - assuming it working O(1)
+            int j = random.nextInt(i);
 
             // Swap arr[i] with the element at random index
             int temp = arr[i];
