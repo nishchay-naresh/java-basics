@@ -62,5 +62,46 @@ public class SortArrayOf01 {
 
     }
 
+    /*
+     *
+     * Method 2 :  Use two indexes to traverse
+     *Maintain two indexes. Initialize the first index left as 0 and second index right as n-1.
+     *	Do following while left < right
+     *	a) Keep incrementing index left while there are 0s at it
+     *	b) Keep decrementing index right while there are 1s at it
+     *	c) If left < right then exchange arr[left] and arr[right]
+     *
+     * Time Complexity : O(n)
+     * No fo array scan  - 1
+     *
+     * */
+
+    private static void segregate0and1TwoPointers(int[] arr) {
+
+        int left = 0, right = arr.length - 1;
+
+        int t;
+        while (left < right)
+        {
+            /* Increment left index while we see 0 at left */
+            while (arr[left] == 0 && left < right)
+                left++;
+
+            /* Decrement right index while we see 1 at right */
+            while (arr[right] == 1 && left < right)
+                right--;
+
+            /* If left is smaller than right then there is a 1 at left
+               and a 0 at right.  Exchange arr[left] and arr[right]*/
+            if (left < right)
+            {
+                t = arr[left];
+                arr[left] = arr[right];
+                arr[right] = t;
+                left++;
+                right--;
+            }
+        }
+    }
 
 }
