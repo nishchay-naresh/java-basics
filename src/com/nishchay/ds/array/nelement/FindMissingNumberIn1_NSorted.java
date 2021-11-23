@@ -47,6 +47,7 @@ class FindMissingNumberIn1_NSorted {
      *
      * just follow the first stmt : since array starting index is 0, starting Number is 1, so arr[i] == i+1
      * So our problem reduces to search in an array to find the first cell, whose value is not the same as its index + 1
+     *      => get the first instance of arr[i] != i+1
      * this can be solve using sequential search - O(n)
      *
      * then we can improve the solution by using the sorted data properties - O(log n)
@@ -64,7 +65,7 @@ class FindMissingNumberIn1_NSorted {
 
         int n = arr.length;
 
-        // staring from the left side , so weill break the loop for the first instance of arr[i] != i+1
+        // staring from the left side , so will break the loop for the first instance of arr[i] != i+1
         int i = 0;
         while (i < n && i + 1 == arr[i]) {
             i++;
@@ -79,7 +80,7 @@ class FindMissingNumberIn1_NSorted {
      * condition to get the - first instance of arr[i] != i+1
      *   if (arr[mid] != mid+1 && arr[mid - 1] == mid)
      *
-     * partition braking / left & right logic :
+     * partition breaking / left & right logic :
      *
      *			if (arr[mid] != mid+1){
      *                  // index sequencing is not correct -  go left
