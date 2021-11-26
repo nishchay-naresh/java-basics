@@ -15,9 +15,8 @@ package com.nishchay.ds.array.nelement;
  * https://www.geeksforgeeks.org/find-repetitive-element-1-n-1/
  * https://www.youtube.com/watch?v=6KHW7ZQwtCA
  * */
-class FindMissingNumberIn1_N {
+class FindMissingNumberIn1_NUnSorted {
 
-    /* program to test above function */
     public static void main(String[] args) {
 
         int[] arr1 =  { 10, 5, 9, 4, 2, 7, 8, 3, 1 };
@@ -76,6 +75,8 @@ class FindMissingNumberIn1_N {
 
     /*
      * Method 3 - XOR method
+     *      (XOR of all array element) XOR (XOR of N natural nos) = missing no
+     *
      * Function to find missing number -  by doing XOR of First N Numbers
      * Time Complexity: O(n)
      * Space Complexity: O(1)
