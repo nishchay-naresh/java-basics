@@ -41,6 +41,7 @@ public class ShuffleString {
 
     }
 
+/*
     private static String restoreString(String str, int[] indices) {
         StringBuilder ans = new StringBuilder(str);
 
@@ -50,7 +51,19 @@ public class ShuffleString {
 
         return ans.toString();
     }
+*/
 
+    /*
+     * Time Complexity - O(n)
+     * */
+    private static String restoreString(String str, int[] indices) {
+        StringBuilder ans = new StringBuilder();
 
+        for (int i = 0; i < indices.length; i++){
+            ans.append(str.charAt(indices[i]));
+        }
+
+        return ans.toString();
+    }
     
 }
