@@ -24,46 +24,74 @@ public class ShuffleString {
     public static void main(String[] args) {
 
         String str = "codeleet";
-        int[] indices = new int[]{4,5,6,7,0,2,1,3};
-        System.out.println("shuffled string - " + restoreString(str,indices)); //leetcode
+        int[] indices = new int[]{4, 5, 6, 7, 0, 2, 1, 3};
+        System.out.println("shuffled string - " + restoreString(str, indices)); //leetcode
 
-        str = "abc"; indices = new int[]{0,1,2};
-        System.out.println("shuffled string - " + restoreString(str,indices)); //abc
+        str = "abc";
+        indices = new int[]{0, 1, 2};
+        System.out.println("shuffled string - " + restoreString(str, indices)); //abc
 
-        str = "aiohn"; indices = new int[]{3,1,4,2,0};
-        System.out.println("shuffled string - " + restoreString(str,indices)); //nihao
+        str = "aiohn";
+        indices = new int[]{3, 1, 4, 2, 0};
+        System.out.println("shuffled string - " + restoreString(str, indices)); //nihao
 
-        str = "aaiougrt"; indices = new int[]{4,0,2,6,7,3,1,5};
-        System.out.println("shuffled string - " + restoreString(str,indices)); //arigatou
+        str = "aaiougrt";
+        indices = new int[]{4, 0, 2, 6, 7, 3, 1, 5};
+        System.out.println("shuffled string - " + restoreString(str, indices)); //arigatou
 
-        str = "art"; indices = new int[]{1,0,2};
-        System.out.println("shuffled string - " + restoreString(str,indices)); //rat
+        str = "art";
+        indices = new int[]{1, 0, 2};
+        System.out.println("shuffled string - " + restoreString(str, indices)); //rat
 
     }
 
-/*
-    private static String restoreString(String str, int[] indices) {
+    /*
+     * some solution
+     * Time Complexity - O(n)
+     * Space Complexity - O(n)
+     * */
+    private static String restoreString1(String str, int[] indices) {
         StringBuilder ans = new StringBuilder(str);
 
-        for (int i = 0; i < str.length(); i++){
+        for (int i = 0; i < str.length(); i++) {
             ans.setCharAt(indices[i], str.charAt(i));
         }
 
         return ans.toString();
     }
-*/
 
     /*
+     * my solution
      * Time Complexity - O(n)
+     * Space Complexity - O(n)
      * */
-    private static String restoreString(String str, int[] indices) {
+    private static String restoreString2(String str, int[] indices) {
         StringBuilder ans = new StringBuilder();
 
-        for (int i = 0; i < indices.length; i++){
+        for (int i = 0; i < indices.length; i++) {
             ans.append(str.charAt(indices[i]));
         }
 
         return ans.toString();
     }
-    
+
+    /*
+     * my another solution
+     * Time Complexity - O(n)
+     * Space Complexity - O(n)
+     * */
+    private static String restoreString(String str, int[] indices) {
+        char[] charArray = str.toCharArray();
+        char t;
+        for (int i = 0; i < indices.length; i++) {
+            if (indices[i] != i) {
+                t = charArray[i];
+                charArray[i] = charArray[indices[i]];
+                charArray[indices[i]] = t;
+            }
+        }
+
+        return String.valueOf(charArray);
+    }
+
 }
