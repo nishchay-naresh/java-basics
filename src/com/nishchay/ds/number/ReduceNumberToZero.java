@@ -38,6 +38,10 @@ public class ReduceNumberToZero {
         System.out.println("steps - " + numberOfSteps(14)); // 6
         System.out.println("steps - " + numberOfSteps(8)); // 4
         System.out.println("steps - " + numberOfSteps(123)); // 12
+        System.out.println("-----------------------------------");
+        System.out.println("steps - " + numberOfSteps_bit(351)); // 12
+        System.out.println("steps - " + numberOfSteps_bit(2)); // 12
+        System.out.println("steps - " + numberOfSteps_bit(71)); // 12
     }
 
     private static int numberOfSteps(int num) {
@@ -47,6 +51,20 @@ public class ReduceNumberToZero {
                 num = num / 2;
             } else {
                 num--;
+            }
+        }
+        return i;
+    }
+
+
+    // using bitwise operator
+    private static int numberOfSteps_bit(int num) {
+        int i = 0;
+        for (; num > 0; i++) {
+            if ((num & 1) == 1) {
+                num--;
+            } else {
+                num = num >> 1;
             }
         }
         return i;
