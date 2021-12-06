@@ -9,7 +9,7 @@ public class MapDemo {
     public static void main(String[] args) {
 
         hashMapNullPut();
-
+        hashMapStringPut();
     }
 
 
@@ -48,6 +48,18 @@ public class MapDemo {
 
 //        map.forEach((key, value) -> System.out.println(key + "-> " + value));
 
+    }
+
+    private static void hashMapStringPut() {
+        String str1 = "java";
+        String str2 = new String("java");
+        Map<String, Integer> map = new HashMap<>();
+        map.put(str1,10);
+        map.put(str2,20);
+
+        String str3 = new String("java");
+        System.out.println(map.get(str3));
+        System.out.println(map.size());
     }
 
 }
