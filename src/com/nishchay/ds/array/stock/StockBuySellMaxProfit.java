@@ -23,8 +23,8 @@ package com.nishchay.ds.array.stock;
  *	Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
  *	Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
  *
- *
- * https://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/
+ * https://java2blog.com/stock-buy-sell-to-maximize-profit/
+ * https://www.youtube.com/watch?v=4YjEHmw1MX0&t=56s&ab_channel=Pepcoding
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
  *
  * */
@@ -33,13 +33,15 @@ public class StockBuySellMaxProfit {
     public static void main(String[] args) {
 
         int[] arr = {14, 12, 70, 15, 99, 65, 21, 90};
-        System.out.println("Maximum profit :" + calculateMaxProfit(arr)); // 87
+        System.out.println("Maximum profit : " + calculateMaxProfit(arr)); // 87
+        System.out.println("Maximum profit : " + calculateMaxProfit1(arr)); // 87
 
         arr = new int[] {7,1,5,3,6,4};
-        System.out.println("Maximum profit :" + calculateMaxProfit(arr)); // 5
+        System.out.println("Maximum profit : " + calculateMaxProfit(arr)); // 5
 
         arr = new int[] {7,6,4,3,1};
-        System.out.println("Maximum profit :" + calculateMaxProfit(arr)); // 0
+        System.out.println("Maximum profit : " + calculateMaxProfit(arr)); // 0
+
     }
 
     /*
@@ -61,9 +63,10 @@ public class StockBuySellMaxProfit {
     private static int calculateMaxProfit(int[] arr) {
         int lowestPriceTillThatDay = arr[0];
         int maxProfit = 0;
+        int currIndexProfit;
 
         for (int i = 0; i < arr.length; i++) {
-            int currIndexProfit = 0;
+            currIndexProfit = 0;
             if (arr[i] > lowestPriceTillThatDay) {
                 currIndexProfit = arr[i] - lowestPriceTillThatDay;
                 if (currIndexProfit > maxProfit) {
@@ -76,4 +79,20 @@ public class StockBuySellMaxProfit {
         return maxProfit;
     }
 
+    private static int calculateMaxProfit1(int[] arr) {
+        int lowestPriceTillThatDay = arr[0];
+        int maxProfit = 0;
+        int currIndexProfit;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < lowestPriceTillThatDay) {
+                lowestPriceTillThatDay = arr[i];
+            }
+            currIndexProfit = arr[i] - lowestPriceTillThatDay;
+            if (currIndexProfit > maxProfit) {
+                maxProfit = currIndexProfit;
+            }
+        }
+        return maxProfit;
+    }
 }
