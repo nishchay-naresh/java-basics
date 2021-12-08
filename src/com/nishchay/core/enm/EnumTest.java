@@ -19,5 +19,11 @@ public class EnumTest {
 }
 
 enum Days {
-    MON, TUE, WED, THU, FRI, SAT, SUN
+    MON,
+    TUE,
+    WED,
+    THU,
+    FRI,
+    SAT,
+    SUN
 }
