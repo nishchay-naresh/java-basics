@@ -5,7 +5,14 @@ import java.util.Scanner;
 public class ArrayUtils {
 
 
-    // The time complexity of this algorithm is O(n).
+    /*
+    * Linear Search / Sequential search
+    * just start either left/right side of the array, compare each element with the key, until you done with the entire collection
+    * if found - return the index
+    * else - return -1;
+    *
+    *  Time complexity - O(n)
+    * */
     public static int linearSearch(int[] arr, int key) {
 
         for (int i = 0; i < arr.length; i++) {
@@ -14,28 +21,42 @@ public class ArrayUtils {
                 return i;
         }
 
-        // return -1 if the element is not found
         return -1;
     }
 
 
-    // The time complexity of this algorithm is O(log n)
-    public static int binarySearchIterative(int[] sortedArray, int left, int right, int key) {
+    /*
+     *	left = 0; right = endOfArray, calculate the mid
+     *	Compare the key items with the mid element.
+     *	If key == arr[mid],
+     *		then return the mid index as result.
+     *	Else If key > arr[mid],  key lies in the right half of the collection.
+     *		Thus repeat steps 1 to 3 for right half of the collection.
+     *	Else key < arr[mid], then the key is in the left half of the collection.
+     *		Thus repeat steps 1 to 3 for left half of the collection.
+     *
+     *
+     *  Time complexity - O(log n)
+     * */
+    public static int binarySearchIterative(int[] sortedArray, int key) {
 
-        int index = -1;
+        int left, right, mid;
+        left = 0;
+        right = sortedArray.length - 1;
 
         while (left <= right) {
-            int mid = (left + right) / 2;
-            if (sortedArray[mid] < key) {
+
+            mid = (left + right) / 2;
+
+            if (sortedArray[mid] == key) {
+                return mid;
+            } else if (sortedArray[mid] < key) { //  go right
                 left = mid + 1;
-            } else if (sortedArray[mid] > key) {
+            } else if (sortedArray[mid] > key) {//  go left
                 right = mid - 1;
-            } else if (sortedArray[mid] == key) {
-                index = mid;
-                break;
             }
         }
-        return index;
+        return -1;
     }
 
     // The time complexity of this algorithm is O(2^n)
@@ -72,7 +93,7 @@ public class ArrayUtils {
     // reversing the content of an int array.
     public static void reverseArray(int[] arr) {
 
-        for (int i = 0,  j = arr.length - 1; i < j ; i++, j--) {
+        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
             // swap ith & jth element
             int t = arr[i];
             arr[i] = arr[j];
