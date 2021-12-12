@@ -1,4 +1,4 @@
-package com.nishchay.core.objectclass;
+package com.nishchay.core.objectclazz;
 
 import java.util.Date;
 
