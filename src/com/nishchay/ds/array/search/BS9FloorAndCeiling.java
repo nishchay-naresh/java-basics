@@ -62,10 +62,12 @@ public class BS9FloorAndCeiling {
     public static void main(String[] args) {
 
         floorEx();
+        ceilingEx();
     }
 
+
     private static void floorEx() {
-        
+
         int key;
         int[] arr;
 
@@ -90,7 +92,33 @@ public class BS9FloorAndCeiling {
         System.out.printf("Found At = %d%n", getFloor(arr, key)); // -1
     }
 
+    private static void ceilingEx() {
+
+        int key;
+        int[] arr;
+
+        arr = new int[] {1, 3, 9, 15, 15, 18, 21};
+
+        key = 0;
+        System.out.printf("Found At = %d%n", getceil(arr, key)); // 1
+
+        key = 1;
+        System.out.printf("Found At = %d%n", getceil(arr, key)); // 1
+
+        key = 5;
+        System.out.printf("Found At = %d%n", getceil(arr, key)); // 9
+
+        key = 25;
+        System.out.printf("Found At = %d%n", getceil(arr, key)); // -1
+
+    }
+
     private static int getFloor(int[] arr, int key) {
+        return -1;
+    }
+
+
+    private static int getceil(int[] arr, int key) {
         return -1;
     }
 
