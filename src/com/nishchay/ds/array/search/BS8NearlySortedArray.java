@@ -55,19 +55,19 @@ public class BS8NearlySortedArray {
      *
      *	Approach:
      *
-     *	if(target == a[mid]) {
+     *	if(key == arr[mid]) {
      *		return mid;
      *	}
      *
-     *	if(mid > 0 && target == a[mid-1]) {
+     *	if(mid > 0 && key == arr[mid-1]) {
      *		return mid-1;
      *	}
      *
-     *	if(mid < n-1 && target == a[mid+1]) {
+     *	if(mid < n-1 && key == arr[mid+1]) {
      *		return mid+1;
      *	}
      *
-     *	if (target < a[mid]) {
+     *	if (key < arr[mid]) {
      *		end = mid-2;
      *	} else {
      *		start = mid+2;
@@ -78,6 +78,32 @@ public class BS8NearlySortedArray {
      * */
     private static int searchAlmostSorted(int[] arr, int key) {
 
+        int n = arr.length;
+        int start = 0;
+        int end = n-1;
+        int mid;
+
+        while(start <= end) {
+            mid = (start + end)/2;
+
+            if(key == arr[mid]) {
+                return mid;
+            }
+            // checking segmentation fault - for lower bound
+            if(mid > 0 && key == arr[mid-1]) {
+                return mid-1;
+            }
+            // checking segmentation fault - for upper bound
+            if(mid < n-1 && key == arr[mid+1]) {
+                return mid+1;
+            }
+
+            if (key < arr[mid]) {
+                end = mid-2;
+            } else {
+                start = mid+2;
+            }
+        }
         return -1;
     }
 
