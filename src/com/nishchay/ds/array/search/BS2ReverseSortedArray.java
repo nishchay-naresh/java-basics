@@ -60,7 +60,7 @@ public class BS2ReverseSortedArray {
      *
      *  Time complexity - O(log n)
      * */
-    private static int binarySearchReverse(int[] sortedArray, int key) {
+    static int binarySearchReverse(int[] sortedArray, int key) {
 
         int left, right, mid;
         left = 0;
