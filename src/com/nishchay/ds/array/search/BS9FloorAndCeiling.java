@@ -1,4 +1,5 @@
 package com.nishchay.ds.array.search;
+
 /*
  *================= Floor & Ceiling in a Sorted Array ====================
  *
@@ -62,7 +63,9 @@ public class BS9FloorAndCeiling {
     public static void main(String[] args) {
 
         floorEx();
+        System.out.printf("----------------------------------------------%n");
         ceilingEx();
+
     }
 
 
@@ -71,25 +74,25 @@ public class BS9FloorAndCeiling {
         int key;
         int[] arr;
 
-        arr = new int[] {1, 2, 8, 10, 10, 12, 19};
+        arr = new int[]{1, 2, 8, 10, 10, 12, 19};
         key = 5;
-        System.out.printf("Found At = %d%n", getFloor(arr, key)); // 2
+        System.out.printf("floor of %d = %d%n", key, getFloor(arr, key)); // 2
 
         key = 20;
-        System.out.printf("Found At = %d%n", getFloor(arr, key)); // 19
+        System.out.printf("floor of %d = %d%n", key, getFloor(arr, key)); // 19
 
         key = 0;
-        System.out.printf("Found At = %d%n", getFloor(arr, key)); // -1
+        System.out.printf("floor of %d = %d%n", key, getFloor(arr, key)); // -1
 
         arr = new int[]{1, 3, 9, 15, 15, 18, 21};
         key = 5;
-        System.out.printf("Found At = %d%n", getFloor(arr, key)); // 3
+        System.out.printf("floor of %d = %d%n", key, getFloor(arr, key)); // 3
 
         key = 25;
-        System.out.printf("Found At = %d%n", getFloor(arr, key)); // 21
+        System.out.printf("floor of %d = %d%n", key, getFloor(arr, key)); // 21
 
         key = 0;
-        System.out.printf("Found At = %d%n", getFloor(arr, key)); // -1
+        System.out.printf("floor of %d = %d%n", key, getFloor(arr, key)); // -1
     }
 
     private static void ceilingEx() {
@@ -97,29 +100,85 @@ public class BS9FloorAndCeiling {
         int key;
         int[] arr;
 
-        arr = new int[] {1, 3, 9, 15, 15, 18, 21};
+        arr = new int[]{1, 3, 9, 15, 15, 18, 21};
 
         key = 0;
-        System.out.printf("Found At = %d%n", getceil(arr, key)); // 1
+        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // 1
 
         key = 1;
-        System.out.printf("Found At = %d%n", getceil(arr, key)); // 1
+        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // 1
 
         key = 5;
-        System.out.printf("Found At = %d%n", getceil(arr, key)); // 9
+        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // 9
 
         key = 25;
-        System.out.printf("Found At = %d%n", getceil(arr, key)); // -1
+        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // -1
 
     }
 
     private static int getFloor(int[] arr, int key) {
-        return -1;
+
+        int left = 0, right = arr.length - 1;
+        int mid;
+
+        int floor = -1;
+
+        // loop till the search space is exhausted
+        while (left <= right) {
+
+            mid = (left + right) / 2;
+
+            // if `key` is equal to the middle element, it is the floor
+            if (arr[mid] == key) {
+                return arr[mid];
+                // if arr[mid] < key, the floor exists in the right sub-array
+                // arr[mid] could be a possible floor, so update floor to the middle element
+                // and reduce our search space to the right sub-array
+            } else if (arr[mid] < key) {
+                floor = arr[mid];
+                left = mid + 1;
+            } else { // arr[mid] > key, the floor exists in the left sub-array
+                right = mid - 1;
+            }
+        }
+
+        return floor;
     }
 
 
     private static int getceil(int[] arr, int key) {
-        return -1;
+
+        int left = 0, right = arr.length - 1;
+        int mid;
+        int ceil = -1;
+
+        // loop till the search space is exhausted
+        while (left <= right) {
+
+            mid = (left + right) / 2;
+
+            // if `key` is equal to the middle element, it is the ceil
+            if (arr[mid] == key) {
+                return arr[mid];
+            }
+
+            // if arr[mid] > key, the ceil exists in the left sub-array arr[left…mid]
+            //  arr[mid] could be a possible ceil, so update ceil to the middle element
+            // and reduce our search space to the left subarray arr[left…mid-1]
+            else if (arr[mid] > key) {
+                ceil = arr[mid];
+                right = mid - 1;
+            }
+
+            // if `key` is more than the middle element, the ceil exists in the
+            // right subarray arr[mid+1…right]
+            // arr[mid] < key, the ceil exists in the right sub-array
+            else {
+                left = mid + 1;
+            }
+        }
+
+        return ceil;
     }
 
 
