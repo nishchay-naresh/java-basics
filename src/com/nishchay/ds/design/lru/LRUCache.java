@@ -1,4 +1,4 @@
-package com.nishchay.ds.lru;
+package com.nishchay.ds.design.lru;
 
 import java.util.HashMap;
 

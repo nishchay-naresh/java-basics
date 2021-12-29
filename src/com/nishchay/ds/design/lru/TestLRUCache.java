@@ -1,4 +1,4 @@
-package com.nishchay.ds.lru;
+package com.nishchay.ds.design.lru;
 
 public class TestLRUCache {
 
