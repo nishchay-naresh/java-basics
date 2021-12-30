@@ -103,19 +103,30 @@ public class BS9FloorAndCeiling {
         arr = new int[]{1, 3, 9, 15, 15, 18, 21};
 
         key = 0;
-        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // 1
+        System.out.printf("ceil of %d = %d%n", key, getCeil(arr, key)); // 1
 
         key = 1;
-        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // 1
+        System.out.printf("ceil of %d = %d%n", key, getCeil(arr, key)); // 1
 
         key = 5;
-        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // 9
+        System.out.printf("ceil of %d = %d%n", key, getCeil(arr, key)); // 9
 
         key = 25;
-        System.out.printf("ceil of %d = %d%n", key, getceil(arr, key)); // -1
+        System.out.printf("ceil of %d = %d%n", key, getCeil(arr, key)); // -1
 
     }
 
+    /*
+     *	if (arr[mid] == key) {
+     *		return arr[mid];
+     *	// floor means smaller
+     *	} else if (arr[mid] < key) {
+     *		floor = arr[mid];
+     *		left = mid + 1;
+     *	} else {
+     *		right = mid - 1;
+     *	}
+     * */
     private static int getFloor(int[] arr, int key) {
 
         int left = 0, right = arr.length - 1;
@@ -123,12 +134,10 @@ public class BS9FloorAndCeiling {
 
         int floor = -1;
 
-        // loop till the search space is exhausted
         while (left <= right) {
 
             mid = (left + right) / 2;
 
-            // if `key` is equal to the middle element, it is the floor
             if (arr[mid] == key) {
                 return arr[mid];
                 // if arr[mid] < key, the floor exists in the right sub-array
@@ -145,19 +154,29 @@ public class BS9FloorAndCeiling {
         return floor;
     }
 
-
-    private static int getceil(int[] arr, int key) {
+    /*
+     *	if (arr[mid] == key) {
+     *		return arr[mid];
+     *	}
+     *	// ceil means greater
+     *	else if (arr[mid] > key) {
+     *		ceil = arr[mid];
+     *		right = mid - 1;
+     *	}
+     *	else {
+     *		left = mid + 1;
+     *	}
+     * */
+    private static int getCeil(int[] arr, int key) {
 
         int left = 0, right = arr.length - 1;
         int mid;
         int ceil = -1;
 
-        // loop till the search space is exhausted
         while (left <= right) {
 
             mid = (left + right) / 2;
 
-            // if `key` is equal to the middle element, it is the ceil
             if (arr[mid] == key) {
                 return arr[mid];
             }
@@ -170,8 +189,6 @@ public class BS9FloorAndCeiling {
                 right = mid - 1;
             }
 
-            // if `key` is more than the middle element, the ceil exists in the
-            // right subarray arr[mid+1…right]
             // arr[mid] < key, the ceil exists in the right sub-array
             else {
                 left = mid + 1;
