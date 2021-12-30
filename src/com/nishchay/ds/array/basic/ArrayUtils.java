@@ -6,13 +6,13 @@ public class ArrayUtils {
 
 
     /*
-    * Linear Search / Sequential search
-    * just start either left/right side of the array, compare each element with the key, until you done with the entire collection
-    * if found - return the index
-    * else - return -1;
-    *
-    *  Time complexity - O(n)
-    * */
+     * Linear Search / Sequential search
+     * just start either left/right side of the array, compare each element with the key, until you done with the entire collection
+     * if found - return the index
+     * else - return -1;
+     *
+     *  Time complexity - O(n)
+     * */
     public static int linearSearch(int[] arr, int key) {
 
         for (int i = 0; i < arr.length; i++) {
@@ -60,23 +60,21 @@ public class ArrayUtils {
     }
 
     // The time complexity of this algorithm is O(2^n)
-    public static int binarySearchRecursive(int[] sortedArray, int left, int right, int key) {
-
-        int middle = (left + right) / 2;
+    public static int binarySearchRecursive(int[] array, int left, int right, int key) {
 
         if (right < left) {
             return -1;
         }
 
-        if (key == sortedArray[middle]) {
-            return middle;
-        } else if (key < sortedArray[middle]) {
-            return binarySearchRecursive(
-                    sortedArray, left, middle - 1, key);
-        } else {
-            return binarySearchRecursive(
-                    sortedArray, middle + 1, right, key);
-        }
+        int mid = (left + right) / 2;
+
+        if (key == array[mid])
+            return mid;
+        else if (key < array[mid])
+            return binarySearchRecursive(array, left, mid - 1, key);
+
+        return binarySearchRecursive(array, mid + 1, right, key);
+
     }
 
     // The time complexity of this algorithm is O(n).
