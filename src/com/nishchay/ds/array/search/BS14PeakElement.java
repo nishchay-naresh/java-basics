@@ -36,7 +36,7 @@ package com.nishchay.ds.array.search;
  * https://www.techiedelight.com/find-peak-element-array/
  * https://www.ideserve.co.in/learn/find-a-peak-element-in-an-array
  * */
-public class BS10PeakElement {
+public class BS14PeakElement {
 
     public static void main(String[] args) {
 

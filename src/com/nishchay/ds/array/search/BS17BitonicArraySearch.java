@@ -24,7 +24,7 @@ import java.util.Arrays;
  * https://www.callicoder.com/search-in-bitonic-array/
  *
  * */
-public class BS12BitonicArraySearch {
+public class BS17BitonicArraySearch {
 
 
     public static void main(String[] args) {
@@ -56,7 +56,7 @@ public class BS12BitonicArraySearch {
      * */
     // Bitonic Search
     private static int search(int[] arr, int key) {
-        int maxIndex = BS11BitonicArrayMax.findMax(arr);
+        int maxIndex = BS16BitonicArrayMax.findMax(arr);
 
         int[] left = Arrays.copyOf(arr,maxIndex); // copying 0 to maxIndex, excluding pivot
         int[] right = Arrays.copyOfRange(arr, maxIndex,arr.length); // copying maxIndex to length, excluding length

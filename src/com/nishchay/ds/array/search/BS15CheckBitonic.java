@@ -43,7 +43,7 @@ package com.nishchay.ds.array.search;
  *
  * https://www.geeksforgeeks.org/program-to-check-if-an-array-is-bitonic-or-not/
  * */
-public class CheckBitonic {
+public class BS15CheckBitonic {
 
 
     public static void main(String[] args) {

@@ -39,7 +39,7 @@ package com.nishchay.ds.array.search;
  *
  *
  * */
-public class BS11BitonicArrayMax {
+public class BS16BitonicArrayMax {
 
     public static void main(String[] args) {
 
