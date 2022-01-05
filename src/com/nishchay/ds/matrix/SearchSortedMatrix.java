@@ -42,24 +42,27 @@ public class SearchSortedMatrix {
                 {21, 23, 50, 90, 92}
         };
 
-        verify_search(matrix);
+        verifySearch(matrix);
     }
 
     /*
-     * A Simple Solution is to one by one compare x with every element of the matrix. If matches, then return position. If we reach the end, return -1.
-     *  The time complexity of this solution is O(n x m).
-     * An efficient solution is to typecast a given 2D array to a 1D array, then apply binary search on the type casted array.
+     * A Simple Solution is to one by one compare x with every element of the matrix, time complexity of this solution is O(n x m).
+     *
      *
      * However, there are better solutions with less time complexity that use the sorted property of matrix.
+     *
      *  We start from the upper right corner of the matrix and compare its value with the key.
-     *  If they are equal, we have found the position of the key.
-     *  If the key is smaller than the current element, we move one position to the left.
-     *  If the key is larger than the current element, we move one position down.
+     *  If matrix[i][j] ==  key
+     *      return (i,j)
+     *  If matrix[i][j] >  key
+     *      we move one position to the left.
+     *  If matrix[i][j] <  key
+     *      we move one position down.
      *
      *	Runtime Complexity : O(m+n) where ‘m’ is number of rows and ‘n’ is number of columns.
-     *	Memory Complexity  : Constant, O(1).
+     *	Memory Complexity  : O(1)
      * */
-    private static IntPair search_in_matrix(int[][] matrix, int key) {
+    private static int[] searchInMatrix(int[][] matrix, int key) {
 
         int M = matrix.length; //rows
         int N = matrix[0].length; // columns
@@ -69,7 +72,7 @@ public class SearchSortedMatrix {
         int i = 0, j = N - 1;
         while (i < M && j >= 0) {
             if (matrix[i][j] == key) {
-                return new IntPair(i, j);
+                return new int[]{i, j};
             } else if (key < matrix[i][j]) {
                 // search left
                 --j;
@@ -78,33 +81,19 @@ public class SearchSortedMatrix {
                 ++i;
             }
         }
-        return new IntPair(-1, -1);
+        return new int[]{-1, -1};
     }
 
 
-    private static void verify_search(int[][] matrix) {
+    private static void verifySearch(int[][] matrix) {
         for (int i = 0; i < matrix.length; ++i) {
             for (int j = 0; j < matrix[0].length; ++j) {
-                System.out.print("\nVerifying at " + i + ", " + j);
-                IntPair val_loc = search_in_matrix(matrix, matrix[i][j]);
-                if (val_loc.first == i && val_loc.second == j)
+                System.out.print("\n Verifying at " + i + ", " + j);
+                int[] keyLocation = searchInMatrix(matrix, matrix[i][j]);
+                if (keyLocation[0] == i && keyLocation[1] == j)
                     System.out.print(" verification done");
             }
         }
     }
 
-}
-
-class IntPair {
-    int first;
-    int second;
-
-    IntPair() {
-        this.first = this.second = 0;
-    }
-
-    IntPair(int first, int second) {
-        this.first = first;
-        this.second = second;
-    }
 }
