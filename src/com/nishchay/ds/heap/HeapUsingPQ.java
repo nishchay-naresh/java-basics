@@ -8,7 +8,7 @@ public class HeapUsingPQ {
 
     public static void main(String[] args) {
 
-//        heapPrint();
+        heapPrint();
         System.out.println("----------------------------");
         minHeapPrint();
         System.out.println("----------------------------");
@@ -33,8 +33,8 @@ public class HeapUsingPQ {
     }
 
     /*
-     *	Max–heap Property - in a max-heap, the root node always has the largest value.
-     *	Min–heap Property - in a min-heap, the root node always has the smallest value.
+     *  Min–heap Property - in a min-heap, the root node always has the smallest value, keeps data in ascending order
+     *	Max–heap Property - in a max-heap, the root node always has the largest value, keeps data in descending order
      * */
     private static void minHeapPrint() {
         // Min–heap -  root node always has the smallest value, keeps data in ascending order
@@ -47,7 +47,7 @@ public class HeapUsingPQ {
         minHeap.offer(18);
 
         System.out.println("minHeap = " + minHeap); // minHeap = [1, 2, 8, 12, 5, 18]
-        System.out.println("minHeap.peek() = " + minHeap.peek()); // 2
+        System.out.println("minHeap.peek() = " + minHeap.peek()); // 1
 
         printDataOrder(minHeap);
     }
@@ -75,4 +75,5 @@ public class HeapUsingPQ {
         }
         System.out.println();
     }
+
 }
