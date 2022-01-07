@@ -25,7 +25,7 @@ public class HeapUsingPQ {
         pq.offer(18);
 
         System.out.println("pq.size() = " + pq.size());
-        Integer val = null;
+        Integer val;
         while ((val = pq.poll()) != null) {
             System.out.print(val + ", ");
         }
