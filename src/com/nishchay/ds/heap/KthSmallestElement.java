@@ -1,5 +1,8 @@
 package com.nishchay.ds.heap;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /*
  *============== K’th Smallest/Largest Element in Unsorted Array ====================
  *
@@ -24,11 +27,46 @@ package com.nishchay.ds.heap;
 public class KthSmallestElement {
 
     public static void main(String[] args){
-        int[] arr = new int[] { 12, 3, 5, 7, 19 };
-        int k = 2;
-//        System.out.print("K'th smallest element is " + kthSmallest(arr, k));
+
+        int[] arr;
+        int k;
 
 
+        arr = new int[] { 12, 3, 5, 7, 19 };
+        k = 2;
+        System.out.println("K'th smallest element is " + kthSmallest(arr, k)); // 5
+
+        arr = new int[] { 7, 10, 4, 3, 20, 15 };
+        k = 3;
+        System.out.println("K'th smallest element is " + kthSmallest(arr, k)); // 7
+
+        k = 4;
+        System.out.println("K'th smallest element is " + kthSmallest(arr, k)); // 10
+    }
+
+
+    /*
+     * Time complexity - O(n logk)
+     * Space complexity - O(k)
+    * */
+    private static int kthSmallest(int[] arr, int k) {
+
+        int res = 0;
+
+        // maxHeap, bcus max among k smallest element
+        // similarly minHeap for largest element
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+        for(int e : arr){
+            maxHeap.offer(e);
+            if(maxHeap.size() > k ){
+                maxHeap.poll();
+            }
+        }
+
+        if(maxHeap.peek() != null)
+            res = maxHeap.peek();
+        return res;
     }
 
 }
