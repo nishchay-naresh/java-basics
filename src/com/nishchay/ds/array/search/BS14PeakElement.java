@@ -1,7 +1,7 @@
 package com.nishchay.ds.array.search;
 
 /*
- *============== Find a peak element an Array ====================
+ *============== Find a peak element of an Array ====================
  *
  * Given an array of integers(no-sorted). Find a peak element in it.
  * An array element is a peak if it is NOT smaller than its neighbours.
