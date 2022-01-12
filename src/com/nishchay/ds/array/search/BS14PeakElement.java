@@ -3,8 +3,7 @@ package com.nishchay.ds.array.search;
 /*
  *============== Find a peak element an Array ====================
  *
- *
- * Given an array of integers. Find a peak element in it.
+ * Given an array of integers(no-sorted). Find a peak element in it.
  * An array element is a peak if it is NOT smaller than its neighbours.
  * For corner elements, we need to consider only one neighbour.
  *
@@ -91,7 +90,7 @@ public class BS14PeakElement {
      * 		}
      *
      * */
-    static int findPeak_simple(int[] array) {
+    private static int findPeak_simple(int[] array) {
 
         int size = array.length;
 

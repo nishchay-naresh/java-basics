@@ -73,6 +73,16 @@ public class BS15CheckBitonic {
 
     }
 
+    /*
+     *  ======= CheckBitonic logic =======
+     *
+     * iterate thought all the element of array
+     *  - Check for increasing sequence
+     *       return true - if array got over
+     *  - Check for decreasing sequence
+     *       return false -  if array id not over yet
+     *       return true - if array got over
+     * */
     private static boolean isBitonic(int[] arr) {
 
         int n = arr.length;

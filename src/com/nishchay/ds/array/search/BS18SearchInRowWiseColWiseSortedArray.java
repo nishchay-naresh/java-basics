@@ -36,17 +36,17 @@ public class BS18SearchInRowWiseColWiseSortedArray {
     public static void main(String[] args) {
 
         int[][] matrix = {
-                { 10, 20, 30, 40 },
-                { 15, 25, 35, 45 },
-                { 27, 29, 37, 48 },
-                { 32, 33, 39, 50 }
+                {10, 20, 30, 40},
+                {15, 25, 35, 45},
+                {27, 29, 37, 48},
+                {32, 33, 39, 50}
         };
 
         int key = 29;
 
         int[] result = searchInSortedMatrix(matrix, key);
 
-        if(result[0] != -1 && result[1] != -1) {
+        if (result[0] != -1 && result[1] != -1) {
             System.out.printf("%d is found at (%d, %d)%n", key, result[0], result[1]);
         } else {
             System.out.printf("Element not found");
@@ -56,13 +56,27 @@ public class BS18SearchInRowWiseColWiseSortedArray {
 
         result = searchInSortedMatrix(matrix, key);
 
-        if(result[0] != -1 && result[1] != -1) {
+        if (result[0] != -1 && result[1] != -1) {
             System.out.printf("%d is found at (%d, %d)%n", key, result[0], result[1]);
         } else {
             System.out.printf("Element not found");
         }
     }
 
+    /*
+     * we starting from right op corner -> and travelling towards left bottom corner
+     * we always finding the element in a shortest path manner
+     *
+     *  We start from the upper right corner of the matrix and compare its value with the key.
+     *  If matrix[i][j] ==  key
+     *      return (i,j)
+     *  If matrix[i][j] >  key
+     *      we move one position to the left.
+     *  If matrix[i][j] <  key
+     *      we move one position down.
+     *
+     *  Runtime Complexity : O(m+n) where ‘m’ is number of rows and ‘n’ is number of columns.
+     * */
     private static int[] searchInSortedMatrix(int[][] matrix, int key) {
 
         if (matrix.length == 0) {

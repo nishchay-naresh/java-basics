@@ -93,14 +93,14 @@ public class BS7KeyInRotatedArray {
         int[] right = Arrays.copyOfRange(arr,pivot,arr.length); // copying pivot to length, excluding length
 
         int firstPartKey = ArrayUtils.binarySearchIterative(left, key);
-        int secondPartKey = ArrayUtils.binarySearchIterative(right, key);
         if(-1 != firstPartKey){
             return firstPartKey;
-        }else if(-1 != secondPartKey){
+        }
+        int secondPartKey = ArrayUtils.binarySearchIterative(right, key);
+        if(-1 != secondPartKey){
             return pivot+secondPartKey;
         }
         return -1;
     }
-
 
 }

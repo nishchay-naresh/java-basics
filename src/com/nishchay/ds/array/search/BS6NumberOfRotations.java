@@ -6,8 +6,6 @@ package com.nishchay.ds.array.search;
  * Consider an array of distinct numbers sorted in increasing order.
  * The array has been rotated (clockwise) k number of times. Given such an array, find the value of k.
  *
- *
- *
  * Examples - 1
  *		Input : arr[] = {15, 18, 2, 3, 6, 12}
  *		Output: 2
@@ -39,11 +37,10 @@ public class BS6NumberOfRotations {
         arr = new int[]{7, 9, 11, 12, 15};
         System.out.printf("Rotation Count = %d%n", findPivotIndex(arr)); // 0
 
-
     }
 
 
-    /*
+    /* ====> # of times array is been rotated = index of the smallest element
      *
      *	Input: a = [4, 6, 8, 10, 0, 1, 2]
      *	Output: 4
@@ -53,7 +50,7 @@ public class BS6NumberOfRotations {
      *	-------
      *	Apply BS logic to get the smallest element in array
      *		1. index return logic
-     *			already sorted - left
+     *          if array is already sorted (no rotations) - 0
      *			pivot element index
      *
      *	    2. left / right movement logic
@@ -96,7 +93,7 @@ public class BS6NumberOfRotations {
      *			if (arr[mid] >= arr[left])
      *	                left = mid + 1;
      *
-     * time complexity = O(n)
+     * time complexity = O(log n)
      * space complexity = O(1)
      * */
     static int findPivotIndex(int[] arr) {
@@ -123,18 +120,15 @@ public class BS6NumberOfRotations {
             if (arr[mid] <= arr[next] && arr[mid] <= arr[prev]) {
                 return mid;
             }
-
             // right is sorted - go left half
             else if (arr[mid] <= arr[right]) {
                 right = mid - 1;
             }
-
             // left is sorted - go right half
             else if (arr[mid] >= arr[left]) {
                 left = mid + 1;
             }
         }
-
         return 0;
     }
 

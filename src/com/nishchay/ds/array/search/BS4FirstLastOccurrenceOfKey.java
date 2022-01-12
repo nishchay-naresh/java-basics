@@ -168,7 +168,7 @@ public class BS4FirstLastOccurrenceOfKey {
      *  condition to get first occurrence
      *  if (arr[mid] == key){
      *       result = mid;
-     *       right = mid - 1; // moving left for the fist occurrence
+     *       right = mid - 1; // moving left for the first occurrence
      *  }
      *
      *  condition to get last occurrence
@@ -191,10 +191,10 @@ public class BS4FirstLastOccurrenceOfKey {
         while (left <= right) {
             mid = (left + right) / 2;
 
-            if (key == arr[mid]) {
+            if (arr[mid] == key) {
                 result = mid;
                 right = mid - 1; // moving left for the fist occurrence
-            } else if (key < arr[mid])
+            } else if (arr[mid] > key)
                 right = mid - 1; // go left
             else
                 left = mid + 1; // go right
@@ -212,10 +212,10 @@ public class BS4FirstLastOccurrenceOfKey {
         while (left <= right) {
             mid = (left + right) / 2;
 
-            if (key == arr[mid]) {
+            if (arr[mid] == key) {
                 result = mid;
                 left = mid + 1; // moving right for the last occurrence
-            } else if (key < arr[mid])
+            } else if (arr[mid] > key)
                 right = mid - 1; // go left
             else
                 left = mid + 1; // go right

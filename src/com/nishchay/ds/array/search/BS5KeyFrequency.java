@@ -4,7 +4,7 @@ package com.nishchay.ds.array.search;
  *============== Count number of occurrences (or frequency) in a sorted array ====================
  *
  * Given a sorted array arr[] and a number key.
- * write a function that counts the occurrences of x in arr[]. Expected time complexity is O(Logn)
+ * write a function that counts the occurrences of key in arr[]. Expected time complexity is O(log n)
  *
  *
  * Examples - 1
@@ -128,7 +128,7 @@ public class BS5KeyFrequency {
      *	2) Use Binary search to get index of the last occurrence of key -  lastIndex
      *	3) Return (lastIndex - startIndex + 1);
      *
-     * Time Complexity: O(Logn)
+     * Time Complexity: O(log n)
      * Programming Paradigm: Divide & Conquer
      * */
     private static int countOccurrences(int[] arr, int key) {

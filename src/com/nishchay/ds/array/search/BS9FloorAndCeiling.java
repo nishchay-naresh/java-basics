@@ -3,6 +3,11 @@ package com.nishchay.ds.array.search;
 /*
  *================= Floor & Ceiling in a Sorted Array ====================
  *
+ *	floor of x in array =  	largest smaller number
+ *							largest element in array smaller than or equal to x
+ *
+ *	ceil of x in array  =	smallest greater number
+ *							smallest element in array greater than or equal to x.
  *
  *============== Floor in a Sorted Array ====================
  * Given a sorted array and a value key, the floor of key is the largest element in array smaller than or equal to key.
@@ -197,6 +202,5 @@ public class BS9FloorAndCeiling {
 
         return ceil;
     }
-
 
 }

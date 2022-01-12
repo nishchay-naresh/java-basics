@@ -125,7 +125,7 @@ public class BS16BitonicArrayMax {
             } else if (mid == 0) {
                 return arr[0] > arr[1] ? 0 : 1;
             } else if (mid == size - 1) {
-                return arr[size - 1] > arr[size - 2] ? size - 1 : size - 1;
+                return arr[size - 1] > arr[size - 2] ? size - 1 : size - 2;
             }
         }
         return -1;
