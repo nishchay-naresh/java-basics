@@ -49,7 +49,7 @@ public class BS18SearchInRowWiseColWiseSortedArray {
         if (result[0] != -1 && result[1] != -1) {
             System.out.printf("%d is found at (%d, %d)%n", key, result[0], result[1]);
         } else {
-            System.out.printf("Element not found");
+            System.out.print("Element not found");
         }
 
         key = 100;
@@ -59,7 +59,7 @@ public class BS18SearchInRowWiseColWiseSortedArray {
         if (result[0] != -1 && result[1] != -1) {
             System.out.printf("%d is found at (%d, %d)%n", key, result[0], result[1]);
         } else {
-            System.out.printf("Element not found");
+            System.out.print("Element not found");
         }
     }
 
