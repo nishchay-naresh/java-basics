@@ -70,7 +70,7 @@ public class HashMapSortOnValue {
      *  Sort an integer array based on its frequency descending order, if frequency is same go for no again in descending order
      *	integer[] arr = {1,3,5,7,2,1,5,3,3};
      *	o/p -  3,3,3,5,5,1,1,7,2
-     *  N + N LogN + N= N LogN
+     *  N + N LogN + N = N LogN
      * */
     private static void sortIntArray1() {
 

@@ -10,10 +10,10 @@ package com.nishchay.ds.matrix;
  *
  *		Input: 4
  *
- *		1 2 3 4
- *		4 3 2 1
- *		7 8 9 6
- *		6 5 4 3
+ *		1  2  3  4
+ *		4  3  2  1
+ *		7  8  9  6
+ *		6  5  4  3
  *		Output:
  *		Principal Diagonal: 1, 3, 9, 3
  *		Secondary Diagonal: 4, 2, 8, 6
@@ -51,7 +51,7 @@ public class DiagonalElement {
      * Condition for Principal Diagonal: row == column
      *
      * The secondary diagonal is formed by the elements A03, A12, A21, A30.
-     * Condition for Secondary Diagonal:  row + col = numberOfRows -1
+     * Condition for Secondary Diagonal:  row + col = numberOfRows - 1, ie => row + col + 1 = numberOfRows
      *
      * */
     // Function to print the Principal Diagonal
