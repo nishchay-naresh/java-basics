@@ -6,12 +6,20 @@ class SinglyLinkedList {
 
     public static void main(String[] args) {
 
+//        createPrintListEx();
+//        printMiddleElementEx();
+        reverseListEx();
 
-        printMiddleElementDemo();
     }
 
 
-    private static void printMiddleElementDemo() {
+    private static void createPrintListEx() {
+        Node head = createList();
+        printList(head);
+    }
+
+
+    private static void printMiddleElementEx() {
         Node head = createList();
 
         System.out.println("Link List Content :");
@@ -20,6 +28,14 @@ class SinglyLinkedList {
         printMiddleElement(head);
     }
 
+    private static void reverseListEx() {
+        Node head = createList();
+        System.out.print("Original list = ");
+        printList(head);
+        head = reverse(head);
+        System.out.print("Reversed list = ");
+        printList(head);
+    }
 
     // creating a singly linked list (10-50)
     private static Node createList() {
