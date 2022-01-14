@@ -1,5 +1,9 @@
 package com.nishchay.ds.recursion;
 
+/*
+*   Write recursive function to reverse string
+*
+ * */
 public class StringReverseRecursion {
 
     public static void main(String[] args) {

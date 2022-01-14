@@ -4,7 +4,10 @@ package com.nishchay.ds.string.freq;
 * https://www.baeldung.com/java-string-contains-all-letters
 * Check If a String Contains All The Letters of The Alphabet with Java
 *   input - “Farmer jack realized that big yellow quilts were expensive.”
-*   output - true Else false
+*   output - true / false
+*
+*   input - The quick brown fox jumped over the lazy dog.
+*   output -
 *
 * */
 public class EnglishAlphabetLetters {
@@ -16,8 +19,11 @@ public class EnglishAlphabetLetters {
 
 
         String string="The quick brown fox jumps over the lazy dog";
-//        String string = "qwertyuioplkjhgfdsazxcvbnm";
         System.out.println(checkStringForAllLetterUsingStream(string));
+
+        string="java is a programming language";
+        System.out.println(checkStringForAllLetterUsingStream(string));
+
     }
 
     // Imperative Algorithm
