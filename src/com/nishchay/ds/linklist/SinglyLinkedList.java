@@ -8,14 +8,14 @@ class SinglyLinkedList {
 
     public static void main(String[] args) {
 
-//        createPrintListEx();
-//        printMiddleElementEx();
-//        printFromBackEx();
-//        printFrontAndBack();
-//        searchNodeEx();
+        createPrintListEx();
+        printMiddleElementEx();
+        printFromBackEx();
+        printFrontAndBack();
+        searchNodeEx();
         nthFromLastNodeEx();
-//        reverseListEx();
-//        isLoopExistsEx();
+        reverseListEx();
+        isLoopExistsEx();
 
     }
 
@@ -128,6 +128,7 @@ class SinglyLinkedList {
 
         System.out.println("-----------------------------------");
 
+        // created alink list with loop
         head = new Node(10);
         head.next = new Node(20);
         head.next.next = new Node(30);
@@ -165,7 +166,7 @@ class SinglyLinkedList {
     }
 
 
-    /* Function to print middle of linked list */
+    // Function to print middle of linked list
     private static void printMiddleElement(Node head) {
         Node slowPointer = head;
         Node fastPointer = head;
@@ -243,7 +244,7 @@ class SinglyLinkedList {
         return -1; // not found
     }
 
-    // method to get nth node from the last
+    // method to get nth node from the last,  return node else null
     private static Node nthFromLastNode(Node head, int n) {
         if (null == head || n < 1)
             return null;
@@ -266,7 +267,7 @@ class SinglyLinkedList {
         return secondPtr;
     }
 
-    /* Function to reverse the linked list */
+    // Function to reverse the linked list
     public static Node reverse(Node head) {
         Node prev = null;
         Node current = head;
@@ -291,7 +292,6 @@ class SinglyLinkedList {
      * */
     private static boolean isLoopExists(Node head) {
         Node slowPtr = head, fastPtr = head;
-        int flag = 0;
         while (slowPtr != null && fastPtr != null && fastPtr.next != null) {
             slowPtr = slowPtr.next;
             fastPtr = fastPtr.next.next;
