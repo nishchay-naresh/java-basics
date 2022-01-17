@@ -14,12 +14,14 @@ public class HashSetDemo {
     private static void hashSetMethodsEx() {
 
         Set<Integer> hashSet = new HashSet<>();
-
+        int x = 2;
         hashSet.add(1);
         System.out.println("add(uniqueValue) - " + hashSet.add(2)); // true
-        System.out.println("add(duplicatesValue) - " + hashSet.add(2)); // false
+        System.out.println("add(duplicatesValue) - " + hashSet.add(x)); // false
+
         hashSet.add(3);
-        hashSet.add(3);
+        x = 3;
+        hashSet.add(x);
         System.out.println("size - " + hashSet.size()); // 3
 
         hashSet.clear();
@@ -27,15 +29,16 @@ public class HashSetDemo {
 
         //  1,2,2,3,3,4,4,5,5,6 => 1,2,3,4,5,6
         int[] arr = new int[]{1, 2, 2, 3, 3, 4, 4, 5, 5, 6};
-        for (int x : arr) {
-            hashSet.add(x);
+        for (int e : arr) {
+            hashSet.add(e);
         }
 
         System.out.print("hashSet - " + hashSet);
         // hashSet.forEach(System.out::print);
     }
 
-    public static void removeDuplicateFromListPreserveOrder() {
+
+    private static void removeDuplicateFromListPreserveOrder() {
         // creating ArrayList with duplicate elements
         List<Integer> primes = new ArrayList<>();
 
@@ -62,3 +65,13 @@ public class HashSetDemo {
         System.out.println("list of primes without duplicates : " + primes);
     }
 }
+
+/*
+ * O/P =>
+ * add(uniqueValue) - true
+ * add(duplicatesValue) - false
+ * size - 3
+ * size - 0
+ * hashSet - [1, 2, 3, 4, 5, 6]list of prime numbers : [2, 3, 5, 7, 7, 11]
+ * list of primes without duplicates : [2, 3, 5, 7, 11]
+ * */
