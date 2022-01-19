@@ -1,6 +1,5 @@
 package com.nishchay.ds.bit;
 
-
 /*
  *	Count set bits in an integer
  *
@@ -16,6 +15,7 @@ package com.nishchay.ds.bit;
  *		Output : 3
  *		Binary representation of 13 is 1101 and has 3 set bits
  *
+ * https://www.geeksforgeeks.org/count-set-bits-in-an-integer/
 * */
 public class CountSetBitsInNumber {
 
@@ -28,16 +28,14 @@ public class CountSetBitsInNumber {
 
     }
 
-
-
-    /* Function to get no of set bits in binary representuhation of positive integer n */
+    /* Function to get no of set bits in binary representation of positive integer n */
     private static int countSetBits(int n) {
         int count = 0;
-        int currBit = 0;
+        int currBit;
         while (n > 0) {
             currBit = n & 1;
             count = currBit + count;
-            n = n >> 1;
+            n = n >> 1; // divide by 2
 
         }
         return count;
