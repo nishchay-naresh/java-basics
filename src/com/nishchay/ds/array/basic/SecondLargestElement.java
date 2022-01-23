@@ -12,25 +12,31 @@ package com.nishchay.ds.array.basic;
  *	Output: The second largest does not exist.
  *
  * */
-public class SecondLargestNoArray {
+public class SecondLargestElement {
 
     public static void main(String[] args) {
 
-//        int[] arr = {12, 35, 1, 10, 34, 1};
-        int[] arr = {10, 10, 10};
-        print2largest(arr);
+        int[] arr;
+
+        arr = new int[]{12, 35, 1, 10, 34, 1};
+        System.out.println("Second largest element = " + get2ndLargest(arr));
+
+        arr = new int[]{10, 5, 10};
+        System.out.println("Second largest element = " + get2ndLargest(arr));
+
+        arr = new int[]{10, 10, 10};
+        System.out.println("Second largest element = " + get2ndLargest(arr));
 
     }
 
-    public static void print2largest(int[] arr) {
+    private static int get2ndLargest(int[] arr) {
 
         int length = arr.length;
         int first, second;
 
-        /* There should be atleast two elements */
         if (length < 2) {
-            System.out.print(" Invalid Input ");
-            return;
+            System.out.println("Invalid Input ");
+            return -1;
         }
 
         first = second = Integer.MIN_VALUE;
@@ -45,11 +51,11 @@ public class SecondLargestNoArray {
                 second = arr[i];
         }
 
-        if (second == Integer.MIN_VALUE)
-            System.out.print("There is no second largest"
-                    + " element\n");
-        else
-            System.out.print("The second largest element"
-                    + " is " + second);
+        if (second == Integer.MIN_VALUE){
+            System.out.println("There is no second largest element");
+            return -1;
+        }
+
+        return second;
     }
 }
