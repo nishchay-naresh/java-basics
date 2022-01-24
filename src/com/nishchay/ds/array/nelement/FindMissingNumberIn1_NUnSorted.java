@@ -33,6 +33,7 @@ class FindMissingNumberIn1_NUnSorted {
     /*
      * Method 1 - Hashing / freq count
      * Function to find missing number -  by first having the sum of First N Numbers
+     *
      * Time Complexity: O(n)
      * Space Complexity: O(n)
      * */
