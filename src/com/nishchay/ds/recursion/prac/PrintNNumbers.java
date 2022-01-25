@@ -1,39 +1,46 @@
 package com.nishchay.ds.recursion.prac;
 
+/*
+*  Print 1,2,3,4…10 (no loop, no array) using recursion
+* */
 public class PrintNNumbers {
 
     public static void main(String[] args) {
-        int n = 8;
 
-        System.out.println("\n ------------printing  1 to n-------------");
-        printN(n);
+        int n = 10;
+        System.out.println("\n------------printing  1 to n-------------");
+        printNFrom1(n);
         System.out.println("\n------------printing  n to 1-------------");
-        printN_rev(n);
+        printNFromN(n);
     }
 
     /*
      * recursive solution
      * printing 1 to n
+     *
+     *  10 -> 9 -> 8->......1 first calling all recursive call, then while returning printing it
+     *  print(1)-> print(2)-> print(3)->......10
      * */
-    private static void printN(int n) {
-        if (n == 1) {
-            System.out.print(n + " ");
+    private static void printNFrom1(int n) {
+        if (n == 0) {
             return;
         }
-        printN(n - 1);
+        printNFrom1(n - 1);
         System.out.print(n + " ");
     }
 
     /*
      * recursive solution
      * printing  n to 1
+     * 1 -> 2 -> 3 ....10
+     * 10 print(10)-> 9 print(9)-> 8 print(8)->......1
      * */
-    private static void printN_rev(int n) {
-        if (n == 1) {
-            System.out.print(n + " ");
+    private static void printNFromN(int n) {
+        if (n == 0) {
             return;
         }
         System.out.print(n + " ");
-        printN_rev(n - 1);
+        printNFromN(n - 1);
     }
+
 }
