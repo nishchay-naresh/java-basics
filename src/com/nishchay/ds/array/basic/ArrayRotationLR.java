@@ -2,35 +2,71 @@ package com.nishchay.ds.array.basic;
 
 import java.util.Arrays;
 
+
 /*
- *   arr     = {10, 20, 30, 40, 50}
+ *   arr     = {10, 20, 30, 40, 50}   <-----
  *   Left    = {20, 30, 40, 50, 10}
+ *   arr     = {10, 20, 30, 40, 50}   ----->
  *   Right   = {50, 10, 20, 30, 40}
+ *
+ * -------------------------------
+ * Given an array, rotate the array to the right by k steps.
+ * arr : [1, 2, 3, 4, 5, 6, 7, 8], k=3
+ * ans:  [6, 7, 8, 1, 2, 3, 4, 5]
+ *
  * */
 public class ArrayRotationLR {
 
     public static void main(String[] args) {
 
-//        int[] arr = {3, 6, 1, 8, 4, 2};
-        int[] arr = {10, 20, 30, 40, 50};
+        arrayLRotateEx();
+        System.out.println("----------------------------------------------------------");
+        arrayRRotateEx();
+        System.out.println("----------------------------------------------------------");
+        arrayRotateRKTimesEx();
+    }
 
+
+    private static void arrayLRotateEx() {
+
+        int[] arr;
+
+        arr = new int[]{10, 20, 30, 40, 50};
+
+        System.out.println("          Original array   = " + Arrays.toString(arr));
+        rotateLeft(arr);
+        System.out.println("Array after left rotation  = " + Arrays.toString(arr));
+
+        arr = new int[]{3, 6, 1, 8, 4, 2};
         System.out.println("           Original array  = " + Arrays.toString(arr));
-        rotateArrayL(arr);
-        System.out.println("Array after right rotation = " + Arrays.toString(arr));
-        rotateArrayR(arr);
+        rotateLeft(arr);
+        System.out.println("Array after left rotation  = " + Arrays.toString(arr));
+    }
+
+    private static void arrayRRotateEx() {
+        int[] arr;
+
+        arr = new int[]{10, 20, 30, 40, 50};
+        System.out.println("          Original array   = " + Arrays.toString(arr));
+        rotateRight(arr);
         System.out.println("Array after right rotation = " + Arrays.toString(arr));
 
+        arr = new int[]{3, 6, 1, 8, 4, 2};
+        System.out.println("           Original array  = " + Arrays.toString(arr));
+        rotateRight(arr);
+        System.out.println("Array after right rotation = " + Arrays.toString(arr));
     }
 
     /*
      *   arr     = {10, 20, 30, 40, 50}
      *   Left    = {20, 30, 40, 50, 10}
      * */
-    private static void rotateArrayL(int[] arr) {
+    private static void rotateLeft(int[] arr) {
         int firstElement = arr[0];
 
-        for (int i = 1; i < arr.length; i++) {
-            arr[i - 1] = arr[i] ;
+        // move forward ward - left to right
+        for (int i = 0; i < arr.length-1; i++) {
+            arr[i] = arr[i+1];
         }
         arr[arr.length - 1] = firstElement;
     }
@@ -39,14 +75,29 @@ public class ArrayRotationLR {
      *    arr     = {10, 20, 30, 40, 50}
      *   Right   = {50, 10, 20, 30, 40}
      * */
-    private static void rotateArrayR(int[] arr) {
+    private static void rotateRight(int[] arr) {
 
         int lastElement = arr[arr.length - 1];
 
-        for (int i = 1; i < arr.length; i++) {
+        // move back ward - right to left
+        for (int i = arr.length-1 ; i > 0; i--) {
             arr[i] = arr[i - 1];
         }
         arr[0] = lastElement;
+    }
+
+    /*
+     * arr : [1, 2, 3, 4, 5, 6, 7, 8], k=3
+     * ans:  [6, 7, 8, 1, 2, 3, 4, 5]
+     * */
+    private static void arrayRotateRKTimesEx() {
+        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
+        int k = 3;
+        System.out.println("       Original array  = " + Arrays.toString(arr));
+        for (int i = 1; i <= k; i++) {
+            rotateRight(arr);
+        }
+        System.out.printf("Array %d right rotation = %s", k, Arrays.toString(arr)); //[6, 7, 8, 1, 2, 3, 4, 5]
     }
 
 }
