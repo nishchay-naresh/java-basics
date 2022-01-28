@@ -8,14 +8,15 @@ class SinglyLinkedList {
 
     public static void main(String[] args) {
 
-        createPrintListEx();
+/*        createPrintListEx();
         printMiddleElementEx();
         printFromBackEx();
-        printFrontAndBack();
-        searchNodeEx();
+        printFrontAndBackEx();*/
+        isPalindromeEx();
+/*        searchNodeEx();
         nthFromLastNodeEx();
         reverseListEx();
-        isLoopExistsEx();
+        isLoopExistsEx();*/
 
     }
 
@@ -45,7 +46,7 @@ class SinglyLinkedList {
     }
 
 
-    private static void printFrontAndBack() {
+    private static void printFrontAndBackEx() {
         Node head = createList();
         System.out.println("Original list :");
         printList(head);
@@ -66,6 +67,36 @@ class SinglyLinkedList {
 
         System.out.println("Front & Back traversal :");
         printFrontAndBack(head);
+    }
+
+
+    private static void isPalindromeEx() {
+        System.out.println("\n-----------------------------------");
+
+        Node head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(30);
+        head.next.next.next = new Node(30);
+        head.next.next.next.next = new Node(20);
+        head.next.next.next.next.next = new Node(10);
+//        head -> 10->20->30->30->20->10 , even length
+        System.out.println("Original list :");
+        printList(head);
+
+        System.out.println("Current list is palindrome - " + isPalindrome(head));
+
+        System.out.println("\n-----------------------------------");
+
+        head = new Node(10);
+        head.next = new Node(20);
+        head.next.next = new Node(50);
+        head.next.next.next = new Node(20);
+        head.next.next.next.next = new Node(10);
+//        head -> 10->20->50->20->10 , odd length
+        System.out.println("Original list :");
+        printList(head);
+
+        System.out.println("Current list is palindrome - " + isPalindrome(head));
     }
 
     private static void searchNodeEx() {
@@ -128,7 +159,7 @@ class SinglyLinkedList {
 
         System.out.println("-----------------------------------");
 
-        // created alink list with loop
+        // created a link list with loop
         head = new Node(10);
         head.next = new Node(20);
         head.next.next = new Node(30);
@@ -226,6 +257,29 @@ class SinglyLinkedList {
 
     }
 
+    // Function to check if linked list is palindrome
+    private static boolean isPalindrome(Node head) {
+        Node start, p, end;
+        start = head;
+
+        // get end node
+        for (p = head; p.next != null; p = p.next) ;
+        end = p;
+
+        while (start != end && start.next != end) {
+
+            if (start.data != end.data) {
+                return false;
+            }
+            // move start forward
+            start = start.next;
+
+            // move end backward
+            for (p = head; p.next != end; p = p.next) ;
+            end = p;
+        }
+        return true;
+    }
 
     // search a key in a singly linked list, return node position else -1
     private static int searchNode(Node head, int key) {
@@ -288,9 +342,16 @@ class SinglyLinkedList {
      *  slowPtr &  fastPtr concept
      *
      * Time complexity: O(n).
-     * Auxiliary Space:O(1).
+     * Auxiliary Space: O(1).
+     *
+     * https://www.codingninjas.com/blog/2021/09/24/detect-a-loop-in-a-linked-list/?amp=1
      * */
     private static boolean isLoopExists(Node head) {
+
+        if (head == null || head.next == null) {
+            return false;
+        }
+
         Node slowPtr = head, fastPtr = head;
         while (slowPtr != null && fastPtr != null && fastPtr.next != null) {
             slowPtr = slowPtr.next;
