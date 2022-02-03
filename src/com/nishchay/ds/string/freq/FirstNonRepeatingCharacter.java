@@ -4,13 +4,18 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * ============Find first unique character in a String=====================
+ *
  * char findFirst(String input)
  * Finds the first character that does not repeat anywhere in the input string
+ *
  * If all characters are repeated, return 0
  * Given "apple", the answer is "a"
  * Given "racecars", the answer is "e"
  * Given "ababdc", the answer is "d"
  * Given "simplest", the answer is "i"
+ *
+ *
  **/
 public class FirstNonRepeatingCharacter {
 
@@ -18,7 +23,7 @@ public class FirstNonRepeatingCharacter {
 
         doTestsPass();
 
-        System.out.println(" findFirstStream(\"java perl rep \") - " +  findFirstStream("java perl rep"));
+        System.out.println("findFirstStream(\"java perl rvj\") - " +  findFirstStream("ava perl rvj"));
 
     }
 
@@ -63,8 +68,8 @@ public class FirstNonRepeatingCharacter {
                 break;
             }
         }
-
-//        System.out.println("input: " + input + "\t firstChar : " + firstChar);
+        // if gets the freMap has HashMap rather LinkedHashMap
+        // then need to traverse the string from start, check for tis character for 1 frequency
         return firstChar;
     }
 
@@ -74,7 +79,6 @@ public class FirstNonRepeatingCharacter {
 
         System.out.println("input = " + input);
         Map<Character, Long> freqMap = StringFrequencyUtility.getOrderedFrequencyMapStream(input);
-        System.out.println("freqMap = " + freqMap);
 
 
         Character result = freqMap
