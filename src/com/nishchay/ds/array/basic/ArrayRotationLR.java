@@ -19,10 +19,10 @@ public class ArrayRotationLR {
 
     public static void main(String[] args) {
 
-        arrayLRotateEx();
-        System.out.println("----------------------------------------------------------");
-        arrayRRotateEx();
-        System.out.println("----------------------------------------------------------");
+//        arrayLRotateEx();
+//        System.out.println("----------------------------------------------------------");
+//        arrayRRotateEx();
+//        System.out.println("----------------------------------------------------------");
         arrayRotateRKTimesEx();
     }
 
@@ -89,15 +89,26 @@ public class ArrayRotationLR {
     /*
      * arr : [1, 2, 3, 4, 5, 6, 7, 8], k=3
      * ans:  [6, 7, 8, 1, 2, 3, 4, 5]
+     *
+     *  A = [3, 8, 9, 7, 6] and K = 3,
+     * the function should return [9, 7, 6, 3, 8].
      * */
     private static void arrayRotateRKTimesEx() {
         int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
         int k = 3;
-        System.out.println("       Original array  = " + Arrays.toString(arr));
+        System.out.printf("       Original array  = %s%n", Arrays.toString(arr));
         for (int i = 1; i <= k; i++) {
             rotateRight(arr);
         }
-        System.out.printf("Array %d right rotation = %s", k, Arrays.toString(arr)); //[6, 7, 8, 1, 2, 3, 4, 5]
+        System.out.printf("Array %d right rotation = %s%n", k, Arrays.toString(arr)); //[6, 7, 8, 1, 2, 3, 4, 5]
+
+        arr = new int[]{3, 8, 9, 7, 6};
+        k = 3;
+        System.out.printf("       Original array  = %s%n", Arrays.toString(arr));
+        for (int i = 1; i <= k; i++) {
+            rotateRight(arr);
+        }
+        System.out.printf("Array %d right rotation = %s", k, Arrays.toString(arr)); //[9, 7, 6, 3, 8]
     }
 
 }
