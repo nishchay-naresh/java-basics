@@ -19,10 +19,10 @@ public class ArrayRotationLR {
 
     public static void main(String[] args) {
 
-//        arrayLRotateEx();
-//        System.out.println("----------------------------------------------------------");
-//        arrayRRotateEx();
-//        System.out.println("----------------------------------------------------------");
+        arrayLRotateEx();
+        System.out.println("----------------------------------------------------------");
+        arrayRRotateEx();
+        System.out.println("----------------------------------------------------------");
         arrayRotateRKTimesEx();
     }
 
