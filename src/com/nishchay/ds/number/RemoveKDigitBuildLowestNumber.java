@@ -1,4 +1,4 @@
-package com.nishchay.ds.fang;
+package com.nishchay.ds.number;
 
 import java.util.Stack;
 
