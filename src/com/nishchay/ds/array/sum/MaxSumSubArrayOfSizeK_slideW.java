@@ -28,7 +28,7 @@ package com.nishchay.ds.array.sum;
  * https://www.geeksforgeeks.org/find-maximum-minimum-sum-subarray-size-k/
  *
  * */
-public class MaxSumSubArrayOfSizeK {
+public class MaxSumSubArrayOfSizeK_slideW {
 
     public static void main(String[] args) {
         int[] arr = {1, 4, 2, 10, 23, 3, 1, 0, 20};
