@@ -19,11 +19,11 @@ import java.util.Scanner;
  *
  * */
 
-public class ReadInputFromConsole {
+public class HackerRankTest {
 
     public static void main(String[] args) throws IOException {
 
-//        usingBufferedReader();
+        usingBufferedReader();
         usingScanner();
 
         // not working with IDE
@@ -41,7 +41,8 @@ public class ReadInputFromConsole {
         String input = reader.readLine(); // java is a prog language
         System.out.println("input = " + input);
 
-        // To read other types, we use functions like Integer.parseInt(), Double.parseDouble(). To read multiple values, we use split().
+        // To read other types, we use functions like Integer.parseInt(), Double.parseDouble().
+        // To read multiple values, we use split().
     }
 
     /*
