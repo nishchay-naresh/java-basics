@@ -41,16 +41,16 @@ public class WordSplit {
 
     public static void main(String[] args) {
 
-        String[] input =  new String[] {"baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"};
+        String[] input = new String[]{"baseball", "a,all,b,ball,bas,base,cat,code,d,e,quit,z"};
         System.out.println("Output - " + findOnlyPair(input)); // base, ball
 
-        input =  new String[] {"abcgefd", "a,ab,abc,abcg,b,c,dog,e,efd,zzzz"};
+        input = new String[]{"abcgefd", "a,ab,abc,abcg,b,c,dog,e,efd,zzzz"};
         System.out.println("Output - " + findOnlyPair(input)); // abcg, efd
 
-        input =  new String[] {"hellocat", "apple, bat,cat,goodbye,hello,yellow,why"};
+        input = new String[]{"hellocat", "apple, bat,cat,goodbye,hello,yellow,why"};
         System.out.println("Output - " + findOnlyPair(input)); // hello, cat
 
-        input =  new String[] {"helloworld", "h,he,hell,hello,w,word,wild,mate,quit,z, friend"};
+        input = new String[]{"helloworld", "h,he,hell,hello,w,word,wild,mate,quit,z, friend"};
         System.out.println("Output - " + findOnlyPair(input)); // Not Possible
 
     }
@@ -58,7 +58,7 @@ public class WordSplit {
     /*
      * Time complexity - O(n)
      * Space complexity - O(n)
-    * */
+     * */
     private static String findOnlyPair(String[] strArr) {
 
         // First Element - wordToCompare
@@ -73,14 +73,13 @@ public class WordSplit {
         // Hold Answers
         String leftPart, rightPart;
         for (int i = 1; i < length; i++) {
-            leftPart = wordToCompare.substring(0,i);
-            rightPart = wordToCompare.substring(i,length);
-            if(dictionary.contains(leftPart) && dictionary.contains(rightPart)){
+            leftPart = wordToCompare.substring(0, i);
+            rightPart = wordToCompare.substring(i, length);
+            if (dictionary.contains(leftPart) && dictionary.contains(rightPart)) {
                 return leftPart + ", " + rightPart;
             }
         }
         return "Not Possible";
     }
-
 
 }
