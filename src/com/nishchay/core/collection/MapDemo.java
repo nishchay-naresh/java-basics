@@ -9,7 +9,7 @@ public class MapDemo {
     public static void main(String[] args) {
 
         hashMapNullPut();
-        System.out.println("--------------");
+        System.out.println("-----------------");
         hashMapStringPut();
     }
 
@@ -58,11 +58,11 @@ public class MapDemo {
         map.put(str1,10);
         map.put(str2,20);
         map.put(str2.intern(),30);
+        System.out.println("size - " + map.size());
 
         String str3 = new String("java");
         System.out.println(map.get(str3));
         System.out.println(map.get(str3.intern()));
-        System.out.println(map.size());
     }
 
 }
