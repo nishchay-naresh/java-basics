@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.sum;
+package com.nishchay.ds.stdalgo;
 
 /*
  *	=========== Find maximum Sum Contiguous Subarray ===========
@@ -25,7 +25,7 @@ package com.nishchay.ds.array.sum;
  * */
 
 
-public class MaxSumSubArray {
+public class KadaneAlgorithm {
 
 
     public static void main(String[] args) {
