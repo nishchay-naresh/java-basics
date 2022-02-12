@@ -2,6 +2,23 @@ package com.nishchay.ds.design.lru;
 
 import java.util.HashMap;
 
+
+
+/*
+* Supported operations :
+*   - Add       -> external
+*   - Lookup    -> external
+*   - Evict     -> internal
+*
+*  => for Add, Lookup => HashMap
+*  => for evict => doubly link list with head & tail pointer
+*
+*  Class level methods :
+*       Add     -   put()
+*       Lookup  -   get()
+*       Evict   -   addToHead(), deleteNode()
+*
+* */
 public class LRUCache<K, V> {
 
     static class Node<K, V> {
@@ -31,42 +48,6 @@ public class LRUCache<K, V> {
         this.cacheSize = capacity;
         map = new HashMap<>(cacheSize);
         head = tail = null;
-    }
-
-
-    /* This method will delete a node from doubly link list takes node as in input */
-    private void deleteNode(Node<K, V> deletingNode) {
-
-        // first node - from head
-        if(deletingNode.prev == null){
-            head = deletingNode.next;
-            deletingNode.next.prev = deletingNode.prev;
-        // last node - from tail
-        }else if(deletingNode.next == null){
-            tail = deletingNode.prev;
-            deletingNode.prev.next = deletingNode.next;
-        // deleting from middle
-        }else{
-            deletingNode.next.prev = deletingNode.prev;
-            deletingNode.prev.next = deletingNode.next;
-        }
-
-    }
-
-    // same method logic as above, hut above one is easy to understand
-    private void deleteNode1(Node<K, V> deletingNode) {
-        if (deletingNode.prev != null) {
-            deletingNode.prev.next = deletingNode.next;
-        } else {
-            head = deletingNode.next;
-        }
-
-        // last node - from tail
-        if (deletingNode.next != null) {
-            deletingNode.next.prev = deletingNode.prev;
-        } else {
-            tail = deletingNode.prev;
-        }
     }
 
     /*This method will make passed node as head*/
@@ -119,6 +100,43 @@ public class LRUCache<K, V> {
             deleteNode(tail);
         }
     }
+
+
+    /* This method will delete a node from doubly link list takes node as in input */
+    private void deleteNode(Node<K, V> deletingNode) {
+
+        // first node - from head
+        if(deletingNode.prev == null){
+            head = deletingNode.next;
+            deletingNode.next.prev = deletingNode.prev;
+        // last node - from tail
+        }else if(deletingNode.next == null){
+            tail = deletingNode.prev;
+            deletingNode.prev.next = deletingNode.next;
+        // deleting from middle
+        }else{
+            deletingNode.next.prev = deletingNode.prev;
+            deletingNode.prev.next = deletingNode.next;
+        }
+
+    }
+
+    // same method logic as above, hut above one is easy to understand
+    private void deleteNode1(Node<K, V> deletingNode) {
+        if (deletingNode.prev != null) {
+            deletingNode.prev.next = deletingNode.next;
+        } else {
+            head = deletingNode.next;
+        }
+
+        // last node - from tail
+        if (deletingNode.next != null) {
+            deletingNode.next.prev = deletingNode.prev;
+        } else {
+            tail = deletingNode.prev;
+        }
+    }
+
 
 
     @Override
