@@ -24,7 +24,7 @@ public class WordSrchInLine {
 
         String key = "test";
         System.out.printf("%s -> %s%n", key, returnContainingLine(lines, key));
-//        searchInLineHM(lines, key);
+        searchInLineHM(lines, key);
     }
 
     private static String returnContainingLine(List<String> lines, String key) {
@@ -36,4 +36,21 @@ public class WordSrchInLine {
         return null;
     }
 
+    private static void searchInLineHM(List<String> lines, String key) {
+
+        Map<String, Integer> dictionary = new HashMap<>();
+
+        Integer freq = 0;
+        for (String line : lines) {
+            for (String words : line.split(" ")) {
+                freq = dictionary.get(words);
+                freq = freq == null ? 0 : ++freq;
+                dictionary.put(words, freq);
+            }
+        }
+
+        if (dictionary.containsKey(key)) {
+            System.out.println("found");
+        }
+    }
 }
