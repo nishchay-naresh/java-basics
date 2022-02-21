@@ -3,6 +3,7 @@ package com.nishchay.ds.tree;
 public class Tree {
 
     /*
+     * TODO
      * Code to perform BST search
      *            2
      *        1       3
@@ -25,5 +26,16 @@ public class Tree {
 
         }
 */
+
+    // A utility function to search a given key in BST
+    public Node search(Node root, int key)    {
+        if (root==null || root.data==key)
+            return root;
+
+        if (root.data < key)
+            return search(root.right, key);
+
+        return search(root.left, key);
+    }
 
 }
