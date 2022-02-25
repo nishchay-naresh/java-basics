@@ -8,8 +8,22 @@ public class BinaryTree {
 
     public static void main(String[] args) {
 
-        checkIsBSTEx();
+//        checkIsBSTEx();
 
+        treeHeightEx();
+
+    }
+
+    private static void treeHeightEx() {
+
+        Node root;
+        root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        System.out.println("Height of tree is : " + getHeight(root));
     }
 
     private static void checkIsBSTEx(){
@@ -47,7 +61,19 @@ public class BinaryTree {
         return (isBST(root.left, min, root.data) && isBST(root.right, root.data, max));
     }
 
+    private static int getHeight(Node node) {
+        if (node == null)
+            return -1;
+        else {
+            int lDepth = getHeight(node.left);
+            int rDepth = getHeight(node.right);
 
+            if (lDepth > rDepth)
+                return (lDepth + 1);
+            else
+                return (rDepth + 1);
+        }
+    }
 
 
 }
