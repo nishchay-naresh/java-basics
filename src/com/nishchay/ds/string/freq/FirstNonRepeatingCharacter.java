@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * ============Find first unique character in a String=====================
+ * ============Find the first non-repeated character in a String=====================
  *
  * char findFirst(String input)
  * Finds the first character that does not repeat anywhere in the input string
