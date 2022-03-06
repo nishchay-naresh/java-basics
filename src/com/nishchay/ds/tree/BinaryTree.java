@@ -75,7 +75,7 @@ public class BinaryTree {
         }
     }
 
-    int getCountNode0(Node node) {
+    private int getCountNode0(Node node) {
         if (node == null)
             return 0;
         if (node.left == null && node.right == null)
@@ -83,5 +83,15 @@ public class BinaryTree {
         else
             return getCountNode0(node.left) + getCountNode0(node.right);
     }
+
+    private int getCountNode1(Node node) {
+        if (node == null)
+            return 0;
+        if (node.left == null || node.right == null)
+            return 1;
+        else
+            return getCountNode1(node.left) + getCountNode1(node.right);
+    }
+
 
 }
