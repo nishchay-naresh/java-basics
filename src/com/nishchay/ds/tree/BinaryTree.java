@@ -93,5 +93,13 @@ public class BinaryTree {
             return getCountNode1(node.left) + getCountNode1(node.right);
     }
 
+    private int getCountNode2(Node node) {
+        if (node == null)
+            return 0;
+        if (node.left != null && node.right != null)
+            return 1;
+        else
+            return getCountNode2(node.left) + getCountNode2(node.right);
+    }
 
 }
