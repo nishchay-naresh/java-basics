@@ -9,18 +9,18 @@ public class TerminalOperationDemo {
 
     public static void main(String[] args) {
 
-//        mthd4AnyMatchAllMatchNoMatch();
-//        mthd4Collect();
-//        mthd4Count();
-//        mthd4FindAnyFindFist();
-//        mthd4StreamForEach();
-//        mthd4MinMax();
-//        mthd4Reduce();
+        mthd4AnyMatchAllMatchNoMatch();
+        mthd4Collect();
+        mthd4Count();
+        mthd4FindAnyFindFist();
+        mthd4StreamForEach();
+        mthd4MinMax();
+        mthd4Reduce();
         mthd4Reduce1();
-//        streamToObjectArray();
-//        mthd4ConcatenateStreams();
+        streamToObjectArray();
+        mthd4ConcatenateStreams();
 
-//        mthd4PrimitiveArrayToStreamAndBack();
+        mthd4PrimitiveArrayToStreamAndBack();
 
     }
 
@@ -110,9 +110,21 @@ public class TerminalOperationDemo {
         // Applying reduce over IntStream
         OptionalInt optionalIntSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
         System.out.println("optionalIntSum = " + optionalIntSum);
-        // if you pass the initial value, it will give you the result instead of optional - here int
-        int intSum = Arrays.stream(new int[]{7, 5, 9, 2, 8, 1}).reduce(0, (a, b) -> a + b);
+        /*
+        * without initial (identity) value
+        * a = a + b
+        * b = iterate through each element of stream
+        * */
+        int intSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce(0, (a, b) -> a + b);
         System.out.println("intSum = " + intSum);
+        /*
+         * with initial (identity) value
+         * a = 0(first time) / a + b(rest of the time)
+         * b = iterate through each element of stream
+         * */
+
+        System.out.println(Stream.of("one", "two", "three", "four").reduce("CountDown : ", (a, b) -> a +", "+ b));
+
 
         intSum = IntStream.range(1, 11).sum();
         System.out.println("sum(1 to 10) = " + intSum);
@@ -157,8 +169,8 @@ public class TerminalOperationDemo {
         Integer maxValue = numbers.stream().reduce(0, (a, b) -> a > b ? a : b);
         System.out.println("maxValue = " + maxValue);
 
-        Optional<Integer> maxVAlueOptional = numbers.stream().reduce(Integer::max);
-        System.out.println("maxVAlueOptional = " + maxVAlueOptional.get());
+        Optional<Integer> maxValueOptional = numbers.stream().reduce(Integer::max);
+        System.out.println("maxValueOptional = " + maxValueOptional.get());
 
         List<String> animals = Arrays.asList("fox", "elephant", "lion", "tiger", "bear");
         // get the string with longest length
