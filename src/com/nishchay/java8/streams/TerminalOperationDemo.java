@@ -107,7 +107,7 @@ public class TerminalOperationDemo {
 
     private static void mthd4Reduce() {
 
-        // Applying reduce over IntStream
+        // Applying to reduce over IntStream
         OptionalInt optionalIntSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
         System.out.println("optionalIntSum = " + optionalIntSum);
         /*
@@ -129,19 +129,19 @@ public class TerminalOperationDemo {
         intSum = IntStream.range(1, 11).sum();
         System.out.println("sum(1 to 10) = " + intSum);
 
-        // Applying reduce over Stream of Integer
+        // Applying to reduce over Stream of Integer
         Optional<Integer> optionalSum = Stream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
         System.out.println("optionalSum = " + optionalSum);
         // if you pass the initial value, it will give you the result instead of optional - here Integer
         Integer integerSum = Stream.of(7, 5, 9, 2, 8, 1).reduce(0, (a, b) -> a + b);
         System.out.println("integerSum = " + integerSum);
 
-        // Applying reduce over Stream of String
+        // Applying to reduce over Stream of String
         Optional<String> reduced = Stream.of("one", "two", "three", "four", "five").
                 reduce((value, combinedValue) -> value + " + " + combinedValue);
         System.out.println("reduced value - " + reduced.get());
 
-        // Applying reduce over Stream of String -  to get char counts
+        // Applying to reduce over Stream of String -  to get char counts
         int charCount = Stream.of("one", "two", "three", "four", "five")
                 .map(String::length)
                 .reduce(0, (e, sum) -> e + sum);
