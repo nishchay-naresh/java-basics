@@ -15,8 +15,8 @@ public class TerminalOperationDemo {
         mthd4FindAnyFindFist();
         mthd4StreamForEach();
         mthd4MinMax();
-        mthd4Reduce();
-        mthd4Reduce1();
+        method4Reduce();
+        method4Reduce1();
         streamToObjectArray();
         mthd4ConcatenateStreams();
 
@@ -105,7 +105,7 @@ public class TerminalOperationDemo {
     }
 
 
-    private static void mthd4Reduce() {
+    private static void method4Reduce() {
 
         // Applying to reduce over IntStream
         OptionalInt optionalIntSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
@@ -154,7 +154,7 @@ public class TerminalOperationDemo {
 
     }
 
-    private static void mthd4Reduce1() {
+    private static void method4Reduce1() {
         List<Integer> numbers = Arrays.asList(3, 7, 2, 9, 6, 1, 5);
 
         int sum = numbers.stream().mapToInt(i -> i).sum();
