@@ -6,6 +6,7 @@ package com.nishchay.java8.lambda;
  *        - the value of 'this' reference will be the same as the value of this reference outside of lambda
  * anonymous inner class - overrides the 'this' reference value to new anonymous inner class (which will sth like MainClass$1)
  *
+ * https://stackoverflow.com/questions/24202236/
  * */
 public class ThisRefDemo1 {
 
