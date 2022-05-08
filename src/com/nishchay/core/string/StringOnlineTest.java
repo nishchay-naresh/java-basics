@@ -4,9 +4,9 @@ public class StringOnlineTest {
 
     public static void main(String[] args) {
 
-        stringsQuiz1();
-        stringsQuiz2();
-
+//        stringsQuiz1();
+//        stringsQuiz2();
+        replaceBraceInLogger();
     }
 
     private static void stringsQuiz1() {
@@ -53,6 +53,20 @@ public class StringOnlineTest {
 
         String blanks = "    ";
         System.out.println(blanks.isEmpty()); // false
+    }
+
+    private static void replaceBraceInLogger() {
+        // Initialising String
+        String str = "Welcome to geeksforgeeks";
+
+        System.out.println(str);
+        str = str.replace('e', '#');
+        System.out.println(str);
+
+        str = "cache{}Name";
+        System.out.println(str);
+        str = str.replace("{", "\\\\{");
+        System.out.println(str);
     }
 
 }
