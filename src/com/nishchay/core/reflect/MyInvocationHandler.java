@@ -14,9 +14,9 @@ class MyInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        System.out.println("Invoked method: " + method.getName());
+        System.out.println("Impl class " + method.getName() + " - before execution");
         method.invoke(obj, args);
-        System.out.println("intercepting method execution - after");
+        System.out.println("Impl class " + method.getName() + " - after execution");
 
         return null;
     }
