@@ -1,4 +1,4 @@
-package com.nishchay.ds.array.basic;
+package com.nishchay.ds.array.sort;
 
 import java.util.Arrays;
 
@@ -57,14 +57,11 @@ public class MoveZeros {
 
 
     private static void pushEndEx(int[] arr) {
-        System.out.println("Array after pushing zeros to end: ");
-        System.out.println("arr = " + Arrays.toString(arr));
-
+        System.out.println("                 Original Array : " + Arrays.toString(arr));
         pushZerosToEnd(arr);
+        System.out.println("Array after pushing zeros to end: " + Arrays.toString(arr));
+        System.out.println("----------------------------------------------------------");
 
-        System.out.println("Array after pushing zeros to end: ");
-        System.out.println("arr = " + Arrays.toString(arr));
-        System.out.println("---------------");
     }
 
     /*
@@ -96,14 +93,10 @@ public class MoveZeros {
     }
 
     private static void pushStartEx(int[] arr) {
-        System.out.println("Array after pushing zeros to end: ");
-        System.out.println("arr = " + Arrays.toString(arr));
-
+        System.out.println("                 Original Array : " + Arrays.toString(arr));
         pushZerosToStart(arr);
-
-        System.out.println("Array after pushing zeros to end: ");
-        System.out.println("arr = " + Arrays.toString(arr));
-        System.out.println("---------------");
+        System.out.println("Array after pushing zeros to end: " + Arrays.toString(arr));
+        System.out.println("---------------------------------------------------------");
     }
 
     /*
