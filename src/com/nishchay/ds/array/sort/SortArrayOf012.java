@@ -111,7 +111,7 @@ public class SortArrayOf012 {
      *  if array[mid] == 0,    swap(lo, mid); lo++; mid++;
      *  if array[mid] == 1,    do nothing simply mid++;;
      *  if array[mid] == 2,    swap(mid, high); high--;
-     *  Only one traversals of the array is needed.
+     *  Only one traversal of the array is needed.
      * */
     private static void sort012_partition(int[] nums) {
 
