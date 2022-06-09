@@ -23,6 +23,11 @@ import java.util.function.UnaryOperator;
  *	•	UnaryOperator is Child of Function : BinaryOperator<T> extends Function<T, T>
  *	•	BinaryOperator is Child of BiFunction : BinaryOperator<T> extends BiFunction<T,T,T>
  *
+ * =============================================Adv usage of UnaryOperator<T> ==================================================
+ * NOTE : Usage of UnaryOperator<T> for Enrichment or Delegation use-case
+ *
+ * Can be referred at -
+ * https://github.com/nnares/design-pattern/blob/main/src/com/nishchay/dp/structural/delegator/Launcher.java
  *
 * */
 public class OperatorEx {
@@ -30,6 +35,7 @@ public class OperatorEx {
     public static void main(String[] args) {
 
         unaryOperatorEx();
+        System.out.println("------------------------------");
         binaryOperatorEx();
 
     }
@@ -39,6 +45,9 @@ public class OperatorEx {
     private static void unaryOperatorEx() {
         UnaryOperator<String> stringUnaryOperator = e -> "Hello " + e;
         System.out.println(stringUnaryOperator.apply("World"));
+
+        UnaryOperator<String> f1 = String::toUpperCase;
+        System.out.println(f1.apply("hello"));
 
         IntUnaryOperator intUnaryOperator = e -> 10 + e;
         System.out.println("result - " + intUnaryOperator.applyAsInt(5));
