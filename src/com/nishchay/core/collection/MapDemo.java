@@ -8,11 +8,29 @@ public class MapDemo {
 
     public static void main(String[] args) {
 
-        hashMapNullPut();
-        System.out.println("-----------------");
-        hashMapStringPut();
+        hashMapPutEx();
+//        System.out.println("-----------------");
+//        hashMapNullPut();
+//        System.out.println("-----------------");
+//        hashMapStringPut();
     }
 
+    private static void hashMapPutEx() {
+
+        Map<String, Integer> hashMap = new HashMap<>();
+
+        // put as add
+        hashMap.put("one", 1);
+        hashMap.put("two", 2);
+        System.out.println("hashMap = " + hashMap);
+
+        // put as update
+        Integer old1 = hashMap.put("one", 100);
+        Integer old2 = hashMap.put("two", 200);
+        System.out.println("old1 = " + old1 + ", old2 = " + old2);
+        System.out.println("hashMap = " + hashMap);
+
+    }
 
     private static void hashMapNullPut() {
 
