@@ -1,5 +1,12 @@
 package com.nishchay.core.objectclazz;
 
+
+import java.io.Serializable;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.RandomAccess;
+
 /*
  *============== instanceof Operator ====================
  *
@@ -15,29 +22,33 @@ public class InstanceOfCheck {
     public static void main(String[] args) {
 
         /*
-        * Using the instanceof Operator When an Object Is null
+        * Using the instanceof Operator when object is null
         *
-        * If we use the instanceof operator on any object that is null, it returns false.
+        * If we use the instanceof operator on any reference variable which points to null, it returns false.
         * Also, no null check is needed when using an instanceof operator.
         * */
-        Parent ref = null;
-        System.out.println(ref instanceof Parent);
 
+        String str = null;
+        System.out.println("instanceof result for reference variable which points null - " + (str instanceof String));
+        Object ref = null;
+        System.out.println("instanceof result for reference variable which points null - " + (ref instanceof Object));
 
-        Parent p = new Parent();
-        Child c = new Child();
-        System.out.println("child instanceof Parent " + (c instanceof Parent)); // true
-        System.out.println("parent instanceof Child " + (p instanceof Child)); // false
+        str = new String("java");
+        ref = new Object();
+
+        System.out.println("    ref instanceof Self - " + (str instanceof String)); // true
+        System.out.println("child instanceof Parent - " + (str instanceof Object)); // true
+        System.out.println("    ref instanceof Self - " + (ref instanceof Object)); // true
+        System.out.println("parent instanceof Child - " + (ref instanceof String)); // false
+
+        System.out.println("---------ArrayList instanceof test of all of its parents-----------");
+        ArrayList<String> list = new ArrayList<>();
+        System.out.println("    ref instanceof Self - " + (list instanceof ArrayList));
+        System.out.println("child instanceof Parent - " + (list instanceof AbstractList));
+        System.out.println("child instanceof Parent - " + (list instanceof List));
+        System.out.println("child instanceof Parent - " + (list instanceof RandomAccess));
+        System.out.println("child instanceof Parent - " + (list instanceof Cloneable));
+        System.out.println("child instanceof Parent - " + (list instanceof Serializable));
+
     }
 }
-
-class Parent {
-}
-
-class Child extends Parent {
-}
-/*
-O/P =>
-    child instanceof Parent true
-    parent instanceof Child false
-* */
