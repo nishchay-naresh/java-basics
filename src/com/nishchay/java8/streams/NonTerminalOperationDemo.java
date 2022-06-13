@@ -19,25 +19,11 @@ public class NonTerminalOperationDemo {
 //        limitDemo();
 //        skipDemo();
 //        peekDemo();
-        noStartsWith();
+//        noStartsWith();
+        compareTwoStreams();
 
     }
 
-    /*
-    * int arr[] = { 2, 1, 15, 10, 25, 101, 35, 19 }; (Start with 1 ) print
-    * output :: 1, 15, 10, 101, 19
-    * Do we have any Method like startWith(1) in Java 1.8 -> No
-    *
-    * */
-    private static void noStartsWith() {
-
-        int[] intArray = {2, 1, 15, 10, 25, 101, 35, 19};
-
-        List<Integer> integerList = Arrays.stream(intArray).boxed().collect(Collectors.toList());
-
-        List<String> result = integerList.stream().map(e -> e.toString()).filter(e -> e.startsWith("1")).collect(Collectors.toList());
-        System.out.println("result = " + result);
-    }
 
     private static void createAndPrint(){
 
@@ -128,6 +114,47 @@ public class NonTerminalOperationDemo {
                 .collect(Collectors.toList());
 
         System.out.println("list = " + list);
+
+    }
+
+
+    /*
+     * int arr[] = { 2, 1, 15, 10, 25, 101, 35, 19 }; (Start with 1 ) print
+     * output :: 1, 15, 10, 101, 19
+     * Do we have any Method like startWith(1) in Java 1.8 -> No
+     *
+     * */
+    private static void noStartsWith() {
+
+        int[] intArray = {2, 1, 15, 10, 25, 101, 35, 19};
+
+        List<Integer> integerList = Arrays.stream(intArray).boxed().collect(Collectors.toList());
+
+        List<String> result = integerList.stream().map(e -> e.toString()).filter(e -> e.startsWith("1")).collect(Collectors.toList());
+        System.out.println("result = " + result);
+    }
+
+    /*
+    * https://www.javaprogramto.com/2020/04/how-to-compare-two-arraylist-for-equality-in-java.html
+    * */
+    private static void compareTwoStreams() {
+
+        List<Integer> list1 = Arrays.asList(23, 17, 8, 12, 5, 6, 9, 16, 2);
+        List<Integer> list2 = Arrays.asList(23, 17, 8, 12, 5, 6, 9, 16, 2);
+
+
+        boolean isEqualAllValues = list1.containsAll(list2);
+        System.out.println("isEqualAllValues = " + isEqualAllValues);
+
+        List<Integer> unavailable = list1.stream().filter(e -> (list2.stream().filter(d -> d.equals(e)).count()) < 1)
+                .collect(Collectors.toList());
+
+        if (unavailable.size() == 0) {
+            System.out.println("list1 and list2 all values same.");
+        } else {
+            System.out.println("list1 and list2 all values are not  same.");
+        }
+
 
     }
 
