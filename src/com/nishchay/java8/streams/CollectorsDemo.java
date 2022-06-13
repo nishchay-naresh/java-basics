@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CollectorsDemo {
 
@@ -19,7 +18,6 @@ public class CollectorsDemo {
 //        toSetEx();
         toMapEx();
 
-        identityEx_toMap();
     }
 
 
@@ -68,15 +66,5 @@ public class CollectorsDemo {
         empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
 
     }
-
-    private static void identityEx_toMap() {
-
-        Map<String, Integer> map =
-                Stream.of("java", "perl", "Java")
-                        .collect(Collectors.toMap(Function.identity(), String::length));
-
-        System.out.println("map = " + map);
-    }
-
 
 }
