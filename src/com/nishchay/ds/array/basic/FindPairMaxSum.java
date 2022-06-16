@@ -110,13 +110,13 @@ public class FindPairMaxSum {
         int[] arr;
 
         arr = new int[]{8, 2, 14, 6, 3, 7, 1};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // 22
+        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -1
 
         arr = new int[]{12, 34, 10, 6, 40};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // 74
+        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -4
 
         arr = new int[]{-2, 3};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // 1
+        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -5
 
         arr = new int[]{-2};
         System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -2
