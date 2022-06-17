@@ -48,6 +48,8 @@ package com.nishchay.ds.array.basic;
  *	Input: arr[] = {-2}
  *	Output: -2
  *	Explanation: pair = -2
+ *
+ * Another approach could be, stro them in hashMap<No,Index> - sort this entry based on no, then take first 2 entry
  * */
 
 public class FindPairMaxSum {
