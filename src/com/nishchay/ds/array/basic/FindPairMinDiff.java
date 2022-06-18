@@ -31,87 +31,87 @@ public class FindPairMinDiff {
 
     public static void main(String[] args) {
 
-        int arr[] = new int[]{1, 5, 3, 19, 18, 25};
-        System.out.println("Minimum difference is "+ findMinDiff(arr, arr.length));
-
-
-
+        findMinDiffEx();
+        System.out.println("------------------------");
+        findMinDiffSortEx();
 
     }
 
-    private static void findMinDiffSort(int[] arr, int n){
+    private static void findMinDiffEx() {
 
-        int[] a = new int[] {4, 9, 1, 32, 13};
-        Arrays.sort(a);
-        int minDiff = a[1]-a[0];
-        for (int i = 2 ; i != a.length ; i++) {
-            minDiff = Math.min(minDiff, a[i]-a[i-1]);
+        int[] arr;
+
+        arr = new int[]{1, 5, 3, 19, 18, 25};
+        System.out.println("Pair with min diff : " + findMinDiff(arr)); // 1
+
+        arr = new int[]{8, 2, 14, 6, 3, 7, 1};
+        System.out.println("Pair with min diff : " + findMinDiff(arr)); // 1
+
+        arr = new int[]{-2, 3};
+        System.out.println("Pair with min diff : " + findMinDiff(arr)); // -5
+
+        arr = new int[]{-2};
+        System.out.println("Pair with min diff : " + findMinDiff(arr)); // -2
+    }
+
+    /*
+    * ============= bruteforce approach - 2 nested loop =====================
+    * A simple solution is to use two nexted loops.
+    * time complexity - O(n2)
+     * */
+    private static int findMinDiff(int[] arr){
+        int n = arr.length;
+        if(n == 1){
+            return arr[0];
+        }else if(n == 2){
+            return (arr[0] - arr[1]);
         }
-        System.out.println(minDiff);
-    }
-
-    private static int findMinDiff(int[] arr, int n)
-    {
-        // Initialize difference as infinite
         int diff = Integer.MAX_VALUE;
 
-        // Find the min diff by comparing difference
-        // of all possible pairs in given array
+        // Diff by comparing difference of all possible pairs in given array
         for (int i=0; i<n-1; i++)
             for (int j=i+1; j<n; j++)
                 if (Math.abs((arr[i] - arr[j]) )< diff)
                     diff = Math.abs((arr[i] - arr[j]));
 
-        // Return min diff
         return diff;
     }
 
-
-    private static void findSmallestDiffPairEx() {
+    private static void findMinDiffSortEx() {
         int[] arr;
 
-        arr = new int[]{8, 2, 14, 6, 3, 7, 1};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -1
+        arr = new int[]{1, 5, 3, 19, 18, 25};
+        System.out.println("Pair with min diff : " + findMinDiffSort(arr)); // 1
 
-        arr = new int[]{12, 34, 10, 6, 40};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -4
+        arr = new int[]{8, 2, 14, 6, 3, 7, 1};
+        System.out.println("Pair with min diff : " + findMinDiffSort(arr)); // -1
 
         arr = new int[]{-2, 3};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -5
+        System.out.println("Pair with min diff : " + findMinDiffSort(arr)); // -5
 
         arr = new int[]{-2};
-        System.out.println("Pair with min diff : " + findSmallestDiffPair(arr)); // -2
+        System.out.println("Pair with min diff : " + findMinDiffSort(arr)); // -2
     }
 
-
-    private static int findSmallestDiffPair(int[] arr) {
-
-        int length = arr.length;
-
-        if(length == 1){
+    /*
+     * ============= sorting approach - =====================
+     * A simple solution is to use two nexted loops.
+     * time complexity - O(n2)
+     * */
+    private static int findMinDiffSort(int[] arr){
+        int n = arr.length;
+        if(n == 1){
             return arr[0];
-        }else if(length == 2){
+        }else if(n == 2){
             return (arr[0] - arr[1]);
         }
 
-        int smallest, secondSmallest;
-        if (arr[0] < arr[1]) {
-            smallest = arr[0];
-            secondSmallest = arr[1];
-        } else {
-            smallest = arr[1];
-            secondSmallest = arr[0];
+        Arrays.sort(arr);
+        int minDiff = arr[1]-arr[0];
+        for (int i = 2 ; i != arr.length ; i++) {
+            minDiff = Math.min(minDiff, arr[i]-arr[i-1]);
         }
-
-        for (int i = 2; i < length; i++) {
-            if (arr[i] < smallest) {
-                secondSmallest = smallest;
-                smallest = arr[i];
-            }else if (arr[i] < secondSmallest && arr[i] != smallest){
-                secondSmallest = arr[i];
-            }
-        }
-        return (smallest - secondSmallest);
+        return minDiff;
     }
 
 
