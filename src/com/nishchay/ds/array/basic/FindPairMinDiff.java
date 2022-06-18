@@ -31,6 +31,16 @@ public class FindPairMinDiff {
 
     public static void main(String[] args) {
 
+        int arr[] = new int[]{1, 5, 3, 19, 18, 25};
+        System.out.println("Minimum difference is "+ findMinDiff(arr, arr.length));
+
+
+
+
+    }
+
+    private static void findMinDiffSort(int[] arr, int n){
+
         int[] a = new int[] {4, 9, 1, 32, 13};
         Arrays.sort(a);
         int minDiff = a[1]-a[0];
@@ -38,7 +48,22 @@ public class FindPairMinDiff {
             minDiff = Math.min(minDiff, a[i]-a[i-1]);
         }
         System.out.println(minDiff);
+    }
 
+    private static int findMinDiff(int[] arr, int n)
+    {
+        // Initialize difference as infinite
+        int diff = Integer.MAX_VALUE;
+
+        // Find the min diff by comparing difference
+        // of all possible pairs in given array
+        for (int i=0; i<n-1; i++)
+            for (int j=i+1; j<n; j++)
+                if (Math.abs((arr[i] - arr[j]) )< diff)
+                    diff = Math.abs((arr[i] - arr[j]));
+
+        // Return min diff
+        return diff;
     }
 
 
