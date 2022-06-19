@@ -1,6 +1,8 @@
 package com.nishchay.java8.basic;
 
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 
 /*
  *   Optional is a container type for a value which may be absent.
@@ -9,6 +11,8 @@ import java.util.Optional;
  * */
 public class OptionalDemo {
 
+    private static final AtomicLong instanceId = new AtomicLong(0L);
+
     public static void main(String[] args) {
 
         whatIsNull();
@@ -16,6 +20,7 @@ public class OptionalDemo {
         NPESuppressUsingOptional();
 
         optionalDemo();
+        strValueCheck();
 
     }
 
@@ -82,6 +87,16 @@ public class OptionalDemo {
     }
 
 
+    private static void strValueCheck() {
+        String id = getId();
+        id = Optional.ofNullable(id).orElseGet(() -> "default id - " + instanceId.incrementAndGet());
+        System.out.println("cacheName = " + id);
+    }
+
+    private static String getId() {
+        return new Random().nextInt(100) % 2 == 0 ? "idIsThere - 99" : null;
+    }
+
     private static void optionalDemo() {
 
         // Create an empty Optional, which describes the absence of a value.
@@ -127,9 +142,7 @@ public class OptionalDemo {
         // Unlike orElse(), which returns a default value directly if the Optional is empty,
         // orElseGet() allows you to pass a Supplier function which is invoked when the Optional is empty.
         // means we need to pass a method call, rather a direct value
-        User returnUser = userOptional3.orElseGet(() -> {
-            return new User(0, "default User");
-        });
+        User returnUser = userOptional3.orElseGet(() -> new User(0, "default User"));
         System.out.println("Optional.orElseGet() - " + returnUser);
 
         // orElseThrow() - Throw an exception on absence of a value
