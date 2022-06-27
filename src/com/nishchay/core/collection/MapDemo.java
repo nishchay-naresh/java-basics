@@ -1,7 +1,6 @@
 package com.nishchay.core.collection;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class MapDemo {
@@ -9,10 +8,10 @@ public class MapDemo {
     public static void main(String[] args) {
 
         hashMapPutEx();
-//        System.out.println("-----------------");
-//        hashMapNullPut();
-//        System.out.println("-----------------");
-//        hashMapStringPut();
+        System.out.println("-----------------");
+        hashMapNullPut();
+        System.out.println("-----------------");
+        hashMapStringPut();
     }
 
     private static void hashMapPutEx() {
@@ -36,7 +35,8 @@ public class MapDemo {
 
         Map<String, Integer> map = new HashMap<>();
 
-        // null as key
+        // null as key -  only one null can be there as a key
+        // all subsequent put with null as a key, will be overridden
         map.put(null, 1);
         map.put(null, 2);
         map.put(null, 3);
@@ -51,19 +51,11 @@ public class MapDemo {
 
         // hashMap printing logic
 
-//        System.out.println("map = " + map);
+        System.out.println("map = " + map);
 
-        Iterator<Map.Entry<String, Integer>> itr = map.entrySet().iterator();
-        while(itr.hasNext()){
-            Map.Entry<String, Integer> entry = itr.next();
+/*        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
-
-/*
-        for (Map.Entry e : map.entrySet()) {
-            System.out.println(e.getKey() + " -> " + e.getValue());
-        }
-*/
+        }*/
 
 //        map.forEach((key, value) -> System.out.println(key + "-> " + value));
 
