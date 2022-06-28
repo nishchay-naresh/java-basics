@@ -5,38 +5,42 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+
+/*
+ *
+ * https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
+ * */
 public class EmployeeSQL {
 
 
     public static void main(String[] args) {
 
-//        employeePrint();
+        employeePrint();
 
-//        maleFemaleEmployeeCount();
-//        departmentNames();
-//        maleFemaleEmployeeAvgAge();
-//        highestAndLeastPaidEmployee();
-//        employeesJoinedAfter2015();
-//        countEmployeeInEachDept();
-//        avgSalaryOfEachDept();
-//        youngestMaleEmployeeFromADept();
-//        seniorMostEmployee();
-//        countMaleFemaleEmployeesInADept();
-//        averageSalaryMaleAndFemaleEmployees();
-//        employeeListFromEachDept();
-//        getSalaryStatistics();
+        maleFemaleEmployeeCount();
+        departmentNames();
+        maleFemaleEmployeeAvgAge();
+        highestAndLeastPaidEmployee();
+        employeesJoinedAfter2015();
+        countEmployeeInEachDept();
+        avgSalaryOfEachDept();
+        youngestMaleEmployeeFromADept();
+        seniorMostEmployee();
+        countMaleFemaleEmployeesInADept();
+        averageSalaryMaleAndFemaleEmployees();
+        employeeListFromEachDept();
+        getSalaryStatistics();
 
 
         // self practice
-//        youngestOldestEmployee();
-//         getEmpNameEmpMap();
-//        first3EmpNames();
-//        printEmpNamesStartingWtih_N();
-//        avgAndTotalSalaryOfFemaleEmployee();
-//        femaleEmployeeWithHighestSalary();
+        youngestOldestEmployee();
+        getEmpNameEmpMap();
+        first3EmpNames();
+        printEmpNamesStartingWtih_N();
+        avgAndTotalSalaryOfFemaleEmployee();
+        femaleEmployeeWithHighestSalary();
         getEmployeeYoungerThan25();
     }
-
 
 
     private static void employeePrint() {
