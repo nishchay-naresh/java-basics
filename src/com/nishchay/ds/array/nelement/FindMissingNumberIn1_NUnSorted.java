@@ -4,11 +4,11 @@ package com.nishchay.ds.array.nelement;
  *   You are given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in the list.
  *  One of the integers is missing in the list. Write an efficient code to find the missing integer.
  *
- *	Input: arr[] = {1, 2, 4, 6, 3, 7, 8}
+ *	Input: arr[] = {1, 2, 4, 6, 3, 7, 8}, n-7, N-8
  *	Output: 5
  *	Explanation: The missing number from 1 to 8 is 5
  *
- *	Input: arr[] = {1, 2, 3, 5}
+ *	Input: arr[] = {1, 2, 3, 5}, n-4, N-5
  *	Output: 4
  *	Explanation: The missing number from 1 to 5 is 4
  *
@@ -76,7 +76,7 @@ class FindMissingNumberIn1_NUnSorted {
 
     /*
      * Method 3 - XOR method
-     *      (XOR of all array element) XOR (XOR of N natural nos) = missing no
+     *      (XOR of all array element) XOR (XOR of N(n+1) natural nos) = missing no
      *
      * Function to find missing number -  by doing XOR of First N Numbers
      * Time Complexity: O(n)
@@ -85,16 +85,16 @@ class FindMissingNumberIn1_NUnSorted {
     private static int getMissingNoXOR(int[] nums) {
 
         int n = nums.length;
-        int x1 = 1;
+        int x1 = 0;
         // For xor of all the elements from 1 to n+1
         /// n+1 , bcus n nos are there in array and 1 is missing so n+1
-        for (int i = 2; i <= n + 1; i++)
+        for (int i = 1; i <= n + 1; i++)
             x1 = x1 ^ i;
 
-        int x2 = nums[0];
-        /* do a xor of each array element*/
-        for (int i = 1; i < n; i++)
-            x2 = x2 ^ nums[i];
+        int x2 = 0;
+        // do a xor of each array element
+        for (int e : nums)
+            x2 = x2 ^ e;
 
         return (x1 ^ x2);
     }
