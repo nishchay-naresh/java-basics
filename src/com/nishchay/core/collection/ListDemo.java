@@ -1,5 +1,7 @@
 package com.nishchay.core.collection;
 
+import com.nishchay.core.collection.comparator.Employee;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +10,13 @@ public class ListDemo {
 
     public static void main(String[] args) {
 
+//        listOfStrEx();
+        listOfEmpEx();
+
+    }
+
+
+    private static void listOfStrEx() {
         List<String> strList = new ArrayList<>();
         strList.add("element1");
         strList.add("element2");
@@ -35,7 +44,17 @@ public class ListDemo {
         for (String s : strList) {
             System.out.print(s + "\t");
         }
+    }
 
+
+    private static void listOfEmpEx() {
+        List<Employee> empList  = Employee.populateEmployeeList();
+         // simple iterator example
+         Iterator<Employee> empIterator = empList.iterator();
+         while(empIterator.hasNext()) {
+             Employee emp = empIterator.next();
+            System.out.println("emp - " + emp);
+         }
     }
 
 }
