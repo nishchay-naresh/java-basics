@@ -62,7 +62,7 @@ public class P2TripletsWithZeroSumDistinct {
 
         bruteforceWay();
         hashingWay();
-//        twoPointersWay();
+        twoPointersWay();
 
     }
 
@@ -219,5 +219,97 @@ public class P2TripletsWithZeroSumDistinct {
         System.out.print("\nEdge cases test validated successfully");
     }
 
+    /*
+     * ========= sorting then two pointers approach =========
+     *
+     *	Approach:
+     *	1.	Sort the array in ascending order.
+     *	2.	Traverse the array from start to end.
+     *	3.	For every index i, create two variables left = i + 1 and right = n – 1
+     *	4.	Run a loop until left is less than right if (sum = array[i] +  array[left] + array[right]) == 0 we got the triplet increment left, decrement right and continue the loop
+     *	5.	If the sum < 0 then increment the value of left
+     *		    , by increasing the value of left the sum will increase as array is sorted, so array[left+1] > array [left]
+     *	6.	If the sum > 0 then decrement the value of right
+     *          , by decreasing the value of right the sum will decrease as array is sorted, so array[right-1] < array [right].
+     *
+     * Time Complexity: O(n * log n).
+     * Auxiliary Space: O(1).
+     *
+     * */
+    private static List<int[]> findTriplets_twoPointers(int[] arr) {
+
+        int n = arr.length;
+        List<int[]> triplets = new ArrayList<>();
+
+        // sort array elements
+        Arrays.sort(arr);
+
+        for (int i = 0; i < n - 1; i++) {
+            // initialize left and right
+            int left = i + 1;
+            int right = n - 1;
+            int curr = arr[i];
+            while (left < right) {
+                if (curr + arr[left] + arr[right] == 0) {
+                    triplets.add(new int[]{curr, arr[left], arr[right]});
+                    left++;
+                    right--;
+                }
+
+                // If sum of three elements is less than zero then increment in left
+                else if (curr + arr[left] + arr[right] < 0)
+                    left++;
+                    // if sum is greater than zero then decrement in right side
+                else
+                    right--;
+            }
+        }
+
+        return triplets;
+    }
+
+    private static void twoPointersWay() {
+
+        validateEdgeCase_twoPointers();
+
+        int[] intArr;
+        List<int[]> triplets;
+
+        intArr = new int[]{0, -1, 2, -3, 1};
+        triplets = findTriplets_twoPointers(intArr);
+        System.out.print("\ntriplets = ");
+        for (int[] curr : triplets)
+            System.out.print("\t" + Arrays.toString(curr));// [0, -1, 1] [2, -3, 1]
+
+        intArr = new int[]{1, -2, 1, 0, 5};
+        triplets = findTriplets_twoPointers(intArr);
+        System.out.print("\ntriplets = ");
+        for (int[] curr : triplets)
+            System.out.print("\t" + Arrays.toString(curr));// [0, -1, 1] [2, -3, 1]
+
+        intArr = new int[]{-5, 3, 2, -3, 1};
+        triplets = findTriplets_twoPointers(intArr);
+        System.out.print("\ntriplets = ");
+        for (int[] curr : triplets)
+            System.out.print("\t" + Arrays.toString(curr)); // [1,-2, 1]
+
+        intArr = new int[]{-1, 0, 1, 2, -2, -4};
+        triplets = findTriplets_twoPointers(intArr);
+        System.out.print("\ntriplets = ");
+        for (int[] curr : triplets)
+            System.out.print("\t" + Arrays.toString(curr)); // 	[-1, 0, 1]	[0, 2, -2]
+    }
+
+    private static void validateEdgeCase_twoPointers() {
+        List<int[]> output;
+        List<int[]> inputs = Arrays.asList(new int[]{}, new int[]{0}, new int[]{0, 0}, new int[]{-1, 1});
+        for (int[] input : inputs) {
+            output = findTriplets_twoPointers(input);
+            if (output.size() > 0) {
+                System.out.print("\nEdge cases test got failed....!!!");
+            }
+        }
+        System.out.print("\nEdge cases test validated successfully");
+    }
 
 }
