@@ -162,13 +162,13 @@ public class P2TripletsWithZeroSumDistinct {
 
         for (int i = 0; i < n - 1; i++) {
             // Find all pairs with sum equals to "-arr[i]"
-            Set<Integer> s = new HashSet<>();
+            Set<Integer> set = new HashSet<>();
             for (int j = i + 1; j < n; j++) {
                 int x = -(arr[i] + arr[j]);
-                if (s.contains(x)) {
+                if (set.contains(x)) {
                     triplets.add(new int[]{x, arr[i], arr[j]});
                 } else {
-                    s.add(arr[j]);
+                    set.add(arr[j]);
                 }
             }
         }
