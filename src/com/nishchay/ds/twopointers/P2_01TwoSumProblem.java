@@ -1,7 +1,6 @@
 package com.nishchay.ds.twopointers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /*
  *============== Two Sum Problem ====================
@@ -39,13 +38,11 @@ public class P2_01TwoSumProblem {
 
     public static void main(String[] args) {
 
-/*
         bruteforceWay();
         System.out.print("\n-----------------------------");
         hashingWay();
         System.out.print("\n-----------------------------");
         twoPointersWay();
-*/
 
     }
 
@@ -77,5 +74,173 @@ public class P2_01TwoSumProblem {
         return pairs;
     }
 
+    private static void bruteforceWay() {
+
+        int[] intArr;
+        int sum;
+        List<int[]> pairs;
+
+        intArr = new int[]{2, 7, 11, 15}; sum = 9;
+        pairs = findPair_bruteforce(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [2, 7]
+
+        intArr = new int[]{0, -1, 2, -3, 1}; sum = -2;
+        pairs = findPair_bruteforce(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [-3, 1]
+
+        intArr = new int[]{1, -2, 1, 0, 5}; sum = 0;
+        pairs = findPair_bruteforce(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// []
+
+        intArr = new int[]{3, 5, 2, -4, 8, 11}; sum = 7;
+        pairs = findPair_bruteforce(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [5, 2],[-4, 11]
+
+    }
+
+    /*
+     * ========= hashing approach =========
+     * One can use a HashMap to solve the problem in O(n) time complexity
+     *
+     *	Approach:
+     *	1.	Initialize an empty HashMap.
+     *	2.	Iterate over the elements of the array.
+     *	3.	For every element in the array, do below :
+     *	    -   If the element exists in the Map, then check if it’s complement (target - element) also exists in the Map or not.
+     *      -   Otherwise, put the element in the Map, and move to the next iteration.
+     *
+     * Time Complexity: O(n).
+     * Auxiliary Space: O(n).
+     *
+     * */
+    private static List<int[]> findPair_hashing(int[] arr, int sum) {
+
+        int n = arr.length, complement;
+        List<int[]> pairs = new ArrayList<>();
+
+        Set<Integer> numMap = new HashSet<>();
+        for (int e : arr) {
+            complement = sum - e;
+            if (numMap.contains(complement)) {
+                pairs.add(new int[]{e, complement});
+            } else {
+                numMap.add(e);
+            }
+        }
+        return pairs;
+    }
+
+    private static void hashingWay() {
+
+        int[] intArr;
+        int sum;
+        List<int[]> pairs;
+
+        intArr = new int[]{2, 7, 11, 15}; sum = 9;
+        pairs = findPair_hashing(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [2, 7]
+
+        intArr = new int[]{0, -1, 2, -3, 1}; sum = -2;
+        pairs = findPair_hashing(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [-3, 1]
+
+        intArr = new int[]{1, -2, 1, 0, 5}; sum = 0;
+        pairs = findPair_hashing(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// []
+
+        intArr = new int[]{3, 5, 2, -4, 8, 11}; sum = 7;
+        pairs = findPair_hashing(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [5, 2],[-4, 11]
+
+    }
+
+    /*
+     * ========= sorting then two pointers approach =========
+     *
+     *	Approach:
+     *	1.	Sort the array.
+     *	2.	Initialize two variables, one pointing to the beginning of the array (left) and another pointing to the end of the array (right).
+     *	3.	Loop until left < right, and for each iteration
+     *	    - if arr[left] + arr[right] == target, then we got the pair increment left, decrement right and continue the loop
+     *      - if arr[left] + arr[right] < target, increment the left index.
+     *      - else, decrement the right index.
+     *
+     * This approach is called the two-pointer approach. It is a very common pattern for solving array related problems.
+     *
+     * Time Complexity: O(n * log n).
+     * Auxiliary Space: O(1).
+     *
+     * */
+    private static List<int[]> findPairs_twoPointers(int[] arr, int sum) {
+
+        List<int[]> pairs = new ArrayList<>();
+
+        Arrays.sort(arr);
+
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            if(arr[left] + arr[right] == sum) {
+                pairs.add(new int[]{arr[left], arr[right]});
+                left++;
+                right--;
+            } else if (arr[left] + arr[right] < sum) {
+                // If sum of three elements is less than zero then increment in left
+                left++;
+            } else {
+                // if sum is greater than zero then decrement in right side
+                right--;
+            }
+        }
+        return pairs;
+    }
+
+    private static void twoPointersWay() {
+
+        int[] intArr;
+        int sum;
+        List<int[]> pairs;
+
+        intArr = new int[]{2, 7, 11, 15}; sum = 9;
+        pairs = findPairs_twoPointers(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [2, 7]
+
+        intArr = new int[]{0, -1, 2, -3, 1}; sum = -2;
+        pairs = findPairs_twoPointers(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [-3, 1]
+
+        intArr = new int[]{1, -2, 1, 0, 5}; sum = 0;
+        pairs = findPairs_twoPointers(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// []
+
+        intArr = new int[]{3, 5, 2, -4, 8, 11}; sum = 7;
+        pairs = findPairs_twoPointers(intArr, sum);
+        System.out.print("\npairs = ");
+        for (int[] curr : pairs)
+            System.out.print("\t" + Arrays.toString(curr));// [5, 2],[-4, 11]
+
+    }
 
 }
