@@ -1,5 +1,14 @@
 package com.nishchay.java8.lambda;
 
+/*
+*
+* Basic difference in both the approach
+* In java method is the 2nd class citizen, A method can't exist as independent, it must be wrapped around an Object
+*
+* 1. anonymous inner class - We are passing the behaviour, by wrapping it under a class
+* 2. lambda expression - passing the behaviour as en independent entity, which has been pointed by lambda
+*
+* */
 public class RunnableUsingLambda {
 
     public static void main(String[] args) {
