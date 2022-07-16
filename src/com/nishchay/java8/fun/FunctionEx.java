@@ -16,26 +16,28 @@ public class FunctionEx {
 
     public static void main(String[] args) {
 
-//        funAsConcept();
-//        funAsParameter();
+/*
+        funAsConcept();
+        funAsParameter();
         System.out.println("------------");
         funIdentityEx();
         identityEx_toMap();
+*/
+
+        funcCompositionEx();
     }
 
 
-
-
     /*
-    *
-    * https://mkyong.com/java8/java-8-function-examples/
-    * */
+     *
+     * https://mkyong.com/java8/java-8-function-examples/
+     * */
     private static void funAsConcept() {
 
-        Function<Integer, Integer> f1 = i -> i*4;
+        Function<Integer, Integer> f1 = i -> i * 4;
         System.out.println(f1.apply(3));    //12
 
-        Function<Integer, Integer> f2 = i -> i+4;
+        Function<Integer, Integer> f2 = i -> i + 4;
         System.out.println(f2.apply(3));    //7
 
         // Function which takes in a number and returns half of it
@@ -66,20 +68,20 @@ public class FunctionEx {
 
     }
 
-    public static void doSum(Integer value, Function <Integer, Integer> func) {
+    public static void doSum(Integer value, Function<Integer, Integer> func) {
         System.out.println(func.apply(value));  //6
     }
 
-    public static void nameLengthPrint(String name, Function <String, Integer> func) {
+    public static void nameLengthPrint(String name, Function<String, Integer> func) {
         System.out.println(func.apply(name));  //4
     }
 
 
     /*
-    * identity() – Returns a Function that always returns its input argument.
-    *
-    * https://javabydeveloper.com/java-8-function-and-examples/
-    * */
+     * identity() – Returns a Function that always returns its input argument.
+     *
+     * https://javabydeveloper.com/java-8-function-and-examples/
+     * */
     private static void funIdentityEx() {
 
         Function<String, String> f1 = x -> x;
@@ -102,9 +104,41 @@ public class FunctionEx {
         Map<String, Integer> map =
                 Stream.of("java", "python", "go")
                         .collect(Collectors.toMap(Function.identity(), String::length));
-                        // .collect(Collectors.toMap(e -> e, e -> e.length()));
+        // .collect(Collectors.toMap(e -> e, e -> e.length()));
 
         System.out.println("map = " + map);
     }
+
+
+    /*
+     *  ============== Composing Functions =================
+     *
+     *  Functional style of programming
+     *  compose functions together -> Composability
+     *
+     * */
+    private static void funcCompositionEx(){
+
+        Function<Integer, Integer> incrementIt = e -> e+1;
+        printIt(5, "increment", incrementIt);
+        printIt(10, "increment", incrementIt);
+
+        Function<Integer, Integer> doubledIt = e -> e * 2;
+        printIt(5, "doubled", doubledIt);
+        printIt(10, "doubled", doubledIt);
+
+        Function<Integer, Integer> incrementAndDoubled = e -> (e+1) * 2; // no friend
+        printIt(20, "doubled", incrementAndDoubled);
+
+        printIt(20, "doubled", incrementIt.andThen(doubledIt));
+        // Now we have a function which is compose of two other functions
+        // Big Function = small function + then apply + another small function
+    }
+
+    // this method itself an example of Function composition, taking input and the Function operation over it
+    private static void printIt(int input, String msg, Function<Integer, Integer> func) {
+        System.out.println(input + " " + msg + " : " + func.apply(input));
+    }
+
 
 }
