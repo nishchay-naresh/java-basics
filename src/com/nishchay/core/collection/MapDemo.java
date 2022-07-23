@@ -2,16 +2,19 @@ package com.nishchay.core.collection;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MapDemo {
 
     public static void main(String[] args) {
 
-        hashMapPutEx();
+       hashMapPutEx();
         System.out.println("-----------------");
         hashMapNullPut();
         System.out.println("-----------------");
         hashMapStringPut();
+        System.out.println("-----------------");
+        treeMapExForSingleNullPut();
     }
 
     private static void hashMapPutEx() {
@@ -73,6 +76,15 @@ public class MapDemo {
         String str3 = new String("java");
         System.out.println(map.get(str3));
         System.out.println(map.get(str3.intern()));
+    }
+
+    private static void treeMapExForSingleNullPut() {
+
+        Map<String, Integer> treeMap =  new TreeMap<>();
+        treeMap.put(null, 100);
+//        treeMap.put("20", 100);
+        System.out.println("treeMap = " + treeMap);
+
     }
 
 }
