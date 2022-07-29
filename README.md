@@ -1,7 +1,8 @@
 # java-basics
-java basics
-java 8 concepts
-Data Structures & Problem Solving
+1. java basics
+2. java 8 concepts
+3. Data Structures & Problem Solving
+4. test - orgn qns 
 
 
 ### java basics - core
