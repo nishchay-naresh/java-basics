@@ -33,6 +33,13 @@ public class OptionalMapDemo1 {
 
     public static void issueFixJava8Way(AppContext context) {
 
+        /*
+        *  1. taking the unmodifiable map from request.getAttribute()
+        *  2. if this unmodifiable map is not null, then doing this mapping
+        *  	  unmodifiable map -> new hashMap(doing the value substitution)
+        *  3. if there exit any map from last step, do
+        *     map -> request.setAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, map)
+        * */
         Optional.ofNullable((Map<String, String>) context.getAttribute(USER_MAP_KEY))
                 .map(m -> m.entrySet().stream()
                         .collect(toMap(
