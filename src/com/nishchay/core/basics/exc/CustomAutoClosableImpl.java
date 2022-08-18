@@ -12,6 +12,7 @@ public class CustomAutoClosableImpl {
         ){
            // use resource
         } // close() get triggered immediate once we reach the end of try block
+          // it's same like closing the open resource in finally block
     }
 }
 /*
