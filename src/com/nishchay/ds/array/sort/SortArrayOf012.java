@@ -9,13 +9,13 @@ import java.util.Arrays;
  * Write a program to sort the array of 0’s, 1’s, and 2’s in ascending order.
  *
  * https://www.educative.io/edpresso/the-dutch-national-flag-problem-in-cpp
+ * https://medium.com/enjoy-algorithm/sort-an-array-of-0s-1s-and-2s-b4e61533e750
  *
  * */
 public class SortArrayOf012 {
 
     public static void main(String[] args) {
 
-//        int[] arr = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
         int[] arr = { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
         int len = arr.length;
         System.out.println("len = " + len);
