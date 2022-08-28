@@ -7,13 +7,13 @@ public class ArraysMethodDemo {
 
     public static void main(String[] args) {
 
-//        sortNSearchEx();
+        sortAndSearchEx();
         fillEx();
 
     }
 
 
-    private static void sortNSearchEx() {
+    private static void sortAndSearchEx() {
 
         String[] cities = {"Bangalore", "Pune", "San Francisco", "New York"};
 
