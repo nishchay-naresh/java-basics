@@ -43,10 +43,24 @@
 +	anyMatch()/allMatch()/noneMatch()
 
 
+[Java8 Cheat Sheet](../resources/java-8-cheat-sheet.pdf])
 
-### Data Structures & Problem Solving
-+   array
-+   linklist
-+   number
-+   recursion
-+   string
+
+### Data Structures & Problem-Solving
++ array
++ bit-wise operator
++ collection
++ design
++ dynamic programming
++ heap
++ linklist
++ matrix
++ number
++ recursion
++ sliding window
++ stack
++ standard algorithms
++ string
++ tree
++ tries
++ two pointers
