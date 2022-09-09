@@ -43,8 +43,7 @@
 +	anyMatch()/allMatch()/noneMatch()
 
 
-[Java8 Cheat Sheet](../resources/java-8-cheat-sheet.pdf])
-
+[Java8 Cheat Sheet](../resources/java-8-cheat-sheet.pdf)
 
 ### Data Structures & Problem-Solving
 + array
