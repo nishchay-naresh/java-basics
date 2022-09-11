@@ -36,6 +36,14 @@ public class LambdaDemo {
         lambdaGreeting.perform();
 
     }
+
+    // Implementation to abstract method in form of implementation class
+    static class HelloGreeting implements Greeting {
+        @Override
+        public void perform() {
+            System.out.println("implementation class - greeting");
+        }
+    }
 }
 
 /*
