@@ -160,34 +160,33 @@ public class OptionalDemo {
 
     }
 
-}
+    static class User {
+
+        private int id;
+        private String name;
 
 
-class User {
+        User(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
 
-    private int id;
-    private String name;
+        public int getId() {
+            return id;
+        }
 
+        public String getName() {
+            return name;
+        }
 
-    User(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+        @Override
+        public String toString() {
+            return "User{" +
+                    "name='" + name + '\'' +
+                    ", id=" + id +
+                    '}';
+        }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
     }
 
 }
