@@ -77,11 +77,12 @@ public class TerminalOperationDemo {
         System.out.println("Find any - " + anyElement.get());
 
         // Find first
-        Optional<String> firstElement =
+        String firstElement =
                 Stream.of("nine", "ten")
-                        .findFirst();
+                        .findFirst()
+                        .orElse(null);
 
-        System.out.println("Find first - " + firstElement.get());
+        System.out.println("Find first - " + firstElement);
     }
 
     private static void mthd4StreamForEach() {
