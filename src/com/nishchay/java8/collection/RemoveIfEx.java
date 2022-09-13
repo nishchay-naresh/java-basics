@@ -8,7 +8,7 @@ import java.util.List;
  *
  * java.lang.Collection<E>
  *         default boolean removeIf(Predicate<? super E> filter)
- * - Removes all of the elements of this collection that satisfy the given predicate.
+ * - Removes all the elements of this collection that satisfy the given predicate.
  */
 
 public class RemoveIfEx {
