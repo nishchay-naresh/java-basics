@@ -14,8 +14,8 @@ public class CollectorsDemo {
 
     public static void main(String[] args) {
 
-//        toListEx();
-//        toSetEx();
+        toListEx();
+        toSetEx();
         toMapEx();
 
     }
@@ -32,6 +32,7 @@ public class CollectorsDemo {
         empNameList.forEach(System.out::println);
 
     }
+
 
     private static void toSetEx() {
 
@@ -55,16 +56,33 @@ public class CollectorsDemo {
 
     private static void toMapEx() {
 
+        List<Employee> employees = EmployeeSQL.populateEmployeeList();
+
+        /*
+        * create a Map with name and age as key, and the person as value.
+        *
+        * toMap() method take two keyMapper, valueMapper parameters of Function
+        * keyMapper - > take a lambda for key mapping from list
+        * valueMapper - > take a lambda for value mapping from list
+        *
+        * */
+        System.out.println(
+                employees.stream()
+                        .collect(Collectors.toMap(
+                                e -> e.getName() + "-" + e.getAge(), // key
+                                person -> person)                    // value
+                        )
+        );
+
         // get a hashMap of <String,Employee> out of List of employee
 /*        Map<String, Employee> empMap = EmployeeSQL.populateEmployeeList().stream()
                 .collect(Collectors.toMap(e -> e.getName(), e -> e));
 */
-        Map<String, Employee> empMap = EmployeeSQL.populateEmployeeList().stream()
+        Map<String, Employee> empMap = employees.stream()
                 .collect(Collectors.toMap(e -> e.getName(), Function.identity()));
 
         System.out.println("-----------<String,Employee> empMap------------");
         empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
-
     }
 
 }
