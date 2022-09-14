@@ -3,10 +3,7 @@ package com.nishchay.java8.streams;
 import com.nishchay.java8.streams.query.Employee;
 import com.nishchay.java8.streams.query.EmployeeSQL;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -15,6 +12,7 @@ public class CollectorsDemo {
     public static void main(String[] args) {
 
         toListEx();
+        toListEx1();
         toSetEx();
         toMapEx();
 
@@ -33,6 +31,31 @@ public class CollectorsDemo {
 
     }
 
+    private static void toListEx1() {
+
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 1, 2, 3, 4, 5);
+
+        //To List - double the even values and put that into a list.
+
+        // wrong way to do this
+        List<Integer> doubleOfEven = new ArrayList<>();
+        numbers. stream()
+                .filter(e -> e % 2 == 0)
+                .map(e -> e * 2)
+                . forEach(e -> doubleOfEven.add(e));
+
+        //mutability is OK, sharing is nice, shared mutability is devils work
+        //friends don't let friends do shared mutation.
+        System.out.println("doubleOfEven = " + doubleOfEven); // don't do this
+
+        List<Integer> doubleOfEven2 =
+                numbers.stream()
+                        .filter(e -> e % 2 == 0)
+                        .map(e -> e * 2)
+                        .collect(Collectors.toList());
+
+        System.out.println("doubleOfEven2 = " + doubleOfEven2);
+    }
 
     private static void toSetEx() {
 
