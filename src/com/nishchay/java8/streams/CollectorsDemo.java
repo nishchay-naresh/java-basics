@@ -15,6 +15,7 @@ public class CollectorsDemo {
         toListEx1();
         toSetEx();
         toMapEx();
+        groupingByEx();
 
     }
 
@@ -28,7 +29,6 @@ public class CollectorsDemo {
                 .collect(Collectors.toList());
         System.out.println("-----------name of employee whose salary are more than 25K------------");
         empNameList.forEach(System.out::println);
-
     }
 
     private static void toListEx1() {
@@ -74,7 +74,6 @@ public class CollectorsDemo {
 
         System.out.println("-----------age in tree set------------");
         ageTreeSet.forEach(System.out::println);
-
     }
 
     private static void toMapEx() {
@@ -107,5 +106,21 @@ public class CollectorsDemo {
         System.out.println("-----------<String,Employee> empMap------------");
         empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
     }
+
+    private static void groupingByEx() {
+
+        List<Employee> employees = EmployeeSQL.populateEmployeeList();
+        //given a list of people, create a map where
+        //their department is the key and value is all the people works in that department.
+
+        Map<String, List<Employee>> deptMap = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+
+        System.out.println("\t\tDept Name \t\t\t\t   Emp Count");
+        System.out.println("----------------------------------------------------");
+        deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value.size()));
+
+    }
+
 
 }
