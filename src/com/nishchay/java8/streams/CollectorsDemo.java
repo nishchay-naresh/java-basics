@@ -16,6 +16,7 @@ public class CollectorsDemo {
         toSetEx();
         toMapEx();
         groupingByEx();
+        groupingAndMappingEx();
 
     }
 
@@ -122,5 +123,20 @@ public class CollectorsDemo {
 
     }
 
+    private static void groupingAndMappingEx() {
+
+        List<Employee> employees = EmployeeSQL.populateEmployeeList();
+        //given a list of people, create a map where
+        //their department is the key and value is all the ages of people with that name
+
+        Map<String, List<Integer>> deptMap =
+                employees.stream()
+                        .collect(Collectors.groupingBy(Employee::getDepartment,
+                                Collectors.mapping(Employee::getAge, Collectors.toList())));
+
+        System.out.println("\t\tDept Name \t\t\t\t   AgeList");
+        System.out.println("----------------------------------------------------");
+        deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
+    }
 
 }
