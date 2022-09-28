@@ -16,13 +16,18 @@ public class CF02CompleteAFuture {
 
     private static void completingAFuture() throws ExecutionException, InterruptedException {
 
-        CompletableFuture<String> completableFuture = new CompletableFuture<>();
-        String result = completableFuture.get();
-        System.out.println("result - " + result);
-        // again this.get() call will get blocked, we need to complete this cf
-
+        CompletableFuture<String> cf = new CompletableFuture<>();
         // completing the cf by calling complete() method
-        completableFuture.complete("dummy value");
+        cf.complete("dummy value");
+
+        // again this.get() call will get blocked, we need to complete this cf
+        String result = cf.get();
+        System.out.println("cf.get() = " + cf.get());
+
+
+        CompletableFuture<Integer> cf1 = new CompletableFuture<>();
+        cf1.complete(999);
+        System.out.println("cf.join() = " + cf1.join());
 
     }
 
