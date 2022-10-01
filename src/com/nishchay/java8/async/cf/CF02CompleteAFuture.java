@@ -9,10 +9,12 @@ public class CF02CompleteAFuture {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         completingAFuture();
-
         completedFutureEx();
+        completingAFutureExceptionally();
 
     }
+
+
 
     private static void completingAFuture() throws ExecutionException, InterruptedException {
 
@@ -42,6 +44,20 @@ public class CF02CompleteAFuture {
             result = future.get();
         } catch (InterruptedException | ExecutionException ignored) { }
         System.out.println("result = " + result);
+
+    }
+
+    /*
+     * completeExceptionally(t) - completing a CompletableFuture with an Exception
+     * */
+    private static void completingAFutureExceptionally() {
+
+        CompletableFuture<String> f1 = new CompletableFuture<>();
+//        f1.completeExceptionally(new RuntimeException("completed exceptionally"));
+        f1.complete("response");
+
+        // join() -  will get result/exception based on its completion
+        System.out.println("result = " + f1.join());
 
     }
 
