@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.nishchay.java8.async.Utils.delay;
+import static com.nishchay.java8.async.Utils.*;
 
 /*
  * ============ Callback =================
@@ -24,7 +24,8 @@ public class CF06CallbackMethods {
         using2MethodsInt();
         System.out.println("------------------------------");
         usingAll3MethodsStr();
-
+        System.out.println("------------------------------");
+        thenApplyEx();
     }
 
     private static void using2MethodsInt() {
@@ -64,5 +65,15 @@ public class CF06CallbackMethods {
 
         completableFuture.join();
     }
+
+    private static void thenApplyEx() {
+        create(3)
+                .thenApply(data -> data * 2)
+                .thenApply(data -> data + 1)
+                .thenAccept(e -> printIt(e));
+
+    }
+
+
 
 }
