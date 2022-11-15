@@ -1,10 +1,15 @@
 package com.nishchay.java8.fun;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
+
+import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
 
 public class SupplierEx {
 
@@ -12,6 +17,7 @@ public class SupplierEx {
 
         basicEx();
         castSupplier();
+        supplierOfObject();
 
         suppFromAnotherSupplier();
     }
@@ -31,6 +37,24 @@ public class SupplierEx {
                 .orElseGet(strSupplier);
 
         System.out.println("result = " + result);
+    }
+
+    private static void supplierOfObject() {
+
+        Supplier<List<Integer>> listSupplier = () -> Arrays.asList(10, 20, 30, 40, 50);
+        List<Integer> list = listSupplier.get();
+        System.out.println("list = " + list);
+
+
+        Supplier<Map<String, Long>> mapSupplier = () -> getFrequencyMapStream("java, perl, go, kotlin, java".split(", "));
+        Map<String, Long> hm  = mapSupplier.get();
+        System.out.println("hm = " + hm);
+
+        // mapSupplier = ConcurrentHashMap::new;
+        mapSupplier = () -> new ConcurrentHashMap<>();
+        hm  = mapSupplier.get();
+        System.out.println("hm = " + hm);
+
     }
 
     private static void castSupplier() {
