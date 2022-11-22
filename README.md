@@ -2,7 +2,7 @@
 1. java basics
 2. java 8 concepts
 3. Data Structures & Problem Solving
-4. test - orgn qns 
+4. test - Organisation interview qns 
 
 
 ### java basics - core
@@ -16,9 +16,15 @@
 
 
 ### java 8 concepts
++ async - Completable Future
 + basic
-+ collection - Comparator interface enhancement using default & static methods
-+ lambda
++ collection
+  - Comparator interface enhancement using default & static methods
+  - hashMap method enhancement
++ dp - Design Patterns using java8
++ imperative vs declarative style
++ lambda - java.util.function
++ split - Spliterator 
 + streams
 
 1. Non-Terminal/Intermediate  Operators :
@@ -66,3 +72,5 @@
 + tree
 + tries
 + two pointers
++ 
+### test - Organisation interview qns 
