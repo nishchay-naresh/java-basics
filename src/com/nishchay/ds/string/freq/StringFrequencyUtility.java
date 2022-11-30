@@ -68,7 +68,7 @@ public class StringFrequencyUtility {
     }
 
     // java 8 feature to get the frequency map - HashMap
-    static Map<String, Long> getFrequencyMapStream(String[] strArray) {
+    public static Map<String, Long> getFrequencyMapStream(String[] strArray) {
         Map<String, Long> freqMap = Arrays.stream(strArray)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return freqMap;
