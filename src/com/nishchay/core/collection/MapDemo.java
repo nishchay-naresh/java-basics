@@ -8,13 +8,17 @@ public class MapDemo {
 
     public static void main(String[] args) {
 
-       hashMapPutEx();
+        hashMapPutEx();
         System.out.println("-----------------");
         hashMapNullPut();
         System.out.println("-----------------");
         hashMapStringPut();
+
+        System.out.println("-----------------");
+        hashMapCASOperationEx();
         System.out.println("-----------------");
         treeMapExForSingleNullPut();
+
     }
 
     private static void hashMapPutEx() {
@@ -58,7 +62,8 @@ public class MapDemo {
 
 /*        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }*/
+        }
+*/
 
 //        map.forEach((key, value) -> System.out.println(key + "-> " + value));
 
@@ -68,9 +73,9 @@ public class MapDemo {
         String str1 = "java";
         String str2 = new String("java");
         Map<String, Integer> map = new HashMap<>();
-        map.put(str1,10);
-        map.put(str2,20);
-        map.put(str2.intern(),30);
+        map.put(str1, 10);
+        map.put(str2, 20);
+        map.put(str2.intern(), 30);
         System.out.println("size - " + map.size());
 
         String str3 = new String("java");
@@ -78,13 +83,51 @@ public class MapDemo {
         System.out.println(map.get(str3.intern()));
     }
 
+    private static void hashMapCASOperationEx() {
+
+        Map<String, Integer> map = new HashMap<>();
+        System.out.println(map.putIfAbsent("java", 8));// null
+        System.out.println(map.putIfAbsent("java", 9));// 8
+        System.out.println(map.putIfAbsent("perl", 9));// null
+        System.out.println(map.put("java", 11));// 8
+        System.out.println(map.get("java"));// 11
+
+        System.out.println(map.containsKey("java"));//true
+        System.out.println(map.containsKey("java1"));//false
+        System.out.println(map.containsKey("perl"));//true
+        System.out.println(map.size());//2
+
+        System.out.println("------------replace--------------");
+        System.out.println(map.replace("java1", 18));//null
+        System.out.println(map.replace("java", 18));//11
+        System.out.println(map.replace("java", 11, 20));//false
+        System.out.println(map.replace("java", 18, 20));//true
+
+        System.out.println("------------remove--------------");
+        System.out.println(map.remove("java"));//20
+        System.out.println(map.remove("java"));//null
+        System.out.println(map.remove("perl", 9));//true
+        System.out.println(map.remove("perl", 9));//false
+
+        System.out.println("------------computeIfAbsent--------------");
+
+        // provide value for new key which is absent using computeIfAbsent method
+        map.computeIfAbsent("key6", v -> 2 + 2 * 2);
+        System.out.println(map.computeIfAbsent("key6", v -> 10));
+        map.computeIfAbsent("key8", v -> (13 * 13 - 35 * 3) / 8);
+        System.out.println(map.computeIfAbsent("key8", v -> 20));
+
+        System.out.println(map.get("key6"));// 6
+        System.out.println(map.get("key8"));// 8
+
+    }
+
     private static void treeMapExForSingleNullPut() {
 
-        Map<String, Integer> treeMap =  new TreeMap<>();
+        Map<String, Integer> treeMap = new TreeMap<>();
         treeMap.put(null, 100);
 //        treeMap.put("20", 100);
-        System.out.println("treeMap = " + treeMap);
-
+        System.out.println(treeMap.size());
     }
 
 }
