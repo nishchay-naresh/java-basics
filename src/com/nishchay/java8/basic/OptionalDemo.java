@@ -14,14 +14,12 @@ public class OptionalDemo {
 
     public static void main(String[] args) {
 
-/*
         whatIsNull();
         NPEExample();
         NPESuppressUsingOptional();
 
         createOptional();
         extractOptional();
-*/
 
         isPresentEx();
         strIdGenerationCheck();
@@ -30,10 +28,10 @@ public class OptionalDemo {
 
 
     /*
-    * null -  unknown value
-    * The null keyword is a literal that represents a null reference,
-    * one that does not refer to any object. null is the default value of reference-type variables.
-    * */
+     * null -  unknown value
+     * The null keyword is a literal that represents a null reference,
+     * one that does not refer to any object. null is the default value of reference-type variables.
+     * */
     private static void whatIsNull() {
         System.out.println(null == null); // Always true
     }
@@ -129,7 +127,7 @@ public class OptionalDemo {
         //1. Retrieving optional using get() - value / NoSuchElementException
         // Optional’s get() method returns a value if it is present, otherwise it throws NoSuchElementException.
         Optional<User> optionalUser = findUserByIdOptionally(999);
-        System.out.println("Optional.get() - " + (optionalUser.isPresent() ? optionalUser.get() : null) );
+        System.out.println("Optional.get() - " + (optionalUser.isPresent() ? optionalUser.get() : null));
 
         /* Below code will throw NoSuchElementException
         System.out.println("Optional.get() - " + Optional.ofNullable(findUserById(111)).get());
@@ -147,16 +145,16 @@ public class OptionalDemo {
         System.out.println("Optional.orElseGet() - " + user);
 
         /*
-        * ==============  orElse() vs orElseGet() =============
-        * orElse() - passing an default value/Object for empty optional
-        *           performance impact - one object gets created every time, irrespective of optional value
-        *
-        * orElseGet() - pass a Supplier function for empty optional
-        *           performance impact - supplier function will only get invoked for empty optional, then only object will get created
-        *
-        * orElseThrow() - Throw an exception on absence of value
-        *
-        * */
+         * ==============  orElse() vs orElseGet() =============
+         * orElse() - passing an default value/Object for empty optional
+         *           performance impact - one object gets created every time, irrespective of optional value
+         *
+         * orElseGet() - pass a Supplier function for empty optional
+         *           performance impact - supplier function will only get invoked for empty optional, then only object will get created
+         *
+         * orElseThrow() - Throw an exception on absence of value
+         *
+         * */
 
         user = findUserByIdOptionally(userId).orElseThrow(
                 () -> new RuntimeException("User not found with userId " + userId)
@@ -170,7 +168,7 @@ public class OptionalDemo {
         Consumer<User> userSalaryConsumer = (user) -> {
             if (user.getId() == 999) {
                 System.out.println("User salary is - 9999");
-            }else{
+            } else {
                 System.out.println("User salary is - 0");
             }
         };
