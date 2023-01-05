@@ -127,7 +127,8 @@ public class OptionalDemo {
         //1. Retrieving optional using get() - value / NoSuchElementException
         // Optional’s get() method returns a value if it is present, otherwise it throws NoSuchElementException.
         Optional<User> optionalUser = findUserByIdOptionally(999);
-        System.out.println("Optional.get() - " + (optionalUser.isPresent() ? optionalUser.get() : null));
+        // System.out.println("Optional.get() - " + (optionalUser.isPresent() ? optionalUser.get() : null));
+        System.out.println("Optional.get() - " + optionalUser.orElse(null));
 
         /* Below code will throw NoSuchElementException
         System.out.println("Optional.get() - " + Optional.ofNullable(findUserById(111)).get());
@@ -164,6 +165,18 @@ public class OptionalDemo {
     }
 
     private static void isPresentEx() {
+
+        Consumer<String> stringConsumer = (s) -> System.out.println("value stored in Optional object = " + s);
+
+        Optional<String> stringOptional = Optional.of("java-8");
+        System.out.println("When a value is present - ");
+        stringOptional.ifPresent(stringConsumer);
+
+        System.out.println("When no value is present - ");
+        stringOptional = Optional.ofNullable(null);
+        stringOptional.ifPresent(stringConsumer);
+
+        System.out.println("---------------------------------------");
 
         Consumer<User> userSalaryConsumer = (user) -> {
             if (user.getId() == 999) {
