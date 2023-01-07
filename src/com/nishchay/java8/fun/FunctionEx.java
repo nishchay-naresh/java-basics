@@ -41,7 +41,7 @@ public class FunctionEx {
      * apply() - abstract method, used to execute/evaluate the function
      *
      *  output = function.apply(input)
-     * https://mkyong.com/java8/java-8-function-examples/
+     *
      * */
     private static void applyEx() {
 
@@ -167,13 +167,15 @@ public class FunctionEx {
 
     public static <T, R> List<R> map(List<T> list, Function<T, R> mappingFun) {
 
-/*      // imperative way
+        /*
+        // imperative way
         List<R> result = new ArrayList<>();
         for (T t : list) {
             result.add(mappingFun.apply(t));
         }
         return result;
-*/
+        */
+
         // declarative way
         return list.stream().map(mappingFun).collect(Collectors.toList());
 
