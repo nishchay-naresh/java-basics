@@ -1,12 +1,15 @@
-package com.nishchay.java8.basic;
+package com.nishchay.java8.impvsdec;
 
 import java.util.Optional;
 
 /*
-* two diff implementation for optional
-*
-* */
-public class OptionalDemo1 {
+ *
+ * two diff implementation for optional
+ *       Imperative way
+ *       Declarative way
+ *
+ * */
+public class FilteringUsingOptional {
 
     public static void main(String[] args) {
 
@@ -28,19 +31,25 @@ public class OptionalDemo1 {
 
     }
 
-    private static String validateSolicitedFlag(String flag){
-        if("F".equals(flag) || "R".equals(flag) || "Y".equals(flag)){
+    /*
+     *
+     * */
+    private static String validateSolicitedFlag(String flag) {
+        if ("F".equals(flag) || "R".equals(flag) || "Y".equals(flag)) {
             return "Y";
-        }else if("N".equals(flag)){
+        } else if ("N".equals(flag)) {
             return "N";
         }
         return null;
     }
 
-    private static String validateSolicitedFlagOptionally(String flag){
-        if(Optional.ofNullable(flag).filter(value -> value.matches("F|R|Y")).isPresent()){
+    /*
+     *
+     * */
+    private static String validateSolicitedFlagOptionally(String flag) {
+        if (Optional.ofNullable(flag).filter(value -> value.matches("F|R|Y")).isPresent()) {
             return "Y";
-        }else if(Optional.ofNullable(flag).filter(value -> value.matches("N")).isPresent()){
+        } else if (Optional.ofNullable(flag).filter(value -> value.matches("N")).isPresent()) {
             return "N";
         }
         return null;
