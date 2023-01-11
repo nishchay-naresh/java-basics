@@ -10,10 +10,11 @@ public class ArrayToList {
 
     public static void main(String[] args) {
 
-//        asListEx();
-//        arrayToList_listToArray_objectType();
+        asListEx();
+        arrayToList_listToArray_objectType();
+        arrayToArray_primitiveToWrapper();
         arrayToList_listToArray_primitiveInt();
-//        arrayToList_listToArray_primitiveChar();
+        arrayToList_listToArray_primitiveChar();
 
     }
 
@@ -72,6 +73,22 @@ public class ArrayToList {
         System.out.println("targetList = " + targetList);
     }
 
+
+    private static void arrayToArray_primitiveToWrapper() {
+
+        int[] intArray = {101, 27, 305, 444, 15};
+
+        // int[] -> Integer[]
+        Integer[] wrapperArray = Arrays.stream(intArray)
+                .boxed()
+                .toArray(Integer[]::new);
+        System.out.println("wrapperArray - " + Arrays.toString(wrapperArray));
+
+        // Integer[] -> int[]
+        intArray = Arrays.stream(wrapperArray).mapToInt(Integer::intValue).toArray();
+        System.out.println("intArray - " + Arrays.toString(intArray));
+
+    }
 
     private static void arrayToList_listToArray_primitiveInt() {
         int[] intArray = {1, 2, 3, 4, 5};
