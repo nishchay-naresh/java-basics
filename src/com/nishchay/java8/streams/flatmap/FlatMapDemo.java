@@ -2,37 +2,69 @@ package com.nishchay.java8.streams.flatmap;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class StreamCollectionDemo {
+public class FlatMapDemo {
 
 
     public static void main(String[] args) {
 
-//        mthd4mapAndCollectorsToList();
-        mthdMapDemoLowerToUpperObject();
-//        mthd4mapToIntAndSum();
-//        mthd4flatMap();
+        flatMapEx();
+
+        List<Book> books = Book.getListOfBook();
+
+        mapAndCollectToList(books);
+        flatMapDemoLowerToUpperObject();
+        flatMapDemoUpperToLowerObject(books);
+        flatMapEx_Object();
 
     }
 
+    private static void flatMapEx() {
+        // Find unique chars from list of words
+        String[] arrOfWords = {"Goodbye", "World"};
+        // array[] to stream
+        Stream<String> streamOfWords = Arrays.stream(arrOfWords);
 
-    private static void mthd4mapAndCollectorsToList() {
+/*
+        wrong usage of map - using map in place of flatMap
+        List<String> uniqueChars =
+                streamOfWords
+                .map(word -> word.split(""))
+                .map(Arrays::stream)
+                .distinct()
+                .collect(Collectors.toList());
+*/
 
-        List<Book> books = getListOfBook();
+
+        List<String> uniqueChars = streamOfWords
+                .map(word -> word.split(""))
+                //.flatMap(e -> Arrays.stream(e))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .collect(Collectors.toList());
+
+        System.out.println("uniqueChars = " + uniqueChars);
+    }
+
+
+    private static void mapAndCollectToList(List<Book> books) {
 
         System.out.println(" ----------------map() & Collectors.toList() demo ----------------");
-        List<String> authers =
+        List<String> authors =
                 books.stream()
-                        .map(e -> e.getAuthorName())
+                        .map(Book::getAuthorName)
                         .sorted()
                         .collect(Collectors.toList());
 
-        System.out.println("authers = " + authers);
+        System.out.println("authors = " + authors);
     }
 
-    private static void mthdMapDemoLowerToUpperObject() {
+    private static void flatMapDemoLowerToUpperObject() {
+
+        System.out.println(" ---------------- LowerToUpperObject ----------------");
         List<String> writers = Arrays.asList("Spider Man", "Iron Man", "Super Man", "Wonder Women");
-        // MapDemoLowerToUpperObject
+        // Mapping : LowerToUpperObject
         List<Book> books = writers.stream().map(writer -> new Book(1001, "Book 1", writer, 100))
                 .collect(Collectors.toList());
 
@@ -41,19 +73,19 @@ public class StreamCollectionDemo {
 
 
 
-    private static void mthd4mapToIntAndSum() {
+    private static void flatMapDemoUpperToLowerObject(List<Book> books) {
 
-        List<Book> books = getListOfBook();
-
-        System.out.println(" ----------------mapToInt() & sum() demo ----------------");
+        System.out.println(" ---------------- UpperToLowerObject ----------------");
+        // Mapping : UpperToLowerObject
         int totalPage = books.stream()
-                .mapToInt(e -> e.getPageCount())
+                //.mapToInt(e -> e.getPageCount())
+                .mapToInt(Book::getPageCount)
                 .sum();
 
         System.out.println("totalPage = " + totalPage);
     }
 
-    private static void mthd4flatMap() {
+    private static void flatMapEx_Object() {
 
         Author author1 = new Author();
         author1.setName("Andrew S. Tanenbaum");
@@ -108,17 +140,6 @@ public class StreamCollectionDemo {
 
         System.out.println("smallestBook = " + smallestBook.get());
 
-
-    }
-
-    private static List<Book> getListOfBook() {
-        List<Book> listOfBook = new ArrayList<>();
-        listOfBook.add(new Book(1011, "Hindi", "Prem Chand", 200));
-        listOfBook.add(new Book(1012, "Mathematics", "K C Sinha", 650));
-        listOfBook.add(new Book(1033, "Computer Science", "Tenen Bom", 140));
-        listOfBook.add(new Book(1048, "Physics", "H C Verma", 240));
-        listOfBook.add(new Book(1050, "Economics", "Rowrds Jowney", 900));
-        return listOfBook;
     }
 
 }
