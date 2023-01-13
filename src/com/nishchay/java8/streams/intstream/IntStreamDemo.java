@@ -5,17 +5,18 @@ import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class IntStreamDemo {
 
     public static void main(String[] args) {
 
 
-//        streamFromArgumentsValues();
+        streamFromArgumentsValues();
         streamFromRange();
-
-//        intStreamTerminalUtility();
-//        intStreamStatistics();
+        streamFromRangeToArray();
+        intStreamTerminalUtility();
+        intStreamStatistics();
 
     }
 
@@ -30,14 +31,25 @@ public class IntStreamDemo {
     private static void streamFromRange() {
         System.out.print("\n IntStream.range(1, 10) = ");
         IntStream.range(1, 10).forEach(e -> System.out.print(e + ", "));
-        System.out.print("\n IntStream.range(1, 10) = ");
+        System.out.print("\n IntStream.rangeClosed(1, 10) = ");
         IntStream.rangeClosed(1, 10).forEach(e -> System.out.print(e + ", "));
 
         System.out.println("\n ------------------------------------------");
         int[] intArray =  IntStream.range(1, 11).toArray();
         System.out.println("intArray = " + Arrays.toString(intArray));
-        List<Integer> listOfInt =  IntStream.range(1, 11).boxed().collect(Collectors.toList());
+        List<Integer> listOfInt =  IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
         System.out.println("listOfInt = " + listOfInt);
+    }
+
+    private static void streamFromRangeToArray() {
+        // IntStream -> int[]
+        int[] intArray = IntStream.rangeClosed(1, 5).toArray();
+        System.out.println("intArray - " + Arrays.toString(intArray));
+
+        // Stream<Integer> -> int[]
+        Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5);
+        intArray = integerStream.mapToInt(x -> x).toArray();
+        System.out.println("intArray - " + Arrays.toString(intArray));
     }
 
     private static void intStreamTerminalUtility() {
@@ -49,8 +61,6 @@ public class IntStreamDemo {
         System.out.println("avg : " + IntStream.of(numbers).average().getAsDouble());
         System.out.println("count : " + IntStream.of(numbers).count());
     }
-
-
 
     private static void intStreamStatistics() {
         int[] numbers = {1, 9, 3, 10, 4, 20, 2};
