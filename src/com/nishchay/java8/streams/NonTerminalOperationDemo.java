@@ -10,22 +10,22 @@ public class NonTerminalOperationDemo {
 
     public static void main(String[] args) {
 
-//        createAndPrint();
+        createAndPrint();
 
-//        mapDemo();
-//        filterDemo();
-//        distinctDemo();
-//        sortedDemo();
-//        limitDemo();
-//        skipDemo();
-//        peekDemo();
-//        noStartsWith();
+        mapDemo();
+        filterDemo();
+        distinctDemo();
+        sortedDemo();
+        limitDemo();
+        skipDemo();
+        peekDemo();
+        noStartsWith();
         compareTwoStreams();
 
     }
 
 
-    private static void createAndPrint(){
+    private static void createAndPrint() {
 
         Stream<String> stringStream = Stream.of("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
         System.out.println("########## Original List ###########");
@@ -38,7 +38,7 @@ public class NonTerminalOperationDemo {
     }
 
 
-    private static void mapDemo(){
+    private static void mapDemo() {
 
         // using lambda
 /*
@@ -49,21 +49,21 @@ public class NonTerminalOperationDemo {
 */
         // using method reference
         System.out.println("########## applying map operation over stream ###########");
-                 Stream.of("ONE", "two", "THREE", "four", "FIVE")
+        Stream.of("ONE", "two", "THREE", "four", "FIVE")
                 .map(String::toLowerCase)
                 .map(String::toUpperCase)
                 .forEach(System.out::println);
     }
 
 
-    private static void filterDemo(){
+    private static void filterDemo() {
         System.out.println("########## List after applying filter - filter((value) -> value.length() > 3) ###########");
         Stream.of("ONE", "two", "THREE", "four", "FIVE")
                 .filter(value -> value.length() > 3)
                 .forEach(System.out::println);
     }
 
-    private static void distinctDemo(){
+    private static void distinctDemo() {
 
         // Printing only distinct numbers
         System.out.println("########## List after applying distinct() ###########");
@@ -72,7 +72,7 @@ public class NonTerminalOperationDemo {
                 .forEach(s -> System.out.print(s + ", ")); // 7, 1, 4, 3, 2
     }
 
-    private static void sortedDemo(){
+    private static void sortedDemo() {
 
         System.out.println("########## sorted view of the stream ###########");
         Stream.of(1, 4, 2, 7, 9, 10, 3)
@@ -81,23 +81,23 @@ public class NonTerminalOperationDemo {
 
     }
 
-    private static void limitDemo(){
+    private static void limitDemo() {
         System.out.println("########## Applying limit ###########");
         Stream.of("one", "two", "three", "four", "five")
                 .limit(2) // limiting stream for first two element only
-                .forEach( System.out::println ); // one, two
+                .forEach(System.out::println); // one, two
     }
 
 
-    private static void skipDemo(){
+    private static void skipDemo() {
         System.out.println("########## Applying skip ###########");
         IntStream.of(23, 17, 8, 12, 5, 6, 9, 16, 2)
                 .skip(2) // skipping first two element only
-                .filter( e -> e > 10)
+                .filter(e -> e > 10)
                 .forEach(System.out::println); //12, 16
     }
 
-    private static void peekDemo(){
+    private static void peekDemo() {
 
 /*
         System.out.println("######### Applying peek ###########");
@@ -135,8 +135,8 @@ public class NonTerminalOperationDemo {
     }
 
     /*
-    * https://www.javaprogramto.com/2020/04/how-to-compare-two-arraylist-for-equality-in-java.html
-    * */
+     * https://www.javaprogramto.com/2020/04/how-to-compare-two-arraylist-for-equality-in-java.html
+     * */
     private static void compareTwoStreams() {
 
         List<Integer> list1 = Arrays.asList(23, 17, 8, 12, 5, 6, 9, 16, 2);
@@ -154,8 +154,6 @@ public class NonTerminalOperationDemo {
         } else {
             System.out.println("list1 and list2 all values are not  same.");
         }
-
-
     }
 
 }
