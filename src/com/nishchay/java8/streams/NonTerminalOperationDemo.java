@@ -33,7 +33,7 @@ public class NonTerminalOperationDemo {
 
 //                stringStream.forEach(e -> System.out.println(e));
 //        Exception in thread "main" java.lang.IllegalStateException: stream has already been operated upon or closed
-//        After performing a terminal operation over a stream , we can't reuse the stream
+//        After performing a terminal operation over a stream, we can't reuse the stream
 
     }
 
@@ -41,12 +41,12 @@ public class NonTerminalOperationDemo {
     private static void mapDemo() {
 
         // using lambda
-/*
+         /*
          Stream.of("ONE", "two", "THREE", "four", "FIVE")
                 .map(value -> value.toLowerCase())
                 .map(value -> value.toUpperCase())
                 .forEach(s -> System.out.print(s + ", "));
-*/
+         */
         // using method reference
         System.out.println("########## applying map operation over stream ###########");
         Stream.of("ONE", "two", "THREE", "four", "FIVE")
@@ -54,7 +54,6 @@ public class NonTerminalOperationDemo {
                 .map(String::toUpperCase)
                 .forEach(System.out::println);
     }
-
 
     private static void filterDemo() {
         System.out.println("########## List after applying filter - filter((value) -> value.length() > 3) ###########");
@@ -87,7 +86,6 @@ public class NonTerminalOperationDemo {
                 .limit(2) // limiting stream for first two element only
                 .forEach(System.out::println); // one, two
     }
-
 
     private static void skipDemo() {
         System.out.println("########## Applying skip ###########");
