@@ -1,6 +1,7 @@
 package com.nishchay.java8.streams;
 
 import java.util.*;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -9,46 +10,207 @@ public class TerminalOperationDemo {
 
     public static void main(String[] args) {
 
-        mthd4AnyMatchAllMatchNoMatch();
-        mthd4Collect();
-        mthd4Count();
-        mthd4FindAnyFindFist();
-        mthd4StreamForEach();
-        mthd4MinMax();
-        method4Reduce();
-        method4Reduce1();
-        streamToObjectArray();
-        mthd4ConcatenateStreams();
+        forEachEx();
 
-        mthd4PrimitiveArrayToStreamAndBack();
+        System.out.println("--------------------- toArrayEx --------------------");
+        toArrayEx();
+
+        System.out.println("----------------------- countEx --------------------");
+        countEx();
+
+        System.out.println("---------------- findAnyFindFistEx -----------------");
+        findAnyFindFistEx();
+
+        System.out.println("----------------------- minMaxEx -------------------");
+        minMaxEx();
+
+        System.out.println("------------ anyMatchAllMatchNoMatchEx -------------");
+        anyMatchAllMatchNoMatchEx();
+
+        System.out.println("------- anyMatchAllMatchNoMatchEx_intStream --------");
+        anyMatchAllMatchNoMatchEx_intStream();
+
+        System.out.println("--------------------- collectEx -------------------");
+        collectEx();
+
+        System.out.println("--------------------- reduceEx --------------------");
+        reduceEx();
+        reduceEx1();
+
+        System.out.println("--------------- concatenateStreams ----------------");
+        concatenateStreams();
 
     }
 
+    private static void forEachEx() {
+        Stream<String> stringStream = Stream.of("fox", "elephant", "lion", "tiger", "bear");
 
-    private static void mthd4AnyMatchAllMatchNoMatch() {
+        System.out.print("Stream elements - ");
+        stringStream.forEach(element -> System.out.print(element + ", "));
+        System.out.println();
+        // stream.forEach(System.out::print);
+    }
+
+    private static void toArrayEx() {
+
+        Stream<Integer> streamOfNum = Stream.of(5, 6, 7, 8, 9, 10);
+        // Object[] arrOfObject = streamOfNum.toArray();
+        Integer[] arrOfObject = streamOfNum.toArray(Integer[]::new);
+        System.out.println("arrOfObject - " + Arrays.toString(arrOfObject));
+
+        Stream<String> stringStream = Stream.of("fox", "elephant", "lion", "tiger", "bear");
+        String[] stringArray = stringStream.toArray(String[]::new);
+        System.out.println("stringArray - " + Arrays.toString(stringArray));
+
+        System.out.println("--------------------------------------------");
+        int[] intArray = {101, 27, 305, 444, 15};
+
+        // int[] -> Integer[]
+        Integer[] wrapperArray = Arrays.stream(intArray)
+                .boxed()
+                .toArray(Integer[]::new);
+        System.out.println("wrapperArray - " + Arrays.toString(wrapperArray));
+
+        // Integer[] -> int[]
+        intArray = Arrays.stream(wrapperArray).mapToInt(Integer::intValue).toArray();
+        System.out.println("intArray - " + Arrays.toString(intArray));
+
+        // int[] -> Set<Integer>
+        Set<Integer> integerSet = Arrays.stream(intArray)
+                .boxed()
+                .collect(Collectors.toSet());
+
+        System.out.println("integerSet - " + integerSet);
+        // Set<Integer> -> int[]
+        intArray = integerSet.stream().mapToInt(i -> i).toArray();
+        System.out.println("intArray = " + Arrays.toString(intArray));
+    }
+
+
+    private static void countEx() {
+
+        long count = Stream.of("one", "two", "three", "four", "five", "ten")
+                .filter(e -> e.startsWith("t"))
+                .count();
+
+        System.out.println("count = " + count);
+    }
+
+
+    private static void findAnyFindFistEx() {
+
+        // findAny() -  but it's always giving the first element only
+        Optional<String> stringOptional =
+                Stream.of("one", "two", "three", "four", "five")
+                        .findAny();
+        System.out.println("Find any - " + stringOptional.get());
+
+        // findFirst() - Returns an Optional describing the first element of this stream, or an empty Optional
+        stringOptional =
+                Stream.of("nine", "ten")
+                        .findFirst();
+
+        System.out.println("Find first - " + stringOptional.orElse(null));
+    }
+
+    private static void minMaxEx() {
+        System.out.println("########## MinMax - String ###########");
+        List<String> animalList = Arrays.asList("be", "elephant", "lion", "tiger", "ant");
+        System.out.println("minString - " + animalList.stream().min(Comparator.comparing(String::length)).get());
+        // System.out.println("maxString - " + animalList.stream().max((s1, s2) -> s1.length() - s2.length()).get());
+        System.out.println("maxString - " + animalList.stream().max(Comparator.comparingInt(String::length)).get());
+
+        // MinMaxInteger
+        System.out.println("########## MinMax - Integer ###########");
+        List<Integer> numbers = Arrays.asList(14, 9, 12, 3, 10, 4, 20, 28);
+        // System.out.println("min - " + numbers.stream().min((o1, o2) -> o1.compareTo(o2)).get());
+        System.out.println("min - " + numbers.stream().min(Integer::compareTo).get());
+        System.out.println("max - " + numbers.stream().max(Integer::compare).get());
+    }
+
+    private static void anyMatchAllMatchNoMatchEx() {
 
         List<String> stringList = new ArrayList<>();
-        stringList.add("One flew over the cuckoo's nest");
-        stringList.add("To kill a muckingbird");
-        stringList.add("Gone with the wind");
+        stringList.add("One and half man");
+        stringList.add("One and only one");
+        stringList.add("One two ka four");
+        stringList.add("One & one eleven");
 
-        boolean anyMatch = stringList.stream()
+        boolean matchResult = stringList.stream()
                 .anyMatch(value -> value.startsWith("One"));
-        System.out.println("anyMatch - " + anyMatch);
+        System.out.println("anyMatch = " + matchResult);
 
-        boolean allMatch = stringList.stream()
+        matchResult = stringList.stream()
+                .anyMatch(value -> value.startsWith("Two"));
+        System.out.println("anyMatch = " + matchResult);
+
+        matchResult = stringList.stream()
                 .allMatch(value -> value.startsWith("One"));
-        System.out.println("allMatch - " + allMatch);
+        System.out.println("allMatch = " + matchResult);
 
-        boolean noneMatch = stringList.stream()
+        matchResult = stringList.stream()
                 .noneMatch(element -> element.startsWith("Two"));
+        System.out.println("noneMatch = " + matchResult);
 
-        System.out.println("noneMatch = " + noneMatch);
+        matchResult = stringList.stream()
+                .noneMatch(element -> element.startsWith("One"));
+        System.out.println("noneMatch = " + matchResult);
 
     }
 
+    /*
+     *
+     *	anyMatch() - Returns whether any elements of this stream match the provided predicate
+     *	allMatch() - Returns whether all elements of this stream match the provided predicate.
+     *	noneMatch() - Returns whether no elements of this stream match the provided predicate.
+     *
+     * opposite of allMatch() is noneMatch()
+     *
+     * What if the stream is empty? anyMatch - false, allMatch - true
+     *
+     * ==== SHORT-CIRCUIT EVALUATION ====
+     * These functions  : anyMatch,allMatch, findFirst, findAny  are short-circuiting terminal operations.
+     * This means, if an infinite stream is presented, the functions may terminate in finite time.
+     * These operations need not required to process whole stream to produce the result
+     *
+     * */
+    private static void anyMatchAllMatchNoMatchEx_intStream() {
 
-    private static void mthd4Collect() {
+        int[] arr = new int[]{3, 18, 15, 30, 60};
+
+        IntPredicate isDivisibleByThree = e -> (e % 3 == 0);
+        IntPredicate isDivisibleByFive = e -> (e % 5 == 0);
+
+        IntPredicate isDivisibleByThreeAndFive = isDivisibleByThree
+                .and(isDivisibleByFive);
+
+        boolean matchResult = Arrays.stream(arr)
+                .allMatch(isDivisibleByThree);
+        System.out.println("divisible by three : " + matchResult);
+
+        matchResult = Arrays.stream(arr)
+                .allMatch(isDivisibleByFive);
+        System.out.println("divisible by five : " + matchResult);
+
+        matchResult = Arrays.stream(arr)
+                .allMatch(isDivisibleByThreeAndFive);
+        System.out.println("divisible by three and five : " + matchResult);
+
+        matchResult = Arrays.stream(arr)
+                .anyMatch(isDivisibleByThree);
+        System.out.println("divisible by three : " + matchResult);
+
+        matchResult = Arrays.stream(arr)
+                .anyMatch(isDivisibleByFive);
+        System.out.println("divisible by five : " + matchResult);
+
+        matchResult = Arrays.stream(arr)
+                .anyMatch(isDivisibleByThreeAndFive);
+        System.out.println("divisible by three and five : " + matchResult);
+
+    }
+
+    private static void collectEx() {
 
         List<String> strUpperCaseList =
                 Stream.of("one", "two", "three", "four", "five")
@@ -58,64 +220,16 @@ public class TerminalOperationDemo {
     }
 
 
-    private static void mthd4Count() {
-
-        long count = Stream.of("one", "two", "three", "four", "five")
-                .filter(e -> e.startsWith("t"))
-                .count();
-
-        System.out.println("count = " + count);
-
-    }
-
-    private static void mthd4FindAnyFindFist() {
-
-        // Find any -  but its always giving the first element only
-        Optional<String> anyElement =
-                Stream.of("one", "two", "three", "four", "five")
-                        .findAny();
-        System.out.println("Find any - " + anyElement.get());
-
-        // Find first
-        String firstElement =
-                Stream.of("nine", "ten")
-                        .findFirst()
-                        .orElse(null);
-
-        System.out.println("Find first - " + firstElement);
-    }
-
-    private static void mthd4StreamForEach() {
-        Stream<String> stream = Stream.of("fox", "elephant", "lion", "tiger", "bear");
-        stream.forEach(element -> System.out.println(element));
-    }
-
-
-    private static void mthd4MinMax() {
-        System.out.println("########## MinMax - String ###########");
-        List<String> animalList = Arrays.asList("be", "elephant", "lion", "tiger", "ant");
-        System.out.println("minString - " + animalList.stream().min(Comparator.comparing(s -> s.length())).get());
-        System.out.println("maxString - " + animalList.stream().max((s1, s2) -> s1.length() - s2.length()).get());
-
-        // MinMaxInteger
-        System.out.println("########## MinMax - Integer ###########");
-        List<Integer> numbers = Arrays.asList(14, 9, 12, 3, 10, 4, 20, 28);
-        System.out.println("min - " + numbers.stream().min((o1, o2) -> o1.compareTo(o2)).get());
-        System.out.println("max - " + numbers.stream().max(Integer::compare).get());
-
-    }
-
-
-    private static void method4Reduce() {
+    private static void reduceEx() {
 
         // Applying to reduce over IntStream
         OptionalInt optionalIntSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce((a, b) -> a + b);
         System.out.println("optionalIntSum = " + optionalIntSum);
         /*
-        * without initial (identity) value
-        * a = a + b
-        * b = iterate through each element of stream
-        * */
+         * without initial (identity) value
+         * a = a + b
+         * b = iterate through each element of stream
+         * */
         int intSum = IntStream.of(7, 5, 9, 2, 8, 1).reduce(0, (a, b) -> a + b);
         System.out.println("intSum = " + intSum);
         /*
@@ -124,7 +238,7 @@ public class TerminalOperationDemo {
          * b = iterate through each element of stream
          * */
 
-        System.out.println(Stream.of("one", "two", "three", "four").reduce("CountDown : ", (a, b) -> a +", "+ b));
+        System.out.println(Stream.of("one", "two", "three", "four").reduce("CountDown : ", (a, b) -> a + ", " + b));
 
 
         intSum = IntStream.range(1, 11).sum();
@@ -155,7 +269,7 @@ public class TerminalOperationDemo {
 
     }
 
-    private static void method4Reduce1() {
+    private static void reduceEx1() {
         List<Integer> numbers = Arrays.asList(3, 7, 2, 9, 6, 1, 5);
 
         int sum = numbers.stream().mapToInt(i -> i).sum();
@@ -174,21 +288,13 @@ public class TerminalOperationDemo {
         System.out.println("maxValueOptional = " + maxValueOptional.get());
 
         List<String> animals = Arrays.asList("fox", "elephant", "lion", "tiger", "bear");
-        // get the string with longest length
+        // get the string with the longest length
         Optional<String> longestString = animals.stream().reduce((e1, e2) -> e1.length() > e2.length() ? e1 : e2);
         System.out.println("longestString = " + longestString.get());
 
-
     }
 
-    private static void streamToObjectArray() {
-
-        Object[] objArray = Arrays.asList("fox", "elephant", "lion", "tiger", "bear").toArray();
-        System.out.println("objects[] = " + Arrays.toString(objArray));
-
-    }
-
-    private static void mthd4ConcatenateStreams() {
+    private static void concatenateStreams() {
 
         Stream<String> streamOne = Stream.of("one", "two", "three", "four", "five");
         Stream<String> streamTwo = Stream.of("six", "seven", "eight", "nine", "ten");
@@ -200,19 +306,5 @@ public class TerminalOperationDemo {
 
         System.out.println(stringsAsUppercaseList);
     }
-
-    private static void mthd4PrimitiveArrayToStreamAndBack() {
-
-        int intArr[] = {1, 9, 3, 10, 4, 20, 2};
-        Set<Integer> intSet = Arrays.stream(intArr)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        System.out.println("intSet - " + intSet);
-
-        int[] array = intSet.stream().mapToInt(i -> i).toArray();
-        System.out.println("array = " + Arrays.toString(array));
-    }
-
 
 }
