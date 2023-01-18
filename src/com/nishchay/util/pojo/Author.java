@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams.flatmap;
+package com.nishchay.util.pojo;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ public class Author {
     private String name;
     private List<Book> books;
     private Country country;
-
-    Author() {
-    }
 
     public String getName() {
         return name;

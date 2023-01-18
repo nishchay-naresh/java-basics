@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams.flatmap;
+package com.nishchay.util.pojo;
 
 import java.util.Optional;
 
