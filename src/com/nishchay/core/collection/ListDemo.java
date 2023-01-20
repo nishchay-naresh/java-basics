@@ -1,16 +1,18 @@
 package com.nishchay.core.collection;
 
-import com.nishchay.core.collection.comparator.Employee;
+
+import com.nishchay.util.pojo.Student;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class ListDemo {
 
     public static void main(String[] args) {
 
-//        listOfStrEx();
+        listOfStrEx();
         listOfEmpEx();
 
     }
@@ -48,13 +50,13 @@ public class ListDemo {
 
 
     private static void listOfEmpEx() {
-        List<Employee> empList  = Employee.populateEmployeeList();
-         // simple iterator example
-         Iterator<Employee> empIterator = empList.iterator();
-         while(empIterator.hasNext()) {
-             Employee emp = empIterator.next();
-            System.out.println("emp - " + emp);
-         }
+        List<Student> studList = Student.populateStudentList();
+        // simple iterator example
+        Iterator<Student> studIterator = studList.iterator();
+        while (studIterator.hasNext()) {
+            Student stud = studIterator.next();
+            System.out.println("stud - " + stud);
+        }
     }
 
 }
