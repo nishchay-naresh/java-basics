@@ -1,5 +1,8 @@
 package com.nishchay.java8.streams.flatmap;
 
+import com.nishchay.util.pojo.Author;
+import com.nishchay.util.pojo.Country;
+
 import java.util.Optional;
 
 
@@ -8,10 +11,10 @@ public class OptionalMapDemo {
     public static void main(String[] args) {
 
         mapExample1();
-//        mapExample2();
+        mapExample2();
 
-//        flatMapExample1();
-//        flatMapExample2();
+        flatMapExample1();
+        flatMapExample2();
 
     }
 

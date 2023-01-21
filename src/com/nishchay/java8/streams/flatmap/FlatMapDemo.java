@@ -1,5 +1,9 @@
 package com.nishchay.java8.streams.flatmap;
 
+import com.nishchay.util.pojo.Author;
+import com.nishchay.util.pojo.Book;
+import com.nishchay.util.pojo.Country;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
