@@ -1,5 +1,7 @@
 package com.nishchay.core.collection.comparator;
 
+import com.nishchay.util.pojo.Student;
+
 import java.util.*;
 
 public class TreeSetSortDemo {
@@ -30,48 +32,49 @@ public class TreeSetSortDemo {
     private static void treeSetDemoWithComparator() {
 
 
-        List<Employee> employeeList = Employee.populateEmployeeList();
+        List<Student> studentList = Student.populateStudentList();
 
-        Set<Employee> empTSet = new TreeSet<>(employeeList);
+        Set<Student> studTSet = new TreeSet<>(studentList);
         System.out.println("                ######## Default(empNo) ordering #######");
-        empTSet.forEach(System.out::println);
+        studTSet.forEach(System.out::println);
 
-        empTSet = null;
-        empTSet = new TreeSet<>(Comparator.comparing(Employee::getEmpName));
-        empTSet.addAll(employeeList);
+        studTSet = null;
+        studTSet = new TreeSet<>(Comparator.comparing(Student::getStudName));
+        studTSet.addAll(studentList);
         System.out.println("                ######## Name wise ordering #######");
-        empTSet.forEach(System.out::println);
+        studTSet.forEach(System.out::println);
 
-        empTSet = null;
-        empTSet = new TreeSet<>(Comparator.comparing(Employee::getCity));
+        studTSet = null;
+        studTSet = new TreeSet<>(Comparator.comparing(Student::getCity));
         // TreeSet : emp with duplicate city name will be not gets added, only the first added entry will be there
-        empTSet.addAll(employeeList);
+        studTSet.addAll(studentList);
         System.out.println("                ######## City wise ordering #######");
-        empTSet.forEach(System.out::println);
+        studTSet.forEach(System.out::println);
     }
 }
 /*
  * O/P =>
+ *
  *	stringArrayList = [BBB, JJJ, ZZZ, AAA, QQQ, III]
  *	stringTreeSet = [AAA, BBB, III, JJJ, QQQ, ZZZ]
  *	                ######## Default(empNo) ordering #######
- *	Employee{empName='SMITH', deptName='RESEARCH', job='CLERK', empNo=7369, city='DALLAS'}
- *	Employee{empName='ALLEN', deptName='SALES', job='SALESMAN', empNo=7499, city='CHICAGO'}
- *	Employee{empName='CLARK', deptName='ACCOUNTING', job='MANAGER', empNo=7782, city='NEW YORK'}
- *	Employee{empName='KING', deptName='ACCOUNTING', job='PRESIDENT', empNo=7839, city='NEW YORK'}
- *	Employee{empName='TURNER', deptName='SALES', job='SALESMAN', empNo=7844, city='CHICAGO'}
- *	Employee{empName='JAMES', deptName='SALES', job='CLERK', empNo=7900, city='CHICAGO'}
+ *	Student{studName='SMITH', deptName='RESEARCH', job='CLERK', studNo=7369, city='DALLAS'}
+ *	Student{studName='ALLEN', deptName='SALES', job='SALESMAN', studNo=7499, city='CHICAGO'}
+ *	Student{studName='CLARK', deptName='ACCOUNTING', job='MANAGER', studNo=7782, city='NEW YORK'}
+ *	Student{studName='KING', deptName='ACCOUNTING', job='PRESIDENT', studNo=7839, city='NEW YORK'}
+ *	Student{studName='TURNER', deptName='SALES', job='SALESMAN', studNo=7844, city='CHICAGO'}
+ *	Student{studName='JAMES', deptName='SALES', job='CLERK', studNo=7900, city='CHICAGO'}
  *	                ######## Name wise ordering #######
- *	Employee{empName='ALLEN', deptName='SALES', job='SALESMAN', empNo=7499, city='CHICAGO'}
- *	Employee{empName='CLARK', deptName='ACCOUNTING', job='MANAGER', empNo=7782, city='NEW YORK'}
- *	Employee{empName='JAMES', deptName='SALES', job='CLERK', empNo=7900, city='CHICAGO'}
- *	Employee{empName='KING', deptName='ACCOUNTING', job='PRESIDENT', empNo=7839, city='NEW YORK'}
- *	Employee{empName='SMITH', deptName='RESEARCH', job='CLERK', empNo=7369, city='DALLAS'}
- *	Employee{empName='TURNER', deptName='SALES', job='SALESMAN', empNo=7844, city='CHICAGO'}
+ *	Student{studName='ALLEN', deptName='SALES', job='SALESMAN', studNo=7499, city='CHICAGO'}
+ *	Student{studName='CLARK', deptName='ACCOUNTING', job='MANAGER', studNo=7782, city='NEW YORK'}
+ *	Student{studName='JAMES', deptName='SALES', job='CLERK', studNo=7900, city='CHICAGO'}
+ *	Student{studName='KING', deptName='ACCOUNTING', job='PRESIDENT', studNo=7839, city='NEW YORK'}
+ *	Student{studName='SMITH', deptName='RESEARCH', job='CLERK', studNo=7369, city='DALLAS'}
+ *	Student{studName='TURNER', deptName='SALES', job='SALESMAN', studNo=7844, city='CHICAGO'}
  *	                ######## City wise ordering #######
- *	Employee{empName='ALLEN', deptName='SALES', job='SALESMAN', empNo=7499, city='CHICAGO'}
- *	Employee{empName='SMITH', deptName='RESEARCH', job='CLERK', empNo=7369, city='DALLAS'}
- *	Employee{empName='CLARK', deptName='ACCOUNTING', job='MANAGER', empNo=7782, city='NEW YORK'}
+ *	Student{studName='ALLEN', deptName='SALES', job='SALESMAN', studNo=7499, city='CHICAGO'}
+ *	Student{studName='SMITH', deptName='RESEARCH', job='CLERK', studNo=7369, city='DALLAS'}
+ *	Student{studName='CLARK', deptName='ACCOUNTING', job='MANAGER', studNo=7782, city='NEW YORK'}
  *
  * */
 
