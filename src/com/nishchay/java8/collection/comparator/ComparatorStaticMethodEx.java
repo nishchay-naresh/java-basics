@@ -2,45 +2,43 @@ package com.nishchay.java8.collection.comparator;
 
 
 import com.nishchay.ds.string.freq.StringFrequencyUtility;
+import com.nishchay.util.pojo.Student;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 public class ComparatorStaticMethodEx {
 
     public static void main(String[] args) {
 
-//        naturalOrder_reverseOrder_ex();
+        naturalOrderReverseOrderEx();
 
-/*
-        List<Employee> employeeList = populateEmployeeList();
-        System.out.println(" --------------- Original List -----------------");
-        employeeList.forEach(System.out::println);
+        List<Student> studentList = Student.populateStudentList();
+        System.out.println(" ===================== Original List ===================== ");
+        studentList.forEach(System.out::println);
 
-        comparing_ex(employeeList);
-        comparingXxx_ex(employeeList);
-        thenComparing_ex(employeeList);
-        nullsLast_nullsFirst_ex();
-*/
+        System.out.println(" ==================== comparingEx ======================== ");
+        comparingEx(studentList);
 
-        thenComparing_ex_map();
+        System.out.println(" ==================== comparingXxxEx ===================== ");
+        comparingXxxEx(studentList);
+
+        System.out.println(" ==================== thenComparingEx  ==================== ");
+        thenComparingEx(studentList);
+
+        System.out.println(" =================== nullsLastAndFirstEx  ================= ");
+        nullsLastAndFirstEx(studentList);
+
+        System.out.println(" ==================== thenComparingExMap  ================= ");
+        thenComparingExMap();
 
     }
 
 
     //    Using Comparator.naturalOrder() & Comparator.reverseOrder()
-    private static void naturalOrder_reverseOrder_ex() {
+    private static void naturalOrderReverseOrderEx() {
 
-        List<String> animals = new ArrayList<>();
-        animals.add("dog");
-        animals.add("penguin");
-        animals.add("cat");
-        animals.add("panther");
-        animals.add("zebra");
-        animals.add("rat");
-        animals.add("donkey");
+        List<String> animals = Arrays.asList("tiger", "lion", "bear", "panther", "zebra", "fox", "deer");
 
         System.out.println(" --------------- Original List -----------------");
         animals.forEach(System.out::println);
@@ -54,68 +52,91 @@ public class ComparatorStaticMethodEx {
         animals.forEach(System.out::println);
     }
 
-    private static void comparing_ex(List<Employee> employeeList) {
+    private static void comparingEx(List<Student> studentList) {
 
         // Using Comparator.comparing(-)
-        System.out.println(" --------------- Sorting based on Names -----------------");
-        Comparator<Employee> nameComparator = Comparator.comparing(Employee::getName);
-        employeeList.sort(nameComparator);
-        employeeList.forEach(System.out::println);
+        System.out.println(" --------------- Sorting based on StudName -----------------");
+        Comparator<Student> nameComparator = (Student s1, Student s2) -> s1.getStudName().compareTo(s2.getDeptName());
+        // Comparator<Student> nameComparator = Comparator.comparing(Student::getStudName);
+        studentList.sort(nameComparator);
+        studentList.forEach(System.out::println);
 
+        System.out.println(" --------------- Sorting based on studNo -----------------");
+        // Comparator<Student> noComparator = (Student s1, Student s2) -> s1.getStudNo() - s2.getStudNo();
+        Comparator<Student> noComparator = Comparator.comparing(Student::getStudNo);
+        studentList.sort(noComparator);
+        studentList.forEach(System.out::println);
 
         System.out.println(" --------------- Sorting based on Names but in reverse order -----------------");
-//        Collections.sort(employeeList, nameComparator.reversed());
-//        employeeList.forEach(System.out::println);
-//         Another way to achieve this
-
-//        Using Comparator.reverseOrder()
-//        Comparator nameComparator1 = Comparator.comparing(Employee::getName, (o1, o2) -> o2.compareTo(o1));
-        Comparator<Employee> nameComparator1 = Comparator.comparing(Employee::getName, Comparator.reverseOrder());
-        employeeList.sort(nameComparator1);
-        employeeList.forEach(System.out::println);
+        Collections.sort(studentList, nameComparator.reversed());
+        studentList.forEach(System.out::println);
+        // Another way to achieve this Using Comparator.reverseOrder()
+        nameComparator = Comparator.comparing(Student::getStudName, Comparator.reverseOrder());
+        studentList.sort(nameComparator);
+        studentList.forEach(System.out::println);
 
         // Using Comparator.comparing(-,-)
-//        Collections.sort(employeeList, Comparator.comparing(Employee::getSalary,Double::compareTo));
-        System.out.println(" --------------- Sorting based on Names length -----------------");
-//        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, (o1, o2) -> o1.length()-o2.length());
-//        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparing(String::length));
-        Comparator<Employee> nameLengthComparator = Comparator.comparing(Employee::getName, Comparator.comparingInt(String::length));
-        employeeList.sort(nameLengthComparator);
-        employeeList.forEach(System.out::println);
+        System.out.println(" --------------- Sorting based on CityName length -----------------");
+        // Comparator<Student> cityLengthComparator = Comparator.comparing(Student::getCity, (o1, o2) -> o1.length() - o2.length());
+        // Comparator<Student> cityLengthComparator = Comparator.comparing(Student::getCity, Comparator.comparing(String::length));
+        Comparator<Student> cityLengthComparator = Comparator.comparing(Student::getCity, Comparator.comparingInt(String::length));
+        studentList.sort(cityLengthComparator);
+        studentList.forEach(System.out::println);
 
     }
 
 
-    private static void comparingXxx_ex(List<Employee> employeeList) {
+    private static void comparingXxxEx(List<Student> studentList) {
         // Using Comparator.comparingInt
-        System.out.println(" --------------- Sorting based on Age -----------------");
-        Comparator<Employee> ageComparator = Comparator.comparingInt(Employee::getAge);
-        employeeList.sort(ageComparator);
-        employeeList.forEach(System.out::println);
+        System.out.println(" --------------- Sorting based on StudNo -----------------");
+        Comparator<Student> ageComparator = Comparator.comparingInt(Student::getStudNo);
+        studentList.sort(ageComparator);
+        studentList.forEach(System.out::println);
 
         //Using Comparator.comparingDouble
-        System.out.println(" --------------- Sorting based on Salary -----------------");
-        Comparator<Employee> salaryComparator = Comparator.comparingDouble(Employee::getSalary);
-        employeeList.sort(salaryComparator);
-        employeeList.forEach(System.out::println);
+        System.out.println(" --------------- Sorting based on Marks -----------------");
+        Comparator<Student> salaryComparator = Comparator.comparingDouble(Student::getMarks);
+        studentList.sort(salaryComparator);
+        studentList.forEach(System.out::println);
     }
 
-    //        Using Comparator.thenComparing
-    //    With Comparator.thenComparing() method, we can use multiple comparators when sorting objects.
-    //        Adding multiple sorting criteria, if age is same , go for cityName
-    private static void thenComparing_ex(List<Employee> employeeList) {
+    //    Comparator.thenComparing - composting two comparator using - thenComparing
+    //    Adding multiple sorting criteria, if city is same then go for marks
+    private static void thenComparingEx(List<Student> studentList) {
 
-        Comparator<Employee> ageThenCityNameComparator = Comparator.comparing(Employee::getAge)
-                .thenComparing(Employee::getCity);
+        Comparator<Student> cityThenMarksComparator = Comparator.comparing(Student::getCity)
+                .thenComparing(Student::getMarks);
 
-        System.out.println(" --------------- Sorting based on Age then Name -----------------");
-        employeeList.sort(ageThenCityNameComparator);
-        employeeList.forEach(System.out::println);
+        System.out.println(" --------------- Sorting based on City then Marks -----------------");
+        studentList.sort(cityThenMarksComparator);
+        studentList.forEach(System.out::println);
     }
 
-    private static void thenComparing_ex_map() {
+    private static void nullsLastAndFirstEx(List<Student> studentList) {
 
-        int[]arr = {7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
+        studentList.add(null);
+        studentList.add(null);
+
+        Comparator<Student> nameComparator = Comparator.comparing(Student::getStudName);
+        Comparator<Student> employeeNameComparator_nullLast = Comparator.nullsLast(nameComparator);
+
+        studentList.sort(employeeNameComparator_nullLast);
+        System.out.println(" --------------- List with name wise sorting with nullLast -----------------");
+        studentList.forEach(System.out::println);
+
+
+        Comparator<Student> cityComparator = Comparator.comparing(Student::getCity);
+        Comparator<Student> cityComparator_nullFirst = Comparator.nullsFirst(cityComparator);
+
+        studentList.sort(cityComparator_nullFirst);
+        System.out.println(" --------------- List with City wise sorting with nullFirst -----------------");
+        studentList.forEach(System.out::println);
+
+    }
+
+    private static void thenComparingExMap() {
+
+        int[] arr = {7, 10, 11, 5, 2, 5, 5, 7, 11, 8, 9};
         Map<Integer,Integer> freqMap = StringFrequencyUtility.getFrequencyMap(arr);
 
         List<Map.Entry<Integer,Integer>> entryList = new ArrayList<>(freqMap.entrySet());
@@ -126,41 +147,7 @@ public class ComparatorStaticMethodEx {
         Comparator<Map.Entry<Integer,Integer>> valueThenKeyComparator = valueComparator.thenComparing(keyComparator);
 
         entryList.sort(valueThenKeyComparator);
-
         System.out.println("Sorted list = " + entryList);
-    }
-    private static void nullsLast_nullsFirst_ex() {
-        List<Employee> employeeList = populateEmployeeList();
-        employeeList.add(null);
-        employeeList.add(null);
-
-        Comparator<Employee> nameComparator = Comparator.comparing(Employee::getName);
-        Comparator<Employee> employeeNameComparator_nullLast = Comparator.nullsLast(nameComparator);
-
-        employeeList.sort(employeeNameComparator_nullLast);
-        System.out.println(" --------------- List with name waise sorting with nullLast -----------------");
-        employeeList.forEach(System.out::println);
-
-
-        Comparator<Employee> cityComparator = Comparator.comparing(Employee::getCity);
-        Comparator<Employee> cityComparator_nullFirst = Comparator.nullsFirst(cityComparator);
-
-        employeeList.sort(cityComparator_nullFirst);
-        System.out.println(" --------------- List with name waise sorting with nullLast -----------------");
-        employeeList.forEach(System.out::println);
-
-    }
-
-
-    public static List<Employee> populateEmployeeList() {
-        List<Employee> employeeList = new ArrayList<>();
-
-        employeeList.add(new Employee("Keith", 35, 4000.0, "Delhi"));
-        employeeList.add(new Employee("John", 25, 3000.0, "Mumbai"));
-        employeeList.add(new Employee("Austin", 22, 2000.0, "Pune"));
-        employeeList.add(new Employee("Zeny", 25, 3500.0, "Kolkata"));
-        employeeList.add(new Employee("Tim", 28, 5000.0, "Chennai"));
-        return employeeList;
     }
 
 }
