@@ -1,5 +1,7 @@
 package com.nishchay.java8.streams;
 
+import com.nishchay.util.pojo.Dish;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ public class NonTerminalOperationDemo {
 
         mapDemo();
         filterDemo();
+        mapFilterEX();
         distinctDemo();
         sortedDemo();
         limitDemo();
@@ -25,21 +28,24 @@ public class NonTerminalOperationDemo {
     }
 
 
+
+
     private static void createAndPrint() {
 
         Stream<String> stringStream = Stream.of("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
         System.out.println("########## Original List ###########");
         stringStream.forEach(System.out::println);
 
-//                stringStream.forEach(e -> System.out.println(e));
-//        Exception in thread "main" java.lang.IllegalStateException: stream has already been operated upon or closed
-//        After performing a terminal operation over a stream, we can't reuse the stream
+        // stringStream.forEach(e -> System.out.println(e));
+        // Exception in thread "main" java.lang.IllegalStateException: stream has already been operated upon or closed
+        // After performing a terminal operation over a stream, we can't reuse the stream
 
     }
 
 
     private static void mapDemo() {
 
+        System.out.println("########## applying map operation over stream ###########");
         // using lambda
          /*
          Stream.of("ONE", "two", "THREE", "four", "FIVE")
@@ -48,7 +54,6 @@ public class NonTerminalOperationDemo {
                 .forEach(s -> System.out.print(s + ", "));
          */
         // using method reference
-        System.out.println("########## applying map operation over stream ###########");
         Stream.of("ONE", "two", "THREE", "four", "FIVE")
                 .map(String::toLowerCase)
                 .map(String::toUpperCase)
@@ -62,6 +67,33 @@ public class NonTerminalOperationDemo {
                 .forEach(System.out::println);
     }
 
+
+    private static void mapFilterEX() {
+        List<String> names;
+
+        /*
+        names = Dish.menu.stream()
+                .filter(d -> d.getCalories() > 500)
+                .map(Dish::getName)
+                .collect(Collectors.toList());
+        System.out.println("names = " + names);
+        */
+
+        // descriptive way to write filter() & map() - putting more statements
+        // printing the current processing element - a debugging technique
+       names = Dish.menu.stream()
+                .filter(d -> {
+                    System.out.println("filtering - " + d.getName());
+                    return d.getCalories() > 500;}
+                )
+                .map(d -> {
+                    System.out.println("mapping - " + d.getName());
+                    return d.getName();}
+                )
+                .collect(Collectors.toList());
+        System.out.println("names = " + names);
+
+    }
     private static void distinctDemo() {
 
         // Printing only distinct numbers
@@ -97,11 +129,11 @@ public class NonTerminalOperationDemo {
 
     private static void peekDemo() {
 
-/*
+        /*
         System.out.println("######### Applying peek ###########");
         Stream.of("one", "two", "three", "four", "five")
                 .peek(value -> System.out.println(value));
-*/
+        */
 
         System.out.println("######### Applying peek ###########");
         List<String> list = Stream.of("one", "two", "three", "four", "five")
