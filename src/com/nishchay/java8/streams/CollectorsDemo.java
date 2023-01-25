@@ -40,10 +40,10 @@ public class CollectorsDemo {
 
         // wrong way to do this
         List<Integer> doubleOfEven = new ArrayList<>();
-        numbers. stream()
+        numbers.stream()
                 .filter(e -> e % 2 == 0)
                 .map(e -> e * 2)
-                . forEach(e -> doubleOfEven.add(e));
+                .forEach(e -> doubleOfEven.add(e));
 
         //mutability is OK, sharing is nice, shared mutability is devils work
         //friends don't let friends do shared mutation.
