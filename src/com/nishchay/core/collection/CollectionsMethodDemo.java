@@ -1,12 +1,11 @@
 package com.nishchay.core.collection;
 
-import com.nishchay.core.collection.comparator.Employee;
+import com.nishchay.util.pojo.Student;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class CollectionsMethodDemo {
 
@@ -49,13 +48,13 @@ public class CollectionsMethodDemo {
         ai.incrementAndGet();
         System.out.println(list);
 
-        System.out.println("----------------------------------Employee------------------------------");
-        Employee emp = new Employee("Rober Downey Jr ", "R&D", "Manager", 7900, "New York");
-        List<Employee> empList = Collections.nCopies(4, emp);
-        System.out.println(empList.get(0) + "\n" + empList.get(1) + "\n" + empList.get(2) + "\n" + empList.get(3));
-        emp.setEmpName("Iron Man");
-        emp.setEmpNo(9999);
-        System.out.println(empList.get(0) + "\n" + empList.get(1) + "\n" + empList.get(2) + "\n" + empList.get(3));
+        System.out.println("----------------------------------Student------------------------------");
+        Student stud = new Student(7900, "Rober Downey Jr ", "R&D", 62.52, "New York");
+        List<Student> studList = Collections.nCopies(4, stud);
+        System.out.println(studList.get(0) + "\n" + studList.get(1) + "\n" + studList.get(2) + "\n" + studList.get(3));
+        stud.setStudName("Iron Man");
+        stud.setStudNo(9999);
+        System.out.println(studList.get(0) + "\n" + studList.get(1) + "\n" + studList.get(2) + "\n" + studList.get(3));
 
     }
 
