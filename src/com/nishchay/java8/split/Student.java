@@ -1,5 +1,6 @@
 package com.nishchay.java8.split;
 
+// TODO - need to replace this Student class with - com.nishchay.util.pojo.Student
 public class Student {
     String name;
     int age;
