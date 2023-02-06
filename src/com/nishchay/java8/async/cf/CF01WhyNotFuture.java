@@ -30,8 +30,8 @@ public class CF01WhyNotFuture {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-//        canNotCompleteAFuture();
-//        futuresCanNotBeCombined();
+        canNotCompleteAFuture();
+        futuresCanNotBeCombined();
         noSupportForExceptionHandling();
 
     }
