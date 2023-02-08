@@ -19,8 +19,8 @@ public class ExceptionHandling {
 
     public static void main(String[] args) {
 
-//        handleEx();
-//        exceptionallyEx();
+        handleEx();
+        exceptionallyEx();
 
         completingAFutureExceptionally();
 
