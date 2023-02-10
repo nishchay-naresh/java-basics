@@ -20,9 +20,9 @@ public class PredicateEx {
 
     public static void main(String[] args) {
 
-//        simplePredicateEx();
-//        negateEx();
-//        composePredicateEx();
+        simplePredicateEx();
+        negateEx();
+        composePredicateEx();
         composePredicateEx_Object();
 
     }
