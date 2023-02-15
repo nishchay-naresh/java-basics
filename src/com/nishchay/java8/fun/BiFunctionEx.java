@@ -1,14 +1,18 @@
 package com.nishchay.java8.fun;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
 /*
- *  BiFunction<T, U, R> f = t + u = r
- * R apply(T t, U u)
+ *
+ *  BiFunction<inputType1,inputType2, outputType>
+ *  java.util.function.BiFunction<T, U, R>  :    T,U -> R      :	R apply(T t, U u);
+ *
+ * 1. R apply(T t, U u)
  *      – Applies this function to the given arguments and produces results.
- * default BiFunction andThen(Function after)
+ * 2. default BiFunction andThen(Function after)
  *      – Returns a composed function that first applies this function to its input, and then applies the after function to the result.
  *
  *
@@ -21,7 +25,7 @@ public class BiFunctionEx {
 
         hashMapComputeWithBiFunctionEx();
         hashMapMergeReplaceAllEx();
-//        hashMapPrintEx();
+        hashMapPrintEx();
 
     }
 
@@ -97,6 +101,24 @@ public class BiFunctionEx {
         BiFunction<Integer, String, String> f2 = (key, value) -> value.replace(msg, "");
         hashMap.replaceAll(f2);
         System.out.println("HashMap using replaceAll() => " + hashMap);
+    }
+
+    // BiFunction to print map key and values, print number of occurrences of value with suffix
+    private static void hashMapPrintEx() {
+        Map<Integer, String> m = new HashMap<>();
+        m.put(1, "Peter");
+        m.put(2, "Mike");
+        m.put(3, "John");
+        m.put(4, "Mike");
+        m.put(5, "Peter");
+        m.put(6, "Anand");
+        m.put(7, "Peter");
+
+        // Collections.frequency to get number of occurances
+        BiFunction<Integer, String, String> f =
+                (key, value) -> "[Key="+key+", "+value+"("+ Collections.frequency(m.values(), value)+")]";
+
+        m.forEach((k,v)-> System.out.println(f.apply(k, v)));
     }
 
 }
