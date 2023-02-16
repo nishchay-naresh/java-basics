@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /*
+ *    Function<inputType, outputType>
  *	java.util.function.Function<T, R>	:    T -> R      :	R apply(T t);
  *
  *	T – Type of the input to the function.
