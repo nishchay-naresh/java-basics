@@ -23,7 +23,8 @@ public class BiFunctionEx {
 
         biFunctionBasicEx();
 
-        hashMapComputeWithBiFunctionEx();
+        computeWithBiFunctionEx();
+        computeIfAbsentWithBiFunctionEx();
         hashMapMergeReplaceAllEx();
         hashMapPrintEx();
 
@@ -48,11 +49,11 @@ public class BiFunctionEx {
 
 
     // BiFunction with compute and computeIfPresent Example
-    private static void hashMapComputeWithBiFunctionEx() {
+    private static void computeWithBiFunctionEx() {
 
         Map<Integer, String> hashMap = new HashMap<>();
 
-        String defaultUser = "Anonymous";
+
         hashMap.put(7, "Peter");
         hashMap.put(5, "Philip");
         hashMap.put(2, "Martin");
@@ -62,17 +63,48 @@ public class BiFunctionEx {
         // Using compute(key, BiFunction)
         //hashMap.compute(4, (key, oldValue) -> oldValue.concat(msg));// throws NPE
 
-        BiFunction<Integer, String, String> f1 = (key, oldValue) -> oldValue == null ? defaultUser : oldValue.toUpperCase();
-        hashMap.compute(4, f1);
+        // String defaultUser = "Anonymous";
+        // BiFunction<Integer, String, String> f1 = (key, oldValue) -> oldValue == null ? defaultUser : oldValue.toUpperCase();
 
-        hashMap.compute(2, f1);
+        hashMap.compute(4, (key1, oldValue) -> {
+            if(oldValue == null){
+                return "Anonymous";
+            }else{
+                return oldValue.toUpperCase();
+            }
+        });
+
+        hashMap.compute(2, (key, oldValue) -> {
+            if(oldValue == null){
+                return "Anonymous";
+            }else{
+                return oldValue.toUpperCase();
+            }
+        });
+
+        hashMap.compute(10, (key, oldValue) -> {
+            if(oldValue == null){
+                return "Anonymous";
+            }else{
+                return oldValue.toUpperCase();
+            }
+        });
+
         System.out.println("HashMap post compute() => " + hashMap);
 
+
+    }
+
+    private static void computeIfAbsentWithBiFunctionEx() {
+
+        Map<String, Integer> hashMap = new HashMap<>();
+
+        hashMap.put("One", 1);
+        hashMap.put("Two", 2);
+
         // Using computeIfPresent(key, BiFunction)
-        String msg = "Hello ";
-        BiFunction<Integer, String, String> f2 = (key, oldValue) -> msg + oldValue + "!";
-        hashMap.computeIfPresent(7, f2);
-        hashMap.computeIfPresent(3, f2);
+        hashMap.computeIfPresent("Two", (key, oldValue) -> oldValue + 100);
+        hashMap.computeIfPresent("foo", (key, oldValue) -> oldValue + 1000);
         System.out.println("HashMap using computeIfPresent() => " + hashMap);
 
     }
