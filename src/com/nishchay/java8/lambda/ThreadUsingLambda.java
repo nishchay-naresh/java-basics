@@ -9,7 +9,7 @@ package com.nishchay.java8.lambda;
 * 2. lambda expression - passing the behaviour as en independent entity, which has been pointed by lambda
 *
 * */
-public class RunnableUsingLambda {
+public class ThreadUsingLambda {
 
     public static void main(String[] args) {
 
@@ -28,9 +28,22 @@ public class RunnableUsingLambda {
         /*
          * 2. Providing Runnable interface implementation using lambda expression
          * Only one class will be generated -  RunnableUsingLambda.class(main running class)
+         * assignment less programming
+         *
+         * Here we have converted the code to lambda expression rather than anonymous method or anonymous class
+         * Here Thread constructor is a higher order function -  which says your don’t have to pass object of runnable to me.
+         *  It's okay you can pass a function to me which have no name.
+         * This is actually is treating a Function as first class citizen.
+         * And that function is of course is lambda expression
+         *
          * */
         Thread t2 = new Thread(() -> System.out.println("Creating a thread using lambda expression"));
         t2.start();
+
+
+        Runnable task = () -> System.out.println("Explicit assignment of lambda");
+        Thread t3 = new Thread(task);
+        t3.start();
 
     }
 
