@@ -1,8 +1,10 @@
 package com.nishchay.java8.streams;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DSQnsUsingJava8 {
 
@@ -10,6 +12,7 @@ public class DSQnsUsingJava8 {
 
 
         noStartsWith();
+        arrayReverseUsingStream();
 
     }
 
@@ -35,6 +38,22 @@ public class DSQnsUsingJava8 {
 
     }
 
+
+    /*
+     *    Hi I have one array of integer
+     *    int[] intArray = {1, 3, 8, 4, 6};
+     *    How to reverse the array using stream
+     *
+     * */
+    private static void arrayReverseUsingStream() {
+
+        int[] intArray = {1, 3, 8, 4, 6};
+
+        int[] reversed = IntStream.of(intArray).boxed().sorted(Comparator.reverseOrder()).mapToInt(i -> i).toArray();
+
+        System.out.println("intArray = " + Arrays.toString(intArray));
+        System.out.println("reversed = " + Arrays.toString(reversed));
+    }
 
 }
 
