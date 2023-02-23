@@ -3,6 +3,8 @@ package com.nishchay.java8.streams;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,6 +15,8 @@ public class DSQnsUsingJava8 {
 
         noStartsWith();
         arrayReverseUsingStream();
+        charFrequency();
+
 
     }
 
@@ -54,6 +58,32 @@ public class DSQnsUsingJava8 {
         System.out.println("intArray = " + Arrays.toString(intArray));
         System.out.println("reversed = " + Arrays.toString(reversed));
     }
+
+    /*
+     * Find the frequency of each char in string array using stream api
+     *
+     * String[] strArray = {"i", "love", "java"};
+     * freqMap = {a=2, e=1, v=2, i=1, j=1, l=1, o=1}
+     * */
+    private static void charFrequency() {
+
+        String[] strArray = {"i", "love", "java"};
+
+/*
+        Map<Character, Long> freqMap =
+                Arrays.stream(strArray)
+                        .flatMap(s -> s.chars().boxed())
+                        .collect(Collectors.groupingBy(x -> (char) (int) x, Collectors.counting()));
+*/
+
+        Map<Character, Long> freqMap =
+                Arrays.stream(strArray)
+                        .flatMap(s -> s.chars().mapToObj(c -> (char) c))
+                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        System.out.println("freqMap = " + freqMap);
+    }
+
 
 }
 
