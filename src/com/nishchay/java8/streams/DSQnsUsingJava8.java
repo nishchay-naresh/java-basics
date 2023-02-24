@@ -12,11 +12,10 @@ public class DSQnsUsingJava8 {
 
     public static void main(String[] args) {
 
-
         noStartsWith();
         arrayReverseUsingStream();
         charFrequency();
-
+        stringToInteger();
 
     }
 
@@ -84,6 +83,25 @@ public class DSQnsUsingJava8 {
         System.out.println("freqMap = " + freqMap);
     }
 
+    /*
+     * One list of string is there, like below
+     * List<String> strList = Arrays.asList("15Shades", "5Th Cross", "98.3FM", "1,233.00$ USD", "java8")
+     * List<Double> intList = {6, 5, 98.3, 1233.00, 8};
+     * extract the numbers from string list and add to the Double list
+     *
+     * https://www.baeldung.com/java-string-retain-digits-decimal
+     * */
+    private static void stringToInteger() {
+        List<String> strList = Arrays.asList("Delhi6", "5Th Cross", "98.3FM", "1,233.00$ USD", "text", "java8");
+
+        List<Double> doubleList = strList.stream()
+                .map(s -> s.replaceAll("[^\\d.]", ""))
+                .filter(( s -> !s.isEmpty()))
+                .map(Double::parseDouble)
+                .collect(Collectors.toList());
+        System.out.println("doubleList = " + doubleList);
+
+    }
 
 }
 
