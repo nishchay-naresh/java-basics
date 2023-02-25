@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.nishchay.java8.async.Utils.*;
+import static com.nishchay.util.Utils.*;
 
 /*
  * ============ Callback =================

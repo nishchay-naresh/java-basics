@@ -1,6 +1,6 @@
 package com.nishchay.java8.async.cf;
 
-import com.nishchay.java8.async.Utils;
+import com.nishchay.util.Utils;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

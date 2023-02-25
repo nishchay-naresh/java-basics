@@ -2,7 +2,7 @@ package com.nishchay.java8.async.cf.combine;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.nishchay.java8.async.Utils.delay;
+import static com.nishchay.util.Utils.delay;
 
 public class AnyAllOfExample {
 
@@ -10,7 +10,7 @@ public class AnyAllOfExample {
     public static void main(String[] args) {
 
         allOfEx();
-//        anyOfEx();
+        anyOfEx();
 
     }
 

@@ -1,7 +1,7 @@
 package com.nishchay.java8.async.cf;
 
-import static com.nishchay.java8.async.Utils.create;
-import static com.nishchay.java8.async.Utils.printIt;
+import static com.nishchay.util.Utils.create;
+import static com.nishchay.util.Utils.printIt;
 
 public class CF07CompFutureNeverEnds {
 

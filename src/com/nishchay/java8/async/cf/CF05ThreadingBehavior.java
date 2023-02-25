@@ -4,7 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import static com.nishchay.java8.async.Utils.delay;
+import static com.nishchay.util.Utils.delay;
 
 /*
 *
