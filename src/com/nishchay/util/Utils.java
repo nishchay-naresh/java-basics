@@ -1,4 +1,4 @@
-package com.nishchay.java8.async;
+package com.nishchay.util;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
