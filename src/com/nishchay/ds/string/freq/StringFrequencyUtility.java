@@ -53,8 +53,11 @@ public class StringFrequencyUtility {
         return feqMap;
     }
 
-
-    // Count the frequency of each no in a integer array
+    // Count the frequency of each no in integer array
+    /*
+    *
+    * return - ordered frequency map
+    * */
     public static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
 
         Map<Integer, Integer> feqMap = new HashMap<>();
@@ -81,5 +84,32 @@ public class StringFrequencyUtility {
         return freqLinkedHashMap;
     }
 
+
+    /*
+     *   grouping function to return Map<String, Integer> instead of Map<String,Long>
+     *   all 3 ways will give you an ordered frequency map in the form of linkedHashMap
+     *
+     * https://stackoverflow.com/questions/55353829/java-8-grouping-function-to-return-mapstring-integer-instead-of-mapstring-lo
+     * */
+    static Map<String, Integer> getFrequencyMapStream_intCount(String[] strArray) {
+
+        Map<String, Integer> freqMap;
+
+        // can perform a conversion of Long to Integer after the counting like
+        freqMap = Arrays.stream(strArray)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new,
+                        Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
+
+        // you may also count using an int value type in the first place
+        freqMap = Arrays.stream(strArray)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new,
+                        Collectors.summingInt(word -> 1)));
+
+        // This is summing a one for each word. You can use the same approach with the toMap collector
+        Map<String, Integer> map = Arrays.stream(strArray)
+                .collect(Collectors.toMap(Function.identity(), word -> 1, Integer::sum));
+
+        return freqMap;
+    }
 
 }
