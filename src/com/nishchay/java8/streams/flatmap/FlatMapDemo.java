@@ -24,6 +24,16 @@ public class FlatMapDemo {
 
     }
 
+    /*
+     * flatMap() - Returns a stream consisting of the results of replacing each element of this stream with the contents of a mapped stream produced by applying the provided mapping function to each element
+     *   - not gives same no of output as no of input
+     *   - since doing a transformation, collection/array of stream -> Stream of elements
+     *
+     * For primitive , below variant of map can be used :
+     * flatMapToInt(), flatMapToLong(), flatMapToDouble()
+     *
+     *
+     * */
     private static void flatMapEx() {
         // Find unique chars from list of words
         String[] arrOfWords = {"Goodbye", "World"};
