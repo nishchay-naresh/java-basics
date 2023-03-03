@@ -1,9 +1,6 @@
 package com.nishchay.java8.fun;
 
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,18 +12,24 @@ import java.util.stream.Stream;
  *	T – Type of the input to the function.
  *	R – Type of the result of the function.
  *
+ *  We may replace the lambda with a method reference that matches passed and returned value types.
+ *
  * Methods in Function Interface :
  *  1. apply()
  *	2. andThen()
  *	3. compose()
  *	4. identity()
  *
+ *
+ * https://www.baeldung.com/java-8-functional-interfaces
  * */
 public class FunctionEx {
 
     public static void main(String[] args) {
 
         applyEx();
+        functionExWithGenerics();
+
         identityEx();
         identityEx_toMap();
 
@@ -60,6 +63,48 @@ public class FunctionEx {
         Function<String, Integer> funStrLength = String::length;
         System.out.println(funStrLength.apply("java")); // 4
 
+    }
+
+    private static void functionExWithGenerics(){
+
+        Map<Number, CharSequence> map = new HashMap<>();
+        map.put(1, "one");
+        map.put(2, "two");
+        map.put(3, "three");
+
+        Function<Iterable<Number>, Iterable<? extends Map.Entry<Number, CharSequence>>> mappingFunction =  numbers -> map.entrySet();
+        System.out.println("mappingFunction.apply(Collections.singleton(3)) - " + mappingFunction.apply(Collections.singleton(3)));
+        System.out.println("mappingFunction.apply(Collections.singleton(1)) - " + mappingFunction.apply(Collections.singleton(1)));
+
+        System.out.println("mappingFunction.apply(new HashSet<>(Arrays.asList(1, 2, 3))) - " + mappingFunction.apply(new HashSet<>(Arrays.asList(1, 2, 3))));
+        System.out.println("mappingFunction.apply(new HashSet<>(Arrays.asList(1, 2))) - " + mappingFunction.apply(new HashSet<>(Arrays.asList(1, 2))));
+
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        Function<Iterable<Number>, Iterable<? extends Map.Entry<Number, CharSequence>>> mappingFunction1 =
+
+                numbers -> {
+                    int key = (int) numbers.iterator().next();
+                    if (key == 1) {
+                        return Collections.singletonList(new AbstractMap.SimpleImmutableEntry<>(1, "one"));
+                    } else if (key == 2) {
+                        return Collections.singletonList(new AbstractMap.SimpleImmutableEntry<>(2, "two"));
+                    } else if (key == 3) {
+                        return Collections.singletonList(new AbstractMap.SimpleImmutableEntry<>(3, "three"));
+                    }
+                    return Collections.singletonList(new AbstractMap.SimpleImmutableEntry<>(-1, null));
+                };
+
+
+        System.out.println("mappingFunction1.apply(Collections.singleton(3)) - " + mappingFunction1.apply(Collections.singleton(3)));
+        System.out.println("mappingFunction1.apply(Collections.singleton(2)) - " + mappingFunction1.apply(Collections.singleton(2)));
+        System.out.println("mappingFunction1.apply(Collections.singleton(1)) - " + mappingFunction1.apply(Collections.singleton(1)));
+        System.out.println("mappingFunction1.apply(Collections.singleton(1)) - " + mappingFunction1.apply(Collections.singleton(9)));
+
+    }
+
+    private static Map.Entry<? extends Number, ? extends CharSequence> newMapEntry(Number key, CharSequence value) {
+        return new AbstractMap.SimpleEntry<>(key, value);
     }
 
     /*
