@@ -211,6 +211,11 @@ public class FunctionEx {
     }
 
 
+    /*
+    * Applying a mappingFunction for each element of list
+    * List<T>  ->   t   ->    mappingFun.apply(t)   ->  r   ->      List<R>
+    *
+    * */
     public static <T, R> List<R> map(List<T> list, Function<T, R> mappingFun) {
 
         /*
