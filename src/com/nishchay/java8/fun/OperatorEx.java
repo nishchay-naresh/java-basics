@@ -1,5 +1,7 @@
 package com.nishchay.java8.fun;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
@@ -7,11 +9,16 @@ import java.util.function.UnaryOperator;
 
 
 /*
+ *  java.util.function.UnaryOperator<T>	 -  child of Function<T, R>
+ *
+ *  java.util.function.UnaryOperator<T>	    :    T -> T         :	T apply(T t);
+ *  java.util.function.BinaryOperator<T>	:    (T,T) -> T     :	T apply(T t1, Tt2);
+ *
  *
  *	The way we have many function in Package java.util.function, Similarly we have so many Operators as well.
  *
  *	These Operators are same like Function, Only difference their type is fixed ( input and return type will always be same)
- *
+ *  For primitive:
  *	UnaryOperator<T>                    BinaryOperator<T>
  *	IntUnaryOperator                    IntBinaryOperator
  *	LongUnaryOperator                   LongBinaryOperator
@@ -29,11 +36,14 @@ import java.util.function.UnaryOperator;
  * Can be referred at -
  * https://github.com/nnares/design-pattern/blob/main/src/com/nishchay/dp/structural/delegator/Launcher.java
  *
+ *
+ *
 * */
 public class OperatorEx {
 
     public static void main(String[] args) {
 
+        operatorEx();
         unaryOperatorEx();
         System.out.println("------------------------------");
         binaryOperatorEx();
@@ -41,6 +51,16 @@ public class OperatorEx {
     }
 
 
+    private static void operatorEx(){
+        List<String> names = Arrays.asList("java", "go", "python");
+        names.replaceAll(name -> name.toUpperCase());
+        System.out.println("names = " + names);
+
+        List<Integer> values = Arrays.asList(3, 5, 8, 9, 12);
+        int sum = values.stream()
+                .reduce(0, (i1, i2) -> i1 + i2);
+        System.out.println("sum = " + sum);
+    }
 
     private static void unaryOperatorEx() {
         UnaryOperator<String> stringUnaryOperator = e -> "Hello " + e;
@@ -53,9 +73,9 @@ public class OperatorEx {
         System.out.println("result - " + intUnaryOperator.applyAsInt(5));
         IntUnaryOperator discountedPrice = e -> (int) (e * 0.9);
         System.out.println("discount - " + discountedPrice.applyAsInt(70));
-        // similarly we have LongUnaryOperator, DoubleUnaryOperator
-        
     }
+
+
 
     private static void binaryOperatorEx() {
         BinaryOperator<String> stringBinaryOperator = (e1,e2) -> e1 + e2;
