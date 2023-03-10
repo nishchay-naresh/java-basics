@@ -5,22 +5,25 @@ import com.nishchay.java8.streams.query.Employee;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 
 /*
  *	java.util.function.Predicate<T>	:    T -> boolean      :	boolean test(T t);
+ *	A predicate is a function that receives a value and returns a boolean value
  *
- *	T – Type of input argument
- *
+ *  A typical use case of the Predicate lambda is to filter a collection of values
  * https://zetcode.com/java/predicate/
+ *
  * */
 public class PredicateEx {
 
     public static void main(String[] args) {
 
         simplePredicateEx();
+        simplePredicateEx1();
         negateEx();
         composePredicateEx();
         composePredicateEx_Object();
@@ -36,6 +39,22 @@ public class PredicateEx {
         System.out.println("21 - " + result);
     }
 
+    private static void simplePredicateEx1() {
+
+        List<String> strList = Arrays.asList("java", "go", null, "python", null, "ruby", null, "redis");
+        System.out.println("original list = " + strList);
+        strList = strList.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        System.out.println("update list = " + strList);
+
+        strList = Arrays.asList("Delhi6", "5Th Cross", "98.3FM", "1,233.00$ USD", "text", "java8");
+        List<Double> doubleList = strList.stream()
+                .map(s -> s.replaceAll("[^\\d.]", ""))
+                .filter((s -> !s.isEmpty()))
+                .map(Double::parseDouble)
+                .collect(Collectors.toList());
+        System.out.println("doubleList = " + doubleList);
+    }
+
     private static void negateEx() {
         Predicate<String> startWithA = x -> x.startsWith("A");
 
@@ -49,12 +68,12 @@ public class PredicateEx {
     }
 
     /*
-    *  Predicate Composition
-    *  The Predicate interface (java.util.function.Predicate) contains a few methods that help you compose new Predicate instances from other Predicate instances.
-    *       and()
-    *       or()
-    *
-    * */
+     *  Predicate Composition
+     *  The Predicate interface (java.util.function.Predicate) contains a few methods that help you compose new Predicate instances from other Predicate instances.
+     *       and()
+     *       or()
+     *
+     * */
     private static void composePredicateEx() {
 
         Predicate<Integer> ageLowerLimit = i -> (i > 25);
@@ -64,7 +83,7 @@ public class PredicateEx {
         System.out.println("45 - " + eligibleAge.test(45));
 
 //        Predicate<String> weekDays = value -> value.startsWith("M|T|W|F");
-        Predicate<String> weekDays = value -> value.substring(0,1).matches("M|T|W|F");
+        Predicate<String> weekDays = value -> value.substring(0, 1).matches("M|T|W|F");
         Predicate<String> weekEnds = value -> value.startsWith("S");
 
         System.out.println("Mon - " + weekDays.test("Mon"));
@@ -73,7 +92,6 @@ public class PredicateEx {
         System.out.println("Tue - " + weekEnds.test("Tue"));
 
         Predicate<String> days = weekDays.or(weekEnds);
-
 
 
     }
