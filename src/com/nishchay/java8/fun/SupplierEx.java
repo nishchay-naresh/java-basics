@@ -11,11 +11,24 @@ import java.util.stream.Stream;
 
 import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
 
+/*
+ *	java.util.function.Supplier<T>	:    () ->   T   :	T get();
+ *	T – Type of input argument
+ *  does not take any arguments
+ *  typically use it for lazy generation of values
+ *
+ *
+ *  For primitive : BooleanSupplier, DoubleSupplier, LongSupplier and IntSupplier
+ *  whose return types are corresponding primitives
+ *
+ * */
+
 public class SupplierEx {
 
     public static void main(String[] args) {
 
         basicEx();
+        lazyValueEx();
         castSupplier();
         supplierOfObject();
 
@@ -38,6 +51,18 @@ public class SupplierEx {
 
         System.out.println("result = " + result);
     }
+
+    private static void lazyValueEx() {
+        System.out.println("sqr(16) = " + squareLazy(() -> 16.0));
+        System.out.println("sqr(13) = " + squareLazy(() -> 13.0));
+    }
+
+    // squares a double value. It will not receive a value itself, but a Supplier of this value
+
+    public static double squareLazy(Supplier<Double> lazyValue) {
+        return Math.pow(lazyValue.get(), 2);
+    }
+
 
     private static void supplierOfObject() {
 
