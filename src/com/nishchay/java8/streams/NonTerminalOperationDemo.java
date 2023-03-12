@@ -42,6 +42,16 @@ public class NonTerminalOperationDemo {
     }
 
 
+    /*
+    * map() - map/transform a sequence of input to sequence of output
+    *   - gives same no of output as no of input
+    *   - since doing a transformation, that is why taking Function<T,R> as input
+    *
+    * For primitive , below variant of map can be used :
+    * mapToInt(), mapToDouble(), mapToLong()
+    *
+    *
+    * */
     private static void mapDemo() {
 
         System.out.println("########## applying map operation over stream ###########");
