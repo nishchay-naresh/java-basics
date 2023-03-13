@@ -2,6 +2,7 @@ package com.nishchay.java8.streams;
 
 import com.nishchay.java8.streams.query.Employee;
 import com.nishchay.java8.streams.query.EmployeeSQL;
+import com.nishchay.util.pojo.Dish;
 
 import java.util.*;
 import java.util.function.Function;
@@ -15,11 +16,17 @@ public class CollectorsDemo {
         toListEx1();
         toSetEx();
         toMapEx();
+
+        minByEx();
+//        maxByEx();
+//        summingIntEx();
+//        joiningEx();
+
+
         groupingByEx();
         groupingAndMappingEx();
 
     }
-
 
     private static void toListEx() {
 
@@ -106,6 +113,17 @@ public class CollectorsDemo {
 
         System.out.println("-----------<String,Employee> empMap------------");
         empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
+    }
+
+    private static void minByEx() {
+
+        Comparator<Dish> dishCaloriesComparator = Comparator.comparingInt(Dish::getCalories);
+
+        Optional<Dish> leastCaloriesDish;
+
+        leastCaloriesDish = Dish.getManu().stream()
+                .collect(Collectors.minBy(dishCaloriesComparator));
+        System.out.println("leastCaloriesDish = " + leastCaloriesDish.orElse(null));
     }
 
     private static void groupingByEx() {
