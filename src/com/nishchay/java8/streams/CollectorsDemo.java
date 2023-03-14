@@ -18,7 +18,7 @@ public class CollectorsDemo {
         toMapEx();
 
         minByEx();
-//        maxByEx();
+        maxByEx();
 //        summingIntEx();
 //        joiningEx();
 
@@ -124,6 +124,21 @@ public class CollectorsDemo {
         leastCaloriesDish = Dish.getManu().stream()
                 .collect(Collectors.minBy(dishCaloriesComparator));
         System.out.println("leastCaloriesDish = " + leastCaloriesDish.orElse(null));
+    }
+
+    private static void maxByEx() {
+
+        Comparator<Dish> dishCaloriesComparator = Comparator.comparingInt(Dish::getCalories);
+
+        Optional<Dish> mostCalorieDish;
+
+        mostCalorieDish = Dish.getManu().stream()
+                .max(dishCaloriesComparator);
+        System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
+
+        mostCalorieDish = Dish.getManu().stream()
+                .collect(Collectors.maxBy(dishCaloriesComparator));
+        System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
     }
 
     private static void groupingByEx() {
