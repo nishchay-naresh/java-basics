@@ -19,9 +19,8 @@ public class CollectorsDemo {
 
         minByEx();
         maxByEx();
-//        summingIntEx();
-//        joiningEx();
-
+        summingIntEx();
+        joiningEx();
 
         groupingByEx();
         groupingAndMappingEx();
@@ -139,6 +138,23 @@ public class CollectorsDemo {
         mostCalorieDish = Dish.getManu().stream()
                 .collect(Collectors.maxBy(dishCaloriesComparator));
         System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
+    }
+
+    private static void summingIntEx() {
+        int totalCalories;
+
+        totalCalories = Dish.getManu().stream().map(Dish::getCalories).mapToInt(i -> i).sum();
+        System.out.println("totalCalories = " + totalCalories);
+
+        totalCalories = Dish.getManu().stream().collect(Collectors.summingInt(Dish::getCalories));
+        System.out.println("totalCalories = " + totalCalories);
+    }
+
+    private static void joiningEx() {
+        String shortMenu;
+
+        shortMenu = Dish.getManu().stream().map(Dish::getName).collect(Collectors.joining(", "));
+        System.out.println("shortMenu = " + shortMenu);
     }
 
     private static void groupingByEx() {
