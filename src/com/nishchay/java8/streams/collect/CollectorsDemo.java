@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.collect;
 
 import com.nishchay.java8.streams.query.Employee;
 import com.nishchay.java8.streams.query.EmployeeSQL;
@@ -19,7 +19,6 @@ public class CollectorsDemo {
 
         minByEx();
         maxByEx();
-        summingIntEx();
         joiningEx();
 
         groupingByEx();
@@ -138,16 +137,6 @@ public class CollectorsDemo {
         mostCalorieDish = Dish.getManu().stream()
                 .collect(Collectors.maxBy(dishCaloriesComparator));
         System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
-    }
-
-    private static void summingIntEx() {
-        int totalCalories;
-
-        totalCalories = Dish.getManu().stream().map(Dish::getCalories).mapToInt(i -> i).sum();
-        System.out.println("totalCalories = " + totalCalories);
-
-        totalCalories = Dish.getManu().stream().collect(Collectors.summingInt(Dish::getCalories));
-        System.out.println("totalCalories = " + totalCalories);
     }
 
     private static void joiningEx() {
