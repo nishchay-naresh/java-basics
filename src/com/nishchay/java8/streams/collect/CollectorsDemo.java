@@ -5,6 +5,7 @@ import com.nishchay.java8.streams.query.EmployeeSQL;
 import com.nishchay.util.pojo.Dish;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,8 @@ public class CollectorsDemo {
         minByEx();
         maxByEx();
         joiningEx();
+//        countingEx();
+//        partitionBy();
 
         groupingByEx();
         groupingAndMappingEx();
@@ -111,6 +114,15 @@ public class CollectorsDemo {
 
         System.out.println("-----------<String,Employee> empMap------------");
         empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
+
+
+        ConcurrentMap<String, Employee> chMap
+                = employees.parallelStream()
+                .collect(Collectors.toConcurrentMap(Employee::getName, Function.identity()));
+
+        System.out.println("-----------<String,Employee> ConcurrentMap ------------");
+        empMap.forEach((key, value) -> System.out.println( key + " -> " + value));
+
     }
 
     private static void minByEx() {
@@ -141,7 +153,6 @@ public class CollectorsDemo {
 
     private static void joiningEx() {
         String shortMenu;
-
         shortMenu = Dish.getManu().stream().map(Dish::getName).collect(Collectors.joining(", "));
         System.out.println("shortMenu = " + shortMenu);
     }
@@ -172,7 +183,7 @@ public class CollectorsDemo {
                         .collect(Collectors.groupingBy(Employee::getDepartment,
                                 Collectors.mapping(Employee::getAge, Collectors.toList())));
 
-        System.out.println("\t\tDept Name \t\t\t\t   AgeList");
+        System.out.println("\t\t Dept Name \t\t\t\t   AgeList");
         System.out.println("----------------------------------------------------");
         deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
     }
