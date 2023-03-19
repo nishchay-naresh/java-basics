@@ -21,7 +21,7 @@ public class CollectorsDemo {
         minByEx();
         maxByEx();
         joiningEx();
-//        countingEx();
+        countingEx();
 //        partitionBy();
 
         groupingByEx();
@@ -150,6 +150,17 @@ public class CollectorsDemo {
                 .collect(Collectors.maxBy(dishCaloriesComparator));
         System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
     }
+    
+    private static void countingEx() {
+
+        List<Integer> numbers = Arrays.asList(17, 9, 13, 21, 5, 2);
+        long count = numbers.stream()
+                .filter( number -> number> 10)
+                .collect(Collectors.counting());
+
+        System.out.println(" count = " + count);
+    }
+
 
     private static void joiningEx() {
         String shortMenu;
