@@ -22,7 +22,7 @@ public class CollectorsDemo {
         maxByEx();
         joiningEx();
         countingEx();
-//        partitionBy();
+        partitionBy();
 
         groupingByEx();
         groupingAndMappingEx();
@@ -161,6 +161,15 @@ public class CollectorsDemo {
         System.out.println(" count = " + count);
     }
 
+    // partitionBy()  - can be used to partition a Stream in two parts
+    private static void partitionBy() {
+
+        List<Integer> numbers = Arrays.asList(17, 9, 13, 21, 5, 2);
+        Map<Boolean, List<Integer>> evenAndOddNumbers = numbers.stream()
+                .collect(Collectors.partitioningBy(number -> number % 2 == 0));
+
+        System.out.println("evenAndOddNumbers = " + evenAndOddNumbers);
+    }
 
     private static void joiningEx() {
         String shortMenu;
