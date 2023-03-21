@@ -1,12 +1,9 @@
 package com.nishchay.java8.fun;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Stream;
 
 import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
@@ -17,9 +14,12 @@ import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMap
  *  does not take any arguments
  *  typically use it for lazy generation of values
  *
- *
- *  For primitive : BooleanSupplier, DoubleSupplier, LongSupplier and IntSupplier
- *  whose return types are corresponding primitives
+ *	============== BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier ===================
+ *	Java provides following functional interfaces that are used for corresponding primitives data type supplier.
+ *	BooleanSupplier: Supplier to return Boolean value. Its method is getAsBoolean().
+ *	IntSupplier: Supplier to return integer data type value. Its method is getAsInt().
+ *	LongSupplier: Supplier to return long data type value. Its method is getAsLong().
+ *	DoubleSupplier: Supplier to return double data type value. Its method is getAsDouble().
  *
  * */
 
@@ -28,6 +28,7 @@ public class SupplierEx {
     public static void main(String[] args) {
 
         basicEx();
+        primitiveSuppliersEx();
         lazyValueEx();
         castSupplier();
         supplierOfObject();
@@ -40,16 +41,40 @@ public class SupplierEx {
         Supplier<String> strSupplier = () -> "dummy";
         System.out.println("strSupplier - " + strSupplier.get());
 
-        Supplier<Integer> integerSupplier = () -> 10;
-        System.out.println("integerSupplier - " + integerSupplier.get());
-
-
         String result = Stream.of("java", "python", "go")
                 .filter(e -> e.length() > 4)
                 .findAny()
                 .orElseGet(strSupplier);
 
         System.out.println("result = " + result);
+
+        Supplier<Integer> integerSupplier = () -> 10;
+        System.out.println("integerSupplier - " + integerSupplier.get());
+
+        integerSupplier = () -> new Random().nextInt(100);
+        System.out.println("integerSupplier - " + integerSupplier.get());
+
+        //Using Constructor
+        Supplier<Random> s1 = Random::new;
+        Random random = s1.get();
+        System.out.println(random.nextInt(100));
+
+    }
+
+    private static void primitiveSuppliersEx() {
+        int age = 30;
+        BooleanSupplier bs = () -> age > 20;
+        System.out.println(bs.getAsBoolean());
+
+        Random random = new Random();
+        IntSupplier is = random::nextInt;
+        System.out.println(is.getAsInt());
+
+        LongSupplier ls = random::nextLong;
+        System.out.println(ls.getAsLong());
+
+        DoubleSupplier ds = random::nextDouble;
+        System.out.println(ds.getAsDouble());
     }
 
     private static void lazyValueEx() {
@@ -58,11 +83,9 @@ public class SupplierEx {
     }
 
     // squares a double value. It will not receive a value itself, but a Supplier of this value
-
     public static double squareLazy(Supplier<Double> lazyValue) {
         return Math.pow(lazyValue.get(), 2);
     }
-
 
     private static void supplierOfObject() {
 
