@@ -1,8 +1,7 @@
 package com.nishchay.core.collection;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MapDemo {
 
@@ -18,6 +17,10 @@ public class MapDemo {
         hashMapCASOperationEx();
         System.out.println("-----------------");
         treeMapExForSingleNullPut();
+
+        mapFromListOfEntries();
+//        getEntryEx();
+
 
     }
 
@@ -129,5 +132,30 @@ public class MapDemo {
 //        treeMap.put("20", 100);
         System.out.println(treeMap.size());
     }
+
+    // Crating a List<Map.Entry<K, V>> then again creating a HashMap<K,V> from it
+    private static void mapFromListOfEntries() {
+
+        List<Map.Entry<String, Integer>> entries = Arrays.asList(
+                new AbstractMap.SimpleEntry<>("four", 4),
+                new AbstractMap.SimpleImmutableEntry<>("ten", 10),
+                new AbstractMap.SimpleEntry<>("five", 5),
+                new AbstractMap.SimpleEntry<>("eight", 8),
+
+                // null as a key is allowed
+                new AbstractMap.SimpleEntry<>(null, 8)
+
+                // new AbstractMap.SimpleEntry<>("unknown", null) // null as value not allowed, causing NPE
+                // new AbstractMap.SimpleImmutableEntry<>("key", null) // null as value not allowed, causing NPE
+        );
+
+
+        Map<String, Integer> mapFromList = entries.stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        System.out.println("mapFromList = " + mapFromList);
+    }
+
+
 
 }
