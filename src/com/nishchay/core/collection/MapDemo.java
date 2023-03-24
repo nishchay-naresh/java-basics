@@ -19,7 +19,7 @@ public class MapDemo {
         treeMapExForSingleNullPut();
 
         mapFromListOfEntries();
-//        getEntryEx();
+        getEntryEx();
 
 
     }
@@ -156,6 +156,32 @@ public class MapDemo {
         System.out.println("mapFromList = " + mapFromList);
     }
 
+    private static void getEntryEx() {
+        HashMap<Integer, String> hashMap = new HashMap<>();
 
+        //add elements to HashMap
+        hashMap.put(1, "one");
+        hashMap.put(2, "two");
+        hashMap.put(3, "three");
+        hashMap.put(4, "four");
+
+
+        System.out.println("getEntry(key) : " + getEntry(hashMap, 4));
+        System.out.println("getEntry(key) : " + getEntry(hashMap, 2));
+        System.out.println("getEntry(key) : " + getEntry(hashMap, 5));
+    }
+
+    // Utility method to get a Map.Entry against of a key
+    public static <K, V> Map.Entry<K, V> getEntry(HashMap<K, V> map, K key) {
+
+        Map.Entry<K, V> result = null;
+        for(Map.Entry<K, V> entries : map.entrySet()){
+            if(entries.getKey().equals(key)){
+                result = entries;
+                break;
+            }
+        }
+        return result;
+    }
 
 }
