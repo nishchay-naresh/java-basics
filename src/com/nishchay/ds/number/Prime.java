@@ -38,9 +38,17 @@ public class Prime {
     // Declarative way to find the Prime.
     // Using Stream & Predicate
     public static boolean isPrime1(int number) {
+
+/*
         return 1 < number &&
                 IntStream.range(2, number / 2)
                         .noneMatch(index -> number % index == 0);
+*/
+
+        return number > 1 &&
+                IntStream.range(2, (int) Math.sqrt(number))
+                        .noneMatch(divisor -> number % divisor == 0);
+
     }
 
 }
