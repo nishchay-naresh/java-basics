@@ -2,6 +2,7 @@ package com.nishchay.java8.fun;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,6 +39,7 @@ public class FunctionEx {
 
         funAsParameter();
 
+        funWithPredicate();
     }
 
 
@@ -229,6 +231,38 @@ public class FunctionEx {
 
         // declarative way
         return list.stream().map(mappingFun).collect(Collectors.toList());
+
+    }
+
+
+    private static void funWithPredicate() {
+
+        Function<String, Predicate<String>> startsWithLetter =
+                (String letter) -> {
+                    Predicate<String> checkStarts = (String name) -> name.startsWith(letter);
+                    return checkStarts;
+                };
+
+        startsWithLetter =
+                (String letter) -> (String name) -> name.startsWith(letter);
+
+        startsWithLetter =
+                (letter) -> (name) -> name.startsWith(letter);
+
+        startsWithLetter.apply("java");
+
+        final List<String> friends =
+                Arrays.asList("Brian", "Nate", "Neal", "Raju", "Sara", "Scott");
+
+        System.out.println(
+                friends.stream()
+                        .filter(startsWithLetter.apply("N")).count()
+        );
+
+        System.out.println(
+                friends.stream()
+                        .filter(startsWithLetter.apply("B")).count()
+        );
 
     }
 
