@@ -1,5 +1,11 @@
 package com.nishchay.java8.dp;
 
+import java.util.function.Consumer;
+
+/*
+* Creating fluent interfaces
+*
+* */
 public class MailerUtil {
 
     public static void main(String[] args) {
@@ -7,6 +13,8 @@ public class MailerUtil {
         legacyWay();
         System.out.println("====================================");
         composeWay();
+        System.out.println("====================================");
+        supplierWay();
     }
 
     // so much noisy and fluffy
@@ -19,7 +27,8 @@ public class MailerUtil {
         mailer.send();
     }
 
-    // compose method pattern
+    // compose method pattern / builder pattern / cascade through pattern
+    // - taking the result of one method using it as argument to next method
     private static void composeWay() {
         Mailer mailer = new Mailer();
         mailer.from("builder@developer.com")
@@ -27,6 +36,19 @@ public class MailerUtil {
         .subject("Design Patterns in java 8")
         .body("----------details-----------")
         .send();
+
+    }
+
+    // supplier way
+    // send - takes a mailer do what even operation its want to do over it
+    // should  re-use the Mailer or not -> i no longer have to worry about it , class designer will take care of it
+    private static void supplierWay() {
+        Mailer.send(mailer ->
+        mailer.from("builder@developer.com")
+                .to("nishchay@gmail.com")
+                .subject("Design Patterns in java 8")
+                .body("----------details-----------")
+        );
 
     }
 
@@ -78,6 +100,13 @@ public class MailerUtil {
         public Mailer send() {
             System.out.println(".......sending.......");
             return this;
+        }
+
+        public static void send(Consumer<Mailer> block) {
+            Mailer mailer = new Mailer();
+
+            block.accept(mailer);
+            System.out.println(".......sending.......");
         }
     }
 }
