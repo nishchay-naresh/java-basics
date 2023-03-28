@@ -27,6 +27,7 @@ public class ConsumerEx {
         consumerEx();
         forEachConsumerEx();
         consumerToPrint();
+        andThenEx();
 
     }
 
@@ -64,6 +65,21 @@ public class ConsumerEx {
         ages.put("Samuel", 30);
         System.out.println();
         ages.forEach((key, value) -> System.out.println(key + " is " + value + " years old"));
+    }
+
+    /*
+     * andThen(Consumer<? super T> after) - Returns a composed Consumer that performs,in sequence, this operation followed by the after operation.
+     *
+     * */
+    private static void andThenEx() {
+        Consumer<Integer> fiveTimes = i -> System.out.println(5 * i);
+        Consumer<Integer> addFive = i -> System.out.println(5 + i);
+
+        fiveTimes.andThen(addFive).accept(4); // 20, 9
+        System.out.println("");
+        addFive.andThen(fiveTimes).accept(5); //10, 25
+        System.out.println("");
+        fiveTimes.andThen(i -> System.out.println(3*i)).accept(4); // 20, 12
     }
 
 }
