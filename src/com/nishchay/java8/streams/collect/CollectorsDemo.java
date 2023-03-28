@@ -173,7 +173,9 @@ public class CollectorsDemo {
 
     private static void joiningEx() {
         String shortMenu;
-        shortMenu = Dish.getManu().stream().map(Dish::getName).collect(Collectors.joining(", "));
+        shortMenu = Dish.getManu().stream()
+                .map(Dish::getName)
+                .collect(Collectors.joining(", "));
         System.out.println("shortMenu = " + shortMenu);
     }
 
