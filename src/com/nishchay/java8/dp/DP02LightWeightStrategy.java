@@ -17,15 +17,12 @@ public class DP02LightWeightStrategy {
     /*
     * The underlying algorithm is passed through - Predicate<Integer> selector
     * So we can pass the strategy/algorithm through the lambda
-    *
     * */
     private static int sumTotal(List<Integer> values, Predicate<Integer> selector) {
-
         return values.stream()
                 .filter(selector)
                 .mapToInt(e -> e)
                 .sum();
-
     }
 
 }
