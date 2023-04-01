@@ -29,19 +29,19 @@ public class MapJava8Methods {
     public static void main(String[] args) {
 
 
-//        forEachEx();
-//        getOrDefaultEx();
-//        putIfAbsentEx();
-//        mergeEx();
-//        replaceAllEx();
-//        replaceEx();
-//        putVsReplace();
-//        removeEx();
-//        computeEx();
+        forEachEx();
+        getOrDefaultEx();
+        putIfAbsentEx();
+        mergeEx();
+        replaceAllEx();
+        replaceEx();
+        putVsReplace();
+        removeEx();
+        computeEx();
         computeIfAbsentEx();
-//        computeIfPresentEx();
-//
-//        putIfAbsentVsComputeIfAbsent();
+        computeIfPresentEx();
+
+        putIfAbsentVsComputeIfAbsent();
 
     }
 
