@@ -1,11 +1,19 @@
 package com.nishchay.java8.split;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.Spliterator;
+import java.util.TreeSet;
 
 
 /**
  * This example shows several examples of using Java Spliterators and
  * streams to traverse over list of String
+ *
  *
  * <a href="Ref Link">https://www.javadevjournal.com/java/java-spliterator/</a>
  */
@@ -17,13 +25,13 @@ public class SpliteratorDemo {
                 "Expansion ", "is ", "Life, ", "Contraction ", "is ", "Death.",
                 "Love ", "is ", "Life, ", "Hatred ", "is ", "Death.");
 
-/*        tryAdvanceEx(quote);
+        tryAdvanceEx(quote);
         characteristicsEx();
         sizeEx(quote);
-        getComparatorEx();*/
-//        trySplitEx(quote);
+        getComparatorEx();
+        trySplitEx(quote);
         trySplitAnotherEx();
-//        forEachRemainingEx(quote);
+        forEachRemainingEx(quote);
 
     }
 
