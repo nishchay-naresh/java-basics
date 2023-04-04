@@ -1,6 +1,13 @@
 package com.nishchay.java8.fun;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -64,6 +71,9 @@ public class FunctionEx {
         // Function which takes in a String and returns its length
         Function<String, Integer> funStrLength = String::length;
         System.out.println(funStrLength.apply("java")); // 4
+
+        funStrLength = Integer::parseInt;
+        System.out.println(funStrLength.apply("10")); // 10
 
     }
 
