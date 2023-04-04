@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 /*
  *
  *	================ Execute around method pattern / loan pattern ============
- *
+ *   ExecuteAroundMethodPattern - EAM
  *	per-op
  *		some operations
  *	post-op
@@ -26,40 +26,39 @@ public class DP05ExecuteAroundMethodPattern {
 
         problem();
         System.out.println("---------------------- problem_fix1 ------------------");
-        problem_fix1();
+        problem_fix1_callingClose();
         System.out.println("---------------------- problem_fix2 ------------------");
-        problem_fix2();
+        problem_fix2_callingCloseInFinally();
         System.out.println("---------------------- problem_fix3 ------------------");
-        problem_fix3();
+        problem_fix3_ARM();
         System.out.println("---------------------- problem_fix4 ------------------");
-        problem_fix4();
+        problem_fix4_lambda();
 
     }
 
 
-
     /*
-    * Some heavy resource is being created and not been cleaned up
-    * resources are not getting clean up - replying on GC to clean it
-    * */
+     * Some heavy resource is being created and not been cleaned up
+     * resources are not getting clean up - replying on GC to clean it
+     * */
     private static void problem() {
         Resource1 resource = new Resource1();
-        resource. opl() ;
-        resource. op2() ;
+        resource.opl();
+        resource.op2();
     }
 
     /*
-    * Now cleaning the resources by self immediately after the use is over
-    *
-    * Now still this code have some problems :
-    *   1. easy to forget close()
-    *   2. poor exception handling – close() will never get called if exception happen during ops()
-    *
-    * */
-    private static void problem_fix1() {
+     * Now cleaning the resources by self immediately after the use is over
+     *
+     * Now still this code have some problems :
+     *   1. easy to forget close()
+     *   2. poor exception handling – close() will never get called if exception happen during ops()
+     *
+     * */
+    private static void problem_fix1_callingClose() {
         Resource1 resource = new Resource1();
-        resource. opl() ;
-        resource. op2() ;
+        resource.opl();
+        resource.op2();
         resource.close();
     }
 
@@ -72,7 +71,7 @@ public class DP05ExecuteAroundMethodPattern {
      *   2. verbose
      *
      * */
-    private static void problem_fix2() {
+    private static void problem_fix2_callingCloseInFinally() {
 
         Resource1 resource = new Resource1();
         try {
@@ -91,7 +90,7 @@ public class DP05ExecuteAroundMethodPattern {
      * not so verbose
      *
      * */
-    private static void problem_fix3() {
+    private static void problem_fix3_ARM() {
 
         try (Resource1 resource = new Resource1()) {
             resource.opl();
@@ -108,7 +107,7 @@ public class DP05ExecuteAroundMethodPattern {
      * this use() method take operation as argument in the form of Consumer and perform it
      *
      * */
-    private static void problem_fix4() {
+    private static void problem_fix4_lambda() {
         Resource2.use(
                 resource -> resource.opl().op2()
         );
@@ -116,7 +115,8 @@ public class DP05ExecuteAroundMethodPattern {
 
 }
 
-class Resource1 implements AutoCloseable{
+class
+Resource1 implements AutoCloseable {
     public Resource1() {
         System.out.println("created...");
     }
@@ -134,6 +134,7 @@ class Resource1 implements AutoCloseable{
     }
 
     public void close() {
+        System.out.println("close called automatically");
         System.out.println("cleanup...");
     }
 }
@@ -143,6 +144,7 @@ class Resource2 {
         System.out.println("created...");
     }
 
+    // Using higher order functions
     public static void use(Consumer<Resource2> block) {
         Resource2 resource = new Resource2();
         try {
