@@ -6,6 +6,7 @@ import com.nishchay.java8.streams.query.Employee;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,7 @@ public class PredicateEx {
         composePredicateEx();
         composePredicateEx_Object();
 
+        biPredicateEx();
     }
 
 
@@ -110,4 +112,13 @@ public class PredicateEx {
 
     }
 
+    private static void biPredicateEx() {
+
+        BiPredicate<List<String>, String> contians = (list, key) -> list.contains(key);
+
+        List<String> list = Arrays.asList("java", "perl", "go", "python");
+        System.out.println(contians.test(list,"go"));
+        System.out.println(contians.test(list,"ruby"));
+
+    }
 }
