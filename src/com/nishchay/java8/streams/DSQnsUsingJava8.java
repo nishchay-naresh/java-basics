@@ -15,6 +15,13 @@ public class DSQnsUsingJava8 {
         noStartsWith();
         arrayReverseUsingStream();
         charFrequency();
+
+        findCharOccurrence();
+//        findDuplicate();
+//        firstNonRepeatElement();
+//        secondHighest();
+//        longestString();
+
         stringToInteger();
 
     }
@@ -32,12 +39,12 @@ public class DSQnsUsingJava8 {
 
         // Arrays.stream(intArray).boxed().map(e -> e.toString()).filter(e -> e.startsWith("1")).forEach(e -> System.out.print(e + ", "));
 
-        List<String> result = Arrays.stream(intArray)
+        List<String> nosStartWith1 = Arrays.stream(intArray)
                 .boxed()
-                .map(e -> e.toString())
+                .map(String::valueOf)
                 .filter(e -> e.startsWith("1"))
                 .collect(Collectors.toList());
-        System.out.println("result = " + result);
+        System.out.println("nosStartWith1 = " + nosStartWith1);
 
     }
 
@@ -84,6 +91,21 @@ public class DSQnsUsingJava8 {
     }
 
     /*
+     *	1. Java program to count the occurrence of each character in a string
+     *	input -  ilovejava8
+     *	output - {a=2, e=1, v=2, 8=1, i=1, j=1, l=1, o=1}
+     *
+    * */
+    private static void findCharOccurrence() {
+//        String input = "ilovejava8" ;
+        String input = "ilovejavaprogramming" ;
+
+        Map<String, Long> map = Arrays.stream(input.split(""))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println("map = " + map);
+    }
+
+    /*
      * One list of string is there, like below
      * List<String> strList = Arrays.asList("15Shades", "5Th Cross", "98.3FM", "1,233.00$ USD", "java8")
      * List<Double> intList = {6, 5, 98.3, 1233.00, 8};
@@ -100,7 +122,6 @@ public class DSQnsUsingJava8 {
                 .map(Double::parseDouble)
                 .collect(Collectors.toList());
         System.out.println("doubleList = " + doubleList);
-
     }
 
 }
