@@ -17,7 +17,7 @@ public class DSQnsUsingJava8 {
         charFrequency();
 
         findCharOccurrence();
-//        findDuplicate();
+        findDuplicate();
 //        firstNonRepeatElement();
 //        secondHighest();
 //        longestString();
@@ -104,6 +104,27 @@ public class DSQnsUsingJava8 {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println("map = " + map);
     }
+
+    /*
+     *	2. Java program to find all duplicate element from a given string
+     *   input = "ilovejavaprogramming"
+     *	 frqMap = {p=1, a=3, r=2, e=1, v=2, g=2, i=2, j=1, l=1, m=2, n=1, o=2}
+     *   duplicates are = {a, r, v, g, i, m, o}
+     *
+     * */
+    private static void findDuplicate() {
+        String input = "ilovejavaprogramming" ;
+
+        List<String> duplicates = Arrays.stream(input.split(""))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .filter(e -> e.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        System.out.println("duplicates = " + duplicates);
+    }
+
 
     /*
      * One list of string is there, like below
