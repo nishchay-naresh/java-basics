@@ -18,7 +18,7 @@ public class DSQnsUsingJava8 {
 
         findCharOccurrence();
         findDuplicate();
-//        firstNonRepeatElement();
+        firstNonRepeatElement();
 //        secondHighest();
 //        longestString();
 
@@ -125,6 +125,24 @@ public class DSQnsUsingJava8 {
         System.out.println("duplicates = " + duplicates);
     }
 
+    /*
+     *	3. Java program to find first non—repeat element front a given string
+     *	input = "ilovejavaprogramming"
+     *	frqMap = {p=1, a=3, r=2, e=1, v=2, g=2, i=2, j=1, l=1, m=2, n=1, o=2}
+     *  first non—repeat element = p
+     * */
+    private static void firstNonRepeatElement() {
+        String input = "ilovejavaprogramming" ;
+
+        String firstNonRepeat = Arrays.stream(input.split(""))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .filter(e -> e.getValue() == 1)
+                .findFirst()
+                        .get().getKey();
+
+        System.out.println("firstNonRepeat = " + firstNonRepeat);
+    }
 
     /*
      * One list of string is there, like below
