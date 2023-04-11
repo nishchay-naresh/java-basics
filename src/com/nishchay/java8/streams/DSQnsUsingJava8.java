@@ -19,7 +19,7 @@ public class DSQnsUsingJava8 {
         findCharOccurrence();
         findDuplicate();
         firstNonRepeatElement();
-//        secondHighest();
+        secondHighest();
 //        longestString();
 
         stringToInteger();
@@ -142,6 +142,26 @@ public class DSQnsUsingJava8 {
                         .get().getKey();
 
         System.out.println("firstNonRepeat = " + firstNonRepeat);
+    }
+
+    /*
+     *	4. Java program to find second-highest number from given array
+     *
+     *	into numbers = {5, 9, 11, 2, 8, 21, 1};
+     *  2nd highest = 11
+     *
+    * */
+    private static void secondHighest() {
+
+        int[] arr = {5, 9, 11, 2, 8, 21, 1};
+
+        Integer secondHighest = Arrays.stream(arr).boxed()
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst()
+                .get();
+
+        System.out.println("secondHighest = " + secondHighest);
     }
 
     /*
