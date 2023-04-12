@@ -20,7 +20,7 @@ public class DSQnsUsingJava8 {
         findDuplicate();
         firstNonRepeatElement();
         secondHighest();
-//        longestString();
+        longestString();
 
         stringToInteger();
 
@@ -162,6 +162,23 @@ public class DSQnsUsingJava8 {
                 .get();
 
         System.out.println("secondHighest = " + secondHighest);
+    }
+
+    /*
+     *	5. Java program to find the longest string from given array
+     *
+     *	String[] input = {"java", "gradle", "microservices", "spring-boot", "docker"}
+     *  longestString = microservices
+     *
+     * */
+    private static void longestString() {
+        String[] input = {"java", "gradle", "microservices", "spring-boot", "docker"};
+
+        String longestString = Arrays.stream(input)
+                .reduce((s1, s2) -> s1.length() > s2.length() ? s1 : s2)
+                .get();
+
+        System.out.println("longestString = " + longestString);
     }
 
     /*
