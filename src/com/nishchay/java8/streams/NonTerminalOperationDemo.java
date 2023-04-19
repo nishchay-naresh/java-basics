@@ -89,7 +89,7 @@ public class NonTerminalOperationDemo {
         */
 
         // descriptive way to write filter() & map() - putting more statements
-        // printing the current processing element - a debugging technique
+        // printing intermediate values - a debugging technique
        names = Dish.menu.stream()
                 .filter(d -> {
                     System.out.println("filtering - " + d.getName());
