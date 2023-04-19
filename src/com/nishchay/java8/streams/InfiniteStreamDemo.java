@@ -3,6 +3,14 @@ package com.nishchay.java8.streams;
 import java.util.Random;
 import java.util.stream.Stream;
 
+
+/*
+* Collection sre still required to be finite but stream can be infinite
+*
+* we can rely on laziness to easily create a lazy , infinite collection
+*
+*
+* */
 public class InfiniteStreamDemo {
 
     public static void main(String[] args) {
