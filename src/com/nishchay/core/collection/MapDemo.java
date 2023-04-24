@@ -1,6 +1,12 @@
 package com.nishchay.core.collection;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class MapDemo {
@@ -13,6 +19,8 @@ public class MapDemo {
         System.out.println("-----------------");
         hashMapStringPut();
 
+        emptyMapEx();
+
         System.out.println("-----------------");
         hashMapCASOperationEx();
         System.out.println("-----------------");
@@ -20,7 +28,6 @@ public class MapDemo {
 
         mapFromListOfEntries();
         getEntryEx();
-
 
     }
 
@@ -38,7 +45,6 @@ public class MapDemo {
         Integer old2 = hashMap.put("two", 200);
         System.out.println("old1 = " + old1 + ", old2 = " + old2);
         System.out.println("hashMap = " + hashMap);
-
     }
 
     private static void hashMapNullPut() {
@@ -69,7 +75,6 @@ public class MapDemo {
 */
 
 //        map.forEach((key, value) -> System.out.println(key + "-> " + value));
-
     }
 
     private static void hashMapStringPut() {
@@ -84,6 +89,14 @@ public class MapDemo {
         String str3 = new String("java");
         System.out.println(map.get(str3));
         System.out.println(map.get(str3.intern()));
+    }
+
+    private static void emptyMapEx() {
+
+        Map<String,String> EmptyMap = Collections.emptyMap();
+        System.out.println("Created Empty Map: "+EmptyMap);
+
+        // EmptyMap.put("1","java7"); // java.lang.UnsupportedOperationException
     }
 
     private static void hashMapCASOperationEx() {
@@ -122,7 +135,6 @@ public class MapDemo {
 
         System.out.println(map.get("key6"));// 6
         System.out.println(map.get("key8"));// 8
-
     }
 
     private static void treeMapExForSingleNullPut() {
@@ -183,5 +195,4 @@ public class MapDemo {
         }
         return result;
     }
-
 }
