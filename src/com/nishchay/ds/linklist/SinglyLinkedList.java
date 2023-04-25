@@ -8,15 +8,15 @@ class SinglyLinkedList {
 
     public static void main(String[] args) {
 
-/*        createPrintListEx();
+        createPrintListEx();
         printMiddleElementEx();
         printFromBackEx();
-        printFrontAndBackEx();*/
+        printFrontAndBackEx();
         isPalindromeEx();
-/*        searchNodeEx();
+        searchNodeEx();
         nthFromLastNodeEx();
         reverseListEx();
-        isLoopExistsEx();*/
+        isLoopExistsEx();
 
     }
 
@@ -186,8 +186,8 @@ class SinglyLinkedList {
         return head;
     }
 
-    // prints content of a singly linked list
-    private static void printList(Node head) {
+    // Helper function to print a given linked list
+    static void printList(Node head) {
         String delim = "head => ";
         for (Node p = head; p != null; p = p.next) {
             System.out.print(delim + p.data);
@@ -322,7 +322,7 @@ class SinglyLinkedList {
     }
 
     // Function to reverse the linked list
-    public static Node reverse(Node head) {
+    static Node reverse(Node head) {
         Node prev = null;
         Node current = head;
         Node next = null;
@@ -362,6 +362,5 @@ class SinglyLinkedList {
         }
         return false;
     }
-
 
 }
