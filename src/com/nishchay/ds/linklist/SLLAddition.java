@@ -5,11 +5,11 @@ package com.nishchay.ds.linklist;
  *
  *
  *	Algorithm:
- *	1. 	Create two linkedlist which will represent above two numbers.
- *	2.	Reverse both linked list.
- *	3.	Add two node values (Each node is being represented as single digit)  starting from heads of two linkedlist.
+ *	1. 	Create two link list which will represent above two numbers.
+ *	2.	Reverse both link list.
+ *	3.	Add two node values (Each node is being represented as single digit)  starting from heads of two link list.
  *	4.	If sum is of above two node values is more than 10, then forward the carry.
- *	5.	Reverse the result , so that we will get actual sum of numbers.
+ *	5.	Reverse the result, so that we will get actual sum of numbers.
  *
  *
  *
