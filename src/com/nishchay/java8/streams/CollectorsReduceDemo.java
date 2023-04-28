@@ -1,18 +1,20 @@
 package com.nishchay.java8.streams;
 
 
+import com.nishchay.util.pojo.Dish;
+
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CollectorsReduceDemo {
-
-
 
     public static void main(String[] args) {
 
         reduceEx();
-//        reduceEx1();
+        reduceEx1();
 
     }
 
@@ -33,6 +35,36 @@ public class CollectorsReduceDemo {
                         .reduce("Steve", (name1, name2) ->
                                 name1.length() >= name2.length() ? name1 : name2);
         System.out.println("steveOrLonger = " + steveOrLonger);
+    }
+
+
+    private static void reduceEx1() {
+
+        int totalCalories;
+
+        totalCalories = Dish.getManu().stream().map(Dish::getCalories).mapToInt(i -> i).sum();
+        System.out.println("totalCalories = " + totalCalories);
+        totalCalories = Dish.getManu().stream().map(Dish::getCalories).reduce(0, Integer::sum);
+        System.out.println("totalCalories = " + totalCalories);
+
+
+        totalCalories = Dish.getManu().stream()
+                .collect(Collectors.reducing(0, Dish::getCalories, Integer::sum));
+        System.out.println("totalCalories = " + totalCalories);
+
+
+        Optional<Dish> mostCalorieDish;
+
+        mostCalorieDish = Dish.getManu().stream()
+                .max(Comparator.comparingInt(Dish::getCalories));
+        System.out.println("mostCaloriesDish = " + mostCalorieDish.orElse(null));
+
+        mostCalorieDish =
+                Dish.getManu().stream()
+                        .collect(Collectors.reducing((d1, d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2));
+
+        System.out.println("mostCaloriesDish = " + mostCalorieDish.orElse(null));
+
     }
 
 }
