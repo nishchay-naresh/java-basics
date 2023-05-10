@@ -15,7 +15,7 @@ public class LazyEvaluationDemo1 {
         lazyEvaluationUsingSupplier1(() -> evaluate(1), () -> evaluate(2));
 
         eagerEvaluation_collection1();
-//        lazyEvaluationInStream1();
+        lazyEvaluationInStream1();
     }
 
     public static boolean evaluate(final int value) {
@@ -46,6 +46,20 @@ public class LazyEvaluationDemo1 {
             }
         }
         System.out.println(result.get(0));
+    }
+
+    private static void lazyEvaluationInStream1() {
+
+        List<String> names = Arrays.asList("Brad", "Kate", "Kim", "Jack", "Joe",
+                "Mike", "Susan", "George", "Robert", "Julia", "Parker", "Benson");
+
+        final String firstNameWith3Letters =
+                names.stream()
+                        .filter(name -> length(name) == 3)
+                        .map(name -> toUpper(name))
+                        .findFirst()
+                        .get();
+        System.out.println(firstNameWith3Letters);
     }
 
     private static int length(final String name) {
