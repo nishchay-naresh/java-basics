@@ -54,7 +54,7 @@ public class FunctionEx {
      * apply() - abstract method, used to execute/evaluate the function
      *
      *  output = function.apply(input)
-     *
+     *  throw java.lang.NullPointerException if mapping function is null
      * */
     private static void applyEx() {
 
