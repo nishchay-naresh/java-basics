@@ -1,8 +1,13 @@
 package com.nishchay.java8.streams;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class BasicStreamDemo {
 
@@ -11,6 +16,7 @@ public class BasicStreamDemo {
         serialParallelStreamEx();
         streamOfEx();
 
+        iterableToList();
     }
 
     private static void serialParallelStreamEx() {
@@ -44,5 +50,18 @@ public class BasicStreamDemo {
         Stream<List<Integer>> intStream = Stream.of(listOfInt);
         intStream.forEach(a -> System.out.println(a));
     }
+
+    private static void iterableToList() {
+        Function<Set<Number>, Iterable<CharSequence>> mappingFunction =
+                missingKeys -> Arrays.asList("updated-one", "two", "three");
+        Iterable<CharSequence> iterable = mappingFunction.apply(new HashSet<Number>(Arrays.asList(1, 2, 3)));
+
+        List<CharSequence> array = StreamSupport
+                .stream(iterable.spliterator(), false)
+                .filter(e -> !e.equals("one"))
+                .collect(Collectors.toList());
+        System.out.println("array = " + array);
+    }
+
 
 }
