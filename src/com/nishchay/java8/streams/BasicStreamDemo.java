@@ -52,13 +52,14 @@ public class BasicStreamDemo {
     }
 
     private static void iterableToList() {
+        Set<String> missingKeys = new HashSet<>(Arrays.asList("two", "three"));
         Function<Set<Number>, Iterable<CharSequence>> mappingFunction =
-                missingKeys -> Arrays.asList("updated-one", "two", "three");
-        Iterable<CharSequence> iterable = mappingFunction.apply(new HashSet<Number>(Arrays.asList(1, 2, 3)));
+               keys -> Arrays.asList("updated-one", "two", "three");
+        Iterable<CharSequence> iterable = mappingFunction.apply(new HashSet<>(Arrays.asList(1, 2, 3)));
 
         List<CharSequence> array = StreamSupport
                 .stream(iterable.spliterator(), false)
-                .filter(e -> !e.equals("one"))
+                .filter(e -> missingKeys.contains(e))
                 .collect(Collectors.toList());
         System.out.println("array = " + array);
     }
