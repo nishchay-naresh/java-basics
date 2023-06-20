@@ -1,5 +1,7 @@
 package com.nishchay.java8.streams.intstream;
 
+import com.nishchay.util.pojo.Dish;
+
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
@@ -18,8 +20,10 @@ public class IntStreamDemo {
         intStreamTerminalUtility();
         intStreamStatistics();
 
-    }
+        needOfStream();
+//        streamToIntStream();
 
+    }
 
     private static void streamFromArgumentsValues(){
 
@@ -74,5 +78,21 @@ public class IntStreamDemo {
         System.out.println("sum : " + stats.getSum());
     }
 
+    private static void needOfStream() {
+        // below code is having - insidious boxing cost
+        int calories = Dish.menu.stream()
+                .map(Dish::getCalories)
+                .reduce(0, Integer::sum);
+
+        System.out.println("calories = " + calories);
+
+        // we don't have sum() method for Stream<T>
+        // No boxing cost involved
+        calories = Dish.menu.stream()
+                .mapToInt(Dish::getCalories)
+                .sum();
+
+        System.out.println("calories = " + calories);
+    }
 
 }
