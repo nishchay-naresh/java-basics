@@ -21,7 +21,7 @@ public class IntStreamDemo {
         intStreamStatistics();
 
         needOfStream();
-//        streamToIntStream();
+        streamToIntStream();
 
     }
 
@@ -94,5 +94,12 @@ public class IntStreamDemo {
 
         System.out.println("calories = " + calories);
     }
+    private static void streamToIntStream() {
+        List<Integer> list = Dish.menu.stream()
+                .mapToInt(Dish::getCalories)
+                .boxed()
+                .collect(Collectors.toList());
 
+        System.out.println("list = " + list);
+    }
 }
