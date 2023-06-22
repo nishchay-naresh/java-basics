@@ -42,7 +42,6 @@ public class PredicateEx {
     }
 
     private static void simplePredicateEx1() {
-
         List<String> strList = Arrays.asList("java", "go", null, "python", null, "ruby", null, "redis");
         System.out.println("original list = " + strList);
         strList = strList.stream().filter(Objects::nonNull).collect(Collectors.toList());
@@ -51,7 +50,7 @@ public class PredicateEx {
         strList = Arrays.asList("Delhi6", "5Th Cross", "98.3FM", "1,233.00$ USD", "text", "java8");
         List<Double> doubleList = strList.stream()
                 .map(s -> s.replaceAll("[^\\d.]", ""))
-                .filter((s -> !s.isEmpty()))
+                .filter(s -> !s.isEmpty())
                 .map(Double::parseDouble)
                 .collect(Collectors.toList());
         System.out.println("doubleList = " + doubleList);
@@ -117,8 +116,8 @@ public class PredicateEx {
         BiPredicate<List<String>, String> contians = (list, key) -> list.contains(key);
 
         List<String> list = Arrays.asList("java", "perl", "go", "python");
-        System.out.println(contians.test(list,"go"));
-        System.out.println(contians.test(list,"ruby"));
+        System.out.println(contians.test(list, "go"));
+        System.out.println(contians.test(list, "ruby"));
 
     }
 }
