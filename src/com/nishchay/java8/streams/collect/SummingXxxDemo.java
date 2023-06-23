@@ -52,6 +52,10 @@ public class SummingXxxDemo {
 
     }
 
+    /*
+    * summingInt(ToIntFunction f), Takes argument as mappingFunction , which maps E -> int
+    * then it does the summation for these int values
+    * */
     private static void summingIntEx() {
         int totalCalories;
 
