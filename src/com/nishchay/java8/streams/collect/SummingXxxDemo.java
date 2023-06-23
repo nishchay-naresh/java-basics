@@ -55,6 +55,7 @@ public class SummingXxxDemo {
     private static void summingIntEx() {
         int totalCalories;
 
+        totalCalories = Dish.getManu().stream().map(Dish::getCalories).reduce(0, (e1, e2) -> e1 + e2);
         totalCalories = Dish.getManu().stream().map(Dish::getCalories).mapToInt(i -> i).sum();
         System.out.println("totalCalories = " + totalCalories);
 
