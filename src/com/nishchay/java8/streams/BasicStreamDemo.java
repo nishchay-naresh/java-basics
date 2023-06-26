@@ -13,12 +13,33 @@ public class BasicStreamDemo {
 
     public static void main(String[] args) {
 
+        streamEx();
         serialParallelStreamEx();
         streamOfEx();
 
         iterableToList();
     }
 
+    /*
+     *
+     * Error - java.lang.IllegalStateException: stream has already been operated upon or closed
+     *
+     * */
+    private static void streamEx() {
+        // A Stream instance cannot have more than one pipeline defined against it
+        Stream<String> stringStream = Stream.of("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
+        Stream<String> pipelineOne = stringStream.filter(e -> !e.isEmpty());
+        // Stream<String> pipelineTwo = stringStream.filter(e-> !e.isEmpty());
+
+        // Once consumed or closed, a stream cannot be used again
+        stringStream = Stream.of("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
+        long count = stringStream.filter(e -> e.startsWith("R")).count();
+        // count = stringStream.filter(e -> e.startsWith("S")).count();
+
+        stringStream = Stream.of("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
+        stringStream.close();
+        // count = stringStream.filter(e -> e.startsWith("S")).count();
+    }
     private static void serialParallelStreamEx() {
 
         List<String> stringList =  Arrays.asList("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
@@ -34,12 +55,9 @@ public class BasicStreamDemo {
         strStream = stringList.parallelStream();
         System.out.println("########## Printing list using parallel stream ###########");
         strStream.forEach(e -> System.out.println(e));
-
-
     }
 
     private static void streamOfEx() {
-
         String[] strArray = new String[]{"A", "B", "C", "D", "E"};
         // Creating Stream from String Array
         Stream<String> strStream = Stream.of(strArray);
@@ -63,6 +81,4 @@ public class BasicStreamDemo {
                 .collect(Collectors.toList());
         System.out.println("array = " + array);
     }
-
-
 }
