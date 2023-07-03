@@ -4,6 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
+
+/*
+ * Strategy Pattern - A common solution for representing a family of algorithms and letting you choose them at runtime.
+ *
+ * The strategy pattern consists of three parts
+ *   1.	An interface to represent some algorithm (the interface Strategy)
+ *   2.	One or more concrete implementations of that interface to represent multiple algorithms (the concrete classes ConcreteStrategyA, ConcreteStrategyB)
+ *   3.	One or more clients that use the strategy objects
+ *
+ * */
 public class DP02LightWeightStrategy {
 
     public static void main(String[] args) {
