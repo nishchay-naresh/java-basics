@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  *
  *	Use case  - certain logic using repeatedly in the project
  *	but, have some boilerplate code - take these boilerplate code and role this under this function
- * anything that I want to do specific, will keep in between pass it as Supplier
+ *  anything that I want to do specific, will keep in between pass it as Supplier
  *
  *
  * https://medium.com/@sandeep12.rao/execute-around-design-pattern-cf1f2e38f626
@@ -115,8 +115,7 @@ public class DP05ExecuteAroundMethodPattern {
 
 }
 
-class
-Resource1 implements AutoCloseable {
+class Resource1 implements AutoCloseable {
     public Resource1() {
         System.out.println("created...");
     }
