@@ -1,11 +1,16 @@
 package com.nishchay.java8.streams;
 
+import com.nishchay.util.pojo.Dish;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -13,7 +18,10 @@ public class BasicStreamDemo {
 
     public static void main(String[] args) {
 
-        streamEx();
+//        sourceOfStreamEx();
+        streamTypesEx();
+
+        streamCloseEx();
         serialParallelStreamEx();
         streamOfEx();
 
@@ -22,10 +30,47 @@ public class BasicStreamDemo {
 
     /*
      *
+     *	A Stream of Elements may be
+     *		-	Obtained from a Collection (Collection.stream)
+     *		-	Obtained from an array (Arrays.stream)
+     *		-	Obtained from a file (BufferedReader.lines)
+     *		-	Generated (LongStream.range)
+     *		-	Constructed using a Spliterator (StreamSupport)
+     *		-	Obtained from a 3rd-party source (DatasetReader.records)
+     *
+     * TODO - need to write a small ex for all of them
+     * */
+    private static void sourceOfStreamEx() {
+
+    }
+
+    /*
+     *
+     * Stream types
+     * 	Reference
+     * 	    -	java.util.stream.Stream<T>
+     * 	Primitive (unboxed)
+     * 	    -	java.util.stream.DoubleStream
+     * 	    -	java.util.stream.IntStream
+     * 	    -	java.util.stream.LongStream
+     * */
+    private static void streamTypesEx() {
+        Dish.menu.forEach(e -> System.out.print(e+", "));
+        System.out.println();
+
+        IntStream.range(1, 10).forEach(e -> System.out.print(e+", "));
+        System.out.println();
+        DoubleStream.of(-9, -18, 54, 8, 7, 14, 3).forEach(e -> System.out.print(e+", "));
+        System.out.println();
+        LongStream.rangeClosed(1,10).forEach(e -> System.out.print(e+", "));
+    }
+
+    /*
+     *
      * Error - java.lang.IllegalStateException: stream has already been operated upon or closed
      *
      * */
-    private static void streamEx() {
+    private static void streamCloseEx() {
         // A Stream instance cannot have more than one pipeline defined against it
         Stream<String> stringStream = Stream.of("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
         Stream<String> pipelineOne = stringStream.filter(e -> !e.isEmpty());
@@ -75,8 +120,8 @@ public class BasicStreamDemo {
                keys -> Arrays.asList("updated-one", "two", "three");
         Iterable<CharSequence> iterable = mappingFunction.apply(new HashSet<>(Arrays.asList(1, 2, 3)));
 
-        List<CharSequence> array = StreamSupport
-                .stream(iterable.spliterator(), false)
+        List<CharSequence> array =
+                StreamSupport.stream(iterable.spliterator(), false)
                 .filter(e -> missingKeys.contains(e))
                 .collect(Collectors.toList());
         System.out.println("array = " + array);
