@@ -1,9 +1,17 @@
 package com.nishchay.java8.fun;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.*;
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
+import java.util.function.LongSupplier;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
@@ -11,8 +19,9 @@ import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMap
 /*
  *	java.util.function.Supplier<T>	:    () ->   T   :	T get();
  *	T – Type of input argument
- *  does not take any arguments
- *  typically use it for lazy generation of values
+ *  does not take any arguments,  returns a value of generified type
+ *
+ *  typically we use it for lazy generation of values
  *
  *	============== BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier ===================
  *	Java provides following functional interfaces that are used for corresponding primitives data type supplier.
