@@ -6,7 +6,8 @@ import java.util.function.Consumer;
 /*
  *
  * ================ template method design pattern ===================
- *  a common solution when you need to represent the outline of an algorithm
+ *
+ *  A common solution when you need to represent the outline of an algorithm
  *  and have the additional flexibility to change certain parts of it
  *
  *  “I’d love to use this algorithm, but I need to change a few lines, so it does what I want.”
