@@ -23,6 +23,13 @@ import static com.nishchay.util.Utils.timeIt;
 * Streams			:	sequential vs parallel
 * Reactive Stream	:	sync vs. async
 *
+* Reactive Stream -  have 3 states , data, error, completed
+* similarly it also have 3 channel : data, error, completed channel
+*
+* Promises vs Reactive Stream :
+* Promises -  it is for 0/1 data
+* Reactive Stream - it is series of data, so for 0/1/many data
+*
 * */
 public class ParallelStream {
 
@@ -32,9 +39,9 @@ public class ParallelStream {
         serialStreamEvaluation(numbers);
         parallelStreamEvaluation(numbers);
 
-        receivedStreamInParallelExc(numbers);
+//        receivedStreamInParallelExc(numbers);
 
-        threadsFormula();
+//        threadsFormula();
     }
 
 
@@ -42,10 +49,12 @@ public class ParallelStream {
     // Martin Fowler : Collection pipeline pattern
     private static void serialStreamEvaluation(List<Integer> numbers) {
         timeIt(() ->
-                numbers.stream()
-                .filter(e -> e % 2 == 0)
-                .mapToInt(ParallelStream::doubledIt)
-                .sum()
+                System.out.println("sum - " +
+                        numbers.stream()
+                                .filter(e -> e % 2 == 0)
+                                .mapToInt(ParallelStream::doubledIt)
+                                .sum()
+                )
         );
     }
 
@@ -53,10 +62,12 @@ public class ParallelStream {
     private static void parallelStreamEvaluation(List<Integer> numbers) {
 
         timeIt(() ->
-                numbers.parallelStream()
-                        .filter(e -> e % 2 == 0)
-                        .mapToInt(ParallelStream::doubledIt)
-                        .sum()
+                System.out.println("sum - " +
+                        numbers.parallelStream()
+                                .filter(e -> e % 2 == 0)
+                                .mapToInt(ParallelStream::doubledIt)
+                                .sum()
+                )
         );
 
     }
@@ -116,8 +127,10 @@ public class ParallelStream {
      * */
     public static void threadsFormula() {
 
-        // System.out.println(Runtime.getRuntime().availableProcessors()); // No of cores
-        // System.out.println(ForkJoinPool.commonPool()); // parallelism = No of cores - 1(main)
+        /*
+        * System.out.println(Runtime.getRuntime().availableProcessors()); // No of cores
+        * System.out.println(ForkJoinPool.commonPool()); // parallelism = No of cores - 1(main)
+        * */
 
         List<Integer> numbers = Arrays.asList(
                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
