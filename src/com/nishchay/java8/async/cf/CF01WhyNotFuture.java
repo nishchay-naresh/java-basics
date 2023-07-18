@@ -85,19 +85,18 @@ public class CF01WhyNotFuture {
     }
 
     /*
-    * We can't complete the remaining process on Exception been raised
-    * when error = true, an RuntimeException been raised unable close the pool
+    * We can't complete the remaining process upon Exception
+    * when error = true, an RuntimeException been raised even unable to close the pool
     * Need to have a mechanism to put some fallback process for exception use-case
     *
     * */
     private static void noSupportForExceptionHandling() throws ExecutionException, InterruptedException {
 
-//        boolean error = true;
-        boolean unKnownBool = new Random().nextInt(100) % 2 == 0 ;
+        boolean errorCondition = new Random().nextInt(100) % 2 == 0 ;
         ExecutorService service = Executors.newFixedThreadPool(10);
 
         Future<List<Integer>> future = service.submit(() -> {
-            if (unKnownBool){
+            if (errorCondition){
                 throw new RuntimeException("some problem has happened!!");
             }
 
