@@ -75,6 +75,11 @@ public class FunctionEx {
         funStrLength = Integer::parseInt;
         System.out.println(funStrLength.apply("10")); // 10
 
+        // Function which takes an Integer and returns List<Integer>
+        Function<Integer, List<Integer>> oneToMany = e -> Arrays.asList(e - 1, e + 1);
+        System.out.println(oneToMany.apply(10)); // [9, 11]
+
+
     }
 
     private static void functionExWithGenerics(){
