@@ -7,6 +7,8 @@ import static com.nishchay.util.Utils.*;
 
 /*
  * ====== Combining independent futures =======
+ * combine - taking one CF and combining it with result of another CF and producing third CF
+ *
  * We can run our two independent operation in parallel and
  * when my both independent operations are done, then I want to combine the result and do the third operation
  *
@@ -22,10 +24,18 @@ public class CombineExample {
 
     }
 
-
+    /*
+    * two independent asynchronous task, when both of them are finished,
+    *  combine them using a biFunction and return a third CF
+    *
+    *   task1 -  create(2)
+    *   task2 -  create(3)
+    *   when both of them gets resolved, then only this method thenCombine(-,-) will be executed and return a third CF
+    *
+    * */
     public static void ex1() {
         create(2)
-                .thenCombine(create(3), (a, b) -> a + b)
+                .thenCombine(create(3), (result1, result2) -> result1 + result2)
                 .thenAccept(System.out::println);
     }
 
