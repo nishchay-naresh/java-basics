@@ -13,8 +13,8 @@ public class CF00Basic {
 
         createCF();
         executingInCF();
-//        extractResult();
-//        executingAsync();
+        extractResult();
+        executingAsync();
     }
 
     // Different ways to create a CompletableFuture<T>
@@ -73,4 +73,23 @@ public class CF00Basic {
         System.out.println("here");
     }
 
+    /*
+     * Executing some piece of code asynchronously in other thread using CF
+     *
+     * 	In start of main - Thread[main,5,main]
+     * 	running a little task in - Thread[ForkJoinPool.commonPool-worker-9,5,main]
+     * 	At the end of main - Thread[main,5,main]
+     *
+     * */
+    public static void executingAsync() {
+        System.out.println("In start of main - " + Thread.currentThread());
+        startAsyncTask(); //this is non-blocking
+        delay(1);
+        System.out.println("At the end of main - " + Thread.currentThread());
+    }
+
+    private static void startAsyncTask() {
+        CompletableFuture.runAsync(() ->
+                System.out.println("running a little task in - " + Thread.currentThread()));
+    }
 }
