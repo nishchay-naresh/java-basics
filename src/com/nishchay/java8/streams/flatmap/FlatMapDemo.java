@@ -4,7 +4,12 @@ import com.nishchay.util.pojo.Author;
 import com.nishchay.util.pojo.Book;
 import com.nishchay.util.pojo.Country;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,15 +18,44 @@ public class FlatMapDemo {
 
     public static void main(String[] args) {
 
+        needOfFlatMap();
+
         flatMapEx();
 
         List<Book> books = Book.getListOfBook();
-
         mapAndCollectToList(books);
         flatMapDemoLowerToUpperObject();
         flatMapDemoUpperToLowerObject(books);
         flatMapEx_Object();
+    }
 
+    /*
+    *
+    *  map one-to-one Stream<T> ===> Stream<Y>
+    *  map one-to-many Stream<T> ===> Stream<List<Y>>
+    *  flatMap one-to-many Stream<T> ===> Stream<Y> ???
+    *
+    * function returns data - map
+    * function returns collection(Collection/Array) - flatMap
+    *
+    * */
+    private static void needOfFlatMap() {
+
+        Function<Integer, Integer> oneToOne = e -> e * 2; // e.g emp -> firstName
+        Function<Integer, List<Integer>> oneToMany = e -> Arrays.asList(e - 1, e + 1); //e.g emp -> List<emailIds>
+        // Function<Integer, Stream<Integer>> oneToMany = e -> Stream.of(e - 1, e + 1); //e.g emp -> List<emailIds>
+
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        System.out.print("one to one mapping - ");
+        numbers.stream()
+                .map(oneToOne) // one-to-one mapping function
+                .forEach(e -> System.out.print(e + ", "));
+
+        System.out.print("\none to many mapping - ");
+        numbers.stream()
+                .map( oneToMany) // one-to-many mapping function
+                .flatMap(e -> e.stream())
+                .forEach(e -> System.out.print(e + ", "));
     }
 
     /*
@@ -31,7 +65,6 @@ public class FlatMapDemo {
      *
      * For primitive , below variant of map can be used :
      * flatMapToInt(), flatMapToLong(), flatMapToDouble()
-     *
      *
      * */
     private static void flatMapEx() {
