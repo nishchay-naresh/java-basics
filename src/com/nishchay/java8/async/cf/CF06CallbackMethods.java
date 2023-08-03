@@ -25,18 +25,16 @@ public class CF06CallbackMethods {
 
     public static void main(String[] args) {
 
-
         thenAcceptEx();
         System.out.println("------------------------------");
         thenApplyEx();
         System.out.println("------------------------------");
-
+        exceptionallyEx();
 
         System.out.println("------------------------------");
         using2MethodsInt();
         System.out.println("------------------------------");
         usingAll3MethodsStr();
-
     }
 
     /*
@@ -107,9 +105,61 @@ public class CF06CallbackMethods {
                 .thenApply(data -> data * 2)
                 .thenApply(data -> data + 1)
                 .thenAccept(e -> System.out.println(e));
-
     }
 
+    /*
+     *
+     * How do we tell something went wrong ?
+     *
+     * In OOPS - Exception
+     * In streams exception don't work well
+     *
+     * If everything is going well - use thenXxxx() Family methods, these are the success method
+     * If anything goes wrong - use exceptionally methods, this is the only method for error channel
+     *
+     * How execution is happening :
+     *  If everything is going well -   It will find the nearest thenXxxx() Family methods and execute it
+     *  If anything goes wrong      -   It will find the nearest exceptionally methods and execute
+     *                                  It will skip all thenXxxx() Family methods
+     *
+     * If an handleException() methods throw another exception
+     *                              --> it continuing on Error track
+     * If an handleException() methods returns a normal value rather than throwing another exception
+     *                              --> it is recovering from its error and switching from Error track to Execution track
+     *
+     *
+     * Execution track ----F-x--F--------------x----F--x--F---x     thens
+     *                   (blowup)\           /return
+     * Error track     -----------E---F--E--F------------------     exceptionals
+     *
+     *
+     *  Both in life and programing never do something without timeout
+     *  CompletableFuture have added timeout feature in java9 onward
+     *          future.completeOnTimeout(0, 2, TimeUnit.SECONDS);   - complete with a default value on timeout
+     *          future.OrTimeout(2, TimeUnit.SECONDS);              - blowup(throw exception) on timeout
+     *
+     *
+     * A CompletableFuture can in any of the below states :
+     *          1. pending
+     *          2. resolved (final)
+     *          3. rejected (final)
+     *
+     * */
+    private static void exceptionallyEx() {
+        create()
+                .thenApply(msg -> msg + " - 200 OK")
+                .thenAccept( msg -> System.out.println(msg))
+                .exceptionally(throwable -> handleException(throwable));
+    }
+
+    private static CompletableFuture<String> create(){
+        return CompletableFuture.supplyAsync(() -> Utils.getResponse());
+    }
+
+    private static Void handleException(Throwable throwable) {
+        System.out.println(throwable);
+        throw new RuntimeException("it is beyond all hope");
+    }
 
     private static void using2MethodsInt() {
 
