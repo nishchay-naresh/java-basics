@@ -6,6 +6,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /*
+ *  class CompletableFuture<T> implements Future<T>, CompletionStage<T>
+ *       -      get() is coming from Future<T> interface
+ *       -      join() they have added new method in CompletableFuture<T> interface
  *
  *	CompletableFuture<T> class: join() vs get()
  *	Both functionally does the same thing :  extract out the computed result
@@ -22,14 +25,11 @@ import java.util.concurrent.ExecutionException;
 public class CF03GetVsJoin {
 
     public static void main(String[] args) {
-
         retrieveUsingGet();
         retrieveUsingJoin();
-
     }
 
     private static void retrieveUsingGet() {
-
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> Utils.doSomeTask());
 
         // retrieving the result using join()
@@ -45,10 +45,8 @@ public class CF03GetVsJoin {
     private static void retrieveUsingJoin() {
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> Utils.doSomeTask());
 
-        // retrieving the result using join()
-        // need not required to handle checked exceptions
+        // retrieving the result using join(), handling checked exceptions is not required now
         String resultValue = completableFuture.join();
         System.out.println("Result - " + resultValue);
     }
-
 }
