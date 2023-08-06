@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
  * Its receives only the Exception
  *
  * completeExceptionally(Throwable ) - manually completing a future with Exception
+ *               When we want to propagate the causing Exception through CF, one can use completeExceptionally() method
  *
  * */
 public class ExceptionHandling {
@@ -23,18 +24,14 @@ public class ExceptionHandling {
         exceptionallyEx();
 
         completingAFutureExceptionally();
-
     }
 
-
     private static void handleEx() {
-
         CompletableFuture<String> future =
                 CompletableFuture.supplyAsync(() -> Utils.getResponse())
                         .handle((s, e) -> logError(s, e));
 
         System.out.println(future.join());
-
     }
 
     private static String logError(String result, Throwable error) {
@@ -46,7 +43,6 @@ public class ExceptionHandling {
     }
 
     private static void exceptionallyEx() {
-
         CompletableFuture<String> future =
                 CompletableFuture.supplyAsync(() -> Utils.getResponse())
                         .exceptionally((e) -> {
@@ -57,18 +53,11 @@ public class ExceptionHandling {
         System.out.println(future.join());
     }
 
-
     private static void completingAFutureExceptionally() {
-
         CompletableFuture<Integer> completableFuture = new CompletableFuture<>();
-
         process(completableFuture);
-
-        // manually completing a future - with Exception
         completableFuture.completeExceptionally(new RuntimeException("Something went wrong ..!!"));
-
     }
-
 
     /*
     *  setting the pipeline, keeping it ready once my data will arrive, ready with what to do with these data
@@ -87,6 +76,4 @@ public class ExceptionHandling {
         //throw new RuntimeException("this is beyond repair");
         return 100; // output - 201
     }
-
-
 }
