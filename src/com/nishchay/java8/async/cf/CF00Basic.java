@@ -17,7 +17,12 @@ public class CF00Basic {
         executingAsync();
     }
 
-    // Different ways to create a CompletableFuture<T>
+    /*
+    *  Different ways to create a CompletableFuture<T>
+    *       1.  Using constructor       -   new CompletableFuture<>()
+    *       2.  Using Factory method    -   CompletableFuture.supplyAsync();
+    *
+    * */
     private static void createCF() {
         CompletableFuture<Void> cf1 = new CompletableFuture<>();
         CompletableFuture<Integer> cf2 = CompletableFuture.supplyAsync(() -> 10);
