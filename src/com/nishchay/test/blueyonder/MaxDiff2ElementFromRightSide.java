@@ -42,8 +42,6 @@ public class MaxDiff2ElementFromRightSide {
         System.out.println("Maximum difference is = " +  maxDiff(arr)); // 2
     }
 
-
-
     /*
      * ============= bruteforce approach - 2 nested loop =====================
      * A simple solution is to use two nexted loops.
@@ -62,7 +60,6 @@ public class MaxDiff2ElementFromRightSide {
 
         return maxDiff;
     }
-
 
     /*
      * ============= Tricky and Efficient approach - single loop =====================
@@ -93,6 +90,4 @@ public class MaxDiff2ElementFromRightSide {
         }
         return maxDiff;
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.nishchay.test.blueyonder;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,20 +13,15 @@ import java.util.List;
  *	        edge case, arr[n-1] is the max , so its one result
  *
  * */
-
 public class GreaterElementFromRightSide {
-
     public static void main(String[] args) {
 
         int[] intArr = new int[]{1, 20, 17, 5, 13, 8, 16, 0};
-
         List<Integer> res = getGreaterElements(intArr);
         System.out.println("res = " + res); // res = [0, 16, 17, 20]
-
     }
 
     private static List<Integer> getGreaterElements(int[] arr) {
-
         List<Integer> list = new ArrayList<>();
 
         int length = arr.length;

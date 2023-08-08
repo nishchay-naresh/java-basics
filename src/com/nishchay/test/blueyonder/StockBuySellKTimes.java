@@ -1,17 +1,16 @@
 package com.nishchay.test.blueyonder;
 
 /*
-
-TODO -  do it well
-k = no times = 1
-2 times
-price [] = {2,8,9,1,10,11};
-try to gain the maxProfilt
-
-int k = 2;
-int[] price = { 5, 17, 5, 88, 55, 90 };
-
-* */
+ *
+ * 	k = no times one can do a buy & sell = 1
+ * 	2 times
+ * 	price [] = {2,8,9,1,10,11};
+ * 	try to gain the maxProfilt
+ *
+ * 	int k = 2;
+ * 	int[] price = { 5, 17, 5, 88, 55, 90 };
+ *
+ * */
 public class StockBuySellKTimes {
 
     public static void main(String[] args) {
