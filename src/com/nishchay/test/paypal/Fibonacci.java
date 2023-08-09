@@ -1,26 +1,27 @@
 package com.nishchay.test.paypal;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
-Find Fibonacci numbers till N with below constraints:
-Objectives:
-- Recursive
-- No objects / references in input
-- No global variables
-
-Sample:
-If n = 6 -> 1,1,2,3,5
-If n = 10 -> 1,1,2,3,5,8
-
-public static void main(String arg[]) {
-    fib(10).forEach(System.out::print)
-}
-
-List<Integer> fib(int n,...) {
-
-}
-*/
+ *			Find Fibonacci numbers till N with below constraints:
+ *			Objectives:
+ *			- Recursive
+ *			- No objects / references in input
+ *			- No global variables
+ *
+ *			Sample:
+ *			If n = 6 -> 1,1,2,3,5
+ *			If n = 10 -> 1,1,2,3,5,8
+ *
+ *			public static void main(String arg[]) {
+ *			    fib(10).forEach(System.out::print)
+ *			}
+ *
+ *			List<Integer> fib(int n,...) {
+ *
+ *			}
+ * */
 public class Fibonacci {
 
     public static void main(String[] args) {

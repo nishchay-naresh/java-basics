@@ -1,6 +1,6 @@
 package com.nishchay.test.epam;
 
-/**
+/*
  * Longest Common Prefix
  * 
  * Write a function to find the longest common prefix string amongst an array of strings.
@@ -20,14 +20,14 @@ package com.nishchay.test.epam;
  * 0 <= strs[i].length <= 200
  * strs[i] consists of only lower-case English letters.
  * 
- **/
+ */
 
 public class LongestCommonPrefix {
 
     public static void main(String[] args) {
 
         String[] strArr = new String[]{"flower","flow","flight"};
-//        String[] strArr = new String[]{"dog","racecar","car"};
+        //String[] strArr = new String[]{"dog","racecar","car"};
 
         String res = longestCommonPrefix(strArr);
         System.out.println("res = " + res);
