@@ -39,9 +39,8 @@ public class ParallelStream {
         serialStreamEvaluation(numbers);
         parallelStreamEvaluation(numbers);
 
-//        receivedStreamInParallelExc(numbers);
-
-//        threadsFormula();
+        receivedStreamInParallelExc(numbers);
+        threadsFormula();
     }
 
 
