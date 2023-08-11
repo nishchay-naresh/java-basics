@@ -9,15 +9,12 @@ import static com.nishchay.util.Utils.delay;
 public class CF02CompleteAFuture {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-
         completingAFuture();
         lazyPipelineEx();
 
         completedFutureEx();
         completingAFutureExceptionally();
-
     }
-
 
     /*
      *
@@ -35,7 +32,6 @@ public class CF02CompleteAFuture {
      * */
     private static void completingAFuture() throws ExecutionException, InterruptedException {
         CompletableFuture<String> cf = new CompletableFuture<>();
-
         // completing the cf by calling complete() method
         new Thread(() -> {
             delay(2);
@@ -66,26 +62,21 @@ public class CF02CompleteAFuture {
 
         System.out.println("build the pipeline");
         delay(1);
-
         future.complete(2);
-
         delay(1);
         System.out.println("prepared to print");
     }
 
-
     /*
-     * completedFuture(v) - Returns a new CompletableFuture that is already completed with
+     * completedFuture(v) - Returns a new CompletableFuture that is already completed with a given value
      * */
     private static void completedFutureEx(){
-
         Future<String> future = CompletableFuture.completedFuture("Hello");
         String result = null;
         try {
             result = future.get();
         } catch (InterruptedException | ExecutionException ignored) { }
         System.out.println("result = " + result);
-
     }
 
     /*
@@ -94,12 +85,10 @@ public class CF02CompleteAFuture {
     private static void completingAFutureExceptionally() {
 
         CompletableFuture<String> f1 = new CompletableFuture<>();
-//        f1.completeExceptionally(new RuntimeException("completed exceptionally"));
+        //f1.completeExceptionally(new RuntimeException("completed exceptionally"));
         f1.complete("response");
 
         // join() -  will get result/exception based on its completion
         System.out.println("result = " + f1.join());
-
     }
-
 }
