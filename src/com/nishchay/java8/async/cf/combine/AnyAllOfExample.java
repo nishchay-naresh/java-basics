@@ -6,12 +6,9 @@ import static com.nishchay.util.Utils.delay;
 
 public class AnyAllOfExample {
 
-
     public static void main(String[] args) {
-
         allOfEx();
         anyOfEx();
-
     }
 
     /*
@@ -47,7 +44,6 @@ public class AnyAllOfExample {
         System.out.println("Time Taken - " + (endTime - startTime) / 1000);
     }
 
-
     public static CompletableFuture<String> future1() {
         return CompletableFuture.supplyAsync(
                 () -> {
@@ -77,5 +73,4 @@ public class AnyAllOfExample {
                 }
         );
     }
-
 }

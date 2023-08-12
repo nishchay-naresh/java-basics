@@ -18,10 +18,8 @@ import static com.nishchay.util.Utils.*;
 public class CombineExample {
 
     public static void main(String[] args) {
-
         ex1();
         ex2();
-
     }
 
     /*
@@ -40,7 +38,6 @@ public class CombineExample {
     }
 
     private static void ex2() {
-
         timeIt(() -> {
             CompletableFuture<String> future = getUserEmail()
                     .thenCombine(getWeatherReport(), (e, w) -> {
@@ -51,7 +48,6 @@ public class CombineExample {
 
             System.out.println(future.join());
         });
-
     }
 
     /*
@@ -76,5 +72,4 @@ public class CombineExample {
                 }
         );
     }
-
 }
