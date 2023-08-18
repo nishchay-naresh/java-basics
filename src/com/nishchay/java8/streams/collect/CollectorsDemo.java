@@ -4,10 +4,19 @@ import com.nishchay.java8.streams.query.Employee;
 import com.nishchay.java8.streams.query.EmployeeSQL;
 import com.nishchay.util.pojo.Dish;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class CollectorsDemo {
 
@@ -27,6 +36,7 @@ public class CollectorsDemo {
         groupingByEx();
         groupingAndMappingEx();
 
+        mapOfNullEx();
     }
 
     private static void toListEx() {
@@ -208,6 +218,28 @@ public class CollectorsDemo {
         System.out.println("\t\t Dept Name \t\t\t\t   AgeList");
         System.out.println("----------------------------------------------------");
         deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
+    }
+
+    private static void mapOfNullEx() {
+        Iterable<? extends String> iterable = Arrays.asList("A", "B", "C", "D");
+        // Map<String, List<Integer>> resultMap = bulkGetOrComputeIfAbsent(iterable, null);
+        Map<String, List<Integer>> resultMap = bulkGetOrComputeIfAbsent_stream(iterable, null);
+        System.out.println("resultMap = " + resultMap);
+    }
+
+    // should return a map with the full set of keys, each with a null value
+    public static <K, V>  Map<K, List<V>> bulkGetOrComputeIfAbsent(Iterable<? extends K> keys, Function<Set<? extends K>, Iterable<? extends Map.Entry<? extends K, ? extends List<V>>>> mappingFunction) {
+        Map<K, List<V>> map = new HashMap<>();
+        for(K key : keys) {
+            map.put(key, null);
+        }
+        return map;
+    }
+
+    public static <K, V> Map<K, List<V>> bulkGetOrComputeIfAbsent_stream(Iterable<? extends K> keys, Function<Set<? extends K>, Iterable<? extends Map.Entry<? extends K, ? extends List<V>>>> mappingFunction) {
+        return StreamSupport.stream(keys.spliterator(), false)
+                // .collect(Collectors.toMap(e -> e, null)); causing NPE
+                .collect(HashMap::new, (m,e)->m.put(e, null), HashMap::putAll);
     }
 
 }
