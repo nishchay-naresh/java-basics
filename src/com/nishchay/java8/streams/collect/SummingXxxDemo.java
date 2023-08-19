@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 public class SummingXxxDemo {
 
     public static void main(String[] args) {
-
         sumInStream();
         System.out.println("----------------------------");
         summingEx();
@@ -27,7 +26,6 @@ public class SummingXxxDemo {
                 .reduce(0, Integer::sum);
 
         System.out.println("sum = " + sum);
-
 
         // sum - using IntStream.sum()
         sum = integers.stream().
@@ -49,7 +47,6 @@ public class SummingXxxDemo {
         List<Long> listOfL = Arrays.asList(23L, 11L, 13L, 49L, 7L);
         Long sumL = listOfL.stream().collect(Collectors.summingLong(Long::longValue));
         System.out.println("Sum = " + sumL);
-
     }
 
     /*
@@ -66,7 +63,4 @@ public class SummingXxxDemo {
         totalCalories = Dish.getManu().stream().collect(Collectors.summingInt(Dish::getCalories));
         System.out.println("totalCalories = " + totalCalories);
     }
-
 }
-
-
