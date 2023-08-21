@@ -16,26 +16,21 @@ public class SummingXxxDemo {
         summingIntEx();
     }
 
-
     private static void sumInStream() {
-
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
 
         // sum - using reduce
         int sum = integers.stream()
                 .reduce(0, Integer::sum);
-
         System.out.println("sum = " + sum);
 
         // sum - using IntStream.sum()
         sum = integers.stream().
                 mapToInt(Integer::intValue).sum();
-
         System.out.println("sum = " + sum);
     }
 
     private static void summingEx() {
-
         List<Integer> listOfI = Arrays.asList(17, 9, 13, 21, 5, 2);
         Integer sumI = listOfI.stream().collect(Collectors.summingInt(Integer::intValue));
         System.out.println("Sum = " + sumI);
