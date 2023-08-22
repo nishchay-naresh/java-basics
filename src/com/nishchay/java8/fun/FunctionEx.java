@@ -224,7 +224,6 @@ public class FunctionEx {
 
         List<String> decodeBackList = map(encodeList, decodeFun);
         System.out.println("decodeBackList = " + decodeBackList);
-
     }
 
 
@@ -234,7 +233,6 @@ public class FunctionEx {
     *
     * */
     public static <T, R> List<R> map(List<T> list, Function<T, R> mappingFun) {
-
         /*
         // imperative way
         List<R> result = new ArrayList<>();
@@ -246,7 +244,6 @@ public class FunctionEx {
 
         // declarative way
         return list.stream().map(mappingFun).collect(Collectors.toList());
-
     }
 
 
@@ -278,7 +275,5 @@ public class FunctionEx {
                 friends.stream()
                         .filter(startsWithLetter.apply("B")).count()
         );
-
     }
-
 }
