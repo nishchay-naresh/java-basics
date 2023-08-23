@@ -15,10 +15,8 @@ import java.util.function.BiFunction;
  * 2. default BiFunction andThen(Function after)
  *      – Returns a composed function that first applies this function to its input, and then applies the after function to the result.
  *
- *
  * */
 public class BiFunctionEx {
-
     public static void main(String[] args) {
 
         biFunctionBasicEx();
@@ -27,14 +25,9 @@ public class BiFunctionEx {
         computeIfAbsentWithBiFunctionEx();
         hashMapMergeReplaceAllEx();
         hashMapPrintEx();
-
     }
 
-
-
-
     private static void biFunctionBasicEx() {
-
         // a basic apply() example
         BiFunction<Integer, Integer, Integer> funAdd = (a, b) -> a + b;
         System.out.println(funAdd.apply(10, 20)); // 30
@@ -44,7 +37,6 @@ public class BiFunctionEx {
 
         BiFunction<String, String, Integer> funAdd1 = (s1, s2) -> s1.length() + s2.length();
         System.out.println(funAdd1.apply("java", "8")); // 5
-
     }
 
 
@@ -52,8 +44,6 @@ public class BiFunctionEx {
     private static void computeWithBiFunctionEx() {
 
         Map<Integer, String> hashMap = new HashMap<>();
-
-
         hashMap.put(7, "Peter");
         hashMap.put(5, "Philip");
         hashMap.put(2, "Martin");
@@ -61,7 +51,7 @@ public class BiFunctionEx {
         System.out.println("Initial HashMap: " + hashMap);
 
         // Using compute(key, BiFunction)
-        //hashMap.compute(4, (key, oldValue) -> oldValue.concat(msg));// throws NPE
+        // hashMap.compute(4, (key, oldValue) -> oldValue.concat(msg));// throws NPE
 
         // String defaultUser = "Anonymous";
         // BiFunction<Integer, String, String> f1 = (key, oldValue) -> oldValue == null ? defaultUser : oldValue.toUpperCase();
@@ -91,14 +81,11 @@ public class BiFunctionEx {
         });
 
         System.out.println("HashMap post compute() => " + hashMap);
-
-
     }
 
     private static void computeIfAbsentWithBiFunctionEx() {
 
         Map<String, Integer> hashMap = new HashMap<>();
-
         hashMap.put("One", 1);
         hashMap.put("Two", 2);
 
@@ -106,7 +93,6 @@ public class BiFunctionEx {
         hashMap.computeIfPresent("Two", (key, oldValue) -> oldValue + 100);
         hashMap.computeIfPresent("foo", (key, oldValue) -> oldValue + 1000);
         System.out.println("HashMap using computeIfPresent() => " + hashMap);
-
     }
 
     // BiFunction with merge and replaceAll Example
@@ -114,7 +100,6 @@ public class BiFunctionEx {
 
         Map<Integer, String> hashMap = new HashMap<>();
         String msg = " King";
-
         hashMap.put(7, "Peter");
         hashMap.put(5, "Philip");
         hashMap.put(2, "Martin");
@@ -152,5 +137,4 @@ public class BiFunctionEx {
 
         m.forEach((k,v)-> System.out.println(f.apply(k, v)));
     }
-
 }
