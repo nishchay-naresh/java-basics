@@ -22,7 +22,6 @@ import java.util.function.Consumer;
  * */
 
 public class ConsumerEx {
-
     public static void main(String[] args) {
 
         consumerEx();
@@ -33,14 +32,12 @@ public class ConsumerEx {
         primitiveConsumerEx();
     }
 
-
     /*
      *  java.util.function.Consumer<T>	:    T -> void  :	void accept(T t);
      *
      *   accept() - Performs this operation on the given argument.
      * */
     private static void consumerEx() {
-
         Consumer<String> strConsumer = x -> System.out.println(x + "-8");
         Consumer<String> consumerString = s -> System.out.println(s.toUpperCase());
         Consumer<Integer> intConsumer = i -> System.out.println(5 * i);
@@ -83,7 +80,6 @@ public class ConsumerEx {
         fiveTimes.andThen(i -> System.out.println(3 * i)).accept(4); // 20, 12
     }
 
-
     /*
      *  primitive Consumer : DoubleConsumer, IntConsumer and LongConsumer, BooleanConsumer
      *  receive primitive values as arguments
@@ -105,5 +101,4 @@ public class ConsumerEx {
         c3.accept(50.20);
         c4.accept(10 % 2 == 0);
     }
-
 }

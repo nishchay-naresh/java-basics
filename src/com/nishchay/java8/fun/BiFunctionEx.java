@@ -131,7 +131,7 @@ public class BiFunctionEx {
         m.put(6, "Anand");
         m.put(7, "Peter");
 
-        // Collections.frequency to get number of occurances
+        // Collections.frequency to get number of occurrences
         BiFunction<Integer, String, String> f =
                 (key, value) -> "[Key="+key+", "+value+"("+ Collections.frequency(m.values(), value)+")]";
 
