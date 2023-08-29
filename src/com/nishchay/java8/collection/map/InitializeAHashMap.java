@@ -1,6 +1,7 @@
 package com.nishchay.java8.collection.map;
 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,9 @@ public class InitializeAHashMap {
     public static void main(String[] args) {
 
         doubleBraceSyntax();
-
+        usingCollection();
+//        toMap();
+//        streamOfEntry();
     }
 
     /*
@@ -33,5 +36,20 @@ public class InitializeAHashMap {
     }
 
 
+    /*
+     *
+     * ========  Using Java Collections ===========
+     * Collections.singletonMap() - create a singleton immutable map with a single entry
+     *                              if we try to add more entries, it'll throw UnsupportedOperationException
+     *
+     * Collections.emptyMap() - create an immutable empty map
+     * */
+    private static void usingCollection() {
+        Map<String, String> singletonMap = Collections.singletonMap("username1", "password1");
+        System.out.println("singletonMap = " + singletonMap);
+
+        Map<String, String> emptyMap = Collections.emptyMap();
+        System.out.println("emptyMap = " + emptyMap);
+    }
 
 }
