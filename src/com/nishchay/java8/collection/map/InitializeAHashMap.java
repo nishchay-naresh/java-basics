@@ -4,6 +4,8 @@ package com.nishchay.java8.collection.map;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /*
 *
@@ -12,10 +14,9 @@ import java.util.Map;
 public class InitializeAHashMap {
 
     public static void main(String[] args) {
-
         doubleBraceSyntax();
         usingCollection();
-//        toMap();
+        toMap();
 //        streamOfEntry();
     }
 
@@ -51,5 +52,28 @@ public class InitializeAHashMap {
         Map<String, String> emptyMap = Collections.emptyMap();
         System.out.println("emptyMap = " + emptyMap);
     }
+
+
+    /*
+     *
+     * ========  Java 8 Way ===========
+     *  Collectors.toMap()
+     *  Stream of Map.Entry
+     *
+     * */
+    private static void toMap() {
+        Map<String, String> map1 = Stream.of(new String[][] {
+                { "Hello", "World" },
+                { "foo", "bar" },
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+        System.out.println("map1 = " + map1);
+
+        Map<String, Integer> map2 = Stream.of(new Object[][] {
+                { "key1", 100 },
+                { "key2", 200 },
+        }).collect(Collectors.toMap(data -> (String) data[0], data -> (Integer) data[1]));
+        System.out.println("map2 = " + map2);
+    }
+
 
 }
