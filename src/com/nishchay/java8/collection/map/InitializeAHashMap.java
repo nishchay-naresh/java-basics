@@ -1,6 +1,7 @@
 package com.nishchay.java8.collection.map;
 
 
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class InitializeAHashMap {
         doubleBraceSyntax();
         usingCollection();
         toMap();
-//        streamOfEntry();
+        streamOfEntry();
     }
 
     /*
@@ -75,5 +76,17 @@ public class InitializeAHashMap {
         System.out.println("map2 = " + map2);
     }
 
+    private static void streamOfEntry(){
+        Map<String, Integer> map1 = Stream.of(
+                        new AbstractMap.SimpleEntry<>("key1", 100),
+                        new AbstractMap.SimpleEntry<>("key2", 200))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        System.out.println("map1 = " + map1);
 
+        Map<String, Integer> map2 = Stream.of(
+                        new AbstractMap.SimpleImmutableEntry<>("key1", 100),
+                        new AbstractMap.SimpleImmutableEntry<>("key2", 200))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        System.out.println("map2 = " + map2);
+    }
 }
