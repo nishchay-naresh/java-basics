@@ -7,16 +7,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StringFrequency {
-
     public static void main(String[] args) {
 
-        stringFrequencyEx();
-        getFrequencyOfAWordEx();
-        nMostFrequentStringEx();
-
+        stringFrequency();
+        getFrequencyOfAWord();
+        removeDuplicateWords();
+        nMostFrequentString();
     }
 
-    private static void stringFrequencyEx() {
+    private static void stringFrequency() {
 
         String input = "Nothing is as easy as it looks but it looks easy";
         String[] strArray = input.split(" ");
@@ -34,24 +33,31 @@ public class StringFrequency {
 
         Map<String, Long> orderedFreqMap = StringFrequencyUtility.getOrderedFrequencyMapStream(strArray);
         System.out.println("orderedFreqMap = \t" + orderedFreqMap);
-
-
     }
 
     /*
      * A string sentence is comma separated find the frequency of the given word in the string.
      *
      * */
-    private static void getFrequencyOfAWordEx() {
+    private static void getFrequencyOfAWord() {
 
         String mainStr = "car, bus, car, jeep, cycle, bike, train, bus, truck, jeep, car, jeep, cycle, truck, train, car, bike, bus, cycle";
         String word = "car";
 
         Map<String, Long> freqMap = StringFrequencyUtility.getFrequencyMapStream(mainStr.split(", "));
         System.out.println("freqMap  =  " + freqMap);
-
         System.out.println("Frequency Of Word : " + word + " -> " + freqMap.get(word));
+    }
 
+    /*
+     * String[] strArr = {"car", "bus", "car", "train", "cycle", "bus", "train", "bus", "car"}
+     * o/p => bus, car, cycle, train
+     *
+     * */
+    private static void removeDuplicateWords() {
+        String[] strArr = {"car", "bus", "car", "train", "cycle", "bus", "train", "bus", "car"};
+        Map<String, Long> freqMap = StringFrequencyUtility.getFrequencyMapStream(strArr);
+        System.out.println("unique words = " + freqMap.keySet());
     }
 
     /*
@@ -64,10 +70,10 @@ public class StringFrequency {
      * n=4, truck
      *
      *  if there are multiple words with same freq, then consider the first one
-     * listOfKeys = [car, bus, jeep, cycle, bike, train, truck]
+     *  listOfKeys = [car, bus, jeep, cycle, bike, train, truck]
      *
      * */
-    private static void nMostFrequentStringEx() {
+    private static void nMostFrequentString() {
 
         String mainStr = "car, bus, car, jeep, cycle, bike, train, bus, truck, jeep, car, jeep, cycle, train, car, bike, bus, cycle";
         int n = 3;
@@ -99,10 +105,6 @@ public class StringFrequency {
         System.out.println("stringListFreqRev = " + stringListFreqRev);
 
         System.out.println("nthFreqStr = " + stringListFreqRev.get(n - 1));
-    }
-
-    private static String nMostFrequentString(String input, int n) {
-        return null;
     }
 }
 
