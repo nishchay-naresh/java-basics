@@ -49,7 +49,6 @@ public class FunctionEx {
         funWithPredicate();
     }
 
-
     /*
      * apply() - abstract method, used to execute/evaluate the function
      *
@@ -78,8 +77,6 @@ public class FunctionEx {
         // Function which takes an Integer and returns List<Integer>
         Function<Integer, List<Integer>> oneToMany = e -> Arrays.asList(e - 1, e + 1);
         System.out.println(oneToMany.apply(10)); // [9, 11]
-
-
     }
 
     private static void functionExWithGenerics(){
@@ -117,7 +114,6 @@ public class FunctionEx {
         System.out.println("mappingFunction1.apply(Collections.singleton(2)) - " + mappingFunction1.apply(Collections.singleton(2)));
         System.out.println("mappingFunction1.apply(Collections.singleton(1)) - " + mappingFunction1.apply(Collections.singleton(1)));
         System.out.println("mappingFunction1.apply(Collections.singleton(1)) - " + mappingFunction1.apply(Collections.singleton(9)));
-
     }
 
     private static Map.Entry<? extends Number, ? extends CharSequence> newMapEntry(Number key, CharSequence value) {
@@ -130,7 +126,6 @@ public class FunctionEx {
      *
      * */
     private static void identityEx() {
-
         Function<String, String> f1 = x -> x;
         System.out.println(f1.apply("java"));
         Function<Integer, Integer> f2 = x -> x;
@@ -143,11 +138,9 @@ public class FunctionEx {
 
         System.out.println(Function.identity().apply("java"));
         System.out.println(Function.identity().apply(25));
-
     }
 
     private static void identityEx_toMap() {
-
         Map<String, Integer> map =
                 Stream.of("java", "python", "go")
                         .collect(Collectors.toMap(Function.identity(), String::length));
@@ -177,7 +170,6 @@ public class FunctionEx {
      *
      * */
     private static void funcCompositionEx() {
-
         Function<Integer, Integer> incrementIt = e -> e + 1;
         printIt(5, "increment", incrementIt);
         printIt(10, "increment", incrementIt);
@@ -196,7 +188,6 @@ public class FunctionEx {
         Function<Integer, Integer> doubledAndIncrement = incrementIt.compose(doubledIt); // e -> (e * 2) + 1;
         printIt(20, "doubledAndIncrement", doubledAndIncrement);
         // Function<Integer, Integer> npe = incrementIt.compose(null); // java.lang.NullPointerException
-
     }
 
     // this method itself an example of Function composition, taking input and the Function operation over it
@@ -213,7 +204,6 @@ public class FunctionEx {
      * Java Base64 Example: Basic Encoding and Decoding
      * */
     private static void funAsParameter() {
-
         List<String> list = Arrays.asList("node", "c++", "java", "javascript", "ruby");
 
         Function<String, String> encodeFun = str -> Base64.getEncoder().encodeToString(str.getBytes());
@@ -248,7 +238,6 @@ public class FunctionEx {
 
 
     private static void funWithPredicate() {
-
         Function<String, Predicate<String>> startsWithLetter =
                 (String letter) -> {
                     Predicate<String> checkStarts = (String name) -> name.startsWith(letter);
