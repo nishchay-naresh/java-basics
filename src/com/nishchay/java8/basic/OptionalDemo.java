@@ -16,6 +16,7 @@ public class OptionalDemo {
 
         whatIsNull();
         NPEExample();
+        whatIsOptional();
         NPESuppressUsingOptional();
 
         createOptional();
@@ -26,9 +27,29 @@ public class OptionalDemo {
 
     }
 
+    /*
+    * null - is a wrong way to model absent of a value
+    *
+    * java.util.Optional<T>  is an optional type inspired form the idea of  - mayBe type of Haskell / Optional[T] of Scala
+    * A way to model absent of a value
+    *
+    * Optional<Car> -   A wrapper/Holder class for a value, which can come up with the absent of a value
+    *               -   Can give you a Value/absent of a value
+    *               -   Car object /  Optional.empty()
+    *               -   Forces you unwrap an Optional / deal with the absent of a value
+    *
+    *
+    * */
+    private static void whatIsOptional() {
+        Optional<User> optionalUser = Optional.of(findUserById(999));
+        System.out.println("optionalUser = " + optionalUser);
+    }
+
 
     /*
-     * null -  unknown value
+     * null -   unknown value
+     *      -   absent of a value
+     *
      * The null keyword is a literal that represents a null reference,
      * one that does not refer to any object. null is the default value of reference-type variables.
      * */
@@ -54,7 +75,6 @@ public class OptionalDemo {
         User user = findUserById(999);
         Optional<User> userOptional = Optional.of(user);
 
-        // checking container for value preset - using if check
         if (userOptional.isPresent()) {
             System.out.println("User detail - " + userOptional.get());
         } else {
@@ -84,7 +104,6 @@ public class OptionalDemo {
      *   Now the clients of this function are explicitly forced to handle this fact.
      * */
     private static Optional<User> findUserByIdOptionally(int id) {
-        // Create an empty Optional, which describes the absence of a value.
         Optional<User> optionalUser = Optional.empty();
 
         if (id == 999) {
@@ -114,7 +133,6 @@ public class OptionalDemo {
         System.out.println("empty optional = " + optionalUser);
         optionalUser = Optional.ofNullable(findUserById(999));
         System.out.println("userOptional = " + optionalUser);
-
     }
 
     private static void extractOptional() {
@@ -124,10 +142,14 @@ public class OptionalDemo {
         System.out.println("isIronMan = " + isIronMan);
 
 
-        //1. Retrieving optional using get() - value / NoSuchElementException
-        // Optional’s get() method returns a value if it is present, otherwise it throws NoSuchElementException.
+        /*
+        * 1. Retrieving optional using get()
+        *  get() -  simplest , but least safe method
+        *           returns a value / NoSuchElementException
+        *           get() method returns a value if it is present, otherwise it throws NoSuchElementException.
+        *
+        * */
         Optional<User> optionalUser = findUserByIdOptionally(999);
-        // System.out.println("Optional.get() - " + (optionalUser.isPresent() ? optionalUser.get() : null));
         System.out.println("Optional.get() - " + optionalUser.orElse(null));
 
         /* Below code will throw NoSuchElementException
@@ -135,7 +157,6 @@ public class OptionalDemo {
         String name = (String) Optional.empty().get();
         name = (String) Optional.ofNullable(null).get();
         */
-
 
         //2. Retrieving optional using orElse(), orElseGet() & orElseThrow() method
         int userId = 111;
@@ -147,13 +168,14 @@ public class OptionalDemo {
 
         /*
          * ==============  orElse() vs orElseGet() =============
-         * orElse() - passing an default value/Object for empty optional
-         *           performance impact - one object gets created every time, irrespective of optional value
+         * orElse() -       passing an default value/Object for empty optional
+         *                  performance impact - one object gets created every time, irrespective of optional value
          *
-         * orElseGet() - pass a Supplier function for empty optional
-         *           performance impact - supplier function will only get invoked for empty optional, then only object will get created
+         * orElseGet() -    pass a Supplier function for empty optional
+         *                  performance impact - supplier function will only get invoked for empty optional, then only object will get created
          *
-         * orElseThrow() - Throw an exception on absence of value
+         * orElseThrow() -  similar to get() methods, Throw an exception on absence of value
+         *                  It allows you to choose the type of exception that you want to throw
          *
          * */
 
@@ -161,7 +183,6 @@ public class OptionalDemo {
                 () -> new RuntimeException("User not found with userId " + userId)
         );
         System.out.println("Optional.orElseThrow() - " + user);
-
     }
 
     private static void isPresentEx() {
@@ -188,7 +209,6 @@ public class OptionalDemo {
 
         findUserByIdOptionally(999).ifPresent(userSalaryConsumer);
         Optional.of(new User(555, "Bat Man")).ifPresent(userSalaryConsumer);
-
     }
 
 
@@ -225,7 +245,6 @@ public class OptionalDemo {
                     ", id=" + id +
                     '}';
         }
-
     }
 
 }
