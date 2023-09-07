@@ -1,93 +1,245 @@
 package com.nishchay.java8.basic;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
+import static org.junit.Assert.assertEquals;
+
 /*
- *   Optional is a container type for a value which may be absent.
- *   Java 8 introduced a new type called Optional<T> to help developers deal with null values properly (avoid NullPointerException)
+ *
+ * =========================== Method Description ==============================
+ * empty()			Returns an empty Optional instance
+ * filter()		    If the value is present and matches the given predicate, returns this Optional; otherwise returns the empty one
+ * flatMap()		If a value is present, returns the Optional resulting from the application of the provided mapping function to it;
+ *                  otherwise returns the empty Optional
+ * get()			Returns the value wrapped by this Optional if present; otherwise throws a NoSuchElementException
+ * ifPresent()		If a value is present, invokes the specified consumer with the value; otherwise does nothing
+ * isPresent()		Returns true if there is a value present; otherwise false
+ * map()			If a value is present, applies the provided mapping function to it
+ * of()			    Returns an Optional wrapping the given value or throws a NullPointerException if this value is null
+ * ofNullable()	    Returns an Optional wrapping the given value or the empty Optional if this value is null
+ * orElse()		    Returns the value if present or the given default value otherwise
+ * orElseGet()	 	Returns the value if present or the one provided by the given Supplier otherwise
+ * orElseThrow()	Returns the value if present or throws the exception created by the given Supplier otherwise
+ *
+ * https://www.baeldung.com/java-optional
  *
  * */
+
 public class OptionalDemo {
 
     public static void main(String[] args) {
 
-        whatIsNull();
-        NPEExample();
-        whatIsOptional();
-        NPESuppressUsingOptional();
+//        whatIsNull();
+//        whatIsOptional();
+//        System.out.println("---------------------------------------");
+//        NPESuppressUsingOptional();
+//
+//        createOptional();
+//        System.out.println("---------------------------------------");
+//        checkOptional();
+//        System.out.println("---------------------------------------");
+//        extractOptional();
+        System.out.println("---------------------------------------");
+        optionalStreamMethods();
+        givenOptional_whenMapWorks_thenCorrect();
 
-        createOptional();
-        extractOptional();
-
-        isPresentEx();
-        strIdGenerationCheck();
-
-    }
-
-    /*
-    * null - is a wrong way to model absent of a value
-    *
-    * java.util.Optional<T>  is an optional type inspired form the idea of  - mayBe type of Haskell / Optional[T] of Scala
-    * A way to model absent of a value
-    *
-    * Optional<Car> -   A wrapper/Holder class for a value, which can come up with the absent of a value
-    *               -   Can give you a Value/absent of a value
-    *               -   Car object /  Optional.empty()
-    *               -   Forces you unwrap an Optional / deal with the absent of a value
-    *
-    *
-    * */
-    private static void whatIsOptional() {
-        Optional<User> optionalUser = Optional.of(findUserById(999));
-        System.out.println("optionalUser = " + optionalUser);
+//        System.out.println("---------------------------------------");
+//        strIdGenerationCheck();
     }
 
 
+
+
     /*
-     * null -   unknown value
+     *
+     * null -   is a wrong way to model absent of a value
+     *      -   unknown value
      *      -   absent of a value
      *
      * The null keyword is a literal that represents a null reference,
      * one that does not refer to any object. null is the default value of reference-type variables.
      * */
     private static void whatIsNull() {
-        System.out.println(null == null); // Always true
+        System.out.println(null == null); // always true
     }
 
-    private static void NPEExample() {
-        User user = findUserById(999);
-        // User user = findUserById(555); // Exception in thread "main" java.lang.NullPointerException
-        System.out.println("name - " + user.getName());
-
-        Optional<User> optionalUser = findUserByIdOptionally(999);
-        System.out.println("name - " + optionalUser.map(User::getName));
-
-        optionalUser = findUserByIdOptionally(555);
-        System.out.println("name - " + optionalUser.map(User::getName)); // Now no java.lang.NullPointerException
-
+    /*
+     *  null - is a wrong way to model absent of a value
+     *
+     *  java.util.Optional<T>  is an optional type inspired form the idea of  - mayBe type of Haskell / Optional[T] of Scala
+     *      -   A way to model absent of a value
+     *      -   Help developers to deal with null values properly (avoid NullPointerException)
+     *
+     *  Optional<Car>   -   A wrapper/Holder class for a value, which can come up with the absent of a value
+     *                  -   Can give you a Value/absent of a value
+     *                  -   Car object / Optional.empty()
+     *                  -   Forces you unwrap an Optional / deal with the absent of a value
+     *
+     * */
+    private static void whatIsOptional() {
+        Optional<User> optionalUser = Optional.of(findUserById(999));
+        System.out.println("optionalUser = " + optionalUser.get());
     }
 
     // The client is now forced by the type system to write the Optional check in his code.
     private static void NPESuppressUsingOptional() {
-        User user = findUserById(999);
-        Optional<User> userOptional = Optional.of(user);
+        User user = findUserById(555);
+        // System.out.println("name - " + user.getName()); // Exception in thread "main" java.lang.NullPointerException
+
+        Optional<User> userOptional = Optional.ofNullable(user);
 
         if (userOptional.isPresent()) {
             System.out.println("User detail - " + userOptional.get());
         } else {
             System.out.println("Optional is empty");
         }
-
-        // checking container for value preset - using Consumer
-        userOptional.ifPresent(v -> System.out.println("User detail - " + v));
-
     }
 
     /*
-     * Return tpe User, indicates that it will always return a User
+    * =========== create Optional =============
+    * 1. Create an empty Optional, which describes the absence of a value.
+    *       empty()         -   Returns an empty Optional instance.
+    *
+    * 2. create an Optional with a non-null value : Optional.of() - value / NullPointerException
+    *       of()            -  Returns an Optional wrapping the given value or throws a NullPointerException if this value is null
+    *
+    * 3. Create an Optional with a value which may or may not be null : Optional.ofNullable() - value / empty optional
+    *       ofNullable()    -	Returns an Optional wrapping the given value or the empty Optional if this value is null
+    *
+    * */
+    private static void createOptional() {
+        Optional<User> emptyOptional = Optional.empty();
+        Optional<User> emptyOptionalFromNull = Optional.ofNullable(null);// empty Optional
+        if (emptyOptional.equals(emptyOptionalFromNull)) {
+            System.out.println("Optional.ofNullable(null) == Optional.empty");
+        }
+
+        Optional<User> optionalUser = Optional.of(findUserById(999));
+        System.out.println("optionalUser = " + optionalUser);
+        // Optional<User> userOptional = Optional.of(null); // Exception in thread "main" java.lang.NullPointerException
+
+        optionalUser = Optional.ofNullable(findUserById(111));
+        System.out.println("empty optional = " + optionalUser);
+        optionalUser = Optional.ofNullable(findUserById(999));
+        System.out.println("userOptional = " + optionalUser);
+    }
+
+    /*
+     * isPresent()		Returns true if there is a value present; otherwise false
+     * ifPresent()		If a value is present, invokes the specified consumer with the value; otherwise does nothing
+     *
+     * */
+    private static void checkOptional() {
+
+        System.out.println("AbsentOptional.isPresent() - " + Optional.empty().isPresent());
+        Optional<String> stringOptional = Optional.of("java-8");
+        System.out.println("PresentOptional.isPresent() - " +stringOptional.isPresent());
+
+        Consumer<String> stringConsumer = (s) -> System.out.print("value stored in Optional object = " + s);
+
+        System.out.print("When value is present - ");
+        stringOptional.ifPresent(stringConsumer);
+
+        System.out.println("\nWhen value is absent - does nothing");
+        stringOptional = Optional.empty();
+        stringOptional.ifPresent(stringConsumer);
+
+        Consumer<User> userConsumer = (user) -> System.out.println("User Details : " + user);
+        findUserByIdOptionally(999).ifPresent(userConsumer);
+    }
+
+
+    /*
+     *
+     * get()			Returns the value wrapped by this Optional if present; otherwise throws a NoSuchElementException
+     * orElse()		    Returns the value if present or the given default value otherwise
+     * orElseGet()	    Returns the value if present or the one provided by the given Supplier otherwise
+     * orElseThrow()	Returns the value if present or throws the exception created by the given Supplier otherwise
+     *
+     * ==================  orElse() vs orElseGet() ==================
+     * orElse(T)    -       passing a default value/Object for empty optional
+     *                      performance impact - one object gets created every time, irrespective of optional value
+     *
+     * orElseGet(Supplier<T> ) -    pass a Supplier function for empty optional
+     *                              performance impact - supplier will only get evaluated for empty optional, then only object will get created
+     *
+     * orElseThrow(Supplier<X>)throws X -   similar to get() methods, Throw an exception on absence of value
+     *                                      It allows you to choose the type of exception that you want to throw
+     *
+     * */
+    private static void extractOptional() {
+
+        Optional<User> optionalUser = findUserByIdOptionally(999);
+        System.out.println("Optional.get() - " + optionalUser.get());
+
+        int userId = 111;
+        User user = Optional.ofNullable(findUserById(userId)).orElse(new User(0, "Default User"));
+        System.out.println("Optional.orElse() - " + user);
+
+        user = Optional.ofNullable(findUserById(userId)).orElseGet(() -> new User(0, "Default User"));
+        System.out.println("Optional.orElseGet() - " + user);
+
+        /*
+        // cause  - Exception in thread "main" java.lang.RuntimeException: User not found with userId 111
+        user = findUserByIdOptionally(userId).orElseThrow(() -> new RuntimeException("User not found with userId " + userId));
+        System.out.println("Optional.orElseThrow() - " + user);
+        */
+    }
+
+    /*
+    * ==================  Optional Stream Methods ==================
+    *
+    * map()     -		If a value is present, applies the provided mapping function to it
+    * flatMap() -       If a value is present, returns the Optional resulting from the application of the provided mapping function to it;
+    *                   otherwise returns the empty Optional
+    * filter()  -   	If the value is present and matches the given predicate, returns this Optional; otherwise returns the empty one
+    *
+    * */
+    private static void optionalStreamMethods() {
+        Optional<String> nonEmptyGender = Optional.of("male");
+        Optional<String> emptyGender = Optional.empty();
+
+        System.out.println("Non-Empty Optional:: " + nonEmptyGender.map(String::toUpperCase));
+        System.out.println("Empty Optional    :: " + emptyGender.map(String::toUpperCase));
+
+        Optional<Optional<String>> nonEmptyOptionalGender = Optional.of(Optional.of("male"));
+        System.out.println("Optional value   :: " + nonEmptyOptionalGender);
+        System.out.println("Optional.map     :: " + nonEmptyOptionalGender.map(gender -> gender.map(String::toUpperCase)));
+        System.out.println("Optional.flatMap :: " + nonEmptyOptionalGender.flatMap(gender -> gender.map(String::toUpperCase)));
+
+        Optional<String> gender = Optional.of("MALE");
+        System.out.println(gender.filter(g -> g.equals("male"))); //Optional.empty
+        System.out.println(gender.filter(g -> g.equalsIgnoreCase("MALE"))); //Optional[MALE]
+        System.out.println(emptyGender.filter(g -> g.equalsIgnoreCase("MALE"))); //Optional.empty
+    }
+
+    public static void givenOptional_whenMapWorks_thenCorrect() {
+        List<String> companyNames = Arrays.asList(
+                "paypal", "oracle", "microsoft", "google", "apple");
+        Optional<List<String>> listOptional = Optional.of(companyNames);
+
+        int size = listOptional
+                .map(List::size)
+                .orElse(0);
+        assertEquals(5, size);
+    }
+
+
+    private static void strIdGenerationCheck() {
+        String idFromDB = new Random().nextInt(100) % 2 == 0 ? "id from DB - 999" : null;
+
+        AtomicLong idCounter = new AtomicLong(554L);
+        String id = Optional.ofNullable(idFromDB).orElseGet(() -> "generated id - " + idCounter.incrementAndGet());
+        System.out.println(id);
+    }
+
+    /*
+     * Return type User, indicates that it will always return a User
      * No Way this function is telling its client that, User could be null
      * */
     private static User findUserById(int id) {
@@ -113,115 +265,7 @@ public class OptionalDemo {
         return optionalUser;
     }
 
-
-    private static void createOptional() {
-
-        //1. Create an empty Optional, which describes the absence of a value.
-        Optional<User> emptyOptional = Optional.empty();
-        Optional<User> emptyOptionalFromNull = Optional.ofNullable(null);// empty Optional
-        if (emptyOptional.equals(emptyOptionalFromNull)) {
-            System.out.println("Optional.empty() & optional.ofNullable(null) = Optional.empty");
-        }
-
-        //2. create an Optional with a non-null value : Optional.of() - value / NullPointerException
-        Optional<User> optionalUser = Optional.of(findUserById(999));
-        System.out.println("optionalUser = " + optionalUser);
-        // Optional<User> userOptional = Optional.of(null); // Exception in thread "main" java.lang.NullPointerException
-
-        //3. Create an Optional with a value which may or may not be null : Optional.ofNullable() - value / empty optional
-        optionalUser = Optional.ofNullable(findUserById(111));
-        System.out.println("empty optional = " + optionalUser);
-        optionalUser = Optional.ofNullable(findUserById(999));
-        System.out.println("userOptional = " + optionalUser);
-    }
-
-    private static void extractOptional() {
-
-        // Filtering values using filter() method
-        boolean isIronMan = findUserByIdOptionally(999).filter(e -> e.getName().equalsIgnoreCase("iron man")).isPresent();
-        System.out.println("isIronMan = " + isIronMan);
-
-
-        /*
-        * 1. Retrieving optional using get()
-        *  get() -  simplest , but least safe method
-        *           returns a value / NoSuchElementException
-        *           get() method returns a value if it is present, otherwise it throws NoSuchElementException.
-        *
-        * */
-        Optional<User> optionalUser = findUserByIdOptionally(999);
-        System.out.println("Optional.get() - " + optionalUser.orElse(null));
-
-        /* Below code will throw NoSuchElementException
-        System.out.println("Optional.get() - " + Optional.ofNullable(findUserById(111)).get());
-        String name = (String) Optional.empty().get();
-        name = (String) Optional.ofNullable(null).get();
-        */
-
-        //2. Retrieving optional using orElse(), orElseGet() & orElseThrow() method
-        int userId = 111;
-        User user = Optional.ofNullable(findUserById(userId)).orElse(new User(0, "Default User"));
-        System.out.println("Optional.orElse() - " + user);
-
-        user = Optional.ofNullable(findUserById(userId)).orElseGet(() -> new User(0, "Default User"));
-        System.out.println("Optional.orElseGet() - " + user);
-
-        /*
-         * ==============  orElse() vs orElseGet() =============
-         * orElse() -       passing an default value/Object for empty optional
-         *                  performance impact - one object gets created every time, irrespective of optional value
-         *
-         * orElseGet() -    pass a Supplier function for empty optional
-         *                  performance impact - supplier function will only get invoked for empty optional, then only object will get created
-         *
-         * orElseThrow() -  similar to get() methods, Throw an exception on absence of value
-         *                  It allows you to choose the type of exception that you want to throw
-         *
-         * */
-
-        user = findUserByIdOptionally(userId).orElseThrow(
-                () -> new RuntimeException("User not found with userId " + userId)
-        );
-        System.out.println("Optional.orElseThrow() - " + user);
-    }
-
-    private static void isPresentEx() {
-
-        Consumer<String> stringConsumer = (s) -> System.out.println("value stored in Optional object = " + s);
-
-        Optional<String> stringOptional = Optional.of("java-8");
-        System.out.println("When a value is present - ");
-        stringOptional.ifPresent(stringConsumer);
-
-        System.out.println("When no value is present - ");
-        stringOptional = Optional.ofNullable(null);
-        stringOptional.ifPresent(stringConsumer);
-
-        System.out.println("---------------------------------------");
-
-        Consumer<User> userSalaryConsumer = (user) -> {
-            if (user.getId() == 999) {
-                System.out.println("User salary is - 9999");
-            } else {
-                System.out.println("User salary is - 0");
-            }
-        };
-
-        findUserByIdOptionally(999).ifPresent(userSalaryConsumer);
-        Optional.of(new User(555, "Bat Man")).ifPresent(userSalaryConsumer);
-    }
-
-
-    private static void strIdGenerationCheck() {
-        String idFromDB = new Random().nextInt(100) % 2 == 0 ? "id from DB - 999" : null;
-
-        AtomicLong idCounter = new AtomicLong(554L);
-        String id = Optional.ofNullable(idFromDB).orElseGet(() -> "generated id - " + idCounter.incrementAndGet());
-        System.out.println(id);
-    }
-
     static class User {
-
         private final int id;
         private final String name;
 
