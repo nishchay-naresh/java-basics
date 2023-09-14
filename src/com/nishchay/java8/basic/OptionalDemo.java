@@ -34,26 +34,23 @@ public class OptionalDemo {
 
     public static void main(String[] args) {
 
-//        whatIsNull();
-//        whatIsOptional();
-//        System.out.println("---------------------------------------");
-//        NPESuppressUsingOptional();
-//
-//        createOptional();
-//        System.out.println("---------------------------------------");
-//        checkOptional();
-//        System.out.println("---------------------------------------");
-//        extractOptional();
+        whatIsNull();
+        whatIsOptional();
+        System.out.println("---------------------------------------");
+        NPESuppressUsingOptional();
+
+        createOptional();
+        System.out.println("---------------------------------------");
+        checkOptional();
+        System.out.println("---------------------------------------");
+        extractOptional();
         System.out.println("---------------------------------------");
         optionalStreamMethods();
         givenOptional_whenMapWorks_thenCorrect();
 
-//        System.out.println("---------------------------------------");
-//        strIdGenerationCheck();
+        System.out.println("---------------------------------------");
+        strIdGenerationCheck();
     }
-
-
-
 
     /*
      *
@@ -135,7 +132,6 @@ public class OptionalDemo {
      *
      * */
     private static void checkOptional() {
-
         System.out.println("AbsentOptional.isPresent() - " + Optional.empty().isPresent());
         Optional<String> stringOptional = Optional.of("java-8");
         System.out.println("PresentOptional.isPresent() - " +stringOptional.isPresent());
