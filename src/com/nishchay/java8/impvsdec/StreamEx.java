@@ -13,13 +13,9 @@ public class StreamEx {
 
     public static void main(String...args){
 
-
         getLowCaloricDishesNamesInJava7(Dish.menu).forEach(System.out::println);
-
         System.out.println("--------------------");
-
         getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
-
     }
 
     //  Imperative way - 3 iterations
@@ -52,5 +48,4 @@ public class StreamEx {
                 .map(Dish::getName)
                 .collect(Collectors.toList());
     }
-
 }
