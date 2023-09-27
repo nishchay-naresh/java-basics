@@ -22,6 +22,7 @@
   - Comparator interface enhancement using default & static methods
   - hashMap method enhancement
 + dp - Design Patterns using java8
++ java.util.function pkg interfaces
 + imperative vs declarative style
 + lambda - java.util.function
 + split - Spliterator 
