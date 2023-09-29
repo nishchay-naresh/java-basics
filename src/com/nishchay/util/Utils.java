@@ -32,20 +32,20 @@ public class Utils {
 
     public static void primeSum() {
         // Simulate a long-running Job
-        int sum = IntStream.rangeClosed(1,100000 ).filter(e -> isPrime1(e)).sum();
+        int sum = IntStream.rangeClosed(1, 100000).filter(e -> isPrime1(e)).sum();
         System.out.println("sum of primes till 100000 = " + sum);
-        System.out.println("primeSum - "+ Thread.currentThread());
+        System.out.println("primeSum - " + Thread.currentThread());
     }
 
-    public static CompletableFuture<Integer> create(int n){
+    public static CompletableFuture<Integer> create(int n) {
         return CompletableFuture.supplyAsync(() -> n);
     }
 
-    public static CompletableFuture<Integer> doubled(int n){
+    public static CompletableFuture<Integer> doubled(int n) {
         return CompletableFuture.supplyAsync(() -> n * 2);
     }
 
-    public static CompletableFuture<Integer> addThree(int n){
+    public static CompletableFuture<Integer> addThree(int n) {
         return CompletableFuture.supplyAsync(() -> n + 3);
     }
 
