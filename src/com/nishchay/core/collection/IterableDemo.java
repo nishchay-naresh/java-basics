@@ -14,30 +14,26 @@ public class IterableDemo {
     }
 
 
-
     private static void wayToItr() {
 
-        Iterable<String> list = Arrays.asList("two", "four", "six");
-        // List<String> list = Arrays.asList("two", "four", "six");
+        Iterable<String> list = Arrays.asList("two", "four", "six", "eight");
 
         // 1. Iterate an Iterable With the for-each Loop
-        for( String element : list ){
-            System.out.println( element.toString() );
+        for (String element : list) {
+            System.out.print(element + ", ");
         }
+        System.out.println();
 
         // 2.	Iterate an Iterable via an Iterator
         Iterator<String> iterator = list.iterator();
-        while(iterator.hasNext()) {
+        do {
             String element = iterator.next();
-            System.out.println( element );
-        }
+            System.out.print(element + ", ");
+        } while (iterator.hasNext());
+        System.out.println();
 
         // 3.	Iterate an Iterable via its forEach() Method
-        list.forEach( (element) -> {
-            System.out.println( element );
-        });
-
-
+        list.forEach(e -> System.out.print(e + ", "));
     }
 
     private static void userImplItr() {
@@ -45,9 +41,13 @@ public class IterableDemo {
         collection.add("ten");
         collection.add("nine");
         collection.add("five");
-        collection.forEach(System.out::println);
-
+        Iterator<String> iterator = collection.iterator();
+        do {
+            String element = iterator.next();
+            System.out.print(element + ", ");
+        } while (iterator.hasNext());
     }
+
 }
 
 // A Custom Collection Iterator implementation
