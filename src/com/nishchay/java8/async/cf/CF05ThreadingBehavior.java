@@ -1,15 +1,15 @@
 package com.nishchay.java8.async.cf;
 
+import com.nishchay.util.Utils;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import static com.nishchay.util.Utils.delay;
-
 /*
  * Threads of execution - where are things going to be run
  * really love, what they have done
- * Is cf execution always happening in a different threads all the time ?
+ * Is CF execution always happening in a different threads all the time ?
  *
  * it has both of the behaviour
  *
@@ -54,15 +54,15 @@ public class CF05ThreadingBehavior {
         asyncRunEx();
         System.out.println("----------------------------------");
         asyncSupplyEx();
-
     }
+
     public static void threadsOfExec() {
         System.out.println("main - " + Thread.currentThread());
         CompletableFuture<Integer> future = create();
         future.thenAccept(data -> printIt((data)));
 
         System.out.println("main done");
-        delay(2);
+        Utils.delay(2);
     }
 
     public static CompletableFuture<Integer> create() {
@@ -71,7 +71,7 @@ public class CF05ThreadingBehavior {
 
     public static int compute() {
         System.out.println("compute - " + Thread.currentThread());
-        delay(2);
+        Utils.delay(2);
         return 10;
     }
 
@@ -91,22 +91,19 @@ public class CF05ThreadingBehavior {
         completableFuture.join();
     }
 
-
     private static void asyncSupplyEx() {
         System.out.println("main - " + Thread.currentThread());
 
         Supplier<Integer> supplier = () -> {
             System.out.println("supplier - " + Thread.currentThread());
-            delay(2);
+            Utils.delay(2);
             return IntStream.rangeClosed(1, 100).sum();
         };
         CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(supplier);
 
         Integer sum100 = completableFuture.join();
         System.out.println("sum100 = " + sum100);
-
     }
-
 }
 /*
  * O/P =>
