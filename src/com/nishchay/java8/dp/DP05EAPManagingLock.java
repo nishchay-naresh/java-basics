@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static com.nishchay.java8.dp.Locker2.runLocked;
 
-public class EAPManagingLock {
+public class DP05EAPManagingLock {
     public static void main(String[] args) {
 
         usingLocks_oldWay();
