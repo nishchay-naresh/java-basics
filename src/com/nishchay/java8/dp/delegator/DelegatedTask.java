@@ -1,8 +1,14 @@
 package com.nishchay.java8.dp.delegator;
 
+/*
+ * when you want to perform some additional actions before/after you delegate
+ * (that's the Decorator pattern, but it's based on delegation).
+ *  For example, Collections.synchronizedList(..)
+ *
+ * */
 public class DelegatedTask implements Task{
 
-    private Task task;
+    private final Task task;
 
     public DelegatedTask(Task task) {
         this.task = task;

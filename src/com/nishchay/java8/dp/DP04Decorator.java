@@ -4,11 +4,10 @@ import java.util.function.Function;
 
 public class DP04Decorator {
 
-
     public static void main(String[] args) {
 
         // refer this
-//        OperatorEx.main(null);
+        // OperatorEx.main(null);
 
         /*
          * Can be referred at -
