@@ -68,7 +68,7 @@ public class FunctionEx {
         System.out.println(funHalf.apply(10));  //5.0
 
         // Function which takes in a String and returns its length
-        Function<String, Integer> funStrLength = String::length;
+        Function<String, Integer> funStrLength = x -> x.length();
         System.out.println(funStrLength.apply("java")); // 4
 
         funStrLength = Integer::parseInt;

@@ -21,7 +21,8 @@ import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMap
  *	T – Type of input argument
  *  does not take any arguments,  returns a value of generified type
  *
- *  typically we use it for lazy generation of values
+ *  typically we use it for lazy evaluation/execution of code
+ *
  *
  *	============== BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier ===================
  *	Java provides following functional interfaces that are used for corresponding primitives data type supplier.
