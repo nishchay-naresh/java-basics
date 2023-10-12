@@ -71,6 +71,7 @@ public class FunctionEx {
         Function<String, Integer> funStrLength = x -> x.length();
         System.out.println(funStrLength.apply("java")); // 4
 
+        // Storing a method to a FI reference type
         funStrLength = Integer::parseInt;
         System.out.println(funStrLength.apply("10")); // 10
 
