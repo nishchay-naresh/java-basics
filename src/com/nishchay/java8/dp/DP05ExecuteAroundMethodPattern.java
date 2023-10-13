@@ -4,6 +4,11 @@ import java.util.function.Consumer;
 
 
 /*
+ * ================ Higher Order Functions ============
+ *
+ *	Higher Order Functions - A function that either
+ *	•	takes one or more functions as parameter
+ *	•	 returns a function as result
  *
  *	================ Execute around method pattern / loan pattern ============
  *   ExecuteAroundMethodPattern - EAM
