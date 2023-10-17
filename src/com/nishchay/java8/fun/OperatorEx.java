@@ -47,9 +47,7 @@ public class OperatorEx {
         unaryOperatorEx();
         System.out.println("------------------------------");
         binaryOperatorEx();
-
     }
-
 
     private static void operatorEx(){
         List<String> names = Arrays.asList("java", "go", "python");
@@ -75,8 +73,6 @@ public class OperatorEx {
         System.out.println("discount - " + discountedPrice.applyAsInt(70));
     }
 
-
-
     private static void binaryOperatorEx() {
         BinaryOperator<String> stringBinaryOperator = (e1,e2) -> e1 + e2;
         System.out.println(stringBinaryOperator.apply("Hello ","World"));
@@ -93,5 +89,4 @@ public class OperatorEx {
         * similarly we have LongUnaryOperator, DoubleUnaryOperator
         * */
     }
-
 }
