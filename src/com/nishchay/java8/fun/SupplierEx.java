@@ -46,7 +46,6 @@ public class SupplierEx {
         suppFromAnotherSupplier();
     }
 
-
     private static void basicEx() {
         Supplier<String> strSupplier = () -> "dummy";
         System.out.println("strSupplier - " + strSupplier.get());
@@ -68,7 +67,6 @@ public class SupplierEx {
         Supplier<Random> s1 = Random::new;
         Random random = s1.get();
         System.out.println(random.nextInt(100));
-
     }
 
     private static void primitiveSuppliersEx() {
@@ -98,7 +96,6 @@ public class SupplierEx {
     }
 
     private static void supplierOfObject() {
-
         Supplier<List<Integer>> listSupplier = () -> Arrays.asList(10, 20, 30, 40, 50);
         List<Integer> list = listSupplier.get();
         System.out.println("list = " + list);
@@ -112,15 +109,12 @@ public class SupplierEx {
         mapSupplier = () -> new ConcurrentHashMap<>();
         hm  = mapSupplier.get();
         System.out.println("hm = " + hm);
-
     }
 
     private static void castSupplier() {
-
         Supplier<Map<?, ?>> genericMapSupplier = HashMap::new;
         Supplier<Map<String, Integer>> mapSupplier =  castSupplier1(genericMapSupplier);
         System.out.println("map = " + mapSupplier.get());
-
     }
 
     private static <L, M> Supplier<Map<L, M>> castSupplier1(Supplier<Map<?, ?>> map) {
