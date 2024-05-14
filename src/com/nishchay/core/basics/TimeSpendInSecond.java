@@ -7,6 +7,14 @@ import com.nishchay.ds.number.Prime;
 *
 *  replacing System.currentTimeMillis() to System.nanoTime()
 * */
+
+/*
+*  https://stackoverflow.com/questions/29537639/
+* ======= assignment and null check in single statement ==========
+*  You can use the result variable as your temporary, like this:
+*     dinner = ((dinner = cage.getChicken()) != null) ? dinner : getFreeRangeChicken();
+*
+* */
 public class TimeSpendInSecond {
 
     public static void main(String[] args) {
