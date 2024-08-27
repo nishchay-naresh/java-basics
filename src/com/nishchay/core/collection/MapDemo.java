@@ -15,6 +15,8 @@ public class MapDemo {
 
         hashMapPutEx();
         System.out.println("-----------------");
+        duplicateValue();
+        System.out.println("-----------------");
         hashMapNullPut();
         System.out.println("-----------------");
         hashMapStringPut();
@@ -28,7 +30,6 @@ public class MapDemo {
 
         mapFromListOfEntries();
         getEntryEx();
-
     }
 
     private static void hashMapPutEx() {
@@ -45,6 +46,20 @@ public class MapDemo {
         Integer old2 = hashMap.put("two", 200);
         System.out.println("old1 = " + old1 + ", old2 = " + old2);
         System.out.println("hashMap = " + hashMap);
+    }
+
+    private static void duplicateValue() {
+        // In hashMap key need to be unique, but can have duplicate value, like
+        // 		{k1-v1, k2->v2, k3->v1, k4->v4, k5->v1, k6->v2}
+        Map<String, String> map = new HashMap<>();
+        map.put("k1", "v1");
+        map.put("k2", "v2");
+        map.put("k3", "v1");
+        map.put("k4", "v4");
+        map.put("k5", "v1");
+        map.put("k6", "v2");
+
+        System.out.println("map = " + map);
     }
 
     private static void hashMapNullPut() {
