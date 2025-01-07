@@ -14,22 +14,22 @@ public class MapDemo {
     public static void main(String[] args) {
 
         hashMapPutEx();
-        System.out.println("-----------------");
-        duplicateValue();
-        System.out.println("-----------------");
-        hashMapNullPut();
-        System.out.println("-----------------");
-        hashMapStringPut();
-
-        emptyMapEx();
-
-        System.out.println("-----------------");
-        hashMapCASOperationEx();
-        System.out.println("-----------------");
-        treeMapExForSingleNullPut();
-
-        mapFromListOfEntries();
-        getEntryEx();
+//        System.out.println("-----------------");
+//        duplicateValue();
+//        System.out.println("-----------------");
+//        hashMapNullPut();
+//        System.out.println("-----------------");
+//        hashMapStringPut();
+//
+//        emptyMapEx();
+//
+//        System.out.println("-----------------");
+//        hashMapCASOperationEx();
+//        System.out.println("-----------------");
+//        treeMapExForSingleNullPut();
+//
+//        mapFromListOfEntries();
+//        getEntryEx();
     }
 
     private static void hashMapPutEx() {
@@ -37,14 +37,16 @@ public class MapDemo {
         Map<String, Integer> hashMap = new HashMap<>();
 
         // put as add
+        hashMap.put("", 1);
         hashMap.put("one", 1);
         hashMap.put("two", 2);
         System.out.println("hashMap = " + hashMap);
 
         // put as update
-        Integer old1 = hashMap.put("one", 100);
-        Integer old2 = hashMap.put("two", 200);
-        System.out.println("old1 = " + old1 + ", old2 = " + old2);
+        Integer old1 = hashMap.put("", 0);
+        Integer old2 = hashMap.put("one", 100);
+        Integer old3 = hashMap.put("two", 200);
+        System.out.println("old1 = " + old1 + ", old2 = " + old2 + ", old3 = " + old3);
         System.out.println("hashMap = " + hashMap);
     }
 
