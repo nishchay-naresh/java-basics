@@ -49,22 +49,22 @@ public class ParenthesesMatch {
 
 	/**
 	 * boolean doTestsPass()
-	 * Returns true if all tests pass. Otherwise returns false.
+	 * Returns true if all tests pass. Otherwise, returns false.
 	 */
 	public static void doTestsPass() {
 
-/*
 		String expr = "{[}], [[()]], ({([])}), [[]), {{[]))]]), {[()]}, [[]])))";
 		boolean[] outputs = {false, true, false, false, false, false, false};
-*/
+
+/*
 		String expr = "(), ()[]{}, (], ([)], {[]}";
 		boolean[] outputs = {true, true, false, false, true};
+*/
 
 		String[] inputs = expr.split(",");
 
 		boolean result = true;
 		for (int i = 0; i < inputs.length; i++) {
-//			System.out.println( inputs[i]  + " - " + validate(inputs[i]) );
 			result = result && outputs[i] == validate(inputs[i]) ;
 			if (!result)
 				System.out.println("Test failed for: " + inputs[i]);
@@ -113,10 +113,7 @@ public class ParenthesesMatch {
 				return false;
 			}
 		}
-		if (stack.empty()) {
-			return true;
-		}
-		return false;
+		return stack.empty();
 	}
 
 }
