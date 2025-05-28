@@ -5,14 +5,32 @@ package com.nishchay.ds.array.water;
  * Trapping Rain Water
  * Given n non-negative integers representing an elevation map where the width of each bar is 1,
  * compute how much water it is able to trap after raining.
- * Examples:
- *      Input: arr[]   = {2, 0, 2}
- *      Output: 2
- *	    Input: arr[]   = {3, 0, 2, 0, 4}
- *	    Output: 7
- *	    Input: arr[] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
- *	    Output: 6
  *
+ * Examples:
+ *      Input: arr[] = {2, 0, 2}
+ *      Output: 2
+ *      Explanation: We trap 0 + 2 + 0 = 2 units.
+ *
+ *	    Input: arr[] = {3, 0, 2, 0, 4}
+ *	    Output: 7
+ *      Explanation: We trap 0 + 3 + 1 + 3 + 0 = 7 units.
+ *
+ *	    Input: arr[] = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
+ *	    Output: 6
+ *      Explanation: We trap 0 + 0 + 1 + 0 + 1 + 2 + 1 + 0 + 0 + 1 + 0 + 0 = 6 units.
+ *
+ *	    Input: arr[] = {3, 0, 1, 0, 4, 0, 2}
+ *	    Output: 10
+ *	    Explanation: We trap 0 + 3 + 2 + 3 + 0 + 2 + 0 = 10 units.
+ *
+ *      Input: arr[] = {3, 0, 2, 0, 4}
+ *	    Output: 7
+ *	    Explanation: We trap 0 + 3 + 1 + 3 + 0 = 7 units.
+ *
+ *	    Input: arr[] = {1, 2, 3, 4}
+ *	    Output: 0
+ *	    Explanation: We cannot trap water as there is no height bound on both sides
+
  *------------------------------------------------------------
  * Algorithm :
  *	getTotalWaterVolume(H) :
@@ -30,22 +48,37 @@ package com.nishchay.ds.array.water;
  *
  * */
 
+import java.util.Arrays;
+
 public class TrappingRainWater {
-
-
     public static void main(String[] args) {
-        // -------------
+
+        int[][] input2D = {
+                {2, 0, 2},                              // 2
+                {3, 0, 2, 0, 4},                        // 7
+                {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1},   // 6
+                {3, 0, 1, 0, 4, 0, 2},                  // 10
+                {3, 0, 2, 0, 4},                        // 7
+                {1, 2, 3, 4},                           // 0
+                {1, 3, 2, 4, 6, 1},                     // 1
+                {1, 3, 2, 1, 4, 6, 7, 3, 1},            // 3
+                {7, 0, 4, 2, 5, 0, 6, 4, 0, 5 },        // 25
+                {5, 6, 7, 12, 2, 10, 17, 5, 3}          // 12
+        };
+
+        int[] outputs = {2, 7, 6, 10, 7, 0, 1, 3, 25, 12};
+
+        boolean result = true;
+        for (int i = 0; i < input2D.length; i++) {
+            result = result && getTotalWaterVolume(input2D[i]) == (outputs[i]);
+            if (!result)
+                System.out.println("Test failed for: " + Arrays.toString(input2D[i]));
+            else
+                System.out.println("Test passed for: " + Arrays.toString(input2D[i]));
+        }
+
         int[] nums = {0, 1, 2, 4, 5, 7, 9, 8, 6, 3, 2, 1};  // 0
         System.out.println(getTotalWaterVolume1(nums));
-
-//        int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};   // 6
-//        int[] arr = {1, 3, 2, 4, 6, 1};                   // 1
-//        int[] arr = {1, 3, 2, 1, 4, 6, 7, 3, 1};          // 3
-//        int[] arr = { 7, 0, 4, 2, 5, 0, 6, 4, 0, 5 };     // 25
-        int[] arr = {5, 6, 7, 12, 2, 10, 17, 5, 3};       // 12
-        System.out.print(getTotalWaterVolume(arr));
-
-
     }
 
     private static int getTotalWaterVolume(int[] arr) {
@@ -70,10 +103,7 @@ public class TrappingRainWater {
             int ithWater = Math.min(left, right) - arr[i];
             totalWater = totalWater + ithWater;
         }
-
-
         return totalWater;
-
     }
     /*
      * Time Complexity: O(n2).
@@ -83,10 +113,10 @@ public class TrappingRainWater {
      private static int getTotalWaterVolume1(int[] arr) {
 
          int n = arr.length;
-         // left[i] contains height of tallest bar to the left of i'th bar including itself
+         // left[i] contains height of the tallest bar to the left of ith bar including itself
          int[] left = new int[n];
 
-         // right[i] contains height of tallest bar to the right of ith bar including itself
+         // right[i] contains height of the tallest bar to the right of ith bar including itself
          int[] right = new int[n];
 
          // Initialize result
