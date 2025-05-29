@@ -14,22 +14,22 @@ public class MapDemo {
     public static void main(String[] args) {
 
         hashMapPutEx();
-//        System.out.println("-----------------");
-//        duplicateValue();
-//        System.out.println("-----------------");
-//        hashMapNullPut();
-//        System.out.println("-----------------");
-//        hashMapStringPut();
-//
-//        emptyMapEx();
-//
-//        System.out.println("-----------------");
-//        hashMapCASOperationEx();
-//        System.out.println("-----------------");
-//        treeMapExForSingleNullPut();
-//
-//        mapFromListOfEntries();
-//        getEntryEx();
+        System.out.println("-----------------");
+        duplicateValue();
+        System.out.println("-----------------");
+        hashMapNullPut();
+        System.out.println("-----------------");
+        hashMapStringPut();
+
+        emptyMapEx();
+
+        System.out.println("-----------------");
+        hashMapCASOperationEx();
+        System.out.println("-----------------");
+        treeMapExForSingleNullPut();
+
+        mapFromListOfEntries();
+        getEntryEx();
     }
 
     private static void hashMapPutEx() {
@@ -62,6 +62,13 @@ public class MapDemo {
         map.put("k6", "v2");
 
         System.out.println("map = " + map);
+
+        /*
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+        map.forEach((key, value) -> System.out.println(key + "-> " + value));
+        */
     }
 
     private static void hashMapNullPut() {
@@ -86,12 +93,13 @@ public class MapDemo {
 
         System.out.println("map = " + map);
 
-/*        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
-*/
-
-//        map.forEach((key, value) -> System.out.println(key + "-> " + value));
+        Map<String, Integer> cacheEntries = new HashMap<>();
+        cacheEntries.put("id", 101);
+        cacheEntries.put("age", 35);
+        cacheEntries.put("salary", 9000);
+        cacheEntries.put("pin", 560035);
+        cacheEntries.put("null", null);
+        System.out.println("cacheEntries = " + cacheEntries);
     }
 
     private static void hashMapStringPut() {
@@ -110,8 +118,8 @@ public class MapDemo {
 
     private static void emptyMapEx() {
 
-        Map<String,String> EmptyMap = Collections.emptyMap();
-        System.out.println("Created Empty Map: "+EmptyMap);
+        Map<String, String> EmptyMap = Collections.emptyMap();
+        System.out.println("Created Empty Map: " + EmptyMap);
 
         // EmptyMap.put("1","java7"); // java.lang.UnsupportedOperationException
     }
@@ -157,8 +165,8 @@ public class MapDemo {
     private static void treeMapExForSingleNullPut() {
 
         Map<String, Integer> treeMap = new TreeMap<>();
-        treeMap.put(null, 100);
-//        treeMap.put("20", 100);
+//        treeMap.put(null, 100); // can't put null in TreeMap - NullPointerException
+        treeMap.put("20", 100);
         System.out.println(treeMap.size());
     }
 
@@ -204,8 +212,8 @@ public class MapDemo {
     public static <K, V> Map.Entry<K, V> getEntry(HashMap<K, V> map, K key) {
 
         Map.Entry<K, V> result = null;
-        for(Map.Entry<K, V> entries : map.entrySet()){
-            if(entries.getKey().equals(key)){
+        for (Map.Entry<K, V> entries : map.entrySet()) {
+            if (entries.getKey().equals(key)) {
                 result = entries;
                 break;
             }
