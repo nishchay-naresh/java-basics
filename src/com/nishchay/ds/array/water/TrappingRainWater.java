@@ -70,7 +70,7 @@ public class TrappingRainWater {
 
         boolean result = true;
         for (int i = 0; i < input2D.length; i++) {
-            result = result && getTotalWaterVolume(input2D[i]) == (outputs[i]);
+            result = result && trappingWater(input2D[i]) == (outputs[i]);
             if (!result)
                 System.out.println("Test failed for: " + Arrays.toString(input2D[i]));
             else
@@ -78,6 +78,7 @@ public class TrappingRainWater {
         }
 
         int[] nums = {0, 1, 2, 4, 5, 7, 9, 8, 6, 3, 2, 1};  // 0
+        System.out.println(getTotalWaterVolume(nums));
         System.out.println(getTotalWaterVolume1(nums));
     }
 
@@ -141,5 +142,34 @@ public class TrappingRainWater {
 
          return water;
      }
+
+
+    public static int trappingWater(int[] arr) {
+        int left, right, leftMax, rightMax, totalWater;
+        left = 0;
+        right = arr.length - 1;
+        leftMax = rightMax = totalWater = 0;
+
+
+        while (left < right) {
+            if (arr[left] < arr[right]) {
+                if (arr[left] >= leftMax) {
+                    leftMax = arr[left];
+                } else {
+                    totalWater += leftMax - arr[left];
+                }
+                left++;
+            } else {
+                if (arr[right] >= rightMax) {
+                    rightMax = arr[right];
+                } else {
+                    totalWater += rightMax - arr[right];
+                }
+                right--;
+            }
+        }
+        return totalWater;
+    }
+
 }
 
