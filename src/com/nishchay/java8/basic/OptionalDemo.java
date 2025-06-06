@@ -151,8 +151,8 @@ public class OptionalDemo {
     /*
      *
      * get()			Returns the value wrapped by this Optional if present; otherwise throws a NoSuchElementException
-     * orElse()		    Returns the value if present or the given default value otherwise
-     * orElseGet()	    Returns the value if present or the one provided by the given Supplier otherwise
+     * orElse(-)		Returns the value if present or the given default value otherwise
+     * orElseGet(-)	    Returns the value if present or the one provided by the given Supplier otherwise
      * orElseThrow()	Returns the value if present or throws the exception created by the given Supplier otherwise
      *
      * ==================  orElse() vs orElseGet() ==================
@@ -181,6 +181,7 @@ public class OptionalDemo {
         /*
         // cause  - Exception in thread "main" java.lang.RuntimeException: User not found with userId 111
         user = findUserByIdOptionally(userId).orElseThrow(() -> new RuntimeException("User not found with userId " + userId));
+        user = findUserByIdOptionally(userId).orElseThrow(RuntimeException::new)
         System.out.println("Optional.orElseThrow() - " + user);
         */
     }
