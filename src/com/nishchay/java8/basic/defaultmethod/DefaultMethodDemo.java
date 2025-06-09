@@ -7,15 +7,11 @@ public class DefaultMethodDemo implements MyInterface {
         System.out.println("String is: "+str);
     }
 
-    public static void main(String[] args) {
-        DefaultMethodDemo obj = new DefaultMethodDemo();
-
-        //calling the default method of interface
-        obj.newMethod();
-        //calling the abstract method of interface
-        obj.existingMethod("Java 8 is easy to learn");
-        //calling the static method of interface
-        MyInterface.anotherNewMethod();
+    // implementing a default method - a default method can be overridden by implementing classes.
+    @Override
+    public void m1() {
+        System.out.println("DefaultMethodDemo.m1()");
     }
+
 
 }

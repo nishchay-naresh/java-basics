@@ -1,20 +1,22 @@
 package com.nishchay.java8.basic.defaultmethod;
 
-interface MyInterface{
-    /* This is a default method so we need not
-     * to implement this method in the implementation
-     * classes
+interface MyInterface {
+    /*
+     * This is a default method -> It can have some default implementation
+     * One is not happy with the default implementation he can override its default implementation
      */
-    default void newMethod(){
+    default void newMethod() {
         System.out.println("Newly added default method");
     }
-    /* Already existing public and abstract method
-     * We must need to implement this method in
-     * implementation classes.
+    /*
+     * public and abstract method -> One need to implement this method
      */
     void existingMethod(String str);
+    default void m1(){
+        System.out.println("MyInterface.m1()");
+    }
 
-    static void anotherNewMethod(){
+    static void anotherNewMethod() {
         System.out.println("Newly added static method");
     }
 }
