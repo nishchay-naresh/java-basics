@@ -15,7 +15,7 @@ package com.nishchay.ds.array.nelement;
  *	        Output : 1
  *
  * This problem can be seen as 1-N numbers are there in array + one duplicate is there
- * bcus of this duplicate size of array N + 1;
+ * because of this duplicate size of array N + 1;
  *
  *      	Input  : a[] = {1, 3, 2, 3, 4} = { 1, 2, 3, 4 } + { 2 }
  *	        Output : 3
@@ -30,7 +30,9 @@ package com.nishchay.ds.array.nelement;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 class FindOnlyRepetitiveElementIn1_N {
 
@@ -48,8 +50,9 @@ class FindOnlyRepetitiveElementIn1_N {
         };
 
         int[] outputs = {2, 8, 1, 3, 8, 1, 1, 3};
-
         boolean result = true;
+
+/*
         for (int i = 0; i < input2D.length; i++) {
             result = result && findDuplicate_xor(input2D[i]) == (outputs[i]);
             if (!result)
@@ -57,6 +60,33 @@ class FindOnlyRepetitiveElementIn1_N {
             else
                 System.out.println("Test passed for: " + Arrays.toString(input2D[i]));
         }
+*/
+
+        for (int i = 0; i < input2D.length; i++) {
+            result = result && executeAllApproach(input2D[i], outputs[i]);
+            if (!result)
+                System.out.println("Test failed for: " + Arrays.toString(input2D[i]));
+            else
+                System.out.println("Test passed for: " + Arrays.toString(input2D[i]));
+        }
+
+    }
+
+    private static boolean executeAllApproach(int[] input, int output) {
+        List<Function<int[], Integer>> functionList = Arrays.asList(
+                arr -> findDuplicate_2loop(arr),
+                arr -> findDuplicate_sorting(arr),
+                arr -> findDuplicate_hasSet(arr),
+                arr -> findDuplicate_xor(arr),
+                arr -> findDuplicate_sumFormula(arr),
+                arr -> findDuplicate_elementsAsIndexes(arr)
+        );
+        for (Function<int[], Integer> currFn : functionList) {
+            if (output != currFn.apply(input)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /*
@@ -140,10 +170,10 @@ class FindOnlyRepetitiveElementIn1_N {
      *	Example:
      *	N=5
      *	arr[5]={1,2,3,2,4}
-     *	XOR PROPERTY : 2 XOR 2 =0 i.e XOR of same no. is 0.
+     *	XOR PROPERTY : 2 XOR 2 = 0 i.e XOR of same no. is 0.
      *	now what is happening in algo 2?
      *	XOR of 1st N-1 natural no. X1=1^2^3^4
-     *  N-1, bcus N no are there in array, +1 is the no which is repeated
+     *  N-1, because N no are there in array, +1 is the no which is repeated
      *	XOR of array elements X2=1^2^3^2^4
      *	X1 XOR X2 = 1^2^3^4^1^2^3^2^4= 1^1^2^2^2^3^3^4^4=2
      *
