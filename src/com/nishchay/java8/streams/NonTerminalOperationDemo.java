@@ -107,9 +107,9 @@ public class NonTerminalOperationDemo {
 
         // Printing only distinct numbers
         System.out.println("########## List after applying distinct() ###########");
-        Stream.of(7, 1, 4, 3, 4, 3, 2, 1, 7, 2, 1, 3)
+        Stream.of(7, 1, 8, 4, 3, 1, 7, 1, 4, 1, 3)
                 .distinct()
-                .forEach(s -> System.out.print(s + ", ")); // 7, 1, 4, 3, 2
+                .forEach(s -> System.out.print(s + ", ")); // 7, 1, 8, 4, 3
     }
 
     private static void sortedDemo() {
@@ -117,10 +117,17 @@ public class NonTerminalOperationDemo {
         System.out.println("########## sorted view of the stream ###########");
         Stream.of(1, 4, 2, 7, 9, 10, 3)
                 .sorted()
-                .forEach(s -> System.out.print(s + ", "));
+                .forEach(s -> System.out.print(s + ", ")); // 1, 2, 3, 4, 7, 9, 10
 
     }
 
+    /*
+    *
+    * If total 5 element are there in stream
+    *   How to get first 3 element of stream    = limit(3)
+    *   How to get last 4 element of stream     = skip(5-4)
+    *
+    * */
     private static void limitDemo() {
         System.out.println("########## Applying limit ###########");
         Stream.of("one", "two", "three", "four", "five")
@@ -130,20 +137,17 @@ public class NonTerminalOperationDemo {
 
     private static void skipDemo() {
         System.out.println("########## Applying skip ###########");
-        IntStream.of(23, 17, 8, 12, 5, 6, 9, 16, 2)
-                .skip(2) // skipping first two element only
-                .filter(e -> e > 10)
-                .forEach(System.out::println); //12, 16
+        Stream.of("one", "two", "three", "four", "five")
+                .skip(2) // skipping first two element of stream
+                .forEach(System.out::println); // three, four, five
     }
 
     private static void peekDemo() {
-
         /*
-        System.out.println("######### Applying peek ###########");
+        // it won't work, we need to apply a terminal operation over stream, to execute intermediate operation - peek()
         Stream.of("one", "two", "three", "four", "five")
                 .peek(value -> System.out.println(value));
         */
-
         System.out.println("######### Applying peek ###########");
         List<String> list = Stream.of("one", "two", "three", "four", "five")
                 .filter(e -> e.length() > 3) // three, four, five
@@ -153,7 +157,6 @@ public class NonTerminalOperationDemo {
                 .collect(Collectors.toList());
 
         System.out.println("list = " + list);
-
     }
 
 
