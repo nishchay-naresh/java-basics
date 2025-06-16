@@ -1,5 +1,7 @@
 package com.nishchay.java8.fun;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +55,7 @@ public class SupplierEx {
         String result = Stream.of("java", "python", "go")
                 .filter(e -> e.length() > 4)
                 .findAny()
-                .orElseGet(strSupplier);
+                .orElseGet(() -> "nothing");
 
         System.out.println("result = " + result);
 
@@ -63,7 +65,7 @@ public class SupplierEx {
         integerSupplier = () -> new Random().nextInt(100);
         System.out.println("integerSupplier - " + integerSupplier.get());
 
-        //Using Constructor
+        // holding a constructor reference
         Supplier<Random> s1 = Random::new;
         Random random = s1.get();
         System.out.println(random.nextInt(100));
