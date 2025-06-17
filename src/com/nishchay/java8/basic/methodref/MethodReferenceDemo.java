@@ -2,6 +2,7 @@ package com.nishchay.java8.basic.methodref;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class MethodReferenceDemo {
 
@@ -9,6 +10,7 @@ public class MethodReferenceDemo {
 
         basicEx();
         soringEx();
+        forEachEx();
     }
 
 
@@ -25,31 +27,39 @@ public class MethodReferenceDemo {
         List<String> stringList = Arrays.asList("java", "python", "go");
 
         /*
-         * method reference to instance method
-         *       public String toString() {}
+         * method reference to static method
+         *      public static String valueOf(Object obj) {}
+         *
          * */
         stringList.stream()
                 .map(String::valueOf)
                 .forEach(System.out::println);
 
         /*
-         * method reference to static method
-         *      public static String valueOf(Object obj) {}
+         * method reference to instance method
+         *       public int length() {}
          * */
         stringList.stream()
-                .map(String::toString)
+                .map(String::length)
                 .forEach(System.out::println);
-
     }
 
     private static void soringEx() {
         String[] stringArray = {"Steve", "Rick", "Andy", "Nathan", "Lucy", "Simon", "Jon"};
 
+        System.out.println("Original list   = " + Arrays.toString(stringArray));
         Arrays.sort(stringArray, String::compareToIgnoreCase);
+        System.out.println("Sorted list     = " + Arrays.toString(stringArray));
+    }
 
-        for (String str : stringArray) {
-            System.out.println(str);
-        }
+    private static void forEachEx() {
+        List<String> stringList =  Arrays.asList("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
+
+        Stream<String> strStream = stringList.stream();
+        strStream.forEach(e -> System.out.print(e + ", "));
+
+        // stringList.forEach(s -> System.out.println(s));
+        stringList.forEach(System.out::println);
     }
 
 }
