@@ -1,6 +1,6 @@
 package com.nishchay.java8.basic.defaultmethod;
 
-public class Test {
+public class DefaultMethodTest {
 
     public static void main(String[] args) {
         A1 a1 =  new A1();
@@ -12,9 +12,13 @@ public class Test {
         A1 a2 =  new B1();
         a2.m1(); a2.meth();
     }
-
 }
-
+/*
+ * output ==>
+ *		I1,I1
+ *		I2,I2
+ *		I2,I2
+ * */
 interface I1{
 
     default void m1(){
