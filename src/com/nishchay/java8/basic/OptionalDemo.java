@@ -126,7 +126,7 @@ public class OptionalDemo {
 
     /*
      * isPresent()		Returns true if there is a value present; otherwise false
-     * ifPresent()		If a value is present, invokes the specified consumer with the value; otherwise does nothing
+     * ifPresent()		If a value is present, invokes the specified consumer; otherwise does nothing
      *
      * */
     private static void checkOptional() {

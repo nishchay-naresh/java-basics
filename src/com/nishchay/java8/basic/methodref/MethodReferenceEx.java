@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class MethodReferenceDemo {
+public class MethodReferenceEx {
 
     public static void main(String[] args) {
 
