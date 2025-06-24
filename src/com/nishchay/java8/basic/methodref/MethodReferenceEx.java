@@ -1,65 +1,69 @@
 package com.nishchay.java8.basic.methodref;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
+/*
+ * There are 3 Functional Interface which each have below abstract method
+ *
+ *   FI1    {   void display();              }
+ *   FI2    {   void display(int a);         }
+ *   FI3    {   Person display(String msg);  }
+ *
+ *   Runnable { void run(); }
+ *
+ * */
 public class MethodReferenceEx {
 
     public static void main(String[] args) {
-
-        basicEx();
-        soringEx();
-        forEachEx();
+        instanceMethod_noArg();
+        instanceMethod_1Arg();
+        constructor_1Arg();
+        staticMethod_noArg();
     }
 
-
-    /*
-     * Method reference syntax is same for both - instance method & static method
-     * based on context compiler is good enough to identify respective method invocation
-     *
-     * there is one caveat - method collision and resulting ambiguity
-     *  if we have two method with same signature, static & instance, we will get compilation error, bcus of ambiguity
-     *
-     * */
-    private static void basicEx() {
-
-        List<String> stringList = Arrays.asList("java", "python", "go");
-
-        /*
-         * method reference to static method
-         *      public static String valueOf(Object obj) {}
-         *
-         * */
-        stringList.stream()
-                .map(String::valueOf)
-                .forEach(System.out::println);
-
-        /*
-         * method reference to instance method
-         *       public int length() {}
-         * */
-        stringList.stream()
-                .map(String::length)
-                .forEach(System.out::println);
+    private static void instanceMethod_noArg(){
+        MethodReferenceEx ref = new MethodReferenceEx();
+        //  FI1 fi1 = () -> void
+        //  FI1 fi1 = () -> ref.m1();
+        FI1 fi1 = ref::m1;
+        fi1.display();
+    }
+    private void m1(){
+        System.out.println("FI1.display() impl using instance method");
     }
 
-    private static void soringEx() {
-        String[] stringArray = {"Steve", "Rick", "Andy", "Nathan", "Lucy", "Simon", "Jon"};
-
-        System.out.println("Original list   = " + Arrays.toString(stringArray));
-        Arrays.sort(stringArray, String::compareToIgnoreCase);
-        System.out.println("Sorted list     = " + Arrays.toString(stringArray));
+    private static void instanceMethod_1Arg(){
+        MethodReferenceEx ref = new MethodReferenceEx();
+        // FI2 fi1 ~= (int) -> void
+        // FI2 FI2 = (x) -> ref.m2(x);
+        FI2 FI2 = ref::m2;
+        FI2.display(10);
     }
 
-    private static void forEachEx() {
-        List<String> stringList =  Arrays.asList("Rohit", "Shikhar", "Kohli", "Iyyar", "Rahul");
-
-        Stream<String> strStream = stringList.stream();
-        strStream.forEach(e -> System.out.print(e + ", "));
-
-        // stringList.forEach(s -> System.out.println(s));
-        stringList.forEach(System.out::println);
+    public void m2(int x){
+        System.out.println("FI2.display() impl using instance method, x - " + x);
     }
 
+    private static void constructor_1Arg(){
+
+        // FI3 fi3 = (String ) -> Person
+        // FI3 FI3 = (s) ->  new Person(s); //  Method reference to a constructor
+        FI3 FI3 = Person::new;
+        FI3.display("java8");
+
+    }
+
+    private static void myTask() {
+        System.out.println(Thread.currentThread().getName() + " - static method");
+    }
+
+    private static void staticMethod_noArg(){
+        // Runnable task = () -> void
+        Thread t1 = new Thread(MethodReferenceEx::myTask);
+        t1.start();
+    }
 }
+
+class Person {
+    Person(String msg) {
+        System.out.println("Person class constructor takes the message - " + msg);
+    }
+}
+

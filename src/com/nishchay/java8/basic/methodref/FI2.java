@@ -1,6 +1,6 @@
 package com.nishchay.java8.basic.methodref;
 
 @FunctionalInterface
-interface MyInterface3 {
-    Hello display(String say);
+interface FI2 {
+    void display(int a);
 }
