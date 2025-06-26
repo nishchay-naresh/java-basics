@@ -51,6 +51,7 @@ public class LambdaDemo {
          * 4. Providing the implementation by a method, calling it using method reference
          * Only one class will be generated -  Greeting.class
          * */
+        // instance = () -> LambdaDemo.implMethod();
         instance = LambdaDemo::implMethod;
         instance.perform();
     }
