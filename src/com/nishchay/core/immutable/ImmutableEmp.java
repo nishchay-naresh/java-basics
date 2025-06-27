@@ -9,11 +9,12 @@ public final class ImmutableEmp {
 
     //  direct access is not allowed for member variables, declaring them as private
     //  Marking all mutable fields as final, so that they can only be initialized once in constructor
-    // bcus of making the attribute as final in immutable object, we are achieving failure atomicity
+    //  Because of making the attribute as final in immutable object, we are achieving failure atomicity
     private final Integer id;   // immutable by java
     private final String name;  // immutable by java
     private double sal;         // mutable, but pas by value
-    private final Date doj;     // mutable , need to take care at what comes-in (at constructor) what goes-out (at getters)
+    private final Date doj;     // mutable, need to take care at what comes-in (at constructor) what goes-out (at getters)
+                                // by creating a defensive copy
     private List<Address> addresses;  // mutable
 
     public ImmutableEmp() {
@@ -22,6 +23,7 @@ public final class ImmutableEmp {
 
     public ImmutableEmp(Integer id, String name, double sal, Date doj, List<Address> addresses) {
         // Initialize all mutable fields in constructor via deep copy
+        // No direct reference is assigned, created a defensive copy and then assigned its reference
         Date copyDOJ = (Date) doj.clone();
         // Returns an unmodifiable view of the specified list
         List<Address> copyAddresses = Collections.unmodifiableList(addresses);
@@ -45,7 +47,7 @@ public final class ImmutableEmp {
     }
 
     public Date getDoj() {
-        //Perform cloning of objects in the getter methods to return a copy rather than returning the actual object reference
+        //Perform cloning of objects in the getter methods to return a copy rather than returning the internal mutable object's actual reference
         Date copyDOJ = (Date) doj.clone();
         return copyDOJ;
     }
