@@ -192,15 +192,19 @@ public class CollectorsDemo {
     private static void groupingByEx() {
 
         List<Employee> employees = EmployeeSQL.populateEmployeeList();
-        //given a list of people, create a map where
-        //their department is the key and value is all the people works in that department.
 
-        Map<String, List<Employee>> deptMap = employees.stream()
+        // groupingBy - will group the rows based on department, put these rows details in a List against of this department
+        // outcome will be a map where department will be key and value will be list of employees works in that department
+        Map<String, List<Employee>> deptEmployee = employees.stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
 
         System.out.println("\t\tDept Name \t\t\t\t   Emp Count");
         System.out.println("----------------------------------------------------");
-        deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value.size()));
+//        deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
+        deptEmployee.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value.size()));
+
+        Map<String, Long> deptCount = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
 
     }
 

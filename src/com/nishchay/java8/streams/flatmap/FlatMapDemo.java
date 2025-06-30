@@ -53,18 +53,21 @@ public class FlatMapDemo {
 
         System.out.print("\none to many mapping - ");
         numbers.stream()
-                .map( oneToMany) // one-to-many mapping function
+                .map(oneToMany) // one-to-many mapping function
                 .flatMap(e -> e.stream())
                 .forEach(e -> System.out.print(e + ", "));
     }
 
     /*
-     * flatMap() - Returns a stream consisting of the results of replacing each element of this stream with the contents of a mapped stream produced by applying the provided mapping function to each element
-     *   - not gives same no of output as no of input
-     *   - since doing a transformation, collection/array of stream -> Stream of elements
      *
-     * For primitive , below variant of map can be used :
-     * flatMapToInt(), flatMapToLong(), flatMapToDouble()
+     * map()        →   you get a list of items, map will help you what you want to do with each item
+     * flatMap()    →   you get a list of boxes which is filled with items,
+     *                  you open all boxes and pull out all the items put them into a flat list
+     *
+     *  -   Doing a transformation of, Stream<collection/array of E> -> Stream<E>
+     *  -   Not giving same no of output as no of input
+     *  -   For primitive , below variant of map can be used :
+     *          flatMapToInt(), flatMapToLong(), flatMapToDouble()
      *
      * */
     private static void flatMapEx() {
@@ -82,7 +85,6 @@ public class FlatMapDemo {
                 .distinct()
                 .collect(Collectors.toList());
 */
-
 
         List<String> uniqueChars = streamOfWords
                 .map(word -> word.split(""))

@@ -12,7 +12,7 @@ public class FindDuplicate {
     public static void main(String[] args) {
 
 
-//        removeDupFromStream();
+        removeDupFromStream();
         findDuplicateAndUnique();
         findDuplicateFromStream();
         findDuplicateBySortingBoth();

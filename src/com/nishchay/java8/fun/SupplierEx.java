@@ -24,6 +24,7 @@ import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMap
  *  does not take any arguments,  returns a value of generified type
  *
  *  typically we use it for lazy evaluation/execution of code
+ *  Can wrap any piece code under a Supplier for lazy evaluation
  *
  *
  *	============== BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier ===================
@@ -40,6 +41,7 @@ public class SupplierEx {
     public static void main(String[] args) {
 
         basicEx();
+        wrapPieceOfCode();
         primitiveSuppliersEx();
         lazyValueEx();
         castSupplier();
@@ -69,6 +71,26 @@ public class SupplierEx {
         Supplier<Random> s1 = Random::new;
         Random random = s1.get();
         System.out.println(random.nextInt(100));
+
+
+    }
+
+    // Can wrap any piece code under a Supplier for lazy evaluation
+    private static void wrapPieceOfCode() {
+        Supplier<String> strSupplier = () -> {
+            String lang = "java";
+            lang = lang + "8";
+            return lang;
+        };
+        System.out.println("strSupplier - " + strSupplier.get());
+
+        Supplier<Integer> integerSupplier = () -> {
+            Thread t1 = new Thread(() -> System.out.println(Thread.currentThread().getName() + " hello"));
+            t1.start();
+            throw new IllegalArgumentException("Invalid input");
+        };
+        // Exception in thread "main" java.lang.IllegalArgumentException: Invalid input
+        // System.out.println("integerSupplier - " + integerSupplier.get());
     }
 
     private static void primitiveSuppliersEx() {
@@ -104,18 +126,18 @@ public class SupplierEx {
 
 
         Supplier<Map<String, Long>> mapSupplier = () -> getFrequencyMapStream("java, perl, go, kotlin, java".split(", "));
-        Map<String, Long> hm  = mapSupplier.get();
+        Map<String, Long> hm = mapSupplier.get();
         System.out.println("hm = " + hm);
 
         // mapSupplier = ConcurrentHashMap::new;
         mapSupplier = () -> new ConcurrentHashMap<>();
-        hm  = mapSupplier.get();
+        hm = mapSupplier.get();
         System.out.println("hm = " + hm);
     }
 
     private static void castSupplier() {
         Supplier<Map<?, ?>> genericMapSupplier = HashMap::new;
-        Supplier<Map<String, Integer>> mapSupplier =  castSupplier1(genericMapSupplier);
+        Supplier<Map<String, Integer>> mapSupplier = castSupplier1(genericMapSupplier);
         System.out.println("map = " + mapSupplier.get());
     }
 
@@ -134,7 +156,7 @@ public class SupplierEx {
         Supplier<String> strSupplier1 = () -> {
             System.out.println("nested");
             x.set(100);
-            System.out.println("x = "+ x.get());
+            System.out.println("x = " + x.get());
             return strSupplier.get();
         };
 

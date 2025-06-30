@@ -58,11 +58,13 @@ public class BasicStreamDemo {
         Dish.menu.forEach(e -> System.out.print(e+", "));
         System.out.println();
 
-        IntStream.range(1, 10).forEach(e -> System.out.print(e+", "));
+        IntStream.range(1, 11).forEach(e -> System.out.print(e + ", "));
+        System.out.print("\n----------------------------------\n");
+        IntStream.rangeClosed(1, 11).forEach(e -> System.out.print(e + ", "));
         System.out.println();
-        DoubleStream.of(-9, -18, 54, 8, 7, 14, 3).forEach(e -> System.out.print(e+", "));
+        DoubleStream.of(-9, -18, 54, 8, 7, 14, 3).forEach(e -> System.out.print(e + ", "));
         System.out.println();
-        LongStream.rangeClosed(1,10).forEach(e -> System.out.print(e+", "));
+        LongStream.rangeClosed(1, 10).forEach(e -> System.out.print(e + ", "));
     }
 
     /*

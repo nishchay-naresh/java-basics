@@ -45,6 +45,12 @@ public class ConsumerEx {
         strConsumer.accept("java"); // java-8
         consumerString.accept("Functional Programming");// FUNCTIONAL PROGRAMMING
         intConsumer.accept(4); // 20
+
+        strConsumer = s -> {
+            Integer integer = new Integer(s);
+            System.out.println("integer = " + integer);
+        };
+        strConsumer.accept("5"); // java-8
     }
 
     // Same forEach method to accept Consumer as an argument

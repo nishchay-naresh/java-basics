@@ -189,7 +189,9 @@ public class OptionalDemo {
     /*
     * ==================  Optional Stream Methods ==================
     *
-    * map()     -		If a value is present, applies the provided mapping function to it
+    * map()     -		Mainly used to map Optional<A> to  Optional<B>
+    *                   If a value is present, applies the provided mapping function to it
+    *
     * flatMap() -       If a value is present, returns the Optional resulting from the application of the provided mapping function to it;
     *                   otherwise returns the empty Optional
     * filter()  -   	If the value is present and matches the given predicate, returns this Optional; otherwise returns the empty one
@@ -218,10 +220,10 @@ public class OptionalDemo {
                 "paypal", "oracle", "microsoft", "google", "apple");
         Optional<List<String>> listOptional = Optional.of(companyNames);
 
-        int size = listOptional
-                .map(List::size)
-                .orElse(0);
-        System.out.println(size == 5 ? size : 0);//5
+        int size = listOptional                     // Optional<List<String>>
+                .map(List::size)                    // Optional<int>
+                .orElse(0);                   // value != null ? value : other;
+        System.out.println(size == 5 ? size : 0);
     }
 
 

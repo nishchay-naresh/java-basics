@@ -8,7 +8,6 @@ public class IssueWithNull {
     }
 
     /*
-     *
      * performs a null check every time it dereferences a variable, returning the string
      * “Unknown” if any of the variables traversed in this dereferencing chain is a null value.
      * This clearly scales poorly and compromises the readability
