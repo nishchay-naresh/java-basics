@@ -34,11 +34,11 @@ public class TestJava8 {
     public static void main(String[] args) {
 
         System.out.println("customer with unique emails - " + customerWithUniqueEmail());
-//        System.out.println(" ======================================== ");
-//
-//        firstNonRepeatedChar();
-//        System.out.println(" ======================================== ");
-//        findDuplicates();
+        System.out.println(" ======================================== ");
+
+        firstNonRepeatedChar();
+        System.out.println(" ======================================== ");
+        findDuplicates();
     }
 
     private static List<String> customerWithUniqueEmail() {
@@ -83,7 +83,7 @@ public class TestJava8 {
 
     //  Given a String, find the first non-repeated character in it using Java 8
     private static void firstNonRepeatedChar() {
-        String input = "java";
+        String input = "the quick brown fox jumps over the lazy dog quick";
         Map<Character, Long> freqLinkedHashMap = input.chars()
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
