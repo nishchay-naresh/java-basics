@@ -3,22 +3,21 @@ package com.nishchay.ds.design.lru;
 import java.util.HashMap;
 
 
-
 /*
-* Supported operations :
-*   - Add       -> external
-*   - Lookup    -> external
-*   - Evict     -> internal
-*
-*  => for Add, Lookup => HashMap
-*  => for evict => doubly link list with head & tail pointer
-*
-*  Class level methods :
-*       Add     -   put()
-*       Lookup  -   get()
-*       Evict   -   addToHead(), deleteNode()
-*
-* */
+ * Supported operations :
+ *   - Add       -> external
+ *   - Lookup    -> external
+ *   - Evict     -> internal
+ *
+ *  => for Add, Lookup => HashMap
+ *  => for evict => doubly link list with head & tail pointer
+ *
+ *  Class level methods :
+ *       Add     -   put()
+ *       Lookup  -   get()
+ *       Evict   -   addToHead(), deleteNode()
+ *
+ * */
 public class LRUCache<K, V> {
 
     static class Node<K, V> {
@@ -40,8 +39,8 @@ public class LRUCache<K, V> {
 
     }
 
-    private HashMap<K, Node<K, V>> map;
-    private int cacheSize;
+    private final HashMap<K, Node<K, V>> map;
+    private final int cacheSize;
     private Node<K, V> head, tail;
 
     public LRUCache(int capacity) {
@@ -106,15 +105,15 @@ public class LRUCache<K, V> {
     private void deleteNode(Node<K, V> deletingNode) {
 
         // first node - from head
-        if(deletingNode.prev == null){
+        if (deletingNode.prev == null) {
             head = deletingNode.next;
             deletingNode.next.prev = deletingNode.prev;
-        // last node - from tail
-        }else if(deletingNode.next == null){
+            // last node - from tail
+        } else if (deletingNode.next == null) {
             tail = deletingNode.prev;
             deletingNode.prev.next = deletingNode.next;
-        // deleting from middle
-        }else{
+            // deleting from middle
+        } else {
             deletingNode.next.prev = deletingNode.prev;
             deletingNode.prev.next = deletingNode.next;
         }
@@ -136,7 +135,6 @@ public class LRUCache<K, V> {
             tail = deletingNode.prev;
         }
     }
-
 
 
     @Override

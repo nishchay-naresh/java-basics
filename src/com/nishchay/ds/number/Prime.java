@@ -37,6 +37,7 @@ public class Prime {
 
     // Declarative way to find the Prime.
     // Using Stream & Predicate
+    // TODO -  failing with - 6, saying is prime
     public static boolean isPrime1(int number) {
 
 /*

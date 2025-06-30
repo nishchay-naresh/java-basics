@@ -47,6 +47,7 @@ public class TrappingRainWater {
                 {2, 0, 2},                              // 2
                 {3, 0, 2, 0, 4},                        // 7
                 {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1},   // 6
+                {4, 2, 0, 3, 2, 5},                     // 9
                 {3, 0, 1, 0, 4, 0, 2},                  // 10
                 {3, 0, 2, 0, 4},                        // 7
                 {1, 2, 3, 4},                           // 0
@@ -56,7 +57,7 @@ public class TrappingRainWater {
                 {5, 6, 7, 12, 2, 10, 17, 5, 3}          // 12
         };
 
-        int[] outputs = {2, 7, 6, 10, 7, 0, 1, 3, 25, 12};
+        int[] outputs = {2, 7, 6, 9, 10, 7, 0, 1, 3, 25, 12};
 
         boolean result = true;
         for (int i = 0; i < input2D.length; i++) {
@@ -150,40 +151,40 @@ public class TrappingRainWater {
      *
      */
 
-     private static int trappingRainWater_DPApproach(int[] arr) {
+    private static int trappingRainWater_DPApproach(int[] arr) {
 
-         int n = arr.length;
-         if (n == 0) {
-             return 0;
-         }
+        int n = arr.length;
+        if (n == 0) {
+            return 0;
+        }
 
-         int totalWater, ithWater;
+        int totalWater, ithWater;
 
-         // left[i] contains height of the tallest bar to the left of ith bar including itself
-         int[] leftMax = new int[n];
+        // left[i] contains height of the tallest bar to the left of ith bar including itself
+        int[] leftMax = new int[n];
 
-         // right[i] contains height of the tallest bar to the right of ith bar including itself
-         int[] rightMax = new int[n];
+        // right[i] contains height of the tallest bar to the right of ith bar including itself
+        int[] rightMax = new int[n];
 
-         // Fill left array
-         leftMax[0] = arr[0];
-         for (int i = 1; i < leftMax.length; i++) {
-             leftMax[i] = Math.max(leftMax[i - 1], arr[i]);
-         }
+        // Fill left array
+        leftMax[0] = arr[0];
+        for (int i = 1; i < leftMax.length; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], arr[i]);
+        }
 
-         // Fill right array
-         rightMax[n - 1] = arr[n - 1];
-         for (int j = rightMax.length - 2; j >= 0; j--) {
-             rightMax[j] = Math.max(rightMax[j + 1], arr[j]);
-         }
+        // Fill right array
+        rightMax[n - 1] = arr[n - 1];
+        for (int j = rightMax.length - 2; j >= 0; j--) {
+            rightMax[j] = Math.max(rightMax[j + 1], arr[j]);
+        }
 
-         totalWater = 0;
-        for (int i = 0; i < n; i++){
-            ithWater =  Math.min(leftMax[i], rightMax[i]) - arr[i];
+        totalWater = 0;
+        for (int i = 0; i < n; i++) {
+            ithWater = Math.min(leftMax[i], rightMax[i]) - arr[i];
             totalWater = totalWater + ithWater;
         }
-         return totalWater;
-     }
+        return totalWater;
+    }
 
     /*
      * ============= Two Pointers Approach =====================
