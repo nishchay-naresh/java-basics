@@ -1,7 +1,7 @@
 package com.nishchay.java8.fun;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
+import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +15,6 @@ import java.util.function.IntSupplier;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-
-import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
 
 /*
  *	java.util.function.Supplier<T>	:    () ->   T   :	T get();
@@ -87,10 +85,11 @@ public class SupplierEx {
         Supplier<Integer> integerSupplier = () -> {
             Thread t1 = new Thread(() -> System.out.println(Thread.currentThread().getName() + " hello"));
             t1.start();
-            throw new IllegalArgumentException("Invalid input");
+            // throw new IllegalArgumentException("Invalid input");
+            return 100;
         };
         // Exception in thread "main" java.lang.IllegalArgumentException: Invalid input
-        // System.out.println("integerSupplier - " + integerSupplier.get());
+        System.out.println("integerSupplier - " + integerSupplier.get());
     }
 
     private static void primitiveSuppliersEx() {
@@ -141,6 +140,7 @@ public class SupplierEx {
         System.out.println("map = " + mapSupplier.get());
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     private static <L, M> Supplier<Map<L, M>> castSupplier1(Supplier<Map<?, ?>> map) {
         return (Supplier) map;
     }

@@ -24,7 +24,7 @@ public class StringFrequencyUtility {
     }
 
     // java 8 feature to get the frequency map - HashMap
-    static Map<Character, Long> getFrequencyMapStream(String word) {
+    public static Map<Character, Long> getFrequencyMapStream(String word) {
         Map<Character, Long> freqMap = word.chars()
                 .mapToObj(i -> Character.toLowerCase(Character.valueOf((char) i))) //convert to lowercase & then to Character object
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
