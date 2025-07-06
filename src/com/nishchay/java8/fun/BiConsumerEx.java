@@ -25,8 +25,7 @@ public class BiConsumerEx {
 
     public static void main(String[] args) {
 
-        // basicEx();
-
+        basicEx();
         mdcEx();
     }
 
@@ -49,27 +48,22 @@ public class BiConsumerEx {
 
     private static void mdcEx() {
         BiConsumerEx ref = new BiConsumerEx();
-        ref.logWithMDC("message", (s, e) -> {
-            System.out.println(s + ": " + e);
-            System.out.println("exceuting lambda");
-        }
-        );
 
-        ref.logWithMDC(new IllegalArgumentException("Exception"), (s, e) -> {
-            System.out.println(s + ": " + e);
-            System.out.println("exceuting lambda");
-        }
-        );
+        BiConsumer<Object, Throwable> biConsumer = (obj, exe) -> System.out.println("Log - " + obj);
+        Exception exe = new IllegalArgumentException("IllegalArgumentException");
+
+        ref.logWithMDC("security log message", biConsumer);
+        ref.logWithMDC(exe, biConsumer);
+        ref.logWithMDC("security log message", exe, biConsumer);
     }
 
     String name;
     Map<String, String> MDC = new LinkedHashMap<>();
 
     private void logWithMDC(Object message, Throwable throwable, BiConsumer<Object, Throwable> biConsumer) {
-
     try {
       MDC.put("SECURITY_LOGGER_NAME", name);
-      String msg = (message instanceof Throwable) ? "Exception thrown" : message.toString();
+      String msg = message instanceof Throwable ? ((Throwable) message).getMessage()  : message.toString();
       biConsumer.accept(msg, throwable);
     } finally {
       MDC.remove("SECURITY_LOGGER_NAME");
