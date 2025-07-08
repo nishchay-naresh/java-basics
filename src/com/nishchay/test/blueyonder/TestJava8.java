@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /*
@@ -33,12 +34,15 @@ public class TestJava8 {
 
     public static void main(String[] args) {
 
-        System.out.println("customer with unique emails - " + customerWithUniqueEmail());
-        System.out.println(" ======================================== ");
+        // System.out.println("customer with unique emails - " + customerWithUniqueEmail());
+        // System.out.println(" ======================================== ");
 
-        firstNonRepeatedChar();
-        System.out.println(" ======================================== ");
+        // firstNonRepeatedChar();
+        // System.out.println(" ======================================== ");
         findDuplicates();
+        System.out.println(" ======================================== ");
+        findDuplicatesFrequency();
+
     }
 
     private static List<String> customerWithUniqueEmail() {
@@ -66,7 +70,7 @@ public class TestJava8 {
             }
         }
 
-/*
+        /*
         // declarative way
         Set<String> uniqueEmails = new HashSet<>();
         List<String> customers = customerDirectory.entrySet().stream()
@@ -76,10 +80,9 @@ public class TestJava8 {
                 )
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
-*/
+         */
         return customers;
     }
-
 
     //  Given a String, find the first non-repeated character in it using Java 8
     private static void firstNonRepeatedChar() {
@@ -108,5 +111,25 @@ public class TestJava8 {
         System.out.println("original list = " + numbers);
         System.out.println("      uniques = " + uniques);
         System.out.println("   duplicates = " + duplicates);
+    }
+
+    private static void findDuplicatesFrequency() {
+        List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
+        List<Integer> uniques = getNumbersOnCondition(numbers, f -> (f >= 1));
+        List<Integer> duplicates = getNumbersOnCondition(numbers, f -> (f > 1));
+
+        System.out.println("original list = " + numbers);
+        System.out.println("      uniques = " + uniques);
+        System.out.println("   duplicates = " + duplicates);
+    }
+
+    private static List<Integer> getNumbersOnCondition(List<Integer> numbers, Predicate<Long> condition) {
+        return numbers.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(entry -> condition.test(entry.getValue()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 }
