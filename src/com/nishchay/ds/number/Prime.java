@@ -7,9 +7,8 @@ public class Prime {
     public static void main(String[] args) {
 
         for (int i = 2; i <= 100; i++)
-            if (isPrime(i))
+            if (isPrime1(i))
                 System.out.print("  " + i);
-
 
     }
 
@@ -35,21 +34,13 @@ public class Prime {
     }
 
 
-    // Declarative way to find the Prime.
-    // Using Stream & Predicate
-    // TODO -  failing with - 6, saying is prime
+    // Declarative way to find the Prime - Using Stream & Predicate
     public static boolean isPrime1(int number) {
 
-/*
+        // range vs  rangeClosed : To properly check for factors, we should include number / 2, so rangeClosed
         return 1 < number &&
-                IntStream.range(2, number / 2)
+                IntStream.rangeClosed(2, (int) Math.sqrt(number))
                         .noneMatch(index -> number % index == 0);
-*/
-
-        return number > 1 &&
-                IntStream.range(2, (int) Math.sqrt(number))
-                        .noneMatch(divisor -> number % divisor == 0);
-
     }
 
 }
