@@ -2,8 +2,27 @@ package com.nishchay.ds.design.lru;
 
 import java.util.HashMap;
 
-
 /*
+ *	🔶 Question: Implement a Thread-Safe LRU Cache
+ *	Description:
+ *		Design and implement a thread-safe LRU (Least Recently Used) Cache in Java.
+ *		Your cache should support the following operations in O(1) time complexity:
+ *			get(key): Return the value (if present), else null.
+ *			put(key, value): Insert/update a key-value pair. If the cache exceeds capacity, remove the least recently used item.
+ *
+ *	Requirements:
+ *		Use Java 8 or above.
+ *		Ensure thread safety for concurrent access.
+ *		Avoid using java.util.LinkedHashMap’s access-order mode.
+ *		Capacity is fixed and set via constructor.
+ *
+ * Follow-Up Discussion Topics:
+ *      How would you make this cache eviction asynchronous?
+ *      Can you extend this to support time-based expiry?
+ *      How would you scale this across multiple JVMs?
+ *
+ * ------------------------------------------------------------------------------
+ *
  * Supported operations :
  *   - Add       -> external
  *   - Lookup    -> external
