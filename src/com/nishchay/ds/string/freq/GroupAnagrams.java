@@ -20,31 +20,20 @@ public class GroupAnagrams {
 
     }
 
-    private static List<List<String>> groupAnagrams(String[] strArray) {
+    private static List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
 
-        Map<String, List<String>> anagramListMap = new HashMap<>();
-        String sortedKey;
-        char[] charArray;
-        for (String currStr : strArray) {
+        for (String word : strs) {
+            char[] chars = word.toCharArray();
+            Arrays.sort(chars);               // Sort word
+            String key = new String(chars);   // Sorted string as key
 
-            charArray = currStr.toCharArray();
-            Arrays.sort(charArray);
-            // char[] to String - String.valueOf(charArray)
-            sortedKey = String.valueOf(charArray);
-
-            List<String> anagramList = anagramListMap.get(sortedKey);
-            if (anagramList == null) {
-                anagramList = new ArrayList<>();
-            }
-
-            anagramListMap.put(sortedKey, anagramList);
-            anagramList.add(currStr);
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(word);
         }
 
-        List<List<String>> resultList = new ArrayList<>(anagramListMap.values());
-        return resultList;
+        return new ArrayList<>(map.values());
     }
-
 }
 
 
