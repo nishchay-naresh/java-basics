@@ -1,10 +1,8 @@
 package com.nishchay.ds.number;
 
 
-import java.util.Arrays;
-
 /*
- * Converting Decimal Number lying between 1 to 3999 to Roman Numerals
+ * Converting Decimal Number lying between 1 and 3999 to Roman Numerals
  *
  * Given an integer, convert it into its equivalent Roman numeral representation.
  *
@@ -33,7 +31,7 @@ import java.util.Arrays;
  *
  * Ex
  * Decimal :  2,856 → 1,856 → 856 → 356 → 256 → 156 → 56 → 6 → 1 → 0
- * Roman :  MM DCCC LVI
+ * Roman :  MMDCCCLVI
 
  *
  * https://leetcode.com/problems/integer-to-roman/description/
