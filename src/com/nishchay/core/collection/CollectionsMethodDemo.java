@@ -13,7 +13,7 @@ public class CollectionsMethodDemo {
 
         swapEx();
         nCopiesEx();
-
+        frequencyEx();
     }
 
 
@@ -58,6 +58,21 @@ public class CollectionsMethodDemo {
 
     }
 
+    /*
+     *  there is a method in Collection class -  to get the freq of an element out of the collection
+     *       public static int frequency(Collection<?> c, Object o)
+     *
+     * */
+    private static void frequencyEx() {
 
+        int freq = Collections.frequency( Arrays.asList(2, 5, 2, 3, 2, 1, 5), 2);
+        System.out.println("Frequency of 2 is: " + freq);
+
+        String mainStr = "car, bus, car, jeep, cycle, bike, train, bus, truck, jeep, car, jeep, cycle, truck, train, car, bike, bus, cycle";
+        String key = "car";
+
+        freq = Collections.frequency(Arrays.asList(mainStr.split(", ")), key);
+        System.out.println("Frequency of - " + key + " is - " + freq);
+    }
 }
 
