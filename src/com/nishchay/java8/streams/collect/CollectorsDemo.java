@@ -7,7 +7,6 @@ import com.nishchay.util.pojo.Dish;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +15,6 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class CollectorsDemo {
 
@@ -201,7 +199,7 @@ public class CollectorsDemo {
 
         System.out.println("\t\tDept Name \t\t\t\t   Emp Count");
         System.out.println("----------------------------------------------------");
-//        deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
+        // deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
         deptEmployee.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value.size()));
 
         Map<String, Long> deptCount = employees.stream()
@@ -239,8 +237,23 @@ public class CollectorsDemo {
         System.out.println("freqMapInt = " + freqMapInt);
     }
 
+    // group odd & even numbers in map<sting,List<Integer>> using partitioningBy
     private static void partitionedByEx() {
 
-    }
+        List<Integer> numbers = List.of(2, 6, 7, 9, 5, 3, 8);
+        Map<Boolean, List<Integer>> booleanPartition = numbers
+                .stream()
+                .collect(Collectors.partitioningBy(e -> e % 2 == 0));
+        System.out.println("booleanPartition = " + booleanPartition);
 
+        Map<String, List<Integer>> stringPartition = numbers.stream()
+                .collect(Collectors.partitioningBy(e -> e % 2 == 0))
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                                entry -> entry.getKey() ? "even" : "odd",
+                                entry -> entry.getValue()
+                        )
+                );
+        System.out.println("stringPartition = " + stringPartition);
+    }
 }
