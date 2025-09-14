@@ -40,7 +40,16 @@ public class StringFrequencyUtility {
         return freqLinkedHashMap;
     }
 
-    // Count the frequency of each words in a String array
+    // Get the frequency of each integer in an integer array
+    public static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int num : intArray) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+        }
+        return freqMap;
+    }
+
+    // Get the frequency of each string in a String array - using hashMap methods
     static Map<String, Integer> getFrequencyMap(String[] strArray) {
 
         Map<String, Integer> feqMap = new HashMap<>();
@@ -53,24 +62,10 @@ public class StringFrequencyUtility {
         return feqMap;
     }
 
-    // Count the frequency of each no in integer array
     /*
-    *
-    * return - ordered frequency map
+    *  java 8 feature to get the frequency map - HashMap
+    *  Get the frequency of each string in a String array - using groupingBy
     * */
-    public static Map<Integer, Integer> getFrequencyMap(int[] intArray) {
-
-        Map<Integer, Integer> feqMap = new HashMap<>();
-        Integer freq;
-        for(int currNo : intArray){
-            freq = feqMap.get(currNo);
-            freq = freq == null ? 1 : ++freq;
-            feqMap.put(currNo, freq);
-        }
-        return feqMap;
-    }
-
-    // java 8 feature to get the frequency map - HashMap
     public static Map<String, Long> getFrequencyMapStream(String[] strArray) {
         Map<String, Long> freqMap = Arrays.stream(strArray)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -84,7 +79,6 @@ public class StringFrequencyUtility {
         return freqLinkedHashMap;
     }
 
-
     /*
      *   grouping function to return Map<String, Integer> instead of Map<String,Long>
      *   all 3 ways will give you an ordered frequency map in the form of linkedHashMap
@@ -95,10 +89,17 @@ public class StringFrequencyUtility {
 
         Map<String, Integer> freqMap;
 
+        freqMap =
+                Arrays.stream(strArray)
+                        .collect(Collectors.groupingBy(Function.identity(),
+                                Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
+                                )
+                        );
+
         // can perform a conversion of Long to Integer after the counting like
         freqMap = Arrays.stream(strArray)
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new,
-                        Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
+                        Collectors.collectingAndThen(Collectors.counting(), e -> e.intValue())));
 
         // you may also count using an int value type in the first place
         freqMap = Arrays.stream(strArray)
@@ -111,5 +112,4 @@ public class StringFrequencyUtility {
 
         return freqMap;
     }
-
 }
