@@ -39,7 +39,7 @@ public class TestJava8 {
 
         // firstNonRepeatedChar();
         // System.out.println(" ======================================== ");
-        findDuplicates();
+        findDuplicatesAndUniques();
         System.out.println(" ======================================== ");
         findDuplicatesFrequency();
 
@@ -100,22 +100,42 @@ public class TestJava8 {
         System.out.println("firstNonRepeatedChar = " + result);
     }
 
-    // How to find duplicate elements in a given integers list in java 8
-    private static void findDuplicates() {
+    /*
+     * Find duplicate and unique elements in a given integers list using java 8
+     * original list   : [5, 3, 4, 1, 3, 7, 2, 9, 9, 4]
+     * Uniques         : [1, 2, 5, 7]
+     * Duplicates      : [3, 4, 9]
+     *
+     * duplicate elements - appear more than once
+     * unique elements - appear exactly once
+     * */
+    private static void findDuplicatesAndUniques() {
         List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
-        Set<Integer> uniques = new HashSet<>();
-        Set<Integer> duplicates = numbers.stream()
-                .filter(n -> !uniques.add(n))
-                .collect(Collectors.toSet());
+        Map<Integer, Long> freqMap = numbers.stream()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ));
 
-        System.out.println("original list = " + numbers);
-        System.out.println("      uniques = " + uniques);
-        System.out.println("   duplicates = " + duplicates);
+        // Extract duplicates (freq > 1)
+        List<Integer> duplicates = getNumbersOnCondition(freqMap, freq -> (freq > 1));
+        // Extract uniques (freq == 1)
+        List<Integer> uniques = getNumbersOnCondition(freqMap, freq -> (freq == 1));
+        System.out.println("original list   : " + numbers);
+        System.out.println("Uniques         : " + uniques);
+        System.out.println("Duplicates      : " + duplicates);
+    }
+
+    private static List<Integer> getNumbersOnCondition(Map<Integer, Long> freqMap , Predicate<Long> condition) {
+        return freqMap.entrySet().stream()
+                .filter(entry -> condition.test(entry.getValue()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 
     private static void findDuplicatesFrequency() {
         List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
-        List<Integer> uniques = getNumbersOnCondition(numbers, f -> (f >= 1));
+        List<Integer> uniques = getNumbersOnCondition(numbers, f -> (f == 1));
         List<Integer> duplicates = getNumbersOnCondition(numbers, f -> (f > 1));
 
         System.out.println("original list = " + numbers);
@@ -123,6 +143,7 @@ public class TestJava8 {
         System.out.println("   duplicates = " + duplicates);
     }
 
+    // Bad solution, we are doing 2 iteration, better store the frequency in a map
     private static List<Integer> getNumbersOnCondition(List<Integer> numbers, Predicate<Long> condition) {
         return numbers.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
