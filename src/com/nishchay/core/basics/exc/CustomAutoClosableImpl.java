@@ -7,17 +7,17 @@ public class CustomAutoClosableImpl {
     }
 
     private static void myAutoClosable() throws Exception {
-        try(MyAutoClosable resource1 = new MyAutoClosable();
-            MyAutoClosable resource2 = new MyAutoClosable();
-        ){
+        try (MyAutoClosable resource1 = new MyAutoClosable();
+             AutoCloseable resource2 = () -> System.out.println("AutoCloseable#close() using lambda");
+        ) {
            // use resource
-        } // close() get triggered immediate once we reach the end of try block
+        } // close() get triggered immediate once we reach the end of try block (no catch is required for this try)
           // it's same like closing the open resource in finally block
     }
 }
 /*
 * o/p =>
-* MyAutoClosable closed!
+* AutoCloseable#close() using lambda
 * MyAutoClosable closed!
 *
 * */
