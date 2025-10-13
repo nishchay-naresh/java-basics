@@ -63,9 +63,14 @@ public class StringFrequencyUtility {
     }
 
     /*
-    *  java 8 feature to get the frequency map - HashMap
-    *  Get the frequency of each string in a String array - using groupingBy
-    * */
+     *  java 8 feature to get the frequency map - HashMap
+     *  Get the frequency of each string in a String array - using groupingBy
+     *
+     * Collectors.groupingBy(-) 		- return Map<String, List<String>> groups similar value in same list
+     * Collectors.groupingBy(-,-) 	    - return Map<String, Long> of HashMap
+     * Collectors.groupingBy(-,-,-) 	- return Map<String, Long> of LinkedHashMap
+     *
+     * */
     public static Map<String, Long> getFrequencyMapStream(String[] strArray) {
         Map<String, Long> freqMap = Arrays.stream(strArray)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -92,7 +97,7 @@ public class StringFrequencyUtility {
         freqMap =
                 Arrays.stream(strArray)
                         .collect(Collectors.groupingBy(Function.identity(),
-                                Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
+                                        Collectors.collectingAndThen(Collectors.counting(), Long::intValue)
                                 )
                         );
 

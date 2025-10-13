@@ -183,7 +183,7 @@ public class DSQnsUsingJava8 {
 
     /*
      * One list of string is there, like below
-     * List<String> strList = Arrays.asList("15Shades", "5Th Cross", "98.3FM", "1,233.00$ USD", "java8")
+     * List<String> strList = Arrays.asList("Delhi6", "15Shades", "5Th Cross", "98.3FM", "1,233.00$ USD", "java8")
      * List<Double> intList = {6, 5, 98.3, 1233.00, 8};
      * extract the numbers from string list and add to the Double list
      *

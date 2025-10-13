@@ -29,7 +29,7 @@ import java.util.HashMap;
  *   - Evict     -> internal
  *
  *  => for Add, Lookup => HashMap
- *  => for evict => doubly link list with head & tail pointer
+ *  => for evict => doubly link list with a head & tail pointer
  *
  *  Class level methods :
  *       Add     -   put()
@@ -55,7 +55,6 @@ public class LRUCache<K, V> {
         public String toString() {
             return key + "->" + value;
         }
-
     }
 
     private final HashMap<K, Node<K, V>> map;
