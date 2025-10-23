@@ -2,6 +2,7 @@ package com.nishchay.ds.linklist;
 
 public class Node {
 
+    // not making private, keeping it default because accessing it directly with reference
     int data;
     Node next;
 
