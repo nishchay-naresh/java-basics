@@ -1,15 +1,24 @@
 package com.nishchay.ds.array.basic;
 
-import java.util.Scanner;
 
+import java.util.Arrays;
+
+/*
+*
+* this class is having basic operations/functionalities of the array as a data structure
+*
+* */
 public class ArrayUtils {
 
 
     /*
-     * Linear Search / Sequential search
+     * =========== Linear/Sequential Search ============
+     *
      * just start either left/right side of the array, compare each element with the key, until you done with the entire collection
-     * if found - return the index
-     * else - return -1;
+     *  if found
+     *      return index
+     *  else
+     *      return -1;
      *
      *  Time complexity - O(n)
      * */
@@ -20,21 +29,21 @@ public class ArrayUtils {
             if (arr[i] == key)
                 return i;
         }
-
         return -1;
     }
 
-
     /*
-     *	left = 0; right = endOfArray, calculate the mid
-     *	Compare the key items with the mid element.
-     *	If key == arr[mid],
-     *		then return the mid index as result.
-     *	Else If key > arr[mid],  key lies in the right half of the collection.
-     *		Thus repeat steps 1 to 3 for right half of the collection.
-     *	Else key < arr[mid], then the key is in the left half of the collection.
-     *		Thus repeat steps 1 to 3 for left half of the collection.
+     *  ============================= Binary Search ====================================
+     *  Binary Search is a searching algorithm that operates on a sorted data
+     *  It's repeatedly dividing data into halves to find a target value in logarithmic time O(log N).
      *
+     *	1. Divide the search space into two halves by finding the middle index "mid".
+     *	2. Compare the middle element of the search space with the key.
+     *		If the key is found at middle element, the process is terminated.
+     *		If the key is not found at middle element, choose which half will be used as the next search space.
+     *			-> If the key is smaller than the middle element, then the left side is used for next search.
+     *			-> If the key is larger than the middle element, then the right side is used for next search.
+     *	3. This process is continued until the key is found or the total search space is exhausted.
      *
      *  Time complexity - O(log n)
      * */
@@ -65,7 +74,6 @@ public class ArrayUtils {
         if (right < left) {
             return -1;
         }
-
         int mid = (left + right) / 2;
 
         if (key == array[mid])
@@ -74,20 +82,32 @@ public class ArrayUtils {
             return binarySearchRecursive(array, left, mid - 1, key);
 
         return binarySearchRecursive(array, mid + 1, right, key);
-
     }
 
-    // The time complexity of this algorithm is O(n).
+    // Iterative Approach - O(n) Time and O(1) Space
     public static int findMax(int[] arr) {
-        int max = Integer.MIN_VALUE;
+        int max = arr[0]; // assuming it's max value
 
-        for (int value : arr) {
-            max = Math.max(max, value);
+        // Now traverse array from 1 ro n-1
+        for (int i = 1; i < arr.length; i++){
+            if (arr[i] > max){
+                max = arr[i];
+            }
         }
         return max;
     }
 
+    public static int findMin(int[] arr) {
+        int min = arr[0];
 
+        // Now traverse array from 1 ro n-1
+        for (int i = 1; i < arr.length; i++){
+            if (arr[i] < min){
+                min = arr[i];
+            }
+        }
+        return min;
+    }
     // reversing the content of an int array.
     public static void reverseArray(int[] arr) {
 
@@ -97,22 +117,6 @@ public class ArrayUtils {
             arr[i] = arr[j];
             arr[j] = t;
         }
-    }
-
-
-    private static int[] readArrayFromConsole() {
-
-        Scanner s = new Scanner(System.in);
-
-        // read the array size
-        int length = s.nextInt();
-        int[] intArr = new int[length];
-
-        // read array element
-        for (int i = 0; i < length; i++) {
-            intArr[i] = s.nextInt();
-        }
-        return intArr;
     }
 
 }
