@@ -14,11 +14,8 @@ public class StringFrequencyUtility {
 
         char[] charArray = word.toCharArray();
         Map<Character, Integer> freqMap = new HashMap<>();
-        Integer freq;
         for (char currChar : charArray) {
-            freq = freqMap.get(currChar);
-            freq = freq == null ? 1 : ++freq;
-            freqMap.put(currChar, freq);
+            freqMap.put(currChar, freqMap.getOrDefault(currChar, 0) + 1);
         }
         return freqMap;
     }
@@ -52,14 +49,11 @@ public class StringFrequencyUtility {
     // Get the frequency of each string in a String array - using hashMap methods
     static Map<String, Integer> getFrequencyMap(String[] strArray) {
 
-        Map<String, Integer> feqMap = new HashMap<>();
-        Integer freq;
+        Map<String, Integer> freqMap = new HashMap<>();
         for (String currStr : strArray) {
-            freq = feqMap.get(currStr);
-            freq = freq == null ? 1 : ++freq;
-            feqMap.put(currStr, freq);
+            freqMap.put(currStr, freqMap.getOrDefault(currStr, 0) + 1);
         }
-        return feqMap;
+        return freqMap;
     }
 
     /*
