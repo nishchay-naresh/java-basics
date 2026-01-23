@@ -5,29 +5,20 @@ import com.nishchay.util.pojo.Dish;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class NonTerminalOperationDemo {
 
     public static void main(String[] args) {
-
         createAndPrint();
-
-        mapDemo();
-        filterDemo();
-        mapFilterEX();
         distinctDemo();
         sortedDemo();
-        limitDemo();
-        skipDemo();
+        filterDemo();
+        limitAndSkipDemo();
         peekDemo();
-        compareTwoStreams();
-
+        mapDemo();
+        mapFilterEX();
     }
-
-
-
 
     private static void createAndPrint() {
 
@@ -38,120 +29,91 @@ public class NonTerminalOperationDemo {
         // stringStream.forEach(e -> System.out.println(e));
         // Exception in thread "main" java.lang.IllegalStateException: stream has already been operated upon or closed
         // After performing a terminal operation over a stream, we can't reuse the stream
-
     }
-
 
     /*
-    * map() - map/transform a sequence of input to sequence of output
-    *   - gives same no of output as no of input
-    *   - since doing a transformation, that is why taking Function<T,R> as input
-    *
-    * For primitive , below variant of map can be used :
-    * mapToInt(), mapToDouble(), mapToLong()
-    *
-    *
-    * */
-    private static void mapDemo() {
-
-        System.out.println("########## applying map operation over stream ###########");
-        // using lambda
-         /*
-         Stream.of("ONE", "two", "THREE", "four", "FIVE")
-                .map(value -> value.toLowerCase())
-                .map(value -> value.toUpperCase())
-                .forEach(s -> System.out.print(s + ", "));
-         */
-        // using method reference
-        Stream.of("ONE", "two", "THREE", "four", "FIVE")
-                .map(String::toLowerCase)
-                .map(String::toUpperCase)
-                .forEach(System.out::println);
-    }
-
-    private static void filterDemo() {
-        System.out.println("########## List after applying filter - filter((value) -> value.length() > 3) ###########");
-        Stream.of("ONE", "two", "THREE", "four", "FIVE")
-                .filter(value -> value.length() > 3)
-                .forEach(System.out::println);
-    }
-
-
-    private static void mapFilterEX() {
-        List<String> names;
-
-        /*
-        names = Dish.menu.stream()
-                .filter(d -> d.getCalories() > 500)
-                .map(Dish::getName)
-                .collect(Collectors.toList());
-        System.out.println("names = " + names);
-        */
-
-        // descriptive way to write filter() & map() - putting more statements
-        // printing intermediate values - a debugging technique
-       names = Dish.menu.stream()
-                .filter(d -> {
-                    System.out.println("filtering - " + d.getName());
-                    return d.getCalories() > 500;}
-                )
-                .map(d -> {
-                    System.out.println("mapping - " + d.getName());
-                    return d.getName();}
-                )
-                .collect(Collectors.toList());
-        System.out.println("names = " + names);
-
-    }
+     * distinct() - removing duplicates, keeping only one copy i.e., distinct numbers
+     * */
     private static void distinctDemo() {
-
-        // Printing only distinct numbers
         System.out.println("########## List after applying distinct() ###########");
-        Stream.of(7, 1, 8, 4, 3, 1, 7, 1, 4, 1, 3)
-                .distinct()
-                .forEach(s -> System.out.print(s + ", ")); // 7, 1, 8, 4, 3
+        List<Integer> numbers = Arrays.asList(3, 2, 3, 5, 2, 9, 4, 9, 3);
+        List<Integer> uniques = numbers.stream().distinct().collect(Collectors.toList());
+        System.out.println("uniques = " + uniques); // [3, 2, 5, 9, 4]
     }
 
+    /*
+     *  sorted() - sorted according to natural order
+     * */
     private static void sortedDemo() {
-
         System.out.println("########## sorted view of the stream ###########");
         Stream.of(1, 4, 2, 7, 9, 10, 3)
                 .sorted()
                 .forEach(s -> System.out.print(s + ", ")); // 1, 2, 3, 4, 7, 9, 10
-
     }
 
     /*
-    *
-    * If total 5 element are there in stream
-    *   How to get first 3 element of stream    = limit(3)
-    *   How to get last 4 element of stream     = skip(5-4)
-    *
-    * */
-    private static void limitDemo() {
-        System.out.println("########## Applying limit ###########");
-        Stream.of("one", "two", "three", "four", "five")
-                .limit(2) // limiting stream for first two element only
-                .forEach(System.out::println); // one, two
+     *   filter() - Returns a stream of elements that match the given predicate.
+     *            - elements that meet the predicate will through
+     * */
+    private static void filterDemo() {
+        System.out.println("\n########## applying filter operation over stream ###########");
+        List<Integer> numbers = Arrays.asList(3, 2, 3, 5, 2, 9, 4, 9, 3);
+        List<Integer> evens = numbers.stream().filter(e -> e % 2 == 0).collect(Collectors.toList());
+        System.out.println("evens = " + evens); // [2, 2, 4]
+
+        Stream.of("ONE", "two", "THREE", "four", "FIVE")
+                .filter(value -> value.length() > 3)
+                .forEach(e -> System.out.print(e + ", "));
     }
 
-    private static void skipDemo() {
+
+    /*
+     *
+     *   limit(n)   -   cutting a stream from left/start
+     *              -   limiting(shrinking) a stream to first n elements
+     *
+     *   skip(n)    -   cutting a stream from right/end
+     *              -   skipping(eliminating) first n elements of a stream
+     *
+     * If total 5 elements are there in stream
+     *   How to get the first 3 elements of stream      = limit(3)
+     *   How to get last 4 elements of stream           = skip(5-4)
+     *
+     * */
+    private static void limitAndSkipDemo() {
+        System.out.println("\n########## Applying limit ###########");
+        Stream.of("one", "two", "three", "four", "five")
+                .limit(2) // limiting stream for first two elements only
+                .forEach(System.out::println); // one, two
+
         System.out.println("########## Applying skip ###########");
         Stream.of("one", "two", "three", "four", "five")
                 .skip(2) // skipping first two element of stream
                 .forEach(System.out::println); // three, four, five
     }
 
+    /*
+     * Stream<T> peek(Consumer<T> action) - return the same stream, just applying the given consumer over them
+     *   -   peek() lets you look at elements flowing through the stream and perform an action on them without changing the element.
+     *   -   Think of it as a debug hook in the stream pipeline, Mainly used for debugging, logging
+     *   -   It is an intermediate operation
+     *   -   It is lazy (runs only when a terminal operation is called)
+     *   -   It does NOT transform elements
+     *   -   It should NOT be used for business logic
+     *   -   WRONG Use: Mutating Objects (Common Mistake)
+     *           .peek(s -> s.setStatus("ACTIVE"))
+     *   -   If you are changing data, use map() — not peek()
+     *
+     *  below code won't execute until we apply a terminal operator
+     *       Stream.of("one", "two", "three", "four", "five").peek(value -> System.out.println(value));
+     *
+     * */
     private static void peekDemo() {
-        /*
-        // it won't work, we need to apply a terminal operation over stream, to execute intermediate operation - peek()
-        Stream.of("one", "two", "three", "four", "five")
-                .peek(value -> System.out.println(value));
-        */
+
         System.out.println("######### Applying peek ###########");
         List<String> list = Stream.of("one", "two", "three", "four", "five")
                 .filter(e -> e.length() > 3) // three, four, five
-                .peek(e -> System.out.println("Filtered value: " + e))
+                .peek(e -> System.out.print("Filtered value: " + e + ", "))
                 .map(String::toUpperCase)
                 .peek(e -> System.out.println("Mapped value: " + e))
                 .collect(Collectors.toList());
@@ -159,27 +121,49 @@ public class NonTerminalOperationDemo {
         System.out.println("list = " + list);
     }
 
-
     /*
-     * https://www.javaprogramto.com/2020/04/how-to-compare-two-arraylist-for-equality-in-java.html
+     * map() - map/transform a sequence of input to sequence of output
+     *   - gives same no of output as no of input
+     *   - since doing a transformation, that is why taking Function<T, R> as input
+     *
+     * For primitive, below variant of map() can be used :
+     *  mapToInt(), mapToDouble(), mapToLong()
+     *
      * */
-    private static void compareTwoStreams() {
-
-        List<Integer> list1 = Arrays.asList(23, 17, 8, 12, 5, 6, 9, 16, 2);
-        List<Integer> list2 = Arrays.asList(23, 17, 8, 12, 5, 6, 9, 16, 2);
-
-
-        boolean isEqualAllValues = list1.containsAll(list2);
-        System.out.println("isEqualAllValues = " + isEqualAllValues);
-
-        List<Integer> unavailable = list1.stream().filter(e -> (list2.stream().filter(d -> d.equals(e)).count()) < 1)
-                .collect(Collectors.toList());
-
-        if (unavailable.size() == 0) {
-            System.out.println("list1 and list2 all values same.");
-        } else {
-            System.out.println("list1 and list2 all values are not  same.");
-        }
+    private static void mapDemo() {
+        System.out.println("########## applying map operation over stream ###########");
+        Stream.of("ONE", "two", "THREE", "four", "FIVE")
+                .map(String::toLowerCase)
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
     }
 
+
+    private static void mapFilterEX() {
+        List<String> names;
+
+        names = Dish.menu.stream()
+                .filter(d -> d.getCalories() > 500)
+                .map(Dish::getName)
+                .collect(Collectors.toList());
+        System.out.println("names = " + names);
+
+        /*
+        // descriptive way to write filter() & map() - putting more statements
+        // printing intermediate values - a debugging technique
+        names = Dish.menu.stream()
+                .filter(d -> {
+                            System.out.println("filtering - " + d.getName());
+                            return d.getCalories() > 500;
+                        }
+                )
+                .map(d -> {
+                            System.out.println("mapping - " + d.getName());
+                            return d.getName();
+                        }
+                )
+                .collect(Collectors.toList());
+        System.out.println("names = " + names);
+        */
+    }
 }

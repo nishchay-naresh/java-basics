@@ -49,11 +49,9 @@ public class LazyEvaluationDemo {
         }
     }
 
-
+    // given an ordered list find the double of the first even number greater than 3
     private static void eagerEvaluation_collection() {
-
         List<Integer> numbers = Arrays.asList(1, 2, 3, 5, 4, 6, 7, 8, 9, 10);
-        //given an ordered list find the double of the first even number greater than 3.
 
         int result = 0;
         for(int e : numbers) {
@@ -73,19 +71,16 @@ public class LazyEvaluationDemo {
 
         System.out.println("result - " + result);
     }
+
     /*
-     *
-     * applying one operation over entire collection
-     * vs
-     * applying all the operation over each element of collection
-     * slicing it differently
+     * Java streams are lazy and process one element at a time through the entire pipeline.
+     * Intermediate operations don’t run until a terminal operation is invoked, and short-circuiting operations like findFirst() ensure only the minimum work is done.
      *
      * */
     private static void lazyEvaluationInStream() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 5, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
         //given an ordered list find the double of the first even number greater than 3.
-
         int result = 0;
         for(int e : numbers) {
             if(isGT3(e) && isEven(e)) {
@@ -94,11 +89,7 @@ public class LazyEvaluationDemo {
             }
         }
         System.out.println(result);
-        /*
-        * does not execute a function on a coz collection of data
-        * instead it executes a collection of function on each piece of data, but only as much as necessary
-        *
-        * */
+
         //how much work? -  8 units of work/ computations
         System.out.println(
                 numbers.stream()
@@ -106,9 +97,6 @@ public class LazyEvaluationDemo {
                         .filter(LazyEvaluationDemo::isEven)     // -> 1,2,3
                         .map(LazyEvaluationDemo::doubleIt)      // -> 5
                         .findFirst());
-        // here it's a single pass through
-        // if we are not applying terminal operation then this pipeline will never get evaluated
-        // you are more efficient, not when you work faster, but when you don't work at all.
         // lazy evaluation is possible only if the functions don't have side effect (like sysout)
     }
 
@@ -124,5 +112,4 @@ public class LazyEvaluationDemo {
         System.out.println("doubleIt " + number);
         return number * 2;
     }
-
 }
