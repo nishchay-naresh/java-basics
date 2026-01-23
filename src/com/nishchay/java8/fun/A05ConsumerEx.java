@@ -14,21 +14,18 @@ import java.util.function.Consumer;
  *  As opposed to the Supplier, the Consumer accepts a generified argument and returns nothing
  *
  *
- *  primitive Consumer : DoubleConsumer, IntConsumer and LongConsumer, BooleanConsumer
+ *  primitive Consumer: DoubleConsumer, IntConsumer and LongConsumer, BooleanConsumer
  *  receive primitive values as arguments
  *
  *  https://javabydeveloper.com/java-8-consumer-with-examples/
  *
  * */
 
-public class ConsumerEx {
+public class A05ConsumerEx {
     public static void main(String[] args) {
-
         consumerEx();
         forEachConsumerEx();
-        consumerToPrint();
         andThenEx();
-
         primitiveConsumerEx();
     }
 
@@ -45,24 +42,14 @@ public class ConsumerEx {
         strConsumer.accept("java"); // java-8
         consumerString.accept("Functional Programming");// FUNCTIONAL PROGRAMMING
         intConsumer.accept(4); // 20
-
-        strConsumer = s -> {
-            Integer integer = new Integer(s);
-            System.out.println("integer = " + integer);
-        };
-        strConsumer.accept("5"); // java-8
     }
 
     // Same forEach method to accept Consumer as an argument
     private static void forEachConsumerEx() {
         Consumer<Integer> consumerPrintElement = e -> System.out.print(" " + e);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        numbers.forEach(consumerPrintElement);
 
-        List<Integer> list = Arrays.asList(1, 3, 5, 8, 2);
-        System.out.print("list data - ");
-        list.stream().forEach(consumerPrintElement);
-    }
-
-    private static void consumerToPrint() {
         Map<String, Integer> ages = new HashMap<>();
         ages.put("John", 25);
         ages.put("Freddy", 24);
@@ -72,7 +59,7 @@ public class ConsumerEx {
     }
 
     /*
-     * andThen(Consumer<? super T> after) - Returns a composed Consumer that performs,in sequence, this operation followed by the after operation.
+     * andThen(Consumer<? super T> after) - Returns a composed Consumer that performs, in sequence, this operation followed by the after operation.
      *
      * */
     private static void andThenEx() {

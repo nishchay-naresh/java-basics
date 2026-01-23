@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * https://zetcode.com/java/predicate/
  *
  * */
-public class PredicateEx {
+public class A08PredicateEx {
 
     public static void main(String[] args) {
 

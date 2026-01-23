@@ -1,32 +1,24 @@
 package com.nishchay.java8.fun;
 
 
-import static com.nishchay.ds.string.freq.StringFrequencyUtility.getFrequencyMapStream;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import com.nishchay.ds.string.freq.StringFrequencyUtility;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
-import java.util.function.IntSupplier;
-import java.util.function.LongSupplier;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Stream;
 
 /*
  *	java.util.function.Supplier<T>	:    () ->   T   :	T get();
  *	T – Type of input argument
- *  does not take any arguments,  returns a value of generified type
+ *  does not take any arguments, returns a value of generified type
  *
- *  typically we use it for lazy evaluation/execution of code
- *  Can wrap any piece code under a Supplier for lazy evaluation
- *
+ *  Typically, we use it for lazy evaluation/execution of code
+ *  Can wrap any piece of code under a Supplier for lazy evaluation
  *
  *	============== BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier ===================
- *	Java provides following functional interfaces that are used for corresponding primitives data type supplier.
+ *	Java provides the following functional interfaces that are used for corresponding primitive data type supplier.
  *	BooleanSupplier: Supplier to return Boolean value. Its method is getAsBoolean().
  *	IntSupplier: Supplier to return integer data type value. Its method is getAsInt().
  *	LongSupplier: Supplier to return long data type value. Its method is getAsLong().
@@ -34,7 +26,7 @@ import java.util.stream.Stream;
  *
  * */
 
-public class SupplierEx {
+public class A07SupplierEx {
 
     public static void main(String[] args) {
 
@@ -44,7 +36,6 @@ public class SupplierEx {
         lazyValueEx();
         castSupplier();
         supplierOfObject();
-
         suppFromAnotherSupplier();
     }
 
@@ -55,7 +46,7 @@ public class SupplierEx {
         String result = Stream.of("java", "python", "go")
                 .filter(e -> e.length() > 4)
                 .findAny()
-                .orElseGet(() -> "nothing");
+                .orElse("nothing");
 
         System.out.println("result = " + result);
 
@@ -69,8 +60,6 @@ public class SupplierEx {
         Supplier<Random> s1 = Random::new;
         Random random = s1.get();
         System.out.println(random.nextInt(100));
-
-
     }
 
     // Can wrap any piece code under a Supplier for lazy evaluation
@@ -113,7 +102,7 @@ public class SupplierEx {
         System.out.println("sqr(13) = " + squareLazy(() -> 13.0));
     }
 
-    // squares a double value. It will not receive a value itself, but a Supplier of this value
+    // Squares a double value. It will not receive a value itself, but a Supplier of this value
     public static double squareLazy(Supplier<Double> lazyValue) {
         return Math.pow(lazyValue.get(), 2);
     }
@@ -124,12 +113,12 @@ public class SupplierEx {
         System.out.println("list = " + list);
 
 
-        Supplier<Map<String, Long>> mapSupplier = () -> getFrequencyMapStream("java, perl, go, kotlin, java".split(", "));
+        Supplier<Map<String, Long>> mapSupplier = () -> StringFrequencyUtility.getFrequencyMapStream("java, perl, go, kotlin, java".split(", "));
         Map<String, Long> hm = mapSupplier.get();
         System.out.println("hm = " + hm);
 
         // mapSupplier = ConcurrentHashMap::new;
-        mapSupplier = () -> new ConcurrentHashMap<>();
+        mapSupplier = ConcurrentHashMap::new;
         hm = mapSupplier.get();
         System.out.println("hm = " + hm);
     }

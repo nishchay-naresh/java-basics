@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
  *      – Returns a composed function that first applies this function to its input, and then applies the after function to the result.
  *
  * */
-public class BiFunctionEx {
+public class A02BiFunctionEx {
     public static void main(String[] args) {
 
         biFunctionBasicEx();
