@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.basics;
 
 import com.nishchay.util.pojo.Dish;
 
@@ -7,7 +7,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class NonTerminalOperationDemo {
+/*
+ *	Non-Terminal/Intermediate Operations => 8
+ *
+ *		-	distinct()
+ *		-	sorted()
+ *		-	limit()
+ *		-	skip()
+ *
+ *		-	filter()
+ *		-	peek()
+ *		-	map()
+ *		-	flatMap()
+ *
+ *  Java 8 Streams - Stateful(require to maintain some state during execution) vs Stateless operations
+ *
+ * Stateful intermediate operations : distinct(), sorted(), limit(), skip()
+ *
+ *
+ * */
+
+public class A02NonTerminalOperationDemo {
 
     public static void main(String[] args) {
         createAndPrint();

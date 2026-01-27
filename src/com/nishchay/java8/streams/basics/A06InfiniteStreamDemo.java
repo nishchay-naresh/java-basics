@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.basics;
 
 import java.util.Random;
 import java.util.stream.Stream;
@@ -6,33 +6,25 @@ import java.util.stream.Stream;
 
 /*
 * Collection sre still required to be finite but stream can be infinite
-*
-* we can rely on laziness to easily create a lazy , infinite collection
-*
-*
+* we can rely on laziness to easily create a lazy, infinite collection
 * */
-public class InfiniteStreamDemo {
+public class A06InfiniteStreamDemo {
 
     public static void main(String[] args) {
-
         getUnboundedStream();
         impVsDecEx();
-
     }
 
     private static void getUnboundedStream() {
-
         System.out.print("Stream.iterate() - ");
         Stream.iterate(0, n -> n + 2)
                 .limit(10)
                 .forEach(e -> System.out.print(e + ", "));
 
-
         System.out.print("\nStream.generate() - ");
         Stream.generate(() -> new Random().nextInt(1000))
                 .limit(10)
                 .forEach(e -> System.out.print(e + ", "));
-
     }
 
     private static void impVsDecEx() {
@@ -43,7 +35,6 @@ public class InfiniteStreamDemo {
         int n = 51;
         System.out.println(computeIterative(k, n));
         System.out.println(computeStream(k, n));
-
     }
 
     public static int computeStream(int k, int n) {
@@ -70,5 +61,4 @@ public class InfiniteStreamDemo {
         }
         return result;
     }
-
 }

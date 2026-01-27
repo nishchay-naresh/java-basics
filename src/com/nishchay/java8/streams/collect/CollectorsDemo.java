@@ -1,8 +1,9 @@
 package com.nishchay.java8.streams.collect;
 
-import com.nishchay.java8.streams.query.Employee;
-import com.nishchay.java8.streams.query.EmployeeSQL;
+import com.nishchay.java8.streams.qns.pojo.Employee;
+import com.nishchay.java8.streams.qns.EmployeeSQL;
 import com.nishchay.util.pojo.Dish;
+import com.nishchay.util.pojo.Student;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +21,9 @@ public class CollectorsDemo {
 
     public static void main(String[] args) {
 
+        needOfToList();
         toListEx();
-        toListEx1();
+
         toSetEx();
         toMapEx();
 
@@ -34,26 +36,12 @@ public class CollectorsDemo {
         groupingByEx();
         groupingAndMappingEx();
         collectingAndThenEx();
-
-        partitionedByEx();
     }
 
-    private static void toListEx() {
-
-        // get the name of employee whose salary are more than 25K in a list
-        List<String> empNameList = EmployeeSQL.populateEmployeeList().stream()
-                .filter(e -> e.getSalary() > 25000)
-                .map(e -> e.getName())
-                .collect(Collectors.toList());
-        System.out.println("-----------name of employee whose salary are more than 25K------------");
-        empNameList.forEach(System.out::println);
-    }
-
-    private static void toListEx1() {
+    //To List - double the even values and put that into a list.
+    private static void needOfToList() {
 
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 1, 2, 3, 4, 5);
-
-        //To List - double the even values and put that into a list.
 
         // wrong way to do this
         List<Integer> doubleOfEven = new ArrayList<>();
@@ -64,15 +52,26 @@ public class CollectorsDemo {
 
         //mutability is OK, sharing is nice, shared mutability is devils work
         //friends don't let friends do shared mutation.
-        System.out.println("doubleOfEven = " + doubleOfEven); // don't do this
+        System.out.println("doubleOfEven = " + doubleOfEven);
 
-        List<Integer> doubleOfEven2 =
+        // right way to do this
+        List<Integer> doubleOfEven1 =
                 numbers.stream()
                         .filter(e -> e % 2 == 0)
                         .map(e -> e * 2)
                         .collect(Collectors.toList());
 
-        System.out.println("doubleOfEven2 = " + doubleOfEven2);
+        System.out.println("doubleOfEven1 = " + doubleOfEven1);
+    }
+
+    // get the name of employee whose salary are more than 25K in a list
+    private static void toListEx() {
+        List<String> empNameList = EmployeeSQL.populateEmployeeList().stream()
+                .filter(e -> e.getSalary() > 25000)
+                .map(e -> e.getName())
+                .collect(Collectors.toList());
+        System.out.println("-----------name of employee whose salary are more than 25K------------");
+        empNameList.forEach(System.out::println);
     }
 
     private static void toSetEx() {
@@ -82,98 +81,101 @@ public class CollectorsDemo {
                 .map(e -> e.getAge())
                 .collect(Collectors.toSet()); // or  .collect(Collectors.toCollection(HashSet::new));
         System.out.println("-----------all the age data of all employee------------");
-        ageSet.forEach(System.out::println);
+        ageSet.forEach(e -> System.out.print(e + ", "));
+        System.out.println();
 
 
-        // Accumulate age data of all employee into a TreeSet
+        // Accumulate age data of all employees into a TreeSet
         Set<Integer> ageTreeSet = EmployeeSQL.populateEmployeeList().stream()
                 .map(Employee::getAge)
                 .collect(Collectors.toCollection(TreeSet::new));
 
         System.out.println("-----------age in tree set------------");
-        ageTreeSet.forEach(System.out::println);
+        ageTreeSet.forEach(e -> System.out.print(e + ", "));
+        System.out.println();
     }
 
     private static void toMapEx() {
 
-        List<Employee> employees = EmployeeSQL.populateEmployeeList();
+        List<Student> students = Student.populateStudentList();
 
         /*
-        * create a Map with name and age as key, and the person as value.
-        *
-        * toMap() method take two keyMapper, valueMapper parameters of Function
-        * keyMapper - > take a lambda for key mapping from list
-        * valueMapper - > take a lambda for value mapping from list
-        *
-        * */
-        System.out.println(
-                employees.stream()
-                        .collect(Collectors.toMap(
-                                e -> e.getName() + "-" + e.getAge(), // key
-                                person -> person)                    // value
-                        )
-        );
+         * create a Map with name and no as key, and the Student as value.
+         *
+         * toMap() method take two Function parameters keyMapper and valueMapper
+         * keyMapper - > take a lambda for key mapping from list
+         * valueMapper - > take a lambda for value mapping from list
+         *
+         * */
+        Map<String, Student> map = students.stream()
+                .collect(Collectors.toMap(
+                        e -> e.getStudName() + "-" + e.getStudNo(),     // key
+                        student -> student)                             // value
+                );
 
-        // get a hashMap of <String,Employee> out of List of employee
-/*        Map<String, Employee> empMap = EmployeeSQL.populateEmployeeList().stream()
-                .collect(Collectors.toMap(e -> e.getName(), e -> e));
-*/
-        Map<String, Employee> empMap = employees.stream()
-                .collect(Collectors.toMap(e -> e.getName(), Function.identity()));
+        System.out.println("map = " + map);
+        // get a hashMap of <String, Student> out of List of Student
+        Map<String, Student> studMap = students.stream()
+                .collect(Collectors.toMap(e -> e.getStudName(), Function.identity()));
 
-        System.out.println("-----------<String,Employee> empMap------------");
-        empMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
+        System.out.println("-----------<String,Student> studMap------------");
+        studMap.forEach((key, value) -> System.out.println("[Key] : " + key + " [Value] : " + value));
 
 
-        ConcurrentMap<String, Employee> chMap
-                = employees.parallelStream()
-                .collect(Collectors.toConcurrentMap(Employee::getName, Function.identity()));
+        ConcurrentMap<String, Student> studCcyMap
+                = students.parallelStream()
+                .collect(Collectors.toConcurrentMap(Student::getStudName, Function.identity()));
 
-        System.out.println("-----------<String,Employee> ConcurrentMap ------------");
-        empMap.forEach((key, value) -> System.out.println( key + " -> " + value));
-
+        System.out.println("-----------<String,Student> ConcurrentMap ------------");
+        studCcyMap.forEach((key, value) -> System.out.println(key + " -> " + value));
     }
 
     private static void minByEx() {
-
         Comparator<Dish> dishCaloriesComparator = Comparator.comparingInt(Dish::getCalories);
+        Dish leastCaloriesDish =
+                Dish.getManu()
+                        .stream()
+                        .min(dishCaloriesComparator).orElse(null);
 
-        Optional<Dish> leastCaloriesDish;
+        System.out.println("leastCaloriesDish = " + leastCaloriesDish);
 
-        leastCaloriesDish = Dish.getManu().stream()
-                .collect(Collectors.minBy(dishCaloriesComparator));
-        System.out.println("leastCaloriesDish = " + leastCaloriesDish.orElse(null));
+        leastCaloriesDish =
+                Dish.getManu()
+                        .stream()
+                        .collect(Collectors.minBy(dishCaloriesComparator)).orElse(null);
+        System.out.println("leastCaloriesDish = " + leastCaloriesDish);
     }
 
     private static void maxByEx() {
 
         Comparator<Dish> dishCaloriesComparator = Comparator.comparingInt(Dish::getCalories);
 
-        Optional<Dish> mostCalorieDish;
+        Dish mostCalorieDish =
+                Dish.getManu()
+                        .stream()
+                        .max(dishCaloriesComparator).orElse(null);
+        System.out.println("mostCalorieDish = " + mostCalorieDish);
 
-        mostCalorieDish = Dish.getManu().stream()
-                .max(dishCaloriesComparator);
-        System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
-
-        mostCalorieDish = Dish.getManu().stream()
-                .collect(Collectors.maxBy(dishCaloriesComparator));
-        System.out.println("mostCalorieDish = " + mostCalorieDish.orElse(null));
+        mostCalorieDish =
+                Dish.getManu()
+                        .stream()
+                        .collect(Collectors.maxBy(dishCaloriesComparator)).orElse(null);
+        System.out.println("mostCalorieDish = " + mostCalorieDish);
     }
-    
-    private static void countingEx() {
 
+    private static void countingEx() {
         List<Integer> numbers = Arrays.asList(17, 9, 13, 21, 5, 2);
         long count = numbers.stream()
-                .filter( number -> number> 10)
+                .filter(number -> number > 10)
                 .collect(Collectors.counting());
 
-        System.out.println(" count = " + count);
+        System.out.println(" count = " + count); //3
     }
 
     // partitionBy()  - can be used to partition a Stream in two parts
     private static void partitionBy() {
 
-        List<Integer> numbers = Arrays.asList(17, 9, 13, 21, 5, 2);
+        List<Integer> numbers = Arrays.asList(17, 9, 14, 20, 5, 2);
         Map<Boolean, List<Integer>> evenAndOddNumbers = numbers.stream()
                 .collect(Collectors.partitioningBy(number -> number % 2 == 0));
 
@@ -182,7 +184,8 @@ public class CollectorsDemo {
 
     private static void joiningEx() {
         String shortMenu;
-        shortMenu = Dish.getManu().stream()
+        shortMenu = Dish.getManu()
+                .stream()
                 .map(Dish::getName)
                 .collect(Collectors.joining(", "));
         System.out.println("shortMenu = " + shortMenu);
@@ -190,21 +193,21 @@ public class CollectorsDemo {
 
     private static void groupingByEx() {
 
-        List<Employee> employees = EmployeeSQL.populateEmployeeList();
+        List<Student> students = Student.populateStudentList();
 
-        // groupingBy - will group the rows based on department, put these rows details in a List against of this department
-        // outcome will be a map where department will be key and value will be list of employees works in that department
-        Map<String, List<Employee>> deptEmployee = employees.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment));
+        // groupingBy - will group the rows based on department, put these rows in a List against of this department
+        // outcome will be a map where department will be key and value will be list of students' studies in that department
+        Map<String, List<Student>> deptWiseStudents = students.stream()
+                .collect(Collectors.groupingBy(Student::getDeptName));
 
-        System.out.println("\t\tDept Name \t\t\t\t   Emp Count");
+        System.out.println("\t\tDept Name \t\t\t\t   Student Count");
         System.out.println("----------------------------------------------------");
         // deptMap.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value));
-        deptEmployee.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value.size()));
+        deptWiseStudents.forEach((key, value) -> System.out.println(String.format("%25s", key) + "\t --->\t " + value.size()));
 
-        Map<String, Long> deptCount = employees.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
-
+        Map<String, Long> deptCount = students.stream()
+                .collect(Collectors.groupingBy(Student::getDeptName, Collectors.counting()));
+        System.out.println("deptCount = " + deptCount);
     }
 
     private static void groupingAndMappingEx() {
@@ -226,7 +229,6 @@ public class CollectorsDemo {
     private static void collectingAndThenEx() {
 
         String mainStr = "car, bus, car, jeep, cycle, bike, train, bus, truck, jeep, car, jeep, cycle, truck, train, car, bike, bus, cycle";
-
         Map<String, Integer> freqMapInt = Arrays.stream(mainStr.split(", "))
                 .collect(
                         Collectors.groupingBy(
@@ -235,25 +237,5 @@ public class CollectorsDemo {
                         )
                 );
         System.out.println("freqMapInt = " + freqMapInt);
-    }
-
-    // group odd & even numbers in map<sting,List<Integer>> using partitioningBy
-    private static void partitionedByEx() {
-
-        List<Integer> numbers = List.of(2, 6, 7, 9, 5, 3, 8);
-        Map<Boolean, List<Integer>> booleanPartition = numbers
-                .stream()
-                .collect(Collectors.partitioningBy(e -> e % 2 == 0));
-        System.out.println("booleanPartition = " + booleanPartition);
-
-        Map<String, List<Integer>> stringPartition = numbers.stream()
-                .collect(Collectors.partitioningBy(e -> e % 2 == 0))
-                .entrySet().stream()
-                .collect(Collectors.toMap(
-                                entry -> entry.getKey() ? "even" : "odd",
-                                entry -> entry.getValue()
-                        )
-                );
-        System.out.println("stringPartition = " + stringPartition);
     }
 }

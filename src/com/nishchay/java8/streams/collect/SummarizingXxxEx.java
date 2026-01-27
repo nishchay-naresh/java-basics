@@ -59,5 +59,4 @@ public class SummarizingXxxEx {
                 .collect(Collectors.summarizingLong(e -> e));
         System.out.println("longSummaryStatistics = " + longSummaryStatistics);
     }
-
 }

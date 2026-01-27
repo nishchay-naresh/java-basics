@@ -31,12 +31,11 @@ public class FlatMapDemo {
 
     /*
     *
-    *  map one-to-one Stream<T> ===> Stream<Y>
-    *  map one-to-many Stream<T> ===> Stream<List<Y>>
-    *  flatMap one-to-many Stream<T> ===> Stream<Y> ???
-    *
-    * function returns data - map
-    * function returns collection(Collection/Array) - flatMap
+    *  map()     one-to-one     Stream<T> ===> Stream<Y>
+    *  map()     one-to-many    Stream<T> ===> Stream<List<Y>>
+    *  flatMap() many-to-one    Stream<List<E>> ===> Stream<E>
+    *               .flatMap(e -> e.stream()) => Stream<collection/array of E> ===> Stream<E>
+    *  reduce()  many-to-one    Stream<T> ===> V v
     *
     * */
     private static void needOfFlatMap() {
