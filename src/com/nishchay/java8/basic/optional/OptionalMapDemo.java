@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams.flatmap;
+package com.nishchay.java8.basic.optional;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toMap;
 
-public class OptionalMapDemo1 {
+public class OptionalMapDemo {
 
     private static final String USER_MAP_KEY = "userMapKey";
 
@@ -73,7 +73,7 @@ public class OptionalMapDemo1 {
         }
 
         public void setAttribute(String key, Map<String, String> map) {
-            context.put(USER_MAP_KEY, map);
+            context.put(USER_MAP_KEY, Collections.unmodifiableMap(map));
         }
 
         public Object getAttribute(String key) {

@@ -1,5 +1,6 @@
 package com.nishchay.java8.streams.basics;
 
+import com.nishchay.util.pojo.Book;
 import com.nishchay.util.pojo.Dish;
 
 import java.util.Arrays;
@@ -36,8 +37,11 @@ public class A02NonTerminalOperationDemo {
         filterDemo();
         limitAndSkipDemo();
         peekDemo();
-        mapDemo();
-        mapFilterEX();
+        basicMapDemo();
+        filterThenMapEX();
+
+        List<Book> books = Book.getListOfBook();
+        mapDemo(books);
     }
 
     private static void createAndPrint() {
@@ -150,7 +154,7 @@ public class A02NonTerminalOperationDemo {
      *  mapToInt(), mapToDouble(), mapToLong()
      *
      * */
-    private static void mapDemo() {
+    private static void basicMapDemo() {
         System.out.println("########## applying map operation over stream ###########");
         Stream.of("ONE", "two", "THREE", "four", "FIVE")
                 .map(String::toLowerCase)
@@ -158,8 +162,8 @@ public class A02NonTerminalOperationDemo {
                 .forEach(System.out::println);
     }
 
-
-    private static void mapFilterEX() {
+    // filter() Stream<Dish> then map() it to Stream<String>
+    private static void filterThenMapEX() {
         List<String> names;
 
         names = Dish.menu.stream()
@@ -167,23 +171,47 @@ public class A02NonTerminalOperationDemo {
                 .map(Dish::getName)
                 .collect(Collectors.toList());
         System.out.println("names = " + names);
-
-        /*
-        // descriptive way to write filter() & map() - putting more statements
-        // printing intermediate values - a debugging technique
-        names = Dish.menu.stream()
-                .filter(d -> {
-                            System.out.println("filtering - " + d.getName());
-                            return d.getCalories() > 500;
-                        }
-                )
-                .map(d -> {
-                            System.out.println("mapping - " + d.getName());
-                            return d.getName();
-                        }
-                )
-                .collect(Collectors.toList());
-        System.out.println("names = " + names);
-        */
     }
+
+    /*
+     * map() -   Books to AuthorNames
+     *       -   Stream<Book> to Stream<String>
+     *
+     * LowerToUpperObject
+     * map() -   AuthorNames to Books
+     *       -   Stream<String> to Stream<Book>
+     *
+     * UpperToLowerObject
+     * map() -   Books to PageCounts
+     *       -   Stream<Book> to IntStream
+     *
+     *
+     * */
+    private static void mapDemo(List<Book> books) {
+        System.out.println(" ----------------map() : Books to AuthorNames ----------------");
+        List<String> authors =
+                books.stream()
+                        .map(Book::getAuthorName)
+                        .sorted()
+                        .toList();
+        System.out.println("authors = " + authors);
+
+        System.out.println(" ---------------- LowerToUpperObject ----------------");
+        List<String> writers = Arrays.asList("Spider Man", "Iron Man", "Super Man", "Wonder Women");
+
+        List<Book> books1 = writers.stream()
+                .map(writer -> new Book(1001, "Book 1", writer, 100))
+                .toList();
+
+        books1.forEach(System.out::println);
+
+        System.out.println(" ---------------- UpperToLowerObject ----------------");
+        int totalPage = books.stream()
+                //.mapToInt(e -> e.getPageCount())
+                .mapToInt(Book::getPageCount)
+                .sum();
+
+        System.out.println("totalPage = " + totalPage);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.venkat;
 
 import java.util.Arrays;
 import java.util.List;

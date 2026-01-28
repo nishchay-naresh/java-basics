@@ -12,40 +12,31 @@ import java.util.stream.Stream;
 public class IntStreamDemo {
 
     public static void main(String[] args) {
-
-
-        streamFromArgumentsValues();
         streamFromRange();
-        streamFromRangeToArray();
+        toArrayEx();
         intStreamTerminalUtility();
         intStreamStatistics();
 
         needOfStream();
         streamToIntStream();
-
-    }
-
-    private static void streamFromArgumentsValues(){
-
-        // returning a stream for list of values it accepts
-        IntStream stream = IntStream.of(-9, -18, 54, 8, 7, 14, 3);
-        stream.forEach(System.out::println);
     }
 
     private static void streamFromRange() {
-        System.out.print("\n IntStream.range(1, 10) = ");
+        System.out.print("IntStream.range(1, 10)         = ");       // 1-9
         IntStream.range(1, 10).forEach(e -> System.out.print(e + ", "));
-        System.out.print("\n IntStream.rangeClosed(1, 10) = ");
+        System.out.println();
+        System.out.print("IntStream.rangeClosed(1, 10)   = "); // 1-10
         IntStream.rangeClosed(1, 10).forEach(e -> System.out.print(e + ", "));
+        System.out.println();
 
-        System.out.println("\n ------------------------------------------");
+        System.out.println("------------------------------------------------------");
         int[] intArray =  IntStream.range(1, 11).toArray();
-        System.out.println("intArray = " + Arrays.toString(intArray));
-        List<Integer> listOfInt =  IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
-        System.out.println("listOfInt = " + listOfInt);
+        System.out.println("IntStream to int[] = " + Arrays.toString(intArray));
+        List<Integer> listOfInteger =  IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
+        System.out.println("IntStream to List<Integer> = " + listOfInteger);
     }
 
-    private static void streamFromRangeToArray() {
+    private static void toArrayEx() {
         // IntStream -> int[]
         int[] intArray = IntStream.rangeClosed(1, 5).toArray();
         System.out.println("intArray - " + Arrays.toString(intArray));
@@ -67,7 +58,7 @@ public class IntStreamDemo {
     }
 
     private static void intStreamStatistics() {
-        int[] numbers = {1, 9, 3, 10, 4, 20, 2};
+        int[] numbers = new int[]{1, 9, 3, 10, 4, 20, 2};
 
         System.out.println("---------------------IntSummaryStatistics----------------------");
         IntSummaryStatistics stats = IntStream.of(numbers).summaryStatistics();
@@ -86,14 +77,14 @@ public class IntStreamDemo {
 
         System.out.println("calories = " + calories);
 
-        // we don't have sum() method for Stream<T>
-        // No boxing cost involved
+        // we don't have sum() method for Stream<T>, No boxing cost involved
         calories = Dish.menu.stream()
                 .mapToInt(Dish::getCalories)
                 .sum();
 
         System.out.println("calories = " + calories);
     }
+
     private static void streamToIntStream() {
         List<Integer> list = Dish.menu.stream()
                 .mapToInt(Dish::getCalories)

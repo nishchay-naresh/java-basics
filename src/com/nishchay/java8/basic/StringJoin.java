@@ -5,6 +5,13 @@ import java.util.Arrays;
 
 public class StringJoin {
 
+    /*
+    *
+    * String join(CharSequence delimiter, CharSequence... elements)
+    * Returns a new String composed of copies of the CharSequence elements joined together with a copy of the specified delimiter.
+    *
+    * NullPointerException – If delimiter is null,  if an element is null, then "null" is added.
+    * */
     public static void main(String[] args) {
 
         String counting = String.join(" >> ", "Four", "Five", "Six", "Seven");
@@ -19,14 +26,12 @@ public class StringJoin {
         sequence = String.join(" -> ", "Wake up", "Eat", null, "Work", "Sleep", null);
         System.out.println(sequence);
 
-//        String str = String.join(null, "abc", "bcd", "apple");
+//        String str = String.join(null, "Four", "Five", "Six");
 //        System.out.println(str); // Exception in thread "main" java.lang.NullPointerException
 
-        //Converting an array of String to the list
-        List<String> list = Arrays.asList("Steve", "Rick", "Peter", "Abbey");
+        List<String> list = Arrays.asList("java", "python", "go", "perl", "ruby", "node");
         String names = String.join(" | ", list);
         System.out.println(names);
-
 
     }
 }

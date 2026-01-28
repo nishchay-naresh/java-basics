@@ -1,6 +1,12 @@
 package com.nishchay.java8.basic.methodref;
+
+import com.nishchay.java8.basic.methodref.pojo.FI1;
+import com.nishchay.java8.basic.methodref.pojo.FI2;
+import com.nishchay.java8.basic.methodref.pojo.FI3;
+import com.nishchay.java8.basic.methodref.pojo.Person;
+
 /*
- * There are 3 Functional Interface which each have below abstract method
+ * There are 3 Functional Interface that have below abstract method
  *
  *   FI1    {   void display();              }
  *   FI2    {   void display(int a);         }
@@ -58,12 +64,6 @@ public class MethodReferenceEx {
         // Runnable task = () -> void
         Thread t1 = new Thread(MethodReferenceEx::myTask);
         t1.start();
-    }
-}
-
-class Person {
-    Person(String msg) {
-        System.out.println("Person class constructor takes the message - " + msg);
     }
 }
 

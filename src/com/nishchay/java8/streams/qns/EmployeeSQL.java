@@ -1,5 +1,7 @@
-package com.nishchay.java8.streams.query;
+package com.nishchay.java8.streams.qns;
 
+
+import com.nishchay.java8.streams.qns.pojo.Employee;
 
 import java.util.*;
 import java.util.function.Function;
@@ -15,31 +17,31 @@ public class EmployeeSQL {
 
     public static void main(String[] args) {
 
-        employeePrint();
+//        employeePrint();
 
         maleFemaleEmployeeCount();
-        departmentNames();
-        maleFemaleEmployeeAvgAge();
-        highestAndLeastPaidEmployee();
-        employeesJoinedAfter2015();
-        countEmployeeInEachDept();
-        avgSalaryOfEachDept();
-        youngestMaleEmployeeFromADept();
-        seniorMostEmployee();
-        countMaleFemaleEmployeesInADept();
-        averageSalaryMaleAndFemaleEmployees();
-        employeeListFromEachDept();
-        getSalaryStatistics();
-
-
-        // self practice
-        youngestOldestEmployee();
-        getEmpNameEmpMap();
-        first3EmpNames();
-        printEmpNamesStartingWtih_N();
-        avgAndTotalSalaryOfFemaleEmployee();
-        femaleEmployeeWithHighestSalary();
-        getEmployeeYoungerThan25();
+//        departmentNames();
+//        maleFemaleEmployeeAvgAge();
+//        highestAndLeastPaidEmployee();
+//        employeesJoinedAfter2015();
+//        countEmployeeInEachDept();
+//        avgSalaryOfEachDept();
+//        youngestMaleEmployeeFromADept();
+//        seniorMostEmployee();
+//        countMaleFemaleEmployeesInADept();
+//        averageSalaryMaleAndFemaleEmployees();
+//        employeeListFromEachDept();
+//        getSalaryStatistics();
+//
+//
+//        // self-practice
+//        youngestOldestEmployee();
+//        getEmpNameEmpMap();
+//        first3EmpNames();
+//        printEmpNamesStartingWtih_N();
+//        avgAndTotalSalaryOfFemaleEmployee();
+//        femaleEmployeeWithHighestSalary();
+//        getEmployeeYoungerThan25();
     }
 
 

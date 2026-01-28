@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.venkat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +30,7 @@ public class ObservingAThread {
     }
 
 
-    static int compute(int number) {
+    public static int compute(int number) {
         // assume this is time intensive
         System.out.println("t : " + number + " -- " + Thread.currentThread());
         delay(1);

@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams.query;
+package com.nishchay.java8.streams.qns.pojo;
 
 public class Employee {
 

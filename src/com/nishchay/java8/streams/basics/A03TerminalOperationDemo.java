@@ -61,11 +61,10 @@ public class A03TerminalOperationDemo {
 
     public static void main(String[] args) {
 
-        List<String> stringList = Arrays.asList("java", "python", "go", "perl", "ruby", "kafka");
-        forEachEx(stringList);
+        forEachEx();
 
         System.out.println("--------------------- toArrayEx --------------------");
-        toArrayEx(stringList);
+        toArrayEx();
 
         System.out.println("----------------------- countEx --------------------");
         countEx();
@@ -89,20 +88,29 @@ public class A03TerminalOperationDemo {
         concatenateStreams();
     }
 
-    private static void forEachEx(List<String> list) {
-        System.out.print("Stream elements - ");
-        list.forEach(element -> System.out.print(element + ", "));
+    private static void forEachEx() {
+        // forEach() been added in Iterable class, so its available for all collection class
+        List<String> languages = Arrays.asList("java", "python", "go", "perl", "ruby", "node");
+        System.out.print("list elements - ");
+        languages.forEach(e -> System.out.print(e + ", "));
         System.out.println();
+
+        // to apply forEach() over array, one need to convert it to stream first by using  - Arrays.stream()
+        String[] stringArray = languages.toArray(String[]::new);
+        System.out.print("array elements - ");
+        Arrays.stream(stringArray).forEach(e -> System.out.print(e + ", "));
     }
 
-    private static void toArrayEx(List<String> list) {
+    private static void toArrayEx() {
         Stream<Integer> streamOfNum = Stream.of(5, 6, 7, 8, 9, 10);
         // Object[] objectArray = streamOfNum.toArray();
         Integer[] integerArray = streamOfNum.toArray(Integer[]::new);
         System.out.println("integerArray - " + Arrays.toString(integerArray));
 
-        String[] stringArray = list.toArray(String[]::new);
-        System.out.println("stringArray - " + Arrays.toString(stringArray));
+        // List<String> to String[]
+        List<String> languages = Arrays.asList("java", "python", "go", "perl", "ruby", "node");
+        String[] stringArray = languages.toArray(String[]::new);
+        System.out.println("languages - " + Arrays.toString(stringArray));
     }
 
     private static void countEx() {

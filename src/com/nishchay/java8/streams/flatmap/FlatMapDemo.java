@@ -15,34 +15,31 @@ import java.util.stream.Stream;
 
 public class FlatMapDemo {
 
-
     public static void main(String[] args) {
-
         needOfFlatMap();
-
         flatMapEx();
-
-        List<Book> books = Book.getListOfBook();
-        mapAndCollectToList(books);
-        flatMapDemoLowerToUpperObject();
-        flatMapDemoUpperToLowerObject(books);
         flatMapEx_Object();
     }
 
     /*
-    *
-    *  map()     one-to-one     Stream<T> ===> Stream<Y>
-    *  map()     one-to-many    Stream<T> ===> Stream<List<Y>>
-    *  flatMap() many-to-one    Stream<List<E>> ===> Stream<E>
-    *               .flatMap(e -> e.stream()) => Stream<collection/array of E> ===> Stream<E>
-    *  reduce()  many-to-one    Stream<T> ===> V v
-    *
-    * */
+     *
+     *  map()     one-to-one     Stream<T> ===> Stream<Y>
+     *  flatMap() one-to-many    Stream<Collection<E>/array of E> ===> Stream<E>
+     *               .flatMap(e -> e.stream()) / .flatMap(Arrays::stream)
+     *  reduce()  many-to-one    Stream<T> ===> V v
+     *
+     * map()        : one input → one output
+     * flatMap()    : one input → many outputs (then flattened into a single stream)
+     *
+     * rare use case      map()     one-to-many    Stream<T> ===> Stream<List<Y>>
+     * e.g emp -> List<emailIds>
+     *
+     *
+     * */
     private static void needOfFlatMap() {
 
         Function<Integer, Integer> oneToOne = e -> e * 2; // e.g emp -> firstName
         Function<Integer, List<Integer>> oneToMany = e -> Arrays.asList(e - 1, e + 1); //e.g emp -> List<emailIds>
-        // Function<Integer, Stream<Integer>> oneToMany = e -> Stream.of(e - 1, e + 1); //e.g emp -> List<emailIds>
 
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         System.out.print("one to one mapping - ");
@@ -53,85 +50,70 @@ public class FlatMapDemo {
         System.out.print("\none to many mapping - ");
         numbers.stream()
                 .map(oneToMany) // one-to-many mapping function
-                .flatMap(e -> e.stream())
+                .flatMap(e -> e.stream())   // many-to-one mapping function
                 .forEach(e -> System.out.print(e + ", "));
     }
 
     /*
      *
-     * map()        →   you get a list of items, map will help you what you want to do with each item
-     * flatMap()    →   you get a list of boxes which is filled with items,
-     *                  you open all boxes and pull out all the items put them into a flat list
+     * map()        ->  Stream<T> ===> Stream<Y>
+      *             ->  transform one type to another type
+     * flatMap()    ->  Stream<Collection<E>/array of E>  ===> Stream<E>
+     *              ->  transforming, Stream<Collection<E>/array of E> -> Stream<E>
      *
-     *  -   Doing a transformation of, Stream<collection/array of E> -> Stream<E>
-     *  -   Not giving same no of output as no of input
-     *  -   For primitive , below variant of map can be used :
-     *          flatMapToInt(), flatMapToLong(), flatMapToDouble()
+     * Visual representation:
+     * 	    Before flatMap: [ [1,2], [3,4], [5] ]
+     * 	    After flatMap: [ 1, 2, 3, 4, 5 ]
+     * 	    Think: “Map + flatten = flatMap”
+     *
+     * wrong usage of map - using map() in place of flatMap()
+     * Ex :
+     *        listOfLists.stream()                      // Stream<List<Integer>>
+     *            .map(l -> l.stream())                 // Stream<Stream<Integer>>, nested Stream
+     *            .collect(Collectors.toList());
+     *        applying map() instead of flatMap()  - Stream<Stream<Integer>> this is nested Stream
+     *        Nested streams = useless in most cases
+     *
+     *      sentences.stream()                          // Stream<String>
+     *          .map(word -> word.split(""))            // Stream<String[]>
+     *          .map(Arrays::stream) 		            // Stream<Stream<String>>
+     *          .collect(Collectors.toList());
+     *        applying map() instead of flatMap()  - Stream<Stream<Integer>> this is nested Stream
+     *        Nested streams = useless in most cases
+     *
+     * Primitive flatMap variants (performance)
+     *      -   flatMapToInt()
+     *      -   flatMapToLong()
+     *      -   flatMapToDouble()
+     *
      *
      * */
     private static void flatMapEx() {
-        // Find unique chars from list of words
-        String[] arrOfWords = {"Goodbye", "World"};
-        // array[] to stream
-        Stream<String> streamOfWords = Arrays.stream(arrOfWords);
 
-/*
-        wrong usage of map - using map in place of flatMap
-        List<String> uniqueChars =
-                streamOfWords
-                .map(word -> word.split(""))
-                .map(Arrays::stream)
-                .distinct()
-                .collect(Collectors.toList());
-*/
+        // Stream<List<Integer>> to Stream<Integer> by applying - flatMap(e -> e.stream())
+        List<List<Integer>> listOfLists = Arrays.asList(
+                Arrays.asList(1, 2),
+                Arrays.asList(3, 4),
+                Arrays.asList(5)
+        );
+        List<Integer> listOfE = listOfLists.stream()
+                .flatMap(l -> l.stream())
+                .toList();
+        System.out.println("listOfE = " + listOfE); //[1, 2, 3, 4, 5]
 
-        List<String> uniqueChars = streamOfWords
-                .map(word -> word.split(""))
-                //.flatMap(e -> Arrays.stream(e))
-                .flatMap(Arrays::stream)
-                .distinct()
-                .collect(Collectors.toList());
-
-        System.out.println("uniqueChars = " + uniqueChars);
+        // Stream<String[]> to Stream<String> by applying - flatMap(Arrays::stream)
+        List<String> sentences = Arrays.asList(
+                "Java is powerful",
+                "Streams are lazy"
+        );
+        List<String> words =
+                sentences.stream()
+                        .map(e -> e.split(" "))
+                        .flatMap(Arrays::stream)
+                        .toList();
+        System.out.println("words = " + words); //[Java, is, powerful, Streams, are, lazy]
     }
 
-
-    private static void mapAndCollectToList(List<Book> books) {
-
-        System.out.println(" ----------------map() & Collectors.toList() demo ----------------");
-        List<String> authors =
-                books.stream()
-                        .map(Book::getAuthorName)
-                        .sorted()
-                        .collect(Collectors.toList());
-
-        System.out.println("authors = " + authors);
-    }
-
-    private static void flatMapDemoLowerToUpperObject() {
-
-        System.out.println(" ---------------- LowerToUpperObject ----------------");
-        List<String> writers = Arrays.asList("Spider Man", "Iron Man", "Super Man", "Wonder Women");
-        // Mapping : LowerToUpperObject
-        List<Book> books = writers.stream().map(writer -> new Book(1001, "Book 1", writer, 100))
-                .collect(Collectors.toList());
-
-        books.forEach(System.out::println);
-    }
-
-
-
-    private static void flatMapDemoUpperToLowerObject(List<Book> books) {
-
-        System.out.println(" ---------------- UpperToLowerObject ----------------");
-        // Mapping : UpperToLowerObject
-        int totalPage = books.stream()
-                //.mapToInt(e -> e.getPageCount())
-                .mapToInt(Book::getPageCount)
-                .sum();
-
-        System.out.println("totalPage = " + totalPage);
-    }
 
     private static void flatMapEx_Object() {
 
@@ -187,7 +169,5 @@ public class FlatMapDemo {
                         .min(Comparator.comparing(Book::getPageCount));
 
         System.out.println("smallestBook = " + smallestBook.get());
-
     }
-
 }

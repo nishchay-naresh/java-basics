@@ -3,15 +3,15 @@ package com.nishchay.java8.basic.defaultmethod;
 
 /*
  *
- *  Rule 1 : Any method inherited from a class or a superclass is given higher priority over any default method inherited from an interface.
- *          class D extends A implements I -> A.show() will get picked bcus concrete impl > default impl
+ * Rule 1: Any method inherited from a class or a superclass is given higher priority over any default method inherited from an interface.
+ *              class D extends A implements I -> A.show() will get picked bcus concrete impl > default impl
  *
- * Rule 2 : Derived interfaces or sub-interfaces take higher precedence than the interfaces higher-up in the inheritance hierarchy.
- *           class E implements I, I10 -> I10.show() will get picked bcus sub-interfaces take higher precedence over actual interfaces
+ * Rule 2: Derived interfaces or sub-interfaces take higher precedence than the interfaces higher-up in the inheritance hierarchy.
+ *              class E implements I, I10 -> I10.show() will get picked bcus sub-interfaces take higher precedence over actual interfaces
  *
- * Rule 3 : In case Rule 1 and Rule 2 are not able to resolve the conflict
+ * Rule 3: In case Rule 1 and Rule 2 are not able to resolve the conflict,
  *          then the implementing class has to specifically override and provide a method with the same method definition.
- *          class A implements I, J -> calss A has to provide the implementation for show() method, same will be picked during ther call
+ *              class A implements I, J -> class A has to provide the implementation for show() method, same will be picked during their call
  *
  * Refer the link - https://www.javacodemonk.com/diamond-problem-of-inheritance-in-java-8-88faf6c9
  */
@@ -59,22 +59,20 @@ interface I10 extends I {
     }
 }
 
-
 interface J {
     default void show() {
         System.out.println("J.show()");
     }
 }
 
-
 /*
- * Java does NOT allow multiple inheritance : designed purposefully to avoid this famous diamond problem
- * class D extends B, C { } // Compilation error
+ * Java does NOT allow multiple inheritance: designed purposefully to avoid this famous diamond problem
+ * class D extends B, C { } // Compilation error,
  * But after java8 default method introduction at Interface level, we end up here
  *
  * CE - A inherits unrelated default for show() from type I & J
- * Conflict -> Now this class inherits both I and J — so which show() to use?
- * Must resolve the conflict explicitly , else EC
+ * Conflict -> Now this class inherits both I and J — so there is ambiguity which versin of show() to use?
+ * Must resolve the conflict explicitly, else EC
  * So now its class A responsibility to resolve this ambiguity by providing the implementation for show() method
  *
  * */

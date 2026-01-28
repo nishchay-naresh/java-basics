@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.qns;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -23,43 +23,36 @@ public class DSQnsUsingJava8 {
         longestString();
 
         stringToInteger();
-
+        partitionedByEx();
     }
-
 
     /*
      * int arr[] = { 2, 1, 15, 10, 25, 101, 35, 19 }; (Start with 1 ) print
      * output :: 1, 15, 10, 101, 19
      * Do we have any Method like startWith(1) in Java 1.8 -> No
-     *
      * */
     private static void noStartsWith() {
-
-        int[] intArray = {2, 1, 15, 10, 25, 101, 35, 19};
-
-        // Arrays.stream(intArray).boxed().map(e -> e.toString()).filter(e -> e.startsWith("1")).forEach(e -> System.out.print(e + ", "));
-
+        int[] intArray = new int[]{2, 1, 15, 10, 25, 101, 35, 19};
         List<String> nosStartWith1 = Arrays.stream(intArray)
                 .boxed()
                 .map(String::valueOf)
                 .filter(e -> e.startsWith("1"))
-                .collect(Collectors.toList());
+                .toList();
         System.out.println("nosStartWith1 = " + nosStartWith1);
-
     }
 
-
     /*
-     *    Hi I have one array of integer
-     *    int[] intArray = {1, 3, 8, 4, 6};
+     *    I have one int[] array
+     *    int[] intArray = new int[]{1, 3, 8, 4, 6};
      *    How to reverse the array using stream
      *
      * */
     private static void arrayReverseUsingStream() {
-
-        int[] intArray = {1, 3, 8, 4, 6};
-
-        int[] reversed = IntStream.of(intArray).boxed().sorted(Comparator.reverseOrder()).mapToInt(i -> i).toArray();
+        int[] intArray = new int[]{1, 3, 8, 4, 6};
+        int n = intArray.length;
+        int[] reversed = IntStream.range(0, n)
+                .map(i -> intArray[n - 1 - i])
+                .toArray();
 
         System.out.println("intArray = " + Arrays.toString(intArray));
         System.out.println("reversed = " + Arrays.toString(reversed));
@@ -74,7 +67,6 @@ public class DSQnsUsingJava8 {
     private static void charFrequency() {
 
         String[] strArray = {"i", "love", "java"};
-
 /*
         Map<Character, Long> freqMap =
                 Arrays.stream(strArray)
@@ -91,13 +83,13 @@ public class DSQnsUsingJava8 {
     }
 
     /*
-     *	1. Java program to count the occurrence of each character in a string
+     *	Java program to count the occurrence of each character in a string
      *	input -  ilovejava8
      *	output - {a=2, e=1, v=2, 8=1, i=1, j=1, l=1, o=1}
      *
     * */
     private static void findCharOccurrence() {
-//        String input = "ilovejava8" ;
+        // String input = "ilovejava8" ;
         String input = "ilovejavaprogramming" ;
 
         Map<String, Long> map = Arrays.stream(input.split(""))
@@ -106,7 +98,7 @@ public class DSQnsUsingJava8 {
     }
 
     /*
-     *	2. Java program to find all duplicate element from a given string
+     *	Java program to find all duplicate element from a given string
      *   input = "ilovejavaprogramming"
      *	 frqMap = {p=1, a=3, r=2, e=1, v=2, g=2, i=2, j=1, l=1, m=2, n=1, o=2}
      *   duplicates are = {a, r, v, g, i, m, o}
@@ -145,7 +137,7 @@ public class DSQnsUsingJava8 {
     }
 
     /*
-     *	4. Java program to find second-highest number from given array
+     *	4. Java program to find the second-highest number from given array
      *
      *	into numbers = {5, 9, 11, 2, 8, 21, 1};
      *  2nd highest = 11
@@ -198,6 +190,32 @@ public class DSQnsUsingJava8 {
                 .map(Double::parseDouble)
                 .collect(Collectors.toList());
         System.out.println("doubleList = " + doubleList);
+
+        List<Double> numList = strList.stream()
+                .map(s -> s.replaceAll("[^0-9.]", ""))   // keep digits & dot
+                .filter(s -> !s.isEmpty())
+                .map(Double::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    // group odd and even numbers in map<sting, List<Integer>> using partitioningBy
+    private static void partitionedByEx() {
+
+        List<Integer> numbers = List.of(2, 6, 7, 9, 5, 3, 8);
+        Map<Boolean, List<Integer>> booleanPartition = numbers
+                .stream()
+                .collect(Collectors.partitioningBy(e -> e % 2 == 0));
+        System.out.println("booleanPartition = " + booleanPartition);
+
+        Map<String, List<Integer>> stringPartition = numbers.stream()
+                .collect(Collectors.partitioningBy(e -> e % 2 == 0))
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                                entry -> entry.getKey() ? "even" : "odd",
+                                entry -> entry.getValue()
+                        )
+                );
+        System.out.println("stringPartition = " + stringPartition);
     }
 
 }

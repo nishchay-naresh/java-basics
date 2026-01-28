@@ -1,4 +1,4 @@
-package com.nishchay.java8.streams;
+package com.nishchay.java8.streams.venkat;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,13 +8,11 @@ import java.util.function.Supplier;
 public class LazyEvaluationDemo {
 
     public static void main(String[] args) {
-
         eagerEvaluation_logicalOp();
         lazyEvaluationUsingSupplier();
-
+        System.out.println("..........................................");
         eagerEvaluation_collection();
         lazyEvaluationInStream();
-
     }
 
     /*
@@ -49,7 +47,13 @@ public class LazyEvaluationDemo {
         }
     }
 
-    // given an ordered list find the double of the first even number greater than 3
+    /*
+    * Given an ordered list find the double of the first even number greater than 3
+    *
+    * Streams look like they process the whole list — but they don’t.
+    * Stream process element-by-element, not step-by-step per operation.
+    *
+    * */
     private static void eagerEvaluation_collection() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 5, 4, 6, 7, 8, 9, 10);
 
@@ -74,7 +78,8 @@ public class LazyEvaluationDemo {
 
     /*
      * Java streams are lazy and process one element at a time through the entire pipeline.
-     * Intermediate operations don’t run until a terminal operation is invoked, and short-circuiting operations like findFirst() ensure only the minimum work is done.
+     * Intermediate operations don’t run until a terminal operation is invoked, and
+     * short-circuiting operations like findFirst() ensure only the minimum work is done.
      *
      * */
     private static void lazyEvaluationInStream() {
@@ -88,15 +93,16 @@ public class LazyEvaluationDemo {
                 break;
             }
         }
-        System.out.println(result);
+        System.out.println("result - " + result);
 
         //how much work? -  8 units of work/ computations
-        System.out.println(
-                numbers.stream()
-                        .filter(LazyEvaluationDemo::isGT3)      // 1,2,3,4
-                        .filter(LazyEvaluationDemo::isEven)     // -> 1,2,3
-                        .map(LazyEvaluationDemo::doubleIt)      // -> 5
-                        .findFirst());
+        result = numbers.stream()
+                .filter(LazyEvaluationDemo::isGT3)      // 1,2,3,5,4
+                .filter(LazyEvaluationDemo::isEven)     // -> 5,4
+                .map(LazyEvaluationDemo::doubleIt)      // -> 4
+                .findFirst()                            // -> 8
+                .orElse(0);
+        System.out.println("result - " + result);
         // lazy evaluation is possible only if the functions don't have side effect (like sysout)
     }
 

@@ -19,6 +19,6 @@ public class StreamPrime {
         // declarative
         // focus on what, rather how
         // immutability
-        return num > 1 && IntStream.range(2, num).noneMatch(i -> num % i == 0);
+        return num > 1 && IntStream.range(2, num/2).noneMatch(i -> num % i == 0);
     }
 }

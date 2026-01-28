@@ -103,7 +103,14 @@ public class A01FunctionEx {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println("freqMap = " + freqMap);
 
-        // creating a Map<String, String.length()> from List<String>
+        /*
+         * creating a Map<String, String.length()> from List<String>
+         *
+         * toMap() method take two Function parameters keyMapper and valueMapper
+         * keyMapper - > take a lambda for key mapping from list
+         * valueMapper - > take a lambda for value mapping from list
+         *
+         * */
         Map<String, Integer> map = stringList.stream()
                 .collect(Collectors.toMap(Function.identity(), String::length));
         System.out.println("map = " + map);

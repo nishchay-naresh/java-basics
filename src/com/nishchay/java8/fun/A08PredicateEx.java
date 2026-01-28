@@ -1,7 +1,7 @@
 package com.nishchay.java8.fun;
 
 
-import com.nishchay.java8.streams.query.Employee;
+import com.nishchay.java8.streams.qns.pojo.Employee;
 
 import java.util.Arrays;
 import java.util.List;

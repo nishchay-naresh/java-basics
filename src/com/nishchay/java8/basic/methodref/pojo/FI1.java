@@ -1,4 +1,4 @@
-package com.nishchay.java8.basic.methodref;
+package com.nishchay.java8.basic.methodref.pojo;
 
 
 /*
@@ -6,6 +6,6 @@ package com.nishchay.java8.basic.methodref;
 *
 * */
 @FunctionalInterface
-interface FI1 {
+public interface FI1 {
     void display();
 }

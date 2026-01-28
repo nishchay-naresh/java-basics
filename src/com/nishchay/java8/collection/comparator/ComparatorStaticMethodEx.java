@@ -11,11 +11,12 @@ public class ComparatorStaticMethodEx {
 
     public static void main(String[] args) {
 
-        naturalOrderReverseOrderEx();
-
         List<Student> studentList = Student.populateStudentList();
         System.out.println(" ===================== Original List ===================== ");
         studentList.forEach(System.out::println);
+
+        System.out.println(" ===================== naturalOrder() / reverseOrder() ===================== ");
+        naturalOrderReverseOrderEx();
 
         System.out.println(" ==================== comparingEx ======================== ");
         comparingEx(studentList);
@@ -31,29 +32,27 @@ public class ComparatorStaticMethodEx {
 
         System.out.println(" ==================== thenComparingExMap  ================= ");
         thenComparingExMap();
-
     }
-
 
     //    Using Comparator.naturalOrder() & Comparator.reverseOrder()
     private static void naturalOrderReverseOrderEx() {
-
         List<String> animals = Arrays.asList("tiger", "lion", "bear", "panther", "zebra", "fox", "deer");
+        System.out.print("Original List          =   ");
+        animals.forEach(e -> System.out.print(e + ", "));
+        System.out.println();
 
-        System.out.println(" --------------- Original List -----------------");
-        animals.forEach(System.out::println);
-
-        System.out.println(" --------------- Natural Order Sorting -----------------");
+        System.out.print("Natural Order Sorting   =   ");
         animals.sort(Comparator.naturalOrder());
-        animals.forEach(System.out::println);
+        animals.forEach(e -> System.out.print(e + ", "));
+        System.out.println();
 
-        System.out.println(" --------------- Reverse Order Sorting -----------------");
+        System.out.print("Reverse Order Sorting   =   ");
         animals.sort(Comparator.reverseOrder());
-        animals.forEach(System.out::println);
+        animals.forEach(e -> System.out.print(e + ", "));
+        System.out.println();
     }
 
     private static void comparingEx(List<Student> studentList) {
-
         // Using Comparator.comparing(-)
         System.out.println(" --------------- Sorting based on StudName -----------------");
         Comparator<Student> nameComparator = (Student s1, Student s2) -> s1.getStudName().compareTo(s2.getDeptName());
@@ -82,7 +81,6 @@ public class ComparatorStaticMethodEx {
         Comparator<Student> cityLengthComparator = Comparator.comparing(Student::getCity, Comparator.comparingInt(String::length));
         studentList.sort(cityLengthComparator);
         studentList.forEach(System.out::println);
-
     }
 
 
@@ -100,8 +98,8 @@ public class ComparatorStaticMethodEx {
         studentList.forEach(System.out::println);
     }
 
-    //    Comparator.thenComparing - composting two comparator using - thenComparing
-    //    Adding multiple sorting criteria, if city is same then go for marks
+    //    Comparator.thenComparing - composting two comparators using - thenComparing
+    //    Adding multiple sorting criteria, if the city is same then go for marks
     private static void thenComparingEx(List<Student> studentList) {
 
         Comparator<Student> cityThenMarksComparator = Comparator.comparing(Student::getCity)
@@ -113,7 +111,6 @@ public class ComparatorStaticMethodEx {
     }
 
     private static void nullsLastAndFirstEx(List<Student> studentList) {
-
         studentList.add(null);
         studentList.add(null);
 
@@ -131,7 +128,6 @@ public class ComparatorStaticMethodEx {
         studentList.sort(cityComparator_nullFirst);
         System.out.println(" --------------- List with City wise sorting with nullFirst -----------------");
         studentList.forEach(System.out::println);
-
     }
 
     private static void thenComparingExMap() {
@@ -149,5 +145,4 @@ public class ComparatorStaticMethodEx {
         entryList.sort(valueThenKeyComparator);
         System.out.println("Sorted list = " + entryList);
     }
-
 }

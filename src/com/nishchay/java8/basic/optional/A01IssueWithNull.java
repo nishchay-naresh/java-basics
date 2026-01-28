@@ -1,6 +1,6 @@
-package com.nishchay.java8.basic;
+package com.nishchay.java8.basic.optional;
 
-public class IssueWithNull {
+public class A01IssueWithNull {
 
     // Problem - It will throw NullPointerException
     public String getCarInsuranceName(Person person) {
@@ -8,8 +8,8 @@ public class IssueWithNull {
     }
 
     /*
-     * performs a null check every time it dereferences a variable, returning the string
-     * “Unknown” if any of the variables traversed in this dereferencing chain is a null value.
+     * Performs a null check every time it dereferences a variable.
+     * Returning the string “Unknown” if any of the variables traversed in this dereferencing chain is a null value.
      * This clearly scales poorly and compromises the readability
      *
      * */
@@ -26,7 +26,7 @@ public class IssueWithNull {
         return "unknown";
     }
 
-    // method has four distinct exit points, making it hardly maintainable.
+    // The method has four distinct exit points, making it hardly maintainable.
     public String getCarInsuranceName_defencive_take2(Person person) {
         if (person == null) {
             return "unknown";

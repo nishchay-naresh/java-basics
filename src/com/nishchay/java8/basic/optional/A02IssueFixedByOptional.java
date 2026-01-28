@@ -1,8 +1,8 @@
-package com.nishchay.java8.basic;
+package com.nishchay.java8.basic.optional;
 
 import java.util.Optional;
 
-public class IssueFixedByOptional {
+public class A02IssueFixedByOptional {
 
     public String getCarInsuranceName(Person person) {
         Optional<Person> optPerson = Optional.of(person);

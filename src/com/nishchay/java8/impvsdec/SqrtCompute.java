@@ -1,10 +1,9 @@
 package com.nishchay.java8.impvsdec;
 
-import com.nishchay.ds.number.Prime;
+import com.nishchay.util.Utils;
 
 import java.util.stream.Stream;
 
-import static com.nishchay.ds.number.Prime.isPrime1;
 
 public class SqrtCompute {
 
@@ -12,8 +11,8 @@ public class SqrtCompute {
 
         int n = 101;
         int k = 51;
-        System.out.println(sqrtImperative(n,k));    // 770.34339268981
-        System.out.println(sqrtDeclarative(n,k));   // 770.3433926898098
+        System.out.println(sqrtImperative(n, k));    // 770.34339268981
+        System.out.println(sqrtDeclarative(n, k));   // 770.3433926898098
 
     }
 
@@ -23,7 +22,7 @@ public class SqrtCompute {
         int index = n;
         int count = 0;
         while (count < k) {
-            if (isPrime1(index)) {
+            if (Utils.isPrimeStream(index)) {
                 result += Math.sqrt(index);
                 count++;
             }
@@ -33,13 +32,11 @@ public class SqrtCompute {
     }
 
     public static double sqrtDeclarative(int n, int k) {
-        return Stream.iterate(n,e->e+1)
-                .filter(Prime::isPrime1)
+        return Stream.iterate(n, e -> e + 1)
+                .filter(Utils::isPrimeStream)
                 .mapToDouble(Math::sqrt)
                 .limit(k)
                 .sum();
 
     }
-
-
 }
