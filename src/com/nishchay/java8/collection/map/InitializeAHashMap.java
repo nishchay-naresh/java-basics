@@ -29,7 +29,7 @@ public class InitializeAHashMap {
     *
     * */
     private static void doubleBraceSyntax() {
-        Map<String, String> doubleBraceMap  = new HashMap<String, String>() {{
+        Map<String, String> doubleBraceMap  = new HashMap<>() {{
             put("key1", "value1");
             put("key2", "value2");
             System.out.println("this - " + this);

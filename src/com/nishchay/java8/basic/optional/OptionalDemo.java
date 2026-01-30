@@ -32,22 +32,22 @@ public class OptionalDemo {
 
     public static void main(String[] args) {
 
-//        whatIsNull();
-//        whatIsOptional();
-//        System.out.println("---------------------------------------");
-//        suppressNPEUsingOptional();
-//
-//        createOptional();
-//        System.out.println("---------------------------------------");
-//        checkOptional();
-//        System.out.println("---------------------------------------");
-//        extractOptional();
-//        System.out.println("---------------------------------------");
+        whatIsNull();
+        whatIsOptional();
+        System.out.println("---------------------------------------");
+        suppressNPEUsingOptional();
+
+        createOptional();
+        System.out.println("---------------------------------------");
+        checkOptional();
+        System.out.println("---------------------------------------");
+        extractOptional();
+        System.out.println("---------------------------------------");
         optionalStreamMethods();
-//        givenOptional_whenMapWorks_thenCorrect();
-//
-//        System.out.println("---------------------------------------");
-//        strIdGenerationCheck();
+        givenOptional_whenMapWorks_thenCorrect();
+
+        System.out.println("---------------------------------------");
+        strIdGenerationCheck();
     }
 
     /*

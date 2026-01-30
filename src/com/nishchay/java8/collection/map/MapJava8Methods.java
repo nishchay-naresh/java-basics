@@ -28,7 +28,6 @@ public class MapJava8Methods {
 
     public static void main(String[] args) {
 
-
         forEachEx();
         getOrDefaultEx();
         putIfAbsentEx();
@@ -42,12 +41,9 @@ public class MapJava8Methods {
         computeIfPresentEx();
 
         putIfAbsentVsComputeIfAbsent();
-
     }
 
-
     private static Map<String, Country> getCountryMap() {
-
         Map<String, Country> hashMap = new HashMap<>();
         hashMap.put("IN", new Country("India", "INR"));
         hashMap.put("US", new Country("United States Of America", "USD"));
@@ -77,12 +73,10 @@ public class MapJava8Methods {
         hashMap.put("forty", 40);
         System.out.println("Original map = " + hashMap);
 
-        System.out.println(hashMap.getOrDefault("ten", 999)); // 10
+        System.out.println(hashMap.getOrDefault("ten", 999));   // 10
         System.out.println(hashMap.getOrDefault("sixty", 999)); // 999
-        System.out.println("Updated map = " + hashMap);
 
         HashMap<Integer, String> hashMap1 = new HashMap<>();
-
         hashMap1.put(1, "Java");
         hashMap1.put(2, "Python");
         hashMap1.put(3, "JavaScript");
@@ -90,12 +84,19 @@ public class MapJava8Methods {
 
         System.out.println(hashMap1.getOrDefault(1, "Not Found")); // Java
         System.out.println(hashMap1.getOrDefault(9, "Not Found")); // Not Found
-        System.out.println("Updated map = " + hashMap1);
+
+
+        String vehicles = "car, bus, car, jeep, cycle, bike, train, bus, truck, jeep, car, jeep, cycle, truck, train, car, bike, bus, cycle";
+        Map<String, Integer> freqMap = new HashMap<>();
+        for (String currStr : vehicles.split(", ")) {
+            freqMap.put(currStr, freqMap.getOrDefault(currStr, 0) + 1);
+        }
+        System.out.println("freqMap = " + freqMap);
     }
 
 
     /*
-     * putIfAbsent
+     * V putIfAbsent(K key, V value)
      * inserts the specified key/value mapping to the hashmap if the specified key is absent in hashmap
      *
      * Return - returns the current value associated with the specified key or null (if there was no mapping)
@@ -108,8 +109,8 @@ public class MapJava8Methods {
         hashMap.put("key2", 200);
         System.out.println("Original map = " + hashMap);
 
-        System.out.println(hashMap.putIfAbsent("key2", 500)); // 200
-        System.out.println(hashMap.putIfAbsent("key5", 500)); // null
+        System.out.println(hashMap.putIfAbsent("key2", 500)); // 200 then nothing
+        System.out.println(hashMap.putIfAbsent("key5", 500)); // null then add current mapping to map
         System.out.println("Updated map = " + hashMap);
     }
 
@@ -232,7 +233,7 @@ public class MapJava8Methods {
     }
 
     /*
-     * Syntax for bth is same
+     * Syntax for both is same
      *       hashmap.put(key, value)
      *       hashmap.replace(key, value)
      *
@@ -484,7 +485,6 @@ public class MapJava8Methods {
         }
         return null;
     }
-
 }
 
 /*
