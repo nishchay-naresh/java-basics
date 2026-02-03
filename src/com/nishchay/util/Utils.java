@@ -5,8 +5,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import static com.nishchay.ds.number.Prime.isPrime1;
-
 public class Utils {
 
     public static void delay(int sec) {
@@ -32,7 +30,7 @@ public class Utils {
 
     public static void primeSum() {
         // Simulate a long-running Job
-        int sum = IntStream.rangeClosed(1, 100000).filter(e -> isPrime1(e)).sum();
+        int sum = IntStream.rangeClosed(1, 100000).filter(e -> isPrimeStream(e)).sum();
         System.out.println("sum of primes till 100000 = " + sum);
         System.out.println("primeSum - " + Thread.currentThread());
     }
@@ -64,4 +62,21 @@ public class Utils {
         System.out.println("printIt - " + Thread.currentThread());
     }
 
+    // Declarative way to find the Prime - Using Stream & Predicate
+    public static boolean isPrimeStream(int number) {
+
+        // range vs  rangeClosed : To properly check for factors, we should include number / 2, so rangeClosed
+        return 1 < number &&
+                IntStream.rangeClosed(2, (int) Math.sqrt(number))
+                        .noneMatch(index -> number % index == 0);
+    }
+
+    public static void countPrimes(int n) {
+        int count = 0;
+        for (int i = 2; i <= n; i++) {
+            if (isPrimeStream(i))
+                count++;
+        }
+        System.out.println("count = " + count);
+    }
 }

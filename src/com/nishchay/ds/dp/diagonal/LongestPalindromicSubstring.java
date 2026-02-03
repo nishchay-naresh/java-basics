@@ -1,7 +1,5 @@
 package com.nishchay.ds.dp.diagonal;
 
-import com.nishchay.ds.string.StringPalindrome;
-
 /*
  *	===========Longest Palindromic Substring===========
  *
@@ -77,7 +75,7 @@ public class LongestPalindromicSubstring {
                 sb.setLength(0);
 
                 // check each substring whether it is palindrome or not
-                if (StringPalindrome.isPalindrome(subStr)) {
+                if (isPalindrome(subStr)) {
                     longSubStrLen = Math.max(longSubStrLen, subStr.length());
                     longSubStr = subStr;
                 }
@@ -128,6 +126,17 @@ public class LongestPalindromicSubstring {
         System.out.println("longSubStr = " + longSubStr);
         System.out.println("longSubStrLen = " + longSubStrLen);
         return longSubStrLen;
+    }
+
+    private static boolean isPalindrome(String string) {
+        char[] charArray = string.toCharArray();
+
+        for (int i = 0, j = charArray.length - 1; i < j; i++, j--) {
+            if(charArray[i] != charArray[j]){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
