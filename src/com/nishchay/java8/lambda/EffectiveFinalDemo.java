@@ -1,5 +1,7 @@
 package com.nishchay.java8.lambda;
 
+import com.nishchay.java8.basic.methodref.pojo.FI2;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,9 +9,9 @@ import java.util.stream.Stream;
 
 /*
 * Also referred as closure in lambda
-* Effective Final -  concept introduced in java8. in earlier version you need to make y as final to achieve this
-* java compiler keeping a watch on y, if user changes it, compiler will flag compiler time error
-* Have same behaviour for both lambda & anonymous inner class
+* Effective Final - concept introduced in java8. In the earlier version, you need to make y as final to achieve this
+* Java compiler keeping a watch on y. If a user modifies it, compiler will flag compiler time error
+* Have same behavior for both lambda & anonymous inner class
 *
 * A variable is effectively final if:
 *  - It is assigned only once.
@@ -27,25 +29,28 @@ public class EffectiveFinalDemo {
     }
 
 
-
     private static void effectiveFinalEx1() {
         int x = 100;
         int y = 20;
 
         System.out.println("----------anonymous inner class-------------");
-        doProcess(x, new ProcessI() {
+
+        ProcessI process = new ProcessI() {
             @Override
             public void process(int a) {
                 int y = 50; // Variable 'y' is accessed from within inner class, needs to be final or effectively final
                 System.out.println(a + y);
             }
-        });
+        };
+        doProcess(x, process);
+
 
         System.out.println("----------Using lambda-------------");
-        doProcess(x, a -> {
+        ProcessI process1 = a -> {
 //            y = 50; // Variable used in lambda expression should be final or effectively final
             System.out.println(a + y);
-        });
+        };
+        doProcess(x, process1);
     }
 
     public static void doProcess(int a, ProcessI p) {
@@ -65,12 +70,12 @@ public class EffectiveFinalDemo {
     }
 
     /*
-     * ======== Key Concepts =========
+     * ===================================== Key Concepts ===================================
      *		Concept						Explanation
-     *	Effectively final		Lambda captures variables that don't change — but arrays/objects can be changed without changing their reference.
-     *	Mutable state			factor[0] is mutable. The lambda sees the latest value during execution.
-     *	Stream laziness			The stream pipeline does nothing until the terminal operation (forEach) is invoked.
-     * 	Side effects			Changing shared mutable state (factor[0]) before running the stream can lead to unpredictable results or bugs.
+     *	Effectively final   -   Lambda captures variables that don't change — but arrays/objects can be changed without changing their reference.
+     *	Mutable state       -   factor[0] is mutable. The lambda sees the latest value during execution.
+     *	Stream laziness     -   The stream pipeline does nothing until the terminal operation (forEach) is invoked.
+     * 	Side effects        -   Changing shared mutable state (factor[0]) before running the stream can lead to unpredictable results or bugs.
      */
     private static void  lazyEvaluationEx() {
         List<Integer> numbers = Arrays.asList(1, 2, 3);

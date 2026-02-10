@@ -108,7 +108,7 @@ public class OptionalDemo {
      * 2. create an Optional with a non-null value : Optional.of() - value / NullPointerException
      *       of()            -  Returns an Optional wrapping the given value or throws a NullPointerException if this value is null
      *
-     * 3. Create an Optional with a value which may or may not be null : Optional.ofNullable() - value / empty optional
+     * 3. Create an Optional with a value which may or may not be null: Optional.ofNullable() - value / empty optional
      *       ofNullable()    -	Returns an Optional wrapping the given value or the empty Optional if this value is null
      *
      * */
@@ -155,7 +155,6 @@ public class OptionalDemo {
         Optional<User> userOptional = Optional.of(findUserById(999));
         userOptional.ifPresent(userConsumer);
     }
-
 
     /*
      * ========================================= extract Optional ====================================================

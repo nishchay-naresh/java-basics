@@ -3,13 +3,22 @@ package com.nishchay.java8.basic.defaultmethod;
 
 /*
  *
- * Rule 1: Any method inherited from a class or a superclass is given higher priority over any default method inherited from an interface.
- *              class D extends A implements I -> A.show() will get picked bcus concrete impl > default impl
+ *	Key Rules to Remember:
+ *	    1. Java does not allow multiple inheritance of classes
+ *	    2. Interfaces can cause a diamond problem only with default methods
+ *	    3. Class methods have higher priority than interface default methods
+ *	    4. Sub-interfaces version takes higher precedence over super interface version
+ *	    5. Child class must override to resolve ambiguity
  *
- * Rule 2: Derived interfaces or sub-interfaces take higher precedence than the interfaces higher-up in the inheritance hierarchy.
- *              class E implements I, I10 -> I10.show() will get picked bcus sub-interfaces take higher precedence over actual interfaces
+ * Rule 1: concrete implementation takes higher precedence over default implementation
+ *          Any method inherited from a class or a superclass is given higher priority over any default method inherited from an interface.
+ *              class D extends A implements I -> A.show() will get picked because concrete impl > default impl
  *
- * Rule 3: In case Rule 1 and Rule 2 are not able to resolve the conflict,
+ * Rule 2: sub-interfaces take higher precedence over super interface
+ *          Derived interfaces or sub-interfaces take higher precedence than the interfaces higher-up in the inheritance hierarchy.
+ *              class E implements I, I10 -> I10.show() will get picked because sub-interfaces take higher precedence over actual interfaces
+ *
+ * Rule 3: the famous diamond problam - In case Rule 1 and Rule 2 are not able to resolve the conflict,
  *          then the implementing class has to specifically override and provide a method with the same method definition.
  *              class A implements I, J -> class A has to provide the implementation for show() method, same will be picked during their call
  *
@@ -80,7 +89,7 @@ class A implements I, J {
 
     @Override
     public void show() {
-        // J.super.show(); // or I.super.show(); resolving using super
+        // J.super.show(); // or I.super.show(); resolving using parent.super
         System.out.println("A.show()"); // custom implementation
     }
 }

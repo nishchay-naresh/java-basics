@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 public class UseCaseSolution {
 
     public static void main(String[] args) {
-        getStudents(Arrays.asList(5, 7, 9, 1, 2));
+        List<Student> students = getStudents(Arrays.asList(5, 7, 9, 1, 2));
+        System.out.println("students = " + students);
     }
 
     /*
@@ -59,6 +60,7 @@ public class UseCaseSolution {
     }
 
     private static List<Student> fetchStudentsFromDB(List<Integer> idList) {
+        assert null != idList;
         return Student.populateStudentList();
     }
 

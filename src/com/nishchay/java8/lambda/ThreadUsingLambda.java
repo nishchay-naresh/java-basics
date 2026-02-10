@@ -5,8 +5,8 @@ package com.nishchay.java8.lambda;
 * Basic difference in both the approach
 * In java method is the 2nd class citizen, A method can't exist as independent, it must be wrapped around an Object
 *
-* 1. anonymous inner class - We are passing the behaviour, by wrapping it under a class
-* 2. lambda expression - passing the behaviour as en independent entity, which has been pointed by lambda
+* 1. anonymous inner class - We are passing the behavior by wrapping it under a class
+* 2. lambda expression - passing the behavior as an independent entity, which lambda points
 *
 * */
 public class ThreadUsingLambda {
@@ -27,14 +27,14 @@ public class ThreadUsingLambda {
 
         /*
          * 2. Providing Runnable interface implementation using lambda expression
-         * Only one class will be generated -  RunnableUsingLambda.class(main running class)
+         * Only one class will be generated - RunnableUsingLambda.class(main running class)
          * assignment less programming
          *
          * Here we have converted the code to lambda expression rather than anonymous method or anonymous class
-         * Here Thread constructor is a higher order function -  which says your don’t have to pass object of runnable to me.
-         *  It's okay you can pass a function to me which have no name.
-         * This is actually is treating a Function as first class citizen.
-         * And that function is of course is lambda expression
+         * Here Thread constructor is a higher order function -  which says you don’t have to pass an object of runnable to me.
+         * It's okay you can pass a function to me which has no name.
+         * This is actually treating a Function as first-class citizen.
+         * And that function is, of course, in lambda expression
          *
          * */
         Thread t2 = new Thread(() -> System.out.println("Creating a thread using lambda expression"));

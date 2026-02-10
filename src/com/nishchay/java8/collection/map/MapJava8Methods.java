@@ -240,7 +240,7 @@ public class MapJava8Methods {
      * when the hashmap contains the mapping for the specified key,
      *       then both the methods replace the value associated with the specified key
      *
-     * However, if the hashmap does not contain any mapping for the specified key, then both method return null only
+     * However, if the hashmap does not contain any mapping for the specified key, then both methods return null only
      *   -   the put() method inserts the new mapping for the specified key and value and return null
      *   -   the replace() method not doing insert and simply returns null
      *
@@ -269,9 +269,9 @@ public class MapJava8Methods {
      *
      *  Removes the mapping for a key from this map if it is present (optional operation)
      *
-     * Returns - the previous value associated with key, or null if there was no mapping for key.
+     *  Returns - the previous value associated with key, or null if there was no mapping for key.
      *
-     * remove(-,-) - Removes the entry for the specified key only if it is currently mapped to the specified value
+     *  remove(-,-) - Removes the entry for the specified key only if it is currently mapped to the specified value
      *
      *
      * ============= remove() with Key and Value ===================
@@ -433,7 +433,7 @@ public class MapJava8Methods {
 
 
     /*
-     * some how closer to Optional.orElse() vs Optional.orElseGet()
+     * Somehow closer to Optional.orElse() vs Optional.orElseGet()
      * */
     private static void putIfAbsentVsComputeIfAbsent() {
 

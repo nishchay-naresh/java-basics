@@ -12,14 +12,14 @@ import java.util.stream.Stream;
 /*
  *
  * A Stream in Java is a sequence of elements from a source that supports data processing operations.
- *   It presents in java.util.stream
+ *   It presents in java.util.stream pkg
  *   Data source of a stream is usually a Collection or an Array.
  *
  *	Java Stream Usage
  *	Using a Java Stream follows these steps:
  *	1.	Get a Stream
- *	2.	Call zero or more non-terminal operations on the Stream
- *	3.	Call a terminal operation on the Stream
+ *	2.	Call zero or more non-terminal operations on Stream
+ *	3.	Call a terminal operation on Stream
  *
  * */
 public class A01BasicStreamDemo {
@@ -73,7 +73,7 @@ public class A01BasicStreamDemo {
         // Stream<String> pipelineTwo = stringStream.filter(e-> !e.isEmpty());
 
         // Once consumed or closed, a stream cannot be used again
-        long count = stringStream.filter(e -> e.startsWith("R")).count();
+        long count = stringStream.filter(e -> e.startsWith("j")).count();
         System.out.println("count = " + count);
         // count = stringStream.filter(e -> e.startsWith("S")).count();
 
@@ -91,18 +91,26 @@ public class A01BasicStreamDemo {
         System.out.println("\n########## Printing list using parallel stream ###########");
         strStream.forEach(e -> System.out.print(e + ", "));
     }
+    /*
+     * output sequence may very in parallel stream
+     * o/p =>
+     * ########## Printing list using serial stream ###########
+     * java, python, go, spring, kafka,
+     * ########## Printing list using parallel stream ###########
+     * go, kafka, spring, java, python,
+     *
+     * */
 
     private static void streamOfEx() {
         String[] strArray = new String[]{"A", "B", "C", "D", "E"};
         // Creating Stream from String Array
         Stream<String> strStream = Stream.of(strArray);
         strStream.forEach(e -> System.out.print(e + ", "));
+        System.out.println();
 
         Integer[] integerArray = new Integer[]{1, 2, 3, 4, 5};
         // Creating Stream from intArray
         Stream<Integer> intStream = Stream.of(integerArray);
         intStream.forEach(e -> System.out.print(e + ", "));
-
     }
-
 }

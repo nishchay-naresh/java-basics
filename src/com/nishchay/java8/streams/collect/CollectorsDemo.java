@@ -66,7 +66,7 @@ public class CollectorsDemo {
 
     // get the name of employee whose salary are more than 25K in a list
     private static void toListEx() {
-        List<String> empNameList = EmployeeSQL.populateEmployeeList().stream()
+        List<String> empNameList = Employee.employeeList.stream()
                 .filter(e -> e.getSalary() > 25000)
                 .map(e -> e.getName())
                 .collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class CollectorsDemo {
     private static void toSetEx() {
 
         // get all the age data of all employee - in a set
-        Set<Integer> ageSet = EmployeeSQL.populateEmployeeList().stream()
+        Set<Integer> ageSet = Employee.employeeList.stream()
                 .map(e -> e.getAge())
                 .collect(Collectors.toSet()); // or  .collect(Collectors.toCollection(HashSet::new));
         System.out.println("-----------all the age data of all employee------------");
@@ -86,7 +86,7 @@ public class CollectorsDemo {
 
 
         // Accumulate age data of all employees into a TreeSet
-        Set<Integer> ageTreeSet = EmployeeSQL.populateEmployeeList().stream()
+        Set<Integer> ageTreeSet = Employee.employeeList.stream()
                 .map(Employee::getAge)
                 .collect(Collectors.toCollection(TreeSet::new));
 
@@ -212,7 +212,7 @@ public class CollectorsDemo {
 
     private static void groupingAndMappingEx() {
 
-        List<Employee> employees = EmployeeSQL.populateEmployeeList();
+        List<Employee> employees = Employee.employeeList;
         //given a list of people, create a map where
         //their department is the key and value is all the ages of people with that name
 

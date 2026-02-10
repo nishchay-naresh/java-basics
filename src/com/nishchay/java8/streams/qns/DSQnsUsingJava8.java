@@ -59,7 +59,7 @@ public class DSQnsUsingJava8 {
     }
 
     /*
-     * Find the frequency of each char in string array using stream api
+     * Find the frequency of each char in a string array using stream api
      *
      * String[] strArray = {"i", "love", "java"};
      * freqMap = {a=2, e=1, v=2, i=1, j=1, l=1, o=1}
@@ -139,7 +139,7 @@ public class DSQnsUsingJava8 {
     /*
      *	4. Java program to find the second-highest number from given array
      *
-     *	into numbers = {5, 9, 11, 2, 8, 21, 1};
+     *	into numbers = {5, 9, 11, 2, 8, 21, 1};licate
      *  2nd highest = 11
      *
     * */

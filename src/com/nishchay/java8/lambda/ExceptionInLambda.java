@@ -6,12 +6,12 @@ import java.util.function.Function;
 
 
 /*
- * Dealing with checked exceptions in Stream
+ * Dealing with checked exceptions in Stream,
  * You have three primary approaches:
- *	1. Add a try-catch block to the lambda expression
- *	2. Create a wrapper method, which extract out the above try-catch block
- *  2.5 Assign thr above extracted method to a Function<Integer, Integer>
- *  3. Write a wrapper method that catches checked exceptions and rethrows them as unchecked
+ *	    1. Add a try-catch block to lambda expression
+ *	    2. Create a wrapper method, which extracts out the above try-catch block
+ *      2.5 Assign the above-extracted method to a Function<Integer, Integer>
+ *      3. Write a wrapper method that catches checked exceptions and rethrows them as unchecked
 // *
  * https://www.oreilly.com/content/handling-checked-exceptions-in-java-streams/
  * https://dzone.com/articles/how-to-handle-checked-exception-in-lambda-expressi
@@ -23,15 +23,13 @@ public class ExceptionInLambda {
 
     public static void main(String[] args) {
 
-//        uncheckedExceptionEx();
+        uncheckedExceptionEx();
 
-//        checkedExceptionEx_tryCatch();
-//        checkedExceptionEx_wrapperMethod();
-//        checkedExceptionEx_Function();
+        checkedExceptionEx_tryCatch();
+        checkedExceptionEx_wrapperMethod();
+        checkedExceptionEx_Function();
         checkedExceptionEx_Casting();
-
     }
-
 
     private static void uncheckedExceptionEx() {
 
@@ -56,9 +54,9 @@ public class ExceptionInLambda {
     }
 
     /*
-    *  exception handling required for checked exception - try/catch approach
+    * Exception handling required for checked exception - try/catch approach
     *
-    * This works, but makes the code harder to read and understand.
+    * This works but makes the code harder to read and understand.
     * Ideally when writing pipeline code, you would like to keep each intermediate operation as a single line.
     * */
     private static void checkedExceptionEx_tryCatch() {
@@ -77,7 +75,7 @@ public class ExceptionInLambda {
     /*
     *  exception handling required for checked exception - wrapper method approach
     *
-    *  create a wrapper method, which extract out the above try-catch block
+    *  create a wrapper method, which extracts out the above try-catch block
     * */
     private static void checkedExceptionEx_wrapperMethod() {
 
@@ -108,12 +106,11 @@ public class ExceptionInLambda {
         items.stream().map(e -> wrapperMethodFun.apply(e)).forEach(System.out::println);
     }
 
-
     /*
     * Write a wrapper method that catches checked exceptions and rethrows them as unchecked
     *
     * This casting saves us from all the try-catch handling of the checked exception
-    * You program will have a non-gracefully terminate with exception stack stace will be spite on console
+    * You program will have a non-gracefully terminating with exception stack stace will be spite on console
     *
     * */
     private static void checkedExceptionEx_Casting() {
@@ -125,10 +122,6 @@ public class ExceptionInLambda {
                 throw new RuntimeException(e);
             }
         };
-
         items.stream().map(e -> funCastException.apply(e)).forEach(System.out::println);
-
     }
-
-
 }
