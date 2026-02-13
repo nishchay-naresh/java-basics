@@ -1,21 +1,27 @@
 package com.nishchay.core.immutable.pojo;
 
-public class Transactions {
+public final class Transactions {
 
-    private String transactionId;
-    private double amount;
+    private final String transactionId;
+    private final double amount;
 
-    public Transactions(){
-
-    }
     public Transactions(String transactionId, double amount) {
         this.transactionId = transactionId;
         this.amount = amount;
     }
 
-    public Transactions(Transactions transaction) {
-        this.transactionId = transaction.transactionId;
-        this.amount = transaction.amount;
+    public Transactions(Transactions other) {
+        this.transactionId = other.transactionId;
+        this.amount = other.amount;
+    }
+
+    // no setters to protect the immutability
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public double getAmount() {
+        return amount;
     }
 
     @Override

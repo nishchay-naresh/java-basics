@@ -1,5 +1,6 @@
 package com.nishchay.core.immutable.pojo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -19,29 +20,26 @@ import java.util.List;
 
 public final class ImmutableEmp {
 
-    //  Because of making the attribute as final in immutable object, we are achieving failure atomicity
     private final Integer id;   // immutable by java
     private final String name;  // immutable by java
-    private final double sal;   // primitive
+    private final double sal;   // primitive pass by value
     private final Date doj;     // mutable, need to take care at what comes-in (at constructor) what goes-out (at getters) by creating a defensive copy
-    private List<Address> addresses;  // mutable
+    private final List<Address> addresses;  // mutable
 
-    public ImmutableEmp() {
-        this(0,null,0.00,null,null);
-    }
 
     public ImmutableEmp(Integer id, String name, double sal, Date doj, List<Address> addresses) {
-        // Initialize all mutable fields in constructor via deep copy
-        // No direct reference is assigned, created a defensive copy and then assigned its reference
-        Date copyDOJ = (Date) doj.clone();
-        // Returns an unmodifiable view of the specified list
-        List<Address> copyAddresses = Collections.unmodifiableList(addresses);
 
         this.id = id;
         this.name = name;
         this.sal = sal;
-        this.doj = copyDOJ;
-        this.addresses = copyAddresses;
+        // No direct reference is assigned, created a defensive copy and then assigned its reference
+        this.doj = new Date(doj.getTime());
+
+        List<Address> copyList = new ArrayList<>();
+        for (Address t : addresses) {
+            copyList.add(new Address(t));
+        }
+        this.addresses = Collections.unmodifiableList(copyList); // getting a read-only view for this copyList
     }
 
     //No setter method is provided
@@ -56,15 +54,13 @@ public final class ImmutableEmp {
     }
 
     public Date getDoj() {
-        //Perform cloning of objects in the getter methods to return a copy rather than returning the internal mutable object's actual reference
+        // return a copy rather than returning the actual reference - using copy constructor
         Date copyDOJ = (Date) doj.clone();
-        return copyDOJ;
+        return new Date(doj.getTime());
     }
 
+    // this class is only immutable iff Address is immutable or return defensive copies in getter
     public List<Address> getAddresses() {
-        List<Address> copyAddresses = Collections.unmodifiableList(addresses);
-        return copyAddresses;
+        return addresses; // since it's referring a read-only view of an actual list
     }
-
-
 }

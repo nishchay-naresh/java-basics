@@ -1,30 +1,31 @@
 package com.nishchay.core.immutable.pojo;
 
-public class Address {
+public final class Address {
 
-    private String addLine1;
-    private String addLine2;
-    private int pin;
+    private final String city;
+    private final int pin;
 
-    public Address() {
+    public Address(Address other) {
+        this.city = other.city;
+        this.pin = other.pin;
     }
 
-    public Address(Address address) {
-        this.addLine1 = address.addLine1;
-        this.addLine2 = address.addLine1;
-        this.pin = address.pin;
-    }
-
-
-    public Address(String addLine1, String addLine2, int pin) {
-        this.addLine1 = addLine1;
-        this.addLine2 = addLine1;
+    public Address(String city, int pin) {
+        this.city = city;
         this.pin = pin;
+    }
+
+    // no setters to protect the immutability
+    public String getCity() {
+        return city;
+    }
+
+    public int getPin() {
+        return pin;
     }
 
     @Override
     public String toString() {
-        return "Address [addLine1=" + addLine1 + ", addLine2=" + addLine2 + ", pin=" + pin + "]";
+        return "Address [addLine1=" + city + ", pin=" + pin + "]";
     }
-
 }
