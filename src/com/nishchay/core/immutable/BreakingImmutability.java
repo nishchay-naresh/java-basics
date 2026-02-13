@@ -1,5 +1,8 @@
 package com.nishchay.core.immutable;
 
+import com.nishchay.core.immutable.pojo.ImmutablePerson;
+import com.nishchay.core.immutable.pojo.Person;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -53,58 +56,3 @@ public class BreakingImmutability {
 
 }
 
-class Person {
-    private String name;                // Not final
-    // private final String name;       // correct way - Declare fields as final
-    private Date birthDate;             // Not final (and mutable object)
-
-    public Person(String name, Date birthDate) {
-        this.name = name;
-        this.birthDate = birthDate; // Reference is assigned, not defensively copied
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Date getBirthDate() {
-        return birthDate; // Returns internal mutable object reference
-
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
-}
-
-class ImmutablePerson {
-    private final String name;
-    private final Date birthDate;
-
-    public ImmutablePerson(String name, Date birthDate) {
-        this.name = name;
-        // correct way - Return a Defensive copy
-        this.birthDate = new Date(birthDate.getTime());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Date getBirthDate() {
-        // correct way - Return a copy
-        return new Date(birthDate.getTime());
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
-}

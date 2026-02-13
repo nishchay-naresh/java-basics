@@ -1,20 +1,29 @@
-package com.nishchay.core.immutable;
+package com.nishchay.core.immutable.pojo;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-// marking class as final, so it can’t be extended further
+/*
+ *
+ * To create an immutable class in Java, you have to do the following steps:
+ *     1. Declare the class as final so it can’t be extended.
+ *     2. Make all fields private so that direct access is not allowed.
+ *     3. Make all mutable fields final so that its value can be assigned only once.
+ *     4. Don’t provide any method that modify the object’s state i.e. don’t provide setters methods.
+ *     5. Initialize all the fields via a constructor performing deep copy.
+ *     6. Perform cloning of objects in the getter methods to return a copy rather than returning the actual object reference.
+ * => point 5 & 6 is all about never leak reference for any of the mutable attribute,
+ *    Always create a Defensive copies for mutable types and return its reference
+ * */
+
 public final class ImmutableEmp {
 
-    //  direct access is not allowed for member variables, declaring them as private
-    //  Marking all mutable fields as final, so that they can only be initialized once in constructor
     //  Because of making the attribute as final in immutable object, we are achieving failure atomicity
     private final Integer id;   // immutable by java
     private final String name;  // immutable by java
-    private double sal;         // mutable, but pas by value
-    private final Date doj;     // mutable, need to take care at what comes-in (at constructor) what goes-out (at getters)
-                                // by creating a defensive copy
+    private final double sal;   // primitive
+    private final Date doj;     // mutable, need to take care at what comes-in (at constructor) what goes-out (at getters) by creating a defensive copy
     private List<Address> addresses;  // mutable
 
     public ImmutableEmp() {
@@ -35,7 +44,7 @@ public final class ImmutableEmp {
         this.addresses = copyAddresses;
     }
 
-    //Provide no setter methods
+    //No setter method is provided
     public Integer getId() {
         return id;
     }
@@ -56,4 +65,6 @@ public final class ImmutableEmp {
         List<Address> copyAddresses = Collections.unmodifiableList(addresses);
         return copyAddresses;
     }
+
+
 }
