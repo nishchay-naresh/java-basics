@@ -1,7 +1,9 @@
 package com.nishchay.core.collection;
 
+import com.nishchay.core.immutable.pojo.Person;
 import com.nishchay.util.pojo.Student;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -11,9 +13,10 @@ public class CollectionsMethodDemo {
 
     public static void main(String[] args) {
 
-        swapEx();
-        nCopiesEx();
-        frequencyEx();
+//        swapEx();
+//        nCopiesEx();
+//        frequencyEx();
+        unmodifiableListEx();
     }
 
 
@@ -25,14 +28,14 @@ public class CollectionsMethodDemo {
     }
 
     /*
-     *   Collections.nCopies() is to return an immutable list which contains n copies of given object.
-     *   This function helps if we want to create a list with n copies of given object.
+     *   Collections.nCopies() is to return an immutable list which contains n copies of a given object.
+     *   This function helps if we want to create a list with n copies of a given object.
      *   The newly allocated data object is tiny i.e, it contains a single reference to the data object.
      *
      *       public static <T> List<T> nCopies(int n, T o)
      *           int n : the number of elements in the returned list.
-     *           T o : the element to appear repeatedly in the returned list.
-     *           Exception : The function throws IllegalArgumentException if value of number is less than 0.
+     *           T o: the element to appear repeatedly in the returned list.
+     *           Exception: The function throws IllegalArgumentException if the value of number is less than 0.
      *
      * */
     private static void nCopiesEx() {
@@ -73,6 +76,36 @@ public class CollectionsMethodDemo {
 
         freq = Collections.frequency(Arrays.asList(mainStr.split(", ")), key);
         System.out.println("Frequency of - " + key + " is - " + freq);
+    }
+
+    /*
+     *  public static <T> List<T> unmodifiableList(List<? extends T> list)
+     *
+     *  Collections.unmodifiableList() creates a read-only view, not a new list
+     *  A wrapper around the original list that prevents modification through that reference,
+     *  But the source list still opens for modification through its old reference.
+     *  That’s why we say: "It is a read-only view, not a defensive copy."
+     *
+     * Return a wrapper top of the original list, there it delegates read operations, blocks write operations.
+     * Does It Protect Elements? - No
+     *      unmodifiable.get(0).setName("Changed");  // Allowed
+     *
+     * */
+    private static void unmodifiableListEx() {
+        List<String> strList = new ArrayList<>();
+        strList.add("A");
+        List<String> unmodifiableStrList = Collections.unmodifiableList(strList);
+
+        strList.add("B");
+        System.out.println(unmodifiableStrList);  // [A, B]
+
+        List<Person> personList = new ArrayList<>();
+        personList.add(new Person());
+        List<Person> unmodifiablepersonList = Collections.unmodifiableList(personList);
+        System.out.println(unmodifiablepersonList);
+
+        unmodifiablepersonList.get(0).setName("Changed");
+        System.out.println(unmodifiablepersonList);
     }
 }
 

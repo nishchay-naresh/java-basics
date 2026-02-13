@@ -8,7 +8,7 @@ public class HashSetDemo {
 
         hashSetMethodsEx();
         removeDuplicateFromListPreserveOrder();
-
+        hashSetKeyMutation();
     }
 
     private static void hashSetMethodsEx() {
@@ -63,6 +63,99 @@ public class HashSetDemo {
         primes.addAll(primesWithoutDuplicates);
 
         System.out.println("list of primes without duplicates : " + primes);
+    }
+
+
+    private static void hashSetKeyMutation() {
+
+        Student std1 = new Student("10", "Java");
+        Student std2 = new Student("10", "Perl");
+
+        Set<Student> set = new HashSet<>();
+        set.add(std1);
+        set.add(std2);
+
+        System.out.println("set = " + set.size()); // 2
+
+        /*
+        // Problam - classic HashSet + mutable key bug.
+        std2.setName("Java");
+        set.add(std2);
+        System.out.println("set = " + set.size()); // 2
+        System.out.println("set = " + set); // Student("10", "Java"),  new Student("10", "Java")
+        */
+
+        // solution 1 - Remove the old entry from set prior to mutation, do the mutation, add the new updated entry again
+        if (set.remove(std2)) {   // remove using OLD state
+            std2.setName("Java"); // mutate after removal
+            set.add(std2);        // reinsert
+        }
+
+        /*
+        // solution 2 - do the mutation, populate a new set out of source Set
+        std2.setName("Java");
+        Set<Student> targetSet = new HashSet<>(set);
+
+        System.out.println("set = " + targetSet.size()); // 1
+        System.out.println("set = " + targetSet); // new Student("10", "Java")
+        */
+    }
+
+    static class Student {
+        private String id;
+        private String name;
+
+        public Student() {
+        }
+
+        public Student(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public Student(Student student) {
+            this.id = student.id;
+            this.name = student.name;
+        }
+
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
+                    "id='" + id + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            Student student = (Student) o;
+            return Objects.equals(id, student.id) && Objects.equals(name, student.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, name);
+        }
+
+
     }
 }
 
