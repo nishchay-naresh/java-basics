@@ -1,4 +1,4 @@
-package com.nishchay.java8;
+package com.nishchay.java9;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,6 @@ public class Java9Onward {
         java12Addition();
     }
 
-
     private static void java9Addition() {
         streamApi();
         optionalClazz();
@@ -22,7 +21,6 @@ public class Java9Onward {
     private static void java12Addition() {
         switchExprEx();
     }
-
     // Stream API: takeWhile(), dropWhile(), and an improved iterate() method.
     private static void streamApi() {
         List<Integer> list = List.of(2, 4, 6, 1, 5, 8);
@@ -33,7 +31,7 @@ public class Java9Onward {
 
         result = list.stream()
                 .dropWhile(i -> i % 2 == 0)
-                .collect(Collectors.toList());
+                .toList();
         System.out.println("result = " + result);  // Output: [1, 5, 8]
 
         //  Stream.iterate() that allows bounded iteration.
@@ -69,7 +67,6 @@ public class Java9Onward {
         SATURDAY,
         SUNDAY
     }
-
 
     /*
     * Java 12 introduced Switch Expressions
