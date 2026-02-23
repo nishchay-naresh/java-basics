@@ -11,7 +11,7 @@ import java.util.List;
  *     1. Declare the class as final so it can’t be extended.
  *     2. Make all fields private so that direct access is not allowed.
  *     3. Make all mutable fields final so that its value can be assigned only once.
- *     4. Don’t provide any method that modify the object’s state i.e. don’t provide setters methods.
+ *     4. Don’t provide any method that modifies the object’s state, i.e., don’t provide setters methods.
  *     5. Initialize all the fields via a constructor performing deep copy.
  *     6. Perform cloning of objects in the getter methods to return a copy rather than returning the actual object reference.
  * => point 5 & 6 is all about never leak reference for any of the mutable attribute,
@@ -55,12 +55,22 @@ public final class ImmutableEmp {
 
     public Date getDoj() {
         // return a copy rather than returning the actual reference - using copy constructor
-        Date copyDOJ = (Date) doj.clone();
         return new Date(doj.getTime());
     }
 
     // this class is only immutable iff Address is immutable or return defensive copies in getter
     public List<Address> getAddresses() {
         return addresses; // since it's referring a read-only view of an actual list
+    }
+
+    @Override
+    public String toString() {
+        return "ImmutableEmp{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", sal=" + getSal() +
+                ", doj=" + getDoj() +
+                ", addresses=" + getAddresses() +
+                '}';
     }
 }

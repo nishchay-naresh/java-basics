@@ -13,36 +13,37 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /*
-* 1. Given a String, find the first non-repeated character in it using Java 8
-* 2. How to find duplicate elements in a given integers list in java 8
-*
-* 3.
-*       We have an input structured as customerName -> {emails} , like below
-*       We need to list the customerName for which there is no duplicate email
-*
-*  Like :
-*           c1: [a@b,c@d,h@i]
-*           c2:[o@p,g@5]
-*           c3:[a@b,x@z]
-*           c4:[k@l]
-*
-*       customer with unique emails  :           [c1,c2,c4] / [c2,c3,c4]
-*
-*
-* */
+ * 1. Given a String, find the first non-repeated character in it using Java 8
+ *
+ * 2. How to find duplicate elements in a given integers list in java 8
+ *
+ * 3.
+ *       We have an input structured as customerName -> {emails} , like below
+ *       We need to list the customerName for which there is no duplicate email
+ *
+ *  Like:
+ *           c1: [a@b,c@d,h@i]
+ *           c2:[o@p,g@5]
+ *           c3:[a@b,x@z]
+ *           c4:[k@l]
+ *
+ *       Customer with unique emails:           [c1,c2,c4] / [c2,c3,c4]
+ *
+ * 4.  Str = "this is india, it is my country", delete a specific char from it - 'i'
+ *     resultStr = "ths s nda, t s my country"
+ *
+ * */
 public class TestJava8 {
 
     public static void main(String[] args) {
 
-        // System.out.println("customer with unique emails - " + customerWithUniqueEmail());
-        // System.out.println(" ======================================== ");
-
-        // firstNonRepeatedChar();
-        // System.out.println(" ======================================== ");
-        findDuplicatesAndUniques();
+        System.out.println("customer with unique emails - " + customerWithUniqueEmail());
         System.out.println(" ======================================== ");
-        findDuplicatesFrequency();
 
+        firstNonRepeatedChar();
+
+        System.out.println(" ======================================== ");
+        DeleteCharFromString();
     }
 
     private static List<String> customerWithUniqueEmail() {
@@ -100,57 +101,19 @@ public class TestJava8 {
         System.out.println("firstNonRepeatedChar = " + result);
     }
 
-    /*
-     * Find duplicate and unique elements in a given integers list using java 8
-     * original list   : [5, 3, 4, 1, 3, 7, 2, 9, 9, 4]
-     * Uniques         : [1, 2, 5, 7]
-     * Duplicates      : [3, 4, 9]
-     *
-     * duplicate elements - appear more than once
-     * unique elements - appear exactly once
-     * */
-    private static void findDuplicatesAndUniques() {
-        List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
-        Map<Integer, Long> freqMap = numbers.stream()
-                .collect(Collectors.groupingBy(
-                        Function.identity(),
-                        Collectors.counting()
-                ));
+    private static void DeleteCharFromString() {
+        String str = "this is india, it is my country";
+        String resStr = deleteCharStream(str, 'i');
 
-        // Extract duplicates (freq > 1)
-        List<Integer> duplicates = getNumbersOnCondition(freqMap, freq -> (freq > 1));
-        // Extract uniques (freq == 1)
-        List<Integer> uniques = getNumbersOnCondition(freqMap, freq -> (freq == 1));
-        System.out.println("original list   : " + numbers);
-        System.out.println("Uniques         : " + uniques);
-        System.out.println("Duplicates      : " + duplicates);
+        System.out.println("str = " + str);
+        System.out.println("resStr = " + resStr);
     }
 
-    private static List<Integer> getNumbersOnCondition(Map<Integer, Long> freqMap , Predicate<Long> condition) {
-        return freqMap.entrySet().stream()
-                .filter(entry -> condition.test(entry.getValue()))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-    }
+    private static String deleteCharStream(String str, char c) {
+        return str.chars()
+                .filter(e -> e != c)
+                .mapToObj(e -> String.valueOf((char) e))
+                .collect(Collectors.joining());
 
-    private static void findDuplicatesFrequency() {
-        List<Integer> numbers = Arrays.asList(5, 3, 4, 1, 3, 7, 2, 9, 9, 4);
-        List<Integer> uniques = getNumbersOnCondition(numbers, f -> (f == 1));
-        List<Integer> duplicates = getNumbersOnCondition(numbers, f -> (f > 1));
-
-        System.out.println("original list = " + numbers);
-        System.out.println("      uniques = " + uniques);
-        System.out.println("   duplicates = " + duplicates);
-    }
-
-    // Bad solution, we are doing 2 iteration, better store the frequency in a map
-    private static List<Integer> getNumbersOnCondition(List<Integer> numbers, Predicate<Long> condition) {
-        return numbers.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .filter(entry -> condition.test(entry.getValue()))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
     }
 }

@@ -24,9 +24,9 @@ public class GenericsTypeSafety {
     public static void main(String[] args) {
 
         genericsBasic();
-//        allowedInArray();
-//        notAllowedInCollection();
-//        howToAllowSafely();
+        allowedInArray();
+        notAllowedInCollection();
+        howToAllowSafely();
     }
 
     private static void genericsBasic() {
@@ -87,7 +87,7 @@ public class GenericsTypeSafety {
         for (int i = 0; i < 3; i++) {
             animalArr[i].speak();
         }
-        // addMore(animalArr);
+         addMore(animalArr);
     }
 
     private static void addMore(Animal[] animalArr) {

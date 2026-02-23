@@ -1,13 +1,10 @@
 package com.nishchay.ds.string.freq;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class StringFrequencyUtility {
+public class FrequencyUtility {
 
     // Count the frequency of each character in a String
     static Map<Character, Integer> getFrequencyMap(String word) {
@@ -44,6 +41,15 @@ public class StringFrequencyUtility {
             freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
         }
         return freqMap;
+    }
+
+    public static Map<Integer, Long> getOrderedFrequencyMapStream(int[] arr) {
+        return Arrays.stream(arr).boxed()
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        LinkedHashMap::new,
+                        Collectors.counting()
+                ));
     }
 
     // Get the frequency of each string in a String array - using hashMap methods

@@ -1,14 +1,16 @@
-package com.nishchay.ds.number;
+package com.nishchay.test.orgns;
 
 /*
- *	input a number (10 <= number <= 1000), Apply below logic repeatedly , until number is not covert to 1
+ * Been asked in Margan stanely
+ *
+ *	Input a number (10 <= number <= 1000), Apply below logic repeatedly, until number is not covert to 1
  *		If number is Even - divide by two
  *		If number is Odd - multiply by 3 and add 1
  *	Need to tell how many operation step would require to covert the number to 1
  *
  * ------------------------------------------
  *
- *	Print below series :
+ *	Print below series:
  *	1
  *	2 3
  *	4 5 6
@@ -35,7 +37,7 @@ public class ConvertNumToOne {
     private static void convertNo(int n) {
 
         int opCount = 0;
-        while (n > 10 && n < 1000) {
+        while (n > 0) {
             if (n % 2 == 0)
                 n = n / 2 ;
             else
